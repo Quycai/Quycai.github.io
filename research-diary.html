@@ -1,62 +1,355 @@
-<!DOCTYPE html> <html lang="vi"> <head> <meta charset="UTF-8"> <meta name="viewport"
-content="width=device-width, initial-scale=1.0"> <title>Research Diary v0.1 | HPGVH18</title>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Diary v0.1 | HPGVH18</title>
+
 <style>
-:root{ --bg:#0f0f11; --card:#1e1e24; --accent:#e91e63; --text:#ffffff; --text-dim:#b0b0b0; }
-*{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
-.container{ max-width:1100px; margin:auto; padding:20px; }
-.back{ color:var(--accent); text-decoration:none; font-weight:bold; }
-.hero{ margin-top:20px; padding:50px 20px; text-align:center; border-radius:16px; background:lineargradient(135deg,#4a0d3a,#16161a); border:1px solid rgba(255,255,255,.08); }
-.hero h1{ font-size:3rem; margin-bottom:10px; }
-.hero p{ color:var(--text-dim); }
-.cover{ width:100%; margin-top:20px; border-radius:16px; max-height:550px; object-fit:cover; }
-.box{ background:var(--card); margin-top:20px; padding:25px; border-radius:16px; }
-.tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:15px; }
-.tags span{ background:#2b2b35; border:1px solid #444; padding:8px 14px; border-radius:999px; }
-.box h2{ margin-bottom:15px; }
-.box p{ line-height:1.8; color:var(--text-dim); }
-.gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
-.gallery img{ width:100%; height:260px; object-fit:cover; border-radius:12px; transition:.3s; }
-.gallery img:hover{ transform:scale(1.03); }
-.download{ display:block; text-align:center; background:var(--accent); color:white; text-decoration:none;
-padding:18px; border-radius:12px; font-size:20px; font-weight:bold; transition:.3s; }
-.download:hover{ transform:translateY(-2px); }
-.footer{ text-align:center; color:#888; margin:30px 0; }
-@media(max-width:768px){
-.hero h1{ font-size:2rem; }
-.gallery{ grid-template-columns:1fr; }
-.gallery img{ height:auto; }
+
+:root{
+    --bg:#0b0b12;
+    --card:#171722;
+    --accent:#ff4fa0;
+    --accent2:#8b5cf6;
+    --text:#ffffff;
+    --text-dim:#b0b0b0;
 }
-</style> </head> <body>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Segoe UI,sans-serif;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.back{
+    color:var(--accent);
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.hero{
+    margin-top:20px;
+    padding:60px 20px;
+    text-align:center;
+    border-radius:20px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,79,160,.25),
+        rgba(139,92,246,.25)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 0 30px rgba(255,79,160,.2);
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:var(--text-dim);
+}
+
+.cover{
+    width:100%;
+    margin-top:20px;
+    border-radius:16px;
+    max-height:550px;
+    object-fit:cover;
+}
+
+.box{
+    background:var(--card);
+    margin-top:20px;
+    padding:25px;
+    border-radius:16px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tags span{
+    background:#252536;
+    border:1px solid #444;
+    padding:8px 14px;
+    border-radius:999px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    background:#252536;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+}
+
+.stat h3{
+    color:var(--accent);
+    margin-bottom:5px;
+}
+
+.stat p{
+    color:#aaa;
+    font-size:14px;
+}
+
+.box h2{
+    margin-bottom:15px;
+}
+
+.box p{
+    line-height:1.8;
+    color:var(--text-dim);
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.gallery img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.03);
+}
+
+.download{
+    display:block;
+    text-align:center;
+
+    background:linear-gradient(
+        135deg,
+        var(--accent),
+        var(--accent2)
+    );
+
+    color:white;
+    text-decoration:none;
+
+    padding:18px;
+    border-radius:12px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:
+    0 0 25px rgba(255,79,160,.4);
+
+    transition:.3s;
+}
+
+.download:hover{
+    transform:translateY(-3px);
+    box-shadow:
+    0 0 35px rgba(255,79,160,.7);
+}
+
+.footer{
+    text-align:center;
+    color:#888;
+    margin:30px 0;
+}
+
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:12px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2rem;
+}
+
+.gallery{
+    grid-template-columns:1fr;
+}
+
+.stats{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.gallery img{
+    height:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
 <div class="container">
+
 <a class="back" href="index.html">← Quay lại trang chủ</a>
-<div class="hero"> <h1>Research Diary</h1> <p>Visual Novel Việt Hóa</p> </div>
-<img class="cover" src="research-diary-cover.jpg" alt="Research Diary">
+
+<div class="hero">
+    <h1>Research Diary</h1>
+    <p>Visual Novel Việt Hóa</p>
+</div>
+
+<img
+class="cover"
+src="research-diary-cover.jpg"
+alt="Research Diary">
+
 <div class="box">
+
 <h2>Thông Tin Game</h2>
-<div class="tags"> <span>Version v0.1</span> <span>420 MB</span> <span>Windows PC</span>
-<span>Visual Novel</span> </div>
+
+<div class="tags">
+    <span>Version v0.1</span>
+    <span>420 MB</span>
+    <span>Windows PC</span>
+    <span>Visual Novel</span>
 </div>
+
+<div class="stats">
+
+<div class="stat">
+    <h3>420MB</h3>
+    <p>Dung lượng</p>
+</div>
+
+<div class="stat">
+    <h3>Windows</h3>
+    <p>Nền tảng</p>
+</div>
+
+<div class="stat">
+    <h3>v0.1</h3>
+    <p>Phiên bản</p>
+</div>
+
+<div class="stat">
+    <h3>2026</h3>
+    <p>Cập nhật</p>
+</div>
+
+</div>
+
+</div>
+
 <div class="box">
+
 <h2>Giới Thiệu</h2>
-<p> Research Diary là visual novel với cốt truyện bí ẩn xoay quanh một cuốn nhật ký nghiên cứu chứa
-nhiều bí mật chưa được hé lộ. Người chơi sẽ khám phá câu chuyện thông qua các lựa chọn và sự kiện
-khác nhau. </p>
+
+<p>
+Research Diary là visual novel với cốt truyện bí ẩn xoay quanh
+một cuốn nhật ký nghiên cứu chứa nhiều bí mật chưa được hé lộ.
+Người chơi sẽ khám phá câu chuyện thông qua các lựa chọn và
+sự kiện khác nhau.
+</p>
+
 </div>
+
 <div class="box">
+
 <h2>Ảnh Gameplay</h2>
+
 <div class="gallery">
-<img src="screen1.jpg" alt="Gameplay 1"> <img src="screen2.jpg" alt="Gameplay 2"> <img
-src="screen3.jpg" alt="Gameplay 3"> <img src="screen4.jpg" alt="Gameplay 4">
+
+<img src="screen1.jpg" alt="">
+<img src="screen2.jpg" alt="">
+<img src="screen3.jpg" alt="">
+<img src="screen4.jpg" alt="">
+
 </div>
+
 </div>
+
 <div class="box">
+
 <h2>Tải Game</h2>
-<a class="download" href="https://drive.google.com/file/d/1szcHtBye0qe0zsjnEwozfZlbgxXPc9sP/view?
-usp=drive_link" target="_blank">
-⬇ TẢI RESEARCH DIARY V0.1 (420MB)
+
+<a
+class="download"
+href="https://drive.google.com/file/d/1szcHtBye0qe0zsjnEwozfZlbgxXPc9sP/view?usp=drive_link"
+target="_blank">
+
+🎮 TẢI RESEARCH DIARY V0.1 (420MB)
+
 </a>
+
 </div>
-<div class="footer"> © 2026 HPGVH18 Studio </div>
+
+<div class="footer">
+© 2026 HPGVH18 Studio
 </div>
-</body> </html>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img">
+</div>
+
+<script>
+
+const imgs=document.querySelectorAll('.gallery img');
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+
+imgs.forEach(img=>{
+    img.addEventListener('click',()=>{
+        lightbox.style.display='flex';
+        lightboxImg.src=img.src;
+    });
+});
+
+lightbox.addEventListener('click',()=>{
+    lightbox.style.display='none';
+});
+
+</script>
+
+</body>
+</html>
