@@ -1,43 +1,53 @@
 <!DOCTYPE html> <html lang="vi"> <head> <meta charset="UTF-8"> <meta name="viewport"
-content="width=device-width, initial-scale=1.0"> <title>Research Diary v0.1</title>
+content="width=device-width, initial-scale=1.0"> <title>Research Diary v0.1 | HPGVH18</title>
 <style>
-body{ background:#0f0f11; color:white; font-family:Segoe UI,sans-serif; margin:0; }
-.container{ max-width:1000px; margin:auto; padding:20px; }
-.cover{ width:100%; max-height:500px; object-fit:cover; border-radius:12px; }
-.box{ background:#1e1e24; padding:20px; border-radius:12px; margin-top:20px; overflow:hidden; }
-.back{ color:#e91e63; text-decoration:none; font-weight:bold; }
+:root{ --bg:#0f0f11; --card:#1e1e24; --accent:#e91e63; --text:#ffffff; --text-dim:#b0b0b0; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
+.container{ max-width:1100px; margin:auto; padding:20px; }
+.back{ color:var(--accent); text-decoration:none; font-weight:bold; }
+.hero{ margin-top:20px; padding:50px 20px; text-align:center; border-radius:16px; background:lineargradient(135deg,#4a0d3a,#16161a); border:1px solid rgba(255,255,255,.08); }
+.hero h1{ font-size:3rem; margin-bottom:10px; }
+.hero p{ color:var(--text-dim); }
+.cover{ width:100%; margin-top:20px; border-radius:16px; max-height:550px; object-fit:cover; }
+.box{ background:var(--card); margin-top:20px; padding:25px; border-radius:16px; }
+.tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:15px; }
+.tags span{ background:#2b2b35; border:1px solid #444; padding:8px 14px; border-radius:999px; }
+.box h2{ margin-bottom:15px; }
+.box p{ line-height:1.8; color:var(--text-dim); }
 .gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
-.gallery img{ width:100%; height:250px; object-fit:cover; border-radius:10px; }
-.download{ display:block; text-align:center; background:#e91e63; color:white; text-decoration:none;
-padding:15px; border-radius:8px; font-size:18px; font-weight:bold; }
-.download:hover{ opacity:0.9; }
+.gallery img{ width:100%; height:260px; object-fit:cover; border-radius:12px; transition:.3s; }
+.gallery img:hover{ transform:scale(1.03); }
+.download{ display:block; text-align:center; background:var(--accent); color:white; text-decoration:none;
+padding:18px; border-radius:12px; font-size:20px; font-weight:bold; transition:.3s; }
+.download:hover{ transform:translateY(-2px); }
+.footer{ text-align:center; color:#888; margin:30px 0; }
 @media(max-width:768px){
+.hero h1{ font-size:2rem; }
 .gallery{ grid-template-columns:1fr; }
 .gallery img{ height:auto; }
 }
-</style>
-</head> <body>
+</style> </head> <body>
 <div class="container">
 <a class="back" href="index.html">← Quay lại trang chủ</a>
-<br><br>
+<div class="hero"> <h1>Research Diary</h1> <p>Visual Novel Việt Hóa</p> </div>
 <img class="cover" src="research-diary-cover.jpg" alt="Research Diary">
 <div class="box">
-<h1>Research Diary v0.1</h1>
-<p><b>Dung lượng:</b> 420 MB</p>
-<p><b>Nền tảng:</b> Windows PC</p>
-<p><b>Thể loại:</b> Visual Novel</p>
-<h2>Giới thiệu</h2>
+<h2>Thông Tin Game</h2>
+<div class="tags"> <span>Version v0.1</span> <span>420 MB</span> <span>Windows PC</span>
+<span>Visual Novel</span> </div>
+</div>
+<div class="box">
+<h2>Giới Thiệu</h2>
 <p> Research Diary là visual novel với cốt truyện bí ẩn xoay quanh một cuốn nhật ký nghiên cứu chứa
-nhiều bí mật chưa được hé lộ. Người chơi sẽ khám phá câu chuyện thông qua các lựa chọn và các sự
-kiện khác nhau. </p>
+nhiều bí mật chưa được hé lộ. Người chơi sẽ khám phá câu chuyện thông qua các lựa chọn và sự kiện
+khác nhau. </p>
 </div>
 <div class="box">
 <h2>Ảnh Gameplay</h2>
 <div class="gallery">
-<img src="screen1.jpg" alt="Gameplay 1">
-<img src="screen2.jpg" alt="Gameplay 2">
-<img src="screen3.jpg" alt="Gameplay 3">
-<img src="screen4.jpg" alt="Gameplay 4">
+<img src="screen1.jpg" alt="Gameplay 1"> <img src="screen2.jpg" alt="Gameplay 2"> <img
+src="screen3.jpg" alt="Gameplay 3"> <img src="screen4.jpg" alt="Gameplay 4">
 </div>
 </div>
 <div class="box">
@@ -47,5 +57,6 @@ usp=drive_link" target="_blank">
 ⬇ TẢI RESEARCH DIARY V0.1 (420MB)
 </a>
 </div>
+<div class="footer"> © 2026 HPGVH18 Studio </div>
 </div>
 </body> </html>
