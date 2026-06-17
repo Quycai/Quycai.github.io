@@ -7,7 +7,7 @@
 
 <style>
 /* --- KHUNG XƯƠNG CƠ BẢN --- */
-:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --glow:#ffffff; }
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 header{ text-align:center; padding:50px 20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border-bottom:2px solid var(--accent); }
@@ -32,22 +32,18 @@ header p{ color:#bbb; }
     position: relative;
     border: 1px solid transparent; 
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    /* Giữ cho thẻ game nảy nhẹ khi rê chuột (nhờ Javascript xử lý nghiêng) */
     transform-style: preserve-3d;
     transform: perspective(1000px);
 }
-
 .game-card:hover {
     border-color: rgba(139, 92, 246, 0.5); 
     box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); 
 }
-
 .game-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
 }
-
 .btn {
     display: block;
     margin-top: 15px;
@@ -60,72 +56,70 @@ header p{ color:#bbb; }
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     transition: 0.3s;
 }
-
 .btn:hover {
     filter: brightness(1.2); 
     box-shadow: 0 5px 15px rgba(255, 79, 160, 0.5);
     transform: translateY(-2px);
 }
 
-/* --- STUDIO UPDATE TIMELINE (GIAO DIỆN SỐ 9) --- */
-.timeline-section {
-    margin-top: 80px;
-    padding-bottom: 50px;
-    border-top: 1px solid #333;
-    padding-top: 40px;
-}
-.timeline-title {
-    text-align: center;
-    color: var(--accent2);
-    margin-bottom: 50px;
-}
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: auto;
-}
-/* Đường kẻ phát sáng */
-.timeline-container::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background: linear-gradient(to bottom, var(--accent2), var(--accent));
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -2px;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
-}
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
-}
-/* Các dấu chấm phát sáng */
-.timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    right: -8px;
-    background-color: var(--card);
-    border: 3px solid var(--accent2);
-    top: 15px;
+/* --- HIỆU ỨNG CON TRỞ NEON AURA --- */
+body { cursor: none; }
+a, button, img { cursor: none; }
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
     border-radius: 50%;
-    z-index: 1;
-    box-shadow: 0 0 10px var(--accent2);
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10000;
+    box-shadow: 0 0 10px var(--accent);
+}
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--accent2);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+.cursor-hover {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 79, 160, 0.1);
+    border-color: var(--accent);
+}
+
+/* Tắt con trỏ custom trên thiết bị di động để tránh lỗi cảm ứng */
+@media (max-width: 768px) {
+    body, a, button, img { cursor: auto; }
+    .cursor-dot, .cursor-outline { display: none; }
+}
+
+/* --- STUDIO UPDATE TIMELINE (GIAO DIỆN SỐ 9) --- */
+.timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
+.timeline-title { text-align: center; color: var(--accent2); margin-bottom: 50px; }
+.timeline-container { position: relative; max-width: 800px; margin: auto; }
+.timeline-container::after {
+    content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, var(--accent2), var(--accent));
+    top: 0; bottom: 0; left: 50%; margin-left: -2px; box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+.timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+.timeline-item::after {
+    content: ''; position: absolute; width: 16px; height: 16px; right: -8px;
+    background-color: var(--card); border: 3px solid var(--accent2); top: 15px; border-radius: 50%; z-index: 1; box-shadow: 0 0 10px var(--accent2);
 }
 .left { left: 0; text-align: right; }
 .right { left: 50%; }
 .right::after { left: -8px; }
-.content {
-    padding: 20px;
-    background: var(--card);
-    position: relative;
-    border-radius: 10px;
-    border: 1px solid #333;
-}
+.content { padding: 20px; background: var(--card); position: relative; border-radius: 10px; border: 1px solid #333; }
 .content h3 { color: var(--accent); margin-bottom: 5px; }
 .content p { color: #aaa; font-size: 14px; line-height: 1.6; }
 @media (max-width: 768px) {
@@ -136,7 +130,7 @@ header p{ color:#bbb; }
     .right { left: 0%; }
 }
 
-/* --- MÀN CHẮN 18+ & FOOTER --- */
+/* --- MÀN CHẮN 18+ --- */
 .age-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 11, 18, 0.95); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
 .age-box { background: var(--card); padding: 30px; border-radius: 16px; text-align: center; color: white; border: 2px solid var(--accent2); max-width: 420px; width: 90%; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
 .age-box h2 { color: var(--accent); margin-bottom: 10px; font-size: 26px;}
@@ -150,6 +144,9 @@ header p{ color:#bbb; }
 </style>
 </head>
 <body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
 
 <div id="age-warning-overlay" class="age-overlay">
     <div class="age-box">
@@ -175,7 +172,6 @@ header p{ color:#bbb; }
     </div>
 
     <div class="games">
-        
         <div class="game-card" data-type="pc" data-tilt>
             <img src="images/research-diary/research-diary-cover.jpg" alt="Research Diary">
             <div class="info">
@@ -234,7 +230,7 @@ header p{ color:#bbb; }
             <div class="timeline-item left">
                 <div class="content">
                     <h3>Lột Xác Giao Diện</h3>
-                    <p>Tháng 6, 2026: Tự tay nâng cấp toàn bộ hệ thống web với giao diện 3D Tilt và viền Neon chuẩn Cyberpunk.</p>
+                    <p>Tháng 6, 2026: Tự tay nâng cấp hệ thống với giao diện 3D Tilt, Timeline phát sáng và hiệu ứng con trỏ Neon Aura độc quyền.</p>
                 </div>
             </div>
         </div>
@@ -266,16 +262,39 @@ function filterGames(type){
         card.style.display = card.dataset.type===type ? 'block' : 'none';
     });
 }
+
+// --- LOGIC SCRIPT CHO CON TRỎ NEON ---
+const dot = document.querySelector('.cursor-dot');
+const outline = document.querySelector('.cursor-outline');
+
+window.addEventListener('mousemove', function(e) {
+    const posX = e.clientX;
+    const posY = e.clientY;
+    
+    dot.style.left = posX + 'px';
+    dot.style.top = posY + 'px';
+    
+    setTimeout(() => {
+        outline.style.left = posX + 'px';
+        outline.style.top = posY + 'px';
+    }, 40);
+});
+
+// Hiệu ứng phình to vòng ngoài khi tương tác link/nút
+const hoverElements = document.querySelectorAll('a, button, .game-card img');
+hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 <script>
-    // Kích hoạt hiệu ứng cho tất cả các thẻ game có thuộc tính [data-tilt]
     VanillaTilt.init(document.querySelectorAll(".game-card"), {
-        max: 15,          // Góc nghiêng tối đa (độ)
-        speed: 400,       // Tốc độ chuyển động khi rê chuột
-        glare: true,      // Bật hiệu ứng phản chiếu ánh sáng (bóng bẩy)
-        "max-glare": 0.3, // Độ sáng tối đa của hiệu ứng phản chiếu
+        max: 12,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.25,
     });
 </script>
 </body>
