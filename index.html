@@ -24,7 +24,7 @@ header p{ color:#bbb; }
 .info p{ color:#bbb; line-height:1.7; }
 .footer{ text-align:center; color:#777; margin:40px 0; }
 
-/* --- 3D TILT EFFECT (GIAO DIỆN SỐ 3) --- */
+/* --- 3D TILT EFFECT --- */
 .game-card {
     background: var(--card);
     border-radius: 16px;
@@ -62,13 +62,15 @@ header p{ color:#bbb; }
     transform: translateY(-2px);
 }
 
-/* --- HIỆU ỨNG CON TRỞ NEON AURA --- */
+/* --- HIỆU ỨNG CON TRỞ NEON AURA (V2 - CLEANER) --- */
+/* Ẩn con chuột mặc định của máy tính đi */
 body { cursor: none; }
-a, button, img { cursor: none; }
+a, button, img, .game-card { cursor: none; }
+
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: var(--accent);
+    background-color: var(--accent); /* Chấm màu hồng */
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
@@ -77,33 +79,37 @@ a, button, img { cursor: none; }
     z-index: 10000;
     box-shadow: 0 0 10px var(--accent);
 }
+
 .cursor-outline {
     width: 40px;
     height: 40px;
-    border: 2px solid var(--accent2);
+    border: 2px solid var(--accent2); /* Vòng ngoài màu tím */
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9999;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    /* transition: mượt mà khi đổi kích thước */
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
 }
+
+/* Khi rê chuột vào các nút hoặc ảnh, vòng ngoài bự lên và nháy sáng */
 .cursor-hover {
     width: 60px;
     height: 60px;
-    background-color: rgba(255, 79, 160, 0.1);
-    border-color: var(--accent);
+    background-color: rgba(255, 79, 160, 0.1); /* Màng hồng trong suốt */
+    border-color: var(--accent); /* Viền chuyển hồng */
+    box-shadow: 0 0 15px rgba(255, 79, 160, 0.5);
 }
 
 /* Tắt con trỏ custom trên thiết bị di động để tránh lỗi cảm ứng */
 @media (max-width: 768px) {
-    body, a, button, img { cursor: auto; }
+    body, a, button, img, .game-card { cursor: auto; }
     .cursor-dot, .cursor-outline { display: none; }
 }
 
-/* --- STUDIO UPDATE TIMELINE (GIAO DIỆN SỐ 9) --- */
+/* --- STUDIO UPDATE TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
 .timeline-title { text-align: center; color: var(--accent2); margin-bottom: 50px; }
 .timeline-container { position: relative; max-width: 800px; margin: auto; }
@@ -263,25 +269,28 @@ function filterGames(type){
     });
 }
 
-// --- LOGIC SCRIPT CHO CON TRỎ NEON ---
+// --- LOGIC SCRIPT CHO CON TRỎ NEON AURA (V2) ---
 const dot = document.querySelector('.cursor-dot');
 const outline = document.querySelector('.cursor-outline');
 
+// Bám theo tọa độ chuột
 window.addEventListener('mousemove', function(e) {
     const posX = e.clientX;
     const posY = e.clientY;
     
+    // Chấm nhỏ đi theo ngay lập tức
     dot.style.left = posX + 'px';
     dot.style.top = posY + 'px';
     
+    // Vòng tròn to đi theo hơi trễ một nhịp (tạo hiệu ứng mượt rượt)
     setTimeout(() => {
         outline.style.left = posX + 'px';
         outline.style.top = posY + 'px';
     }, 40);
 });
 
-// Hiệu ứng phình to vòng ngoài khi tương tác link/nút
-const hoverElements = document.querySelectorAll('a, button, .game-card img');
+// Hiệu ứng phình to vòng ngoài khi tương tác link, nút, ảnh game
+const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card');
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
