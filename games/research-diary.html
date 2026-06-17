@@ -38,6 +38,12 @@ body{
     color:var(--accent);
     text-decoration:none;
     font-weight:bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.back:hover{
+    transform: translateX(-5px);
 }
 
 .hero{
@@ -65,6 +71,7 @@ body{
 
 .hero p{
     color:var(--text-dim);
+    font-size: 1.1rem;
 }
 
 .cover{
@@ -73,6 +80,7 @@ body{
     border-radius:16px;
     max-height:550px;
     object-fit:cover;
+    border: 1px solid #333;
 }
 
 .box{
@@ -80,6 +88,7 @@ body{
     margin-top:20px;
     padding:25px;
     border-radius:16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .tags{
@@ -93,6 +102,12 @@ body{
     border:1px solid #444;
     padding:8px 14px;
     border-radius:999px;
+    font-weight: 500;
+}
+
+.tags span.author-tag {
+    border-color: var(--accent2);
+    color: #e2e8f0;
 }
 
 .stats{
@@ -121,6 +136,9 @@ body{
 
 .box h2{
     margin-bottom:15px;
+    color: var(--accent);
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
 }
 
 .box p{
@@ -141,10 +159,12 @@ body{
     border-radius:12px;
     cursor:pointer;
     transition:.3s;
+    border: 2px solid transparent;
 }
 
 .gallery img:hover{
-    transform:scale(1.03);
+    transform:scale(1.02);
+    border-color: var(--accent2);
 }
 
 .download{
@@ -201,6 +221,7 @@ body{
     max-width:90%;
     max-height:90%;
     border-radius:12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
 }
 
 @media(max-width:768px){
@@ -230,16 +251,16 @@ body{
 
 <div class="container">
 
-<a class="back" href="index.html">← Quay lại trang chủ</a>
+<a class="back" href="../index.html">← Quay lại trang chủ</a>
 
 <div class="hero">
     <h1>Research Diary</h1>
-    <p>Visual Novel Việt Hóa</p>
+    <p>Visual Novel Việt Hóa | <strong>Tác giả: Nekanaro</strong></p>
 </div>
 
 <img
 class="cover"
-src="research-diary-cover.jpg"
+src="../research-diary-cover.jpg"
 alt="Research Diary">
 
 <div class="box">
@@ -251,6 +272,7 @@ alt="Research Diary">
     <span>420 MB</span>
     <span>Windows PC</span>
     <span>Visual Novel</span>
+    <span class="author-tag">👤 Tác giả: Nekanaro</span>
 </div>
 
 <div class="stats">
@@ -287,7 +309,8 @@ alt="Research Diary">
 Research Diary là visual novel với cốt truyện bí ẩn xoay quanh
 một cuốn nhật ký nghiên cứu chứa nhiều bí mật chưa được hé lộ.
 Người chơi sẽ khám phá câu chuyện thông qua các lựa chọn và
-sự kiện khác nhau.
+sự kiện khác nhau. Tác phẩm gốc được phát triển bởi Nekanaro và
+được Việt hóa độc quyền bởi HPGVH18 Studio.
 </p>
 
 </div>
@@ -298,10 +321,10 @@ sự kiện khác nhau.
 
 <div class="gallery">
 
-<img src="screen1.jpg" alt="">
-<img src="screen2.jpg" alt="">
-<img src="screen3.jpg" alt="">
-<img src="screen4.jpg" alt="">
+<img src="../screen1.jpg" alt="Gameplay 1">
+<img src="../screen2.jpg" alt="Gameplay 2">
+<img src="../screen3.jpg" alt="Gameplay 3">
+<img src="../screen4.jpg" alt="Gameplay 4">
 
 </div>
 
