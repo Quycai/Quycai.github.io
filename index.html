@@ -6,50 +6,46 @@
 <title>HPGVH18 - Kho Game Việt Hóa</title>
 
 <style>
-/* CSS GỐC CỦA TRANG */
-:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
+/* --- KHUNG XƯƠNG CƠ BẢN --- */
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --glow:#ffffff; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; }
+body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 header{ text-align:center; padding:50px 20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border-bottom:2px solid var(--accent); }
 header h1{ font-size:3rem; }
 header p{ color:#bbb; }
 .container{ max-width:1200px; margin:auto; padding:20px; }
 .search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; }
 .filters{ display:flex; gap:10px; margin-bottom:25px; }
-.filters button{ border:none; padding:10px 15px; border-radius:10px; cursor:pointer; background:#252536; color:white; transition:0.3s;}
+.filters button{ border:none; padding:10px 15px; border-radius:10px; cursor:pointer; background:#252536; color:white; transition: 0.3s; }
 .filters button:hover{ background:var(--accent); }
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
-.info{ padding:20px; position:relative;} 
+.info{ padding:20px; }
 .info h2{ margin-bottom:10px; }
 .info p{ color:#bbb; line-height:1.7; }
 .footer{ text-align:center; color:#777; margin:40px 0; }
 
-/* --- HIỆU ỨNG GIAO DIỆN NEON & HOVER TRƯỢT MỚI --- */
+/* --- 3D TILT EFFECT (GIAO DIỆN SỐ 3) --- */
 .game-card {
     background: var(--card);
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    border: 2px solid transparent; 
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    border: 1px solid transparent; 
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    /* Giữ cho thẻ game nảy nhẹ khi rê chuột (nhờ Javascript xử lý nghiêng) */
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
 }
 
 .game-card:hover {
-    transform: translateY(-12px); 
-    border-color: var(--accent); 
-    box-shadow: 0 0 25px rgba(255, 79, 160, 0.4), 0 0 50px rgba(139, 92, 246, 0.2); 
+    border-color: rgba(139, 92, 246, 0.5); 
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); 
 }
 
 .game-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
-    transition: all 0.5s ease;
-}
-
-.game-card:hover img {
-    transform: scale(1.12); 
-    filter: brightness(0.4); 
 }
 
 .btn {
@@ -62,23 +58,85 @@ header p{ color:#bbb; }
     color: white;
     font-weight: bold;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    
-    opacity: 0; 
-    transform: translateY(30px); 
-    transition: all 0.4s ease;
-}
-
-.game-card:hover .btn {
-    opacity: 1; 
-    transform: translateY(0); 
-    box-shadow: 0 5px 20px rgba(255, 79, 160, 0.6); 
+    transition: 0.3s;
 }
 
 .btn:hover {
     filter: brightness(1.2); 
+    box-shadow: 0 5px 15px rgba(255, 79, 160, 0.5);
+    transform: translateY(-2px);
 }
 
-/* CSS MÀN CHẮN 18+ */
+/* --- STUDIO UPDATE TIMELINE (GIAO DIỆN SỐ 9) --- */
+.timeline-section {
+    margin-top: 80px;
+    padding-bottom: 50px;
+    border-top: 1px solid #333;
+    padding-top: 40px;
+}
+.timeline-title {
+    text-align: center;
+    color: var(--accent2);
+    margin-bottom: 50px;
+}
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+}
+/* Đường kẻ phát sáng */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--accent2), var(--accent));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+}
+/* Các dấu chấm phát sáng */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: -8px;
+    background-color: var(--card);
+    border: 3px solid var(--accent2);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 10px var(--accent2);
+}
+.left { left: 0; text-align: right; }
+.right { left: 50%; }
+.right::after { left: -8px; }
+.content {
+    padding: 20px;
+    background: var(--card);
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+.content h3 { color: var(--accent); margin-bottom: 5px; }
+.content p { color: #aaa; font-size: 14px; line-height: 1.6; }
+@media (max-width: 768px) {
+    .timeline-container::after { left: 31px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
+    .timeline-item::after { left: 15px; }
+    .left::after { left: 23px; }
+    .right { left: 0%; }
+}
+
+/* --- MÀN CHẮN 18+ & FOOTER --- */
 .age-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 11, 18, 0.95); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
 .age-box { background: var(--card); padding: 30px; border-radius: 16px; text-align: center; color: white; border: 2px solid var(--accent2); max-width: 420px; width: 90%; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
 .age-box h2 { color: var(--accent); margin-bottom: 10px; font-size: 26px;}
@@ -118,16 +176,16 @@ header p{ color:#bbb; }
 
     <div class="games">
         
-        <div class="game-card" data-type="pc">
+        <div class="game-card" data-type="pc" data-tilt>
             <img src="images/research-diary/research-diary-cover.jpg" alt="Research Diary">
             <div class="info">
                 <h2>Research Diary v0.1</h2>
-                <p>PC Windows<br>420 MB</p>
+                <p>PC Windows<br>420 MB | Tác giả Nekanaro</p>
                 <a class="btn" href="games/research-diary.html">XEM CHI TIẾT</a>
             </div>
         </div>
 
-        <div class="game-card" data-type="pc">
+        <div class="game-card" data-type="pc" data-tilt>
             <img src="images/big-milf-surprise/big-milf-surprise-cover.jpg" alt="Big Milf Surprise">
             <div class="info">
                 <h2>Big Milf Surprise v1.3</h2>
@@ -136,7 +194,7 @@ header p{ color:#bbb; }
             </div>
         </div>
 
-        <div class="game-card" data-type="pc">
+        <div class="game-card" data-type="pc" data-tilt>
             <img src="images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
             <div class="info">
                 <h2>A Genin Tale v0.3</h2>
@@ -144,19 +202,56 @@ header p{ color:#bbb; }
                 <a class="btn" href="games/a-genin-tale.html">XEM CHI TIẾT</a>
             </div>
         </div>
-
     </div> 
+
+    <div class="timeline-section">
+        <h2 class="timeline-title">LỊCH SỬ PHÁT TRIỂN STUDIO</h2>
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>Bắt Đầu</h3>
+                    <p>Tháng 4, 2026: Thành Lập HPGVH18 STUDIO & Team Tứ Đại Thiên Vương (Khang Hy, Trường Thịnh, Dủ Minh, PhongDHP).</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>Dự Án Đầu Tiên</h3>
+                    <p>Tháng 5, 2026: Phát Hành Bản Việt Hóa Đầu Tiên 'Research Diary v0.1' cho anh em trải nghiệm.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>Quy Hoạch Web</h3>
+                    <p>Tháng 6, 2026: Dọn dẹp Repo gọn gàng, chia thư mục images/games chuẩn dev chuyên nghiệp.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>Dự Án Naruto</h3>
+                    <p>Tháng 6, 2026: Ra Mắt 'A Genin Tale v0.3' | Tác giả Luchetty (Fix lỗi font đậu hũ thành công).</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>Nâng Cấp Giao Diện</h3>
+                    <p>Wednesday, June 17, 2026: Độ giao diện 3D Tilt & Timeline phát sáng cho web HPGVH18.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="footer">© 2026 HPGVH18 Studio</div>
 </div>
 
 <script>
+// --- LOGIC MÀN CHẮN 18+ ---
 document.addEventListener("DOMContentLoaded", function() {
     if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; }
 });
 function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
+// --- LOGIC TÌM KIẾM & BỘ LỌC ---
 const search = document.getElementById('search');
 search.addEventListener('keyup',()=>{
     const value = search.value.toLowerCase();
@@ -171,6 +266,17 @@ function filterGames(type){
         card.style.display = card.dataset.type===type ? 'block' : 'none';
     });
 }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+<script>
+    // Kích hoạt hiệu ứng cho tất cả các thẻ game có thuộc tính [data-tilt]
+    VanillaTilt.init(document.querySelectorAll(".game-card"), {
+        max: 15,          // Góc nghiêng tối đa (độ)
+        speed: 400,       // Tốc độ chuyển động khi rê chuột
+        glare: true,      // Bật hiệu ứng phản chiếu ánh sáng (bóng bẩy)
+        "max-glare": 0.3, // Độ sáng tối đa của hiệu ứng phản chiếu
+    });
 </script>
 </body>
 </html>
