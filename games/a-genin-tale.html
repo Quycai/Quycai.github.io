@@ -3,89 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Genin Tale v0.3 | HPGVH18</title>
+<title>Tải Game A Genin Tale - HPGVH18</title>
+
 <style>
-:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
+/* --- KHUNG XƯƠNG CƠ BẢN --- */
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
-.container{ max-width:1100px; margin:auto; padding:20px; }
-.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; }
-.back:hover{ transform: translateX(-5px); }
-.hero{ margin-top:20px; padding:60px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); }
-.hero h1{ font-size:3rem; margin-bottom:10px; }
-.hero p{ color:var(--text-dim); font-size: 1.1rem; }
-.cover{ width:100%; margin-top:20px; border-radius:16px; max-height:550px; object-fit:cover; border: 1px solid #333; }
-.box{ background:var(--card); margin-top:20px; padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.tags{ display:flex; flex-wrap:wrap; gap:10px; }
-.tags span{ background:#252536; border:1px solid #444; padding:8px 14px; border-radius:999px; font-weight: 500; }
-.tags span.author-tag { border-color: var(--accent2); color: #e2e8f0; }
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-top:20px; }
-.stat{ background:#252536; border-radius:12px; padding:15px; text-align:center; }
-.stat h3{ color:var(--accent); margin-bottom:5px; }
-.stat p{ color:#aaa; font-size:14px; }
-.box h2{ margin-bottom:15px; color: var(--accent); border-bottom: 1px solid #333; padding-bottom: 10px; }
-.box p{ line-height:1.8; color:var(--text-dim); }
-.gallery{ display:grid; grid-template-columns:repeat(2, 1fr); gap:15px; }
-.gallery img{ width:100%; height:260px; object-fit:cover; border-radius:12px; cursor:pointer; transition:.3s; border: 2px solid transparent; }
-.gallery img:hover{ transform:scale(1.02); border-color: var(--accent2); }
-.download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:18px; border-radius:12px; font-size:20px; font-weight:bold; box-shadow: 0 0 25px rgba(255,79,160,.4); transition:.3s; }
-.download:hover{ transform:translateY(-3px); box-shadow: 0 0 35px rgba(255,79,160,.7); }
-.footer{ text-align:center; color:#888; margin:30px 0; }
-.lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.9); justify-content:center; align-items:center; z-index:9999; }
-.lightbox img{ max-width:90%; max-height:90%; border-radius:12px; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
-@media(max-width:768px){ .hero h1{ font-size:2rem; } .gallery{ grid-template-columns:1fr; } .stats{ grid-template-columns:repeat(2,1fr); } .gallery img{ height:auto; } }
+body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; line-height: 1.6; }
+header{ text-align:center; padding:40px 20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border-bottom:2px solid var(--accent); }
+header h1{ font-size:2.5rem; }
+header p{ color:#bbb; }
+.container{ max-width:900px; margin:auto; padding:20px; }
+
+/* --- GIAO DIỆN TRANG TẢI GAME --- */
+.back-btn { display: inline-block; margin-bottom: 20px; padding: 10px 20px; background: #252536; color: white; text-decoration: none; border-radius: 8px; transition: 0.3s; font-weight: bold; }
+.back-btn:hover { background: var(--accent); }
+
+.game-header { text-align: center; margin-bottom: 30px; }
+.game-header h2 { font-size: 2rem; color: var(--accent2); margin-bottom: 10px; }
+.game-cover { width: 100%; max-width: 700px; border-radius: 16px; margin: 0 auto 20px auto; display: block; border: 2px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+.game-desc { background: var(--card); padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #333; }
+.game-desc p { color: #ccc; margin-bottom: 10px; }
+
+.download-btn { display: block; width: 100%; max-width: 400px; margin: 0 auto 40px auto; text-align: center; padding: 18px; border-radius: 12px; text-decoration: none; color: white; font-size: 18px; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 79, 160, 0.3); }
+.download-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 79, 160, 0.6); filter: brightness(1.2); }
+
+/* --- CSS KHUNG HƯỚNG DẪN (ACCORDION) --- */
+.faq-container { background: var(--card); border-radius: 12px; padding: 25px; border: 1px solid #333; margin-bottom: 40px; }
+.faq-title { color: var(--accent); margin-bottom: 20px; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.faq-item { border-bottom: 1px solid #252536; }
+.faq-item:last-child { border-bottom: none; }
+.faq-btn { width: 100%; text-align: left; background: none; border: none; color: white; padding: 18px 0; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+.faq-btn:hover { color: var(--accent2); }
+.faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-content p { color: #bbb; padding-bottom: 18px; font-size: 15px; }
+
+/* Trạng thái khi mở tab */
+.faq-btn.active { color: var(--accent); }
+.faq-btn.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-icon { transition: transform 0.3s; font-size: 24px; }
+
+.footer{ text-align:center; color:#777; margin:40px 0; }
 </style>
 </head>
 <body>
+
+<header>
+    <h1>🎮 HPGVH18 STUDIO</h1>
+    <p>Kho Game Visual Novel Việt Hóa</p>
+</header>
+
 <div class="container">
-<a class="back" href="../index.html">← Quay lại trang chủ</a>
-<div class="hero">
-    <h1>A Genin Tale</h1>
-    <p>Visual Novel Việt Hóa | <strong>Tác giả: Luchetty</strong></p>
-</div>
-<img class="cover" src="../images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
+    <a href="../index.html" class="back-btn">⬅ Quay lại Trang Chủ</a>
 
-<div class="box">
-<h2>Thông Tin Game</h2>
-<div class="tags">
-    <span>Version v0.3</span> <span>245 MB</span> <span>Windows PC</span> <span>Naruto / Ninja</span> <span class="author-tag">👤 Tác giả: Luchetty</span>
-</div>
-<div class="stats">
-<div class="stat"><h3>245 MB</h3><p>Dung lượng</p></div>
-<div class="stat"><h3>Windows</h3><p>Nền tảng</p></div>
-<div class="stat"><h3>v0.3</h3><p>Phiên bản</p></div>
-<div class="stat"><h3>2026</h3><p>Cập nhật</p></div>
-</div>
+    <div class="game-header">
+        <h2>A Genin Tale v0.3</h2>
+        <img src="../images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale Cover" class="game-cover">
+    </div>
+
+    <div class="game-desc">
+        <p><strong>🔹 Thể loại:</strong> Visual Novel, Harem, Ninja</p>
+        <p><strong>🔹 Tác giả:</strong> Luchetty</p>
+        <p><strong>🔹 Kích thước:</strong> 245 MB</p>
+        <p><strong>🔹 Việt hóa bởi:</strong> HPGVH18 Studio (PhongDHP)</p>
+        <br>
+        <p><em>Nội dung game:</em> Vào vai một Genin trẻ tuổi tại Làng Lá, bắt đầu hành trình nhẫn giả của riêng bạn với những nhiệm vụ bất ngờ và các cuộc gặp gỡ thú vị...</p>
+    </div>
+
+    <a href="#" class="download-btn">⬇ TẢI GAME QUA GOOGLE DRIVE</a>
+
+    <div class="faq-container">
+        <h3 class="faq-title">🛠 HƯỚNG DẪN CÀI ĐẶT & FIX LỖI</h3>
+
+        <div class="faq-item">
+            <button class="faq-btn">1. Làm sao để cài đặt game? <span class="faq-icon">+</span></button>
+            <div class="faq-content">
+                <p>- <strong>Bước 1:</strong> Tải file nén (.rar hoặc .zip) từ link phía trên về máy.<br>
+                - <strong>Bước 2:</strong> Bấm chuột phải vào file, chọn <strong>Extract Here</strong> (Giải nén ở đây). Mật khẩu giải nén (nếu có): <em>hpgvh18</em>.<br>
+                - <strong>Bước 3:</strong> Mở thư mục vừa giải nén, tìm file có đuôi <code>.exe</code> (VD: Game.exe) và nháy đúp để chơi!</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-btn">2. Máy báo lỗi thiếu file MSVCP140.dll? <span class="faq-icon">+</span></button>
+            <div class="faq-content">
+                <p>Đây là do máy tính của bạn chưa cài đủ thư viện C++ cơ bản. Hãy lên Google tìm <strong>"Visual C++ Redistributable All-in-One"</strong>, tải về cài đặt một phát là chơi mượt mọi game.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-btn">3. Lỗi font chữ bị thành ô vuông (Lỗi đậu hũ)? <span class="faq-icon">+</span></button>
+            <div class="faq-content">
+                <p>Bạn vào thư mục game, tìm thư mục <code>game/fonts</code>. Xóa font cũ đi, copy một font Tiếng Việt (như Arial) vào và đổi tên giống hệt font cũ. Hoặc lên YouTube tìm kênh <strong>PhongDHP123</strong> để xem clip hướng dẫn fix lỗi cực kỳ chi tiết nhé.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">© 2026 HPGVH18 Studio</div>
 </div>
 
-<div class="box">
-<h2>Giới Thiệu</h2>
-<p>A Genin Tale là một tựa game Visual Novel lấy bối cảnh trong thế giới Naruto đầy hấp dẫn. Người chơi sẽ vào vai một Ninja thế hệ mới tại làng Lá, bắt đầu cuộc hành trình từ một Genin và trải qua những câu chuyện, thử thách cùng các mối quan hệ đầy bất ngờ. Bản dịch được thực hiện và hoàn thiện bởi HPGVH18 Studio.</p>
-</div>
-
-<div class="box">
-<h2>Ảnh Gameplay</h2>
-<div class="gallery">
-<img src="../images/a-genin-tale/a-genin-tale1.jpg" alt="Gameplay 1">
-<img src="../images/a-genin-tale/a-genin-tale2.jpg" alt="Gameplay 2">
-<img src="../images/a-genin-tale/a-genin-tale3.jpg" alt="Gameplay 3">
-<img src="../images/a-genin-tale/a-genin-tale4.jpg" alt="Gameplay 4">
-</div>
-</div>
-
-<div class="box">
-<h2>Tải Game</h2>
-<p style="color: #bbb; text-align: center; margin-bottom: 5px;">Mật khẩu giải nén: <strong style="color: var(--accent);">hpgvh18</strong></p>
-<p style="color: #bbb; text-align: center; margin-bottom: 20px;">Lưu ý: Giải nén bằng WinRAR hoặc 7-Zip để tránh lỗi file.</p>
-<a class="download" href="https://drive.google.com/file/d/1bnTxj0HychoaTbqdQvneOjsQ7OITxrlH/view?usp=sharing" target="_blank">🎮 TẢI A GENIN TALE V0.3 (245MB)</a>
-</div>
-<div class="footer">© 2026 HPGVH18 Studio</div>
-</div>
-<div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
 <script>
-const imgs=document.querySelectorAll('.gallery img'); const lightbox=document.getElementById('lightbox'); const lightboxImg=document.getElementById('lightbox-img');
-imgs.forEach(img=>{ img.addEventListener('click',()=>{ lightbox.style.display='flex'; lightboxImg.src=img.src; }); });
-lightbox.addEventListener('click',()=>{ lightbox.style.display='none'; });
+// SCRIPT CHO KHUNG HƯỚNG DẪN TRƯỢT LÊN XUỐNG
+const faqBtns = document.querySelectorAll('.faq-btn');
+
+faqBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+});
 </script>
 </body>
 </html>
