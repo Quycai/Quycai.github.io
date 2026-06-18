@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - Câu Hỏi Thường Gặp | HPGVH18</title>
+<style>
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
+.container{ max-width:900px; margin:auto; padding:20px; }
+.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
+.back:hover{ transform: translateX(-5px); color: white; }
+.hero{ padding:40px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; }
+.hero h1{ font-size:2.5rem; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.hero p{ color:var(--text-dim); margin-top: 5px; }
+.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #252536; margin-bottom: 20px; }
+.box h3 { color: var(--accent2); margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+.box p{ line-height:1.8; color:var(--text-dim); font-size: 15px; }
+.box strong { color: white; }
+.box code { background: #252536; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-family: Consolas, monospace; }
+.footer{ text-align:center; color:#555; margin:40px 0; font-size: 13px; }
 
+/* --- CON TRỞ CHUỘT NEON --- */
+body { cursor: none; }
+a, button { cursor: none; }
+.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
+.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+.cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
+@media (max-width: 768px) { body, a, button { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<div class="container">
+    <a class="back" href="index.html">← Quay lại trang chủ</a>
+    
+    <div class="hero">
+        <h1>💬 FAQ</h1>
+        <p>Giải đáp thắc mắc và khắc phục lỗi khi chơi game</p>
+    </div>
+
+    <div class="box">
+        <h3>🔑 Mật khẩu giải nén của các file game là gì?</h3>
+        <p>Tất cả các file nén game (.rar hoặc .zip) được tải từ HPGVH18 Studio đều sử dụng chung một mật khẩu giải nén mặc định là: <code>hpgvh18</code> (viết thường, không dấu).</p>
+    </div>
+
+    <div class="box">
+        <h3>👾 Lỗi thiếu file DLL (MSVCP140.dll, VCRUNTIME140.dll...) là sao?</h3>
+        <p>Đây là lỗi cực kỳ phổ biến khi máy tính của bạn thiếu các thư viện chạy game cơ bản của Microsoft. Cách xử lý rất dễ: Hãy lên Google tìm từ khóa <strong>"Visual C++ Redistributable All-in-One"</strong>, tải bộ cài về và chạy file để cập nhật toàn bộ hệ thống. Sau đó khởi động lại máy là chơi được mọi game.</p>
+    </div>
+
+    <div class="box">
+        <h3>🔲 Tại sao vào game chữ lại bị biến thành ô vuông (Lỗi đậu hũ)?</h3>
+        <p>Lỗi này xảy ra do game gốc không hỗ trợ font chữ Tiếng Việt. Bạn hãy vào thư mục game đã giải nén, tìm đến thư mục <code>game/fonts</code>. Xóa font mặc định của game đi, tìm một font chữ chuẩn Tiếng Việt trên máy tính của bạn (như Arial, Roboto), copy vào đó rồi đổi tên file cho giống hệt tên font cũ vừa xóa. Hoặc có thể lên YouTube gõ tìm kênh <strong>PhongDHP123</strong> để xem clip hướng dẫn từng bước nha.</p>
+    </div>
+
+    <div class="box">
+        <h3>📱 Game trên PC có chơi được trên Android không?</h3>
+        <p>Hiện tại, các bản Patch Việt hóa của Studio chủ yếu tối ưu hóa cho hệ điều hành Windows (PC). Đối với các game chạy bằng công cụ Ren'Py, một số game có thể giả lập bằng ứng dụng JoiPlay trên Android, tuy nhiên độ ổn định và hiển thị font chữ sẽ không được hoàn hảo như trên máy tính.</p>
+    </div>
+
+    <div class="box">
+        <h3>🔗 Khi link tải game bị báo quá giới hạn hoặc lỗi 404?</h3>
+        <p>Đối với link Google Drive, nếu bị báo lỗi quá giới hạn tải trong ngày, bạn hãy đăng nhập tài khoản Google của mình rồi bấm "Tạo bản sao" vào Drive cá nhân để tải về. Nếu link bị sập hoàn toàn (lỗi 404), hãy bấm ngay vào nút <strong>"Báo Cáo Lỗi Link"</strong> dưới chân trang hoặc nhắn tin qua Fanpage để Studio fix lại link sớm nhất.</p>
+    </div>
+
+    <div class="footer">© 2026 HPGVH18 Studio</div>
+</div>
+
+<script>
+// LOGIC CHUỘT NEON
+const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
+window.addEventListener('mousemove', (e) => {
+    dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+    setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40);
+});
+document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+});
+</script>
+</body>
+</html>
