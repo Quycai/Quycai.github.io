@@ -10,9 +10,37 @@
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
-header{ text-align:center; padding:50px 20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border-bottom:2px solid var(--accent); }
-header h1{ font-size:3rem; }
-header p{ color:#bbb; }
+
+/* --- UPDATE: HEADER CÓ ẢNH BÌA & LỚP PHỦ NEON --- */
+header {
+    text-align:center;
+    /* Tăng độ cao header một chút để show ảnh đẹp hơn */
+    padding:80px 20px;
+    
+    /* 1. KỸ THUẬT PHỦ MÀU: gradient mờ nằm trên ảnh bìa */
+    background: linear-gradient(135deg, rgba(255,79,160,0.3), rgba(139,92,246,0.3)),
+                /* 2. Thay đường dẫn ảnh bìa của ông vào src này */
+                url('images/cover.jpg'); 
+                
+    /* 3. CĂN CHỈNH ẢNH: full chiều ngang, nằm giữa */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    border-bottom:2px solid var(--accent);
+    /* Thêm hiệu ứng phát sáng nhẹ cho viền dưới */
+    box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
+}
+header h1 {
+    font-size:3rem;
+    /* Thêm bóng chữ để nổi bật trên nền ảnh */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 5px var(--accent);
+}
+header p {
+    color:#eee; /* Làm chữ phụ sáng lên một chút */
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+
 .container{ max-width:1200px; margin:auto; padding:20px; }
 .search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; }
 .filters{ display:flex; gap:10px; margin-bottom:25px; }
@@ -63,14 +91,12 @@ header p{ color:#bbb; }
 }
 
 /* --- HIỆU ỨNG CON TRỞ NEON AURA (V2 - CLEANER) --- */
-/* Ẩn con chuột mặc định của máy tính đi */
 body { cursor: none; }
 a, button, img, .game-card { cursor: none; }
-
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: var(--accent); /* Chấm màu hồng */
+    background-color: var(--accent);
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
@@ -79,31 +105,26 @@ a, button, img, .game-card { cursor: none; }
     z-index: 10000;
     box-shadow: 0 0 10px var(--accent);
 }
-
 .cursor-outline {
     width: 40px;
     height: 40px;
-    border: 2px solid var(--accent2); /* Vòng ngoài màu tím */
+    border: 2px solid var(--accent2);
     border-radius: 50%;
     position: fixed;
     top: 0; left: 0;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9999;
-    /* transition: mượt mà khi đổi kích thước */
     transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
 }
-
-/* Khi rê chuột vào các nút hoặc ảnh, vòng ngoài bự lên và nháy sáng */
 .cursor-hover {
     width: 60px;
     height: 60px;
-    background-color: rgba(255, 79, 160, 0.1); /* Màng hồng trong suốt */
-    border-color: var(--accent); /* Viền chuyển hồng */
+    background-color: rgba(255, 79, 160, 0.1);
+    border-color: var(--accent);
     box-shadow: 0 0 15px rgba(255, 79, 160, 0.5);
 }
 
-/* Tắt con trỏ custom trên thiết bị di động để tránh lỗi cảm ứng */
 @media (max-width: 768px) {
     body, a, button, img, .game-card { cursor: auto; }
     .cursor-dot, .cursor-outline { display: none; }
