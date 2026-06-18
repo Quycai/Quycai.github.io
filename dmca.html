@@ -5,18 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Điều Khoản & DMCA | HPGVH18</title>
 <style>
+/* --- KHUNG XƯƠNG CƠ BẢN & BIẾN MÀU NEON --- */
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
+body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; overflow-x: hidden; }
+
+/* --- 1. THANH CUỘN MÀN HÌNH NEON --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+/* --- 3. BÔI ĐEN CHỮ PHÁ CÁCH --- */
+::selection { background: var(--accent); color: white; text-shadow: none; }
+::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
+
 .container{ max-width:900px; margin:auto; padding:20px; }
-.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
-.back:hover{ transform: translateX(-5px); color: white; }
-.hero{ padding:40px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; }
-.hero h1{ font-size:2.5rem; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-.hero p{ color:var(--text-dim); margin-top: 5px; }
-.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #252536; margin-bottom: 20px; line-height:1.8; color:var(--text-dim); font-size: 15px; }
-.box h2 { color: white; font-size: 20px; margin-bottom: 12px; border-left: 4px solid var(--accent); padding-left: 10px; }
+.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; letter-spacing: 0.5px; }
+.back:hover{ transform: translateX(-5px); color: white; text-shadow: 0 0 10px var(--accent); }
+
+/* --- HERO BANNER CÓ LỚP PHỦ --- */
+.hero{ padding:40px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.hero h1{ font-size:2.5rem; }
+.hero p{ color:var(--text-dim); margin-top: 8px; font-size: 15px; }
+
+/* --- 4. HIỆU ỨNG NHIỄU SÓNG (GLITCH) TIÊU ĐỀ --- */
+.glitch { animation: glitch-anim 4s infinite; display: inline-block; position: relative; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 5px var(--accent); }
+@keyframes glitch-anim {
+    0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 10px rgba(255, 79, 160, 0.3)); }
+    96% { transform: translate(-2px, 1px) skew(-6deg); filter: drop-shadow(-2px 0 0 #ff4fa0) drop-shadow(2px 0 0 #8b5cf6); }
+    97% { transform: translate(2px, -1px) skew(6deg); filter: drop-shadow(2px 0 0 #ff4fa0) drop-shadow(-2px 0 0 #8b5cf6); }
+    99% { transform: translate(0, 0) skew(0deg); filter: none; }
+}
+
+/* --- KHỐI NỘI DUNG --- */
+.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); border: 1px solid #252536; margin-bottom: 20px; line-height:1.8; color:var(--text-dim); font-size: 15px; }
+.box:hover { border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 5px 15px rgba(139, 92, 246, 0.15); }
+.box h2 { color: white; font-size: 20px; margin-bottom: 12px; border-left: 4px solid var(--accent); padding-left: 10px; letter-spacing: 0.5px; }
 .box p { margin-bottom: 15px; text-align: justify; }
+.box strong { color: white; }
+
 .footer{ text-align:center; color:#555; margin:40px 0; font-size: 13px; }
 
 /* --- CON TRỞ CHUỘT NEON --- */
@@ -34,30 +62,30 @@ a, button { cursor: none; }
 <div class="cursor-outline"></div>
 
 <div class="container">
-    <a class="back" href="index.html">← Quay lại trang chủ</a>
+    <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
     
     <div class="hero">
-        <h1>⚖️ DMCA & DISCLAIMER</h1>
-        <p>Điều khoản dịch vụ công bằng và miễn trừ bản quyền pháp lý</p>
+        <h1 class="glitch">⚖️ DMCA & DISCLAIMER</h1>
+        <p>Điều khoản miễn trừ trách nhiệm pháp lý và bảo vệ bản quyền sở hữu trí tuệ</p>
     </div>
 
     <div class="box">
         <h2>1. Miễn Trừ Trách Nhiệm (Disclaimer)</h2>
-        <p>HPGVH18 Studio là một dự án cá nhân hoạt động hoàn toàn phi lợi nhuận, được lập ra với mục đích duy nhất là chia sẻ đam mê dịch thuật và ngôn ngữ dành cho cộng đồng yêu thích thể loại Visual Novel tại Việt Nam.</p>
-        <p>Chúng tôi tuyệt đối <strong>KHÔNG lưu trữ, KHÔNG thu thập</strong> bất kỳ tệp tin (file) trò chơi bẻ khóa hay mã độc nào trên máy chủ lưu trữ (hosting) của website này. Tất cả đường liên kết (link download) được cung cấp trên hệ thống đều dẫn tới các dịch vụ lưu trữ đám mây của bên thứ ba (như Google Drive, TeraBox, Mega...) do người dùng hoặc cộng đồng chia sẻ công khai trên internet.</p>
+        <p>HPGVH18 Studio hoạt động hoàn toàn dưới danh nghĩa dự án cá nhân phi lợi nhuận, được thành lập với mục đích duy nhất là chia sẻ đam mê dịch thuật, trau dồi ngôn ngữ và kết nối cộng đồng những người đam mê thể loại Visual Novel tại Việt Nam.</p>
+        <p>Chúng tôi cam kết <strong>KHÔNG lưu trữ, KHÔNG tự ý bẻ khóa hay phân phối thương mại</strong> bất kỳ tệp tin (file) trò chơi gốc hay phần mềm độc hại nào trên máy chủ lưu trữ (hosting) của website này. Tất cả đường dẫn tải dữ liệu (download link) xuất hiện trên hệ thống đều được trích xuất từ các dịch vụ lưu trữ đám mây công cộng bên thứ ba (Google Drive, TeraBox, Mega...) do cộng đồng mạng chia sẻ tự do.</p>
     </div>
 
     <div class="box">
-        <h2>2. Chính Sách Bản Quyền (DMCA Compliance)</h2>
-        <p>Chúng tôi luôn tôn trọng quyền sở hữu trí tuệ của các nhà phát triển và nhà sản xuất trò chơi gốc. Các sản phẩm do HPGVH18 Studio đăng tải thực chất chỉ là những <strong>"bản vá dịch thuật" (Language Patch)</strong> thay đổi tệp ngôn ngữ của trò chơi gốc, phục vụ cho mục đích trải nghiệm cá nhân của những người không thành thạo tiếng nước ngoài.</p>
-        <p>Nếu bạn là chủ sở hữu hợp pháp của bất kỳ tựa game nào xuất hiện trên trang web của chúng tôi và không muốn sản phẩm của mình được chia sẻ dưới dạng dịch thuật tại đây, vui lòng gửi một thông báo khiếu nại bản quyền chính thức bao gồm đầy đủ giấy tờ chứng minh sở hữu qua hộp thư hoặc Fanpage của Studio. Chúng tôi sẽ lập tức hợp tác và tiến hành gỡ bỏ toàn bộ đường link liên quan trong vòng 24 đến 48 giờ làm việc.</p>
+        <h2>2. Chính Sách Tôn Trọng Bản Quyền (DMCA Compliance)</h2>
+        <p>Studio luôn tôn trọng và đề cao quyền sở hữu trí tuệ hợp pháp của các tác giả, họa sĩ và hãng sản xuất trò chơi gốc. Các sản phẩm do HPGVH18 Studio phân phối thực chất là những <strong>"Bản vá ngôn ngữ" (Language Patch)</strong> mang tính chất bổ trợ dịch thuật, giúp người chơi vượt qua rào cản ngôn ngữ để trải nghiệm cốt truyện một cách trọn vẹn hơn.</p>
+        <p>Nếu ông là chủ sở hữu bản quyền hợp pháp (hoặc đại diện pháp lý được ủy quyền) của bất kỳ tựa game nào xuất hiện tại đây và không đồng ý với việc chia sẻ bản vá ngôn ngữ này, vui lòng gửi thông báo khiếu nại bản quyền kèm theo các giấy tờ minh chứng quyền sở hữu hợp pháp về cho Studio qua hòm thư hỗ trợ. Chúng tôi sẽ lập tức xử lý nghiêm túc và tiến hành gỡ bỏ toàn bộ liên kết liên quan trong vòng 24 - 48 giờ làm việc.</p>
     </div>
 
     <div class="footer">© 2026 HPGVH18 Studio</div>
 </div>
 
 <script>
-// LOGIC CHUỘT NEON
+// LOGIC CHUỘT NEON ĐỒNG BỘ
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
 window.addEventListener('mousemove', (e) => {
     dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
