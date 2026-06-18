@@ -17,32 +17,48 @@ body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overfl
 ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 
-/* --- 3. BÔI ĐEN CHỮ PHÁ CÁCH --- */
+/* --- BÔI ĐEN CHỮ PHÁ CÁCH --- */
 ::selection { background: var(--accent); color: white; text-shadow: none; }
 ::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
 
-/* --- HEADER CÓ ẢNH BÌA & LỚP PHỦ NEON --- */
+/* --- TÍNH NĂNG MỚI: HEADER ẢNH BÌA "THỞ" (BREATHING EFFECT) --- */
 header {
-    text-align:center;
-    padding:80px 20px;
+    position: relative; /* Cần thiết để chứa lớp ảnh nền bên trong */
+    text-align: center;
+    padding: 80px 20px;
+    overflow: hidden; /* Giữ cho ảnh không phình ra ngoài viền */
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
+}
+
+/* Lớp ảnh nền tách riêng để làm animation phóng to thu nhỏ */
+header::before {
+    content: '';
+    position: absolute;
+    top: -5%; left: -5%; right: -5%; bottom: -5%; /* Nới rộng ra 1 chút để có không gian zoom */
     background: linear-gradient(135deg, rgba(255,79,160,0.3), rgba(139,92,246,0.3)),
                 url('images/Gemini_Generated_Image_6txzhm6txzhm6txz.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-bottom:2px solid var(--accent);
-    box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
-}
-header h1 {
-    font-size:3rem;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 5px var(--accent);
-}
-header p {
-    color:#eee;
-    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+    z-index: -1;
+    animation: breathe-anim 12s infinite alternate ease-in-out; /* Zoom nhẹ qua lại mỗi 12s */
 }
 
-/* --- 4. HIỆU ỨNG NHIỄU SÓNG (GLITCH) TIÊU ĐỀ --- */
+@keyframes breathe-anim {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
+
+header h1, header p {
+    position: relative;
+    z-index: 1; /* Đảm bảo chữ luôn nổi lên trên ảnh nền */
+}
+
+header h1 { font-size:3rem; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 5px var(--accent); }
+header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
+
+/* --- HIỆU ỨNG NHIỄU SÓNG (GLITCH) TIÊU ĐỀ --- */
 .glitch { animation: glitch-anim 4s infinite; display: inline-block; position: relative; }
 @keyframes glitch-anim {
     0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); }
@@ -52,6 +68,17 @@ header p {
 }
 
 .container{ max-width:1200px; margin:auto; padding:20px; }
+
+/* --- TÍNH NĂNG MỚI: LÀM MỜ KHI CUỘN (FADE ON SCROLL) --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* --- SLIDER TIÊU ĐIỂM (FADE EFFECT) --- */
 .featured-slider { position: relative; width: 100%; height: 420px; margin-bottom: 35px; border-radius: 16px; overflow: hidden; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: var(--card); }
@@ -93,7 +120,7 @@ header p {
 .info-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #252536; border: 1px solid #333; color: #888; text-transform: uppercase; transition: 0.3s; }
 .game-card:hover .info-tag { border-color: var(--accent2); color: white; }
 
-/* --- 5. NÚT SHARE NHANH GÓC CARD --- */
+/* --- NÚT SHARE NHANH GÓC CARD --- */
 .share-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(11,11,18,0.7); border: 1px solid var(--accent); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; font-size: 14px; transition: 0.3s; backdrop-filter: blur(4px); }
 .share-btn:hover { background: var(--accent); transform: scale(1.15) rotate(15deg); box-shadow: 0 0 15px var(--accent); }
 
@@ -170,7 +197,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
 
 <div class="container">
     
-    <div class="featured-slider" id="main-slider">
+    <div class="featured-slider fade-in" id="main-slider">
         <div class="slide active" onclick="window.location.href='games/a-genin-tale.html'">
             <img src="images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
             <div class="slide-overlay"></div>
@@ -224,9 +251,9 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
         </div>
     </div>
 
-    <input class="search" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
+    <input class="search fade-in" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
     
-    <div class="tag-filter-section">
+    <div class="tag-filter-section fade-in">
         <h3 class="filter-title">🔍 Lọc Theo Gu (TAGS)</h3>
         <div class="tags-container">
             <button class="tag-btn active" data-filter="all">ALL</button>
@@ -241,7 +268,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
     </div>
 
     <div class="games">
-        <div class="game-card" data-tags="pc harem cot-truyen" data-tilt>
+        <div class="game-card fade-in" data-tags="pc harem cot-truyen" data-tilt>
             <div class="share-btn" onclick="shareGame('Research Diary v0.1', 'https://quycai.github.io/games/research-diary.html')">🔗</div>
             <img src="images/research-diary/research-diary-cover.jpg" alt="Research Diary">
             <div class="info">
@@ -256,7 +283,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
             </div>
         </div>
 
-        <div class="game-card" data-tags="pc hai-huoc harem" data-tilt>
+        <div class="game-card fade-in" data-tags="pc hai-huoc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('Big Milf Surprise v1.3', 'https://quycai.github.io/games/big-milf-surprise.html')">🔗</div>
             <img src="images/big-milf-surprise/big-milf-surprise-cover.jpg" alt="Big Milf Surprise">
             <div class="info">
@@ -271,7 +298,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
             </div>
         </div>
 
-        <div class="game-card" data-tags="pc harem" data-tilt>
+        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('A Genin Tale v0.3', 'https://quycai.github.io/games/a-genin-tale.html')">🔗</div>
             <img src="images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
             <div class="info">
@@ -285,7 +312,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
             </div>
         </div>
 
-        <div class="game-card" data-tags="pc kinh-di cot-truyen" data-tilt>
+        <div class="game-card fade-in" data-tags="pc kinh-di cot-truyen" data-tilt>
             <div class="share-btn" onclick="shareGame('Escape To The Past v0.1', 'https://quycai.github.io/games/escape-to-the-past.html')">🔗</div>
             <img src="images/escape-to-the-past/escape-to-the-past-cover.jpg" alt="Escape To The Past">
             <div class="info">
@@ -300,7 +327,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
             </div>
         </div>
 
-        <div class="game-card" data-tags="pc harem" data-tilt>
+         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('Scorched Innocence v0.1', 'https://quycai.github.io/games/scorched-innocence.html')">🔗</div>
             <img src="images/scorched-Innocence/scorched-innocence-cover.png" alt="Scorched Innocence">
             <div class="info">
@@ -315,34 +342,34 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
         </div>
     </div> 
 
-    <div class="timeline-section">
+    <div class="timeline-section fade-in">
         <h2 class="timeline-title">LỊCH SỬ PHÁT TRIỂN STUDIO</h2>
         <div class="timeline-container">
-            <div class="timeline-item left">
+            <div class="timeline-item left fade-in">
                 <div class="content">
                     <h3>Khởi Nguồn</h3>
                     <p>Tháng 4, 2026: HPGVH18 STUDIO chính thức ra mắt. Solo Developer: PhongDHP một tay "cân" mọi dự án.</p>
                 </div>
             </div>
-            <div class="timeline-item right">
+            <div class="timeline-item right fade-in">
                 <div class="content">
                     <h3>Dự Án Đầu Tiên</h3>
                     <p>Tháng 5, 2026: Trình làng bản Việt hóa đầu tay 'Research Diary v0.1'. Mở bát thành công!</p>
                 </div>
             </div>
-            <div class="timeline-item left">
+            <div class="timeline-item left fade-in">
                 <div class="content">
                     <h3>Quy Hoạch Web</h3>
                     <p>Tháng 6, 2026: Cấu trúc lại toàn bộ hệ thống Repo, quản lý thư mục images/games chuẩn Developer chuyên nghiệp.</p>
                 </div>
             </div>
-            <div class="timeline-item right">
+            <div class="timeline-item right fade-in">
                 <div class="content">
                     <h3>Fix Lỗi Cực Căng</h3>
                     <p>Tháng 6, 2026: Xử lý mượt mà lỗi font "đậu hũ", xuất xưởng thành công siêu phẩm 'A Genin Tale v0.3'.</p>
                 </div>
             </div>
-            <div class="timeline-item left">
+            <div class="timeline-item left fade-in">
                 <div class="content">
                     <h3>Lột Xác Giao Diện</h3>
                     <p>Tháng 6, 2026: Tự tay nâng cấp hệ thống với giao diện 3D Tilt, Timeline phát sáng và hiệu ứng con trỏ Neon Aura độc quyền.</p>
@@ -351,7 +378,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
         </div>
     </div>
     
-    <div class="site-footer">
+    <div class="site-footer fade-in">
         <div class="footer-links">
             <a href="faq.html">FAQ - Câu Hỏi Thường Gặp</a>
             <a href="dmca.html">Điều Khoản & DMCA</a>
@@ -389,7 +416,7 @@ const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-// --- 8. ĐIỀU KHIỂN SLIDER BẰNG PHÍM MŨI TÊN TRÊN BÀN PHÍM ---
+// --- ĐIỀU KHIỂN SLIDER BẰNG PHÍM MŨI TÊN TRÊN BÀN PHÍM ---
 document.addEventListener('keydown', function(e) {
     if(e.key === 'ArrowLeft') { changeSlide(-1); } 
     else if(e.key === 'ArrowRight') { changeSlide(1); }
@@ -435,7 +462,7 @@ tagBtns.forEach(btn => {
     });
 });
 
-// --- 5. LỆNH CHẠY TRÌNH SHARE NHANH CỦA THIẾT BỊ ---
+// --- LỆNH CHẠY TRÌNH SHARE NHANH CỦA THIẾT BỊ ---
 function shareGame(title, url) {
     if (navigator.share) {
         navigator.share({
@@ -464,6 +491,24 @@ const hoverElements = document.querySelectorAll('a, button, .game-card img, .gam
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+});
+
+// --- TÍNH NĂNG MỚI: LÀM MỜ KHI CUỘN (INTERSECTION OBSERVER) ---
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+};
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target); // Hiện rồi thì ngừng theo dõi
+    });
+}, appearOptions);
+
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
 });
 </script>
 
