@@ -5,20 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FAQ - Câu Hỏi Thường Gặp | HPGVH18</title>
 <style>
+/* --- KHUNG XƯƠNG CƠ BẢN & BIẾN MÀU NEON --- */
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
+body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; overflow-x: hidden; }
+
+/* --- 1. THANH CUỘN MÀN HÌNH NEON --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+/* --- 3. BÔI ĐEN CHỮ PHÁ CÁCH --- */
+::selection { background: var(--accent); color: white; text-shadow: none; }
+::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
+
 .container{ max-width:900px; margin:auto; padding:20px; }
-.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
-.back:hover{ transform: translateX(-5px); color: white; }
-.hero{ padding:40px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; }
-.hero h1{ font-size:2.5rem; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-.hero p{ color:var(--text-dim); margin-top: 5px; }
-.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #252536; margin-bottom: 20px; }
-.box h3 { color: var(--accent2); margin-bottom: 12px; font-size: 18px; display: flex; align-items: center; gap: 8px; }
-.box p{ line-height:1.8; color:var(--text-dim); font-size: 15px; }
+.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; letter-spacing: 0.5px; }
+.back:hover{ transform: translateX(-5px); color: white; text-shadow: 0 0 10px var(--accent); }
+
+/* --- HERO BANNER CÓ LỚP PHỦ --- */
+.hero{ padding:50px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.hero h1{ font-size:2.8rem; }
+.hero p{ color:var(--text-dim); margin-top: 8px; font-size: 15px; }
+
+/* --- 4. HIỆU ỨNG NHIỄU SÓNG (GLITCH) TIÊU ĐỀ --- */
+.glitch { animation: glitch-anim 4s infinite; display: inline-block; position: relative; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 5px var(--accent); }
+@keyframes glitch-anim {
+    0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 10px rgba(255, 79, 160, 0.3)); }
+    96% { transform: translate(-2px, 1px) skew(-6deg); filter: drop-shadow(-2px 0 0 #ff4fa0) drop-shadow(2px 0 0 #8b5cf6); }
+    97% { transform: translate(2px, -1px) skew(6deg); filter: drop-shadow(2px 0 0 #ff4fa0) drop-shadow(-2px 0 0 #8b5cf6); }
+    99% { transform: translate(0, 0) skew(0deg); filter: none; }
+}
+
+/* --- KHỐI NỘI DUNG --- */
+.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); border: 1px solid #252536; margin-bottom: 20px; transition: 0.3s ease; }
+.box:hover { border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 5px 15px rgba(139, 92, 246, 0.15); }
+.box h3 { color: var(--accent2); margin-bottom: 12px; font-size: 18px; letter-spacing: 0.5px; }
+.box p{ line-height:1.8; color:var(--text-dim); font-size: 15px; text-align: justify; }
 .box strong { color: white; }
-.box code { background: #252536; padding: 2px 6px; border-radius: 4px; color: var(--accent); font-family: Consolas, monospace; }
+.box code { background: #252536; padding: 3px 8px; border-radius: 6px; color: var(--accent); font-family: Consolas, monospace; font-size: 14px; border: 1px solid #333; }
+
 .footer{ text-align:center; color:#555; margin:40px 0; font-size: 13px; }
 
 /* --- CON TRỞ CHUỘT NEON --- */
@@ -36,43 +63,43 @@ a, button { cursor: none; }
 <div class="cursor-outline"></div>
 
 <div class="container">
-    <a class="back" href="index.html">← Quay lại trang chủ</a>
+    <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
     
     <div class="hero">
-        <h1>💬 FAQ</h1>
-        <p>Giải đáp thắc mắc và khắc phục lỗi khi chơi game</p>
+        <h1 class="glitch">💬 FAQ</h1>
+        <p>Giải đáp thắc mắc và khắc phục các lỗi kinh điển khi cài game</p>
     </div>
 
     <div class="box">
         <h3>🔑 Mật khẩu giải nén của các file game là gì?</h3>
-        <p>Tất cả các file nén game (.rar hoặc .zip) được tải từ HPGVH18 Studio đều sử dụng chung một mật khẩu giải nén mặc định là: <code>hpgvh18</code> (viết thường, không dấu).</p>
+        <p>Tất cả các file nén game (.rar hoặc .zip) được tải từ HPGVH18 Studio đều sử dụng chung một mật khẩu giải nén mặc định và duy nhất là: <code>hpgvh18</code> (viết thường hoàn toàn, không dấu, không cách).</p>
     </div>
 
     <div class="box">
-        <h3>👾 Lỗi thiếu file DLL (MSVCP140.dll, VCRUNTIME140.dll...) là sao?</h3>
-        <p>Đây là lỗi cực kỳ phổ biến khi máy tính của bạn thiếu các thư viện chạy game cơ bản của Microsoft. Cách xử lý rất dễ: Hãy lên Google tìm từ khóa <strong>"Visual C++ Redistributable All-in-One"</strong>, tải bộ cài về và chạy file để cập nhật toàn bộ hệ thống. Sau đó khởi động lại máy là chơi được mọi game.</p>
+        <h3>👾 Lỗi thiếu file hệ thống DLL (MSVCP140.dll, VCRUNTIME140.dll...) xử lý thế nào?</h3>
+        <p>Đây là lỗi hệ điều hành Windows của bạn đang thiếu các gói thư viện vận hành môi trường game của Microsoft. Cách xử lý triệt để: Hãy lên Google tìm bộ cài mang tên <strong>"Visual C++ Redistributable All-in-One"</strong>, tải về, giải nén và chạy file script cài đặt tự động để cập nhật toàn bộ hệ thống. Khởi động lại máy tính là có thể mở được game mượt mà.</p>
     </div>
 
     <div class="box">
-        <h3>🔲 Tại sao vào game chữ lại bị biến thành ô vuông (Lỗi đậu hũ)?</h3>
-        <p>Lỗi này xảy ra do game gốc không hỗ trợ font chữ Tiếng Việt. Bạn hãy vào thư mục game đã giải nén, tìm đến thư mục <code>game/fonts</code>. Xóa font mặc định của game đi, tìm một font chữ chuẩn Tiếng Việt trên máy tính của bạn (như Arial, Roboto), copy vào đó rồi đổi tên file cho giống hệt tên font cũ vừa xóa. Hoặc có thể lên YouTube gõ tìm kênh <strong>PhongDHP123</strong> để xem clip hướng dẫn từng bước nha.</p>
+        <h3>🔲 Tại sao khi mở game lên chữ lại biến thành ô vuông (Lỗi font đậu hũ)?</h3>
+        <p>Lỗi này do bộ engine gốc của game nước ngoài không nhận diện được hệ ký tự Telex Tiếng Việt. Để khắc phục, ông vào thư mục chứa game đã giải nén, truy cập đường dẫn <code>game/fonts</code> (nếu có). Xóa file font mặc định bị lỗi đi, sau đó copy một file font Việt hóa chuẩn trên máy tính (như Arial hoặc Roboto) vào và đổi tên nó trùng khít với tên file cũ vừa xóa là xong.</p>
     </div>
 
     <div class="box">
-        <h3>📱 Game trên PC có chơi được trên Android không?</h3>
-        <p>Hiện tại, các bản Patch Việt hóa của Studio chủ yếu tối ưu hóa cho hệ điều hành Windows (PC). Đối với các game chạy bằng công cụ Ren'Py, một số game có thể giả lập bằng ứng dụng JoiPlay trên Android, tuy nhiên độ ổn định và hiển thị font chữ sẽ không được hoàn hảo như trên máy tính.</p>
+        <h3>📱 Game dành cho nền tảng PC có chơi được trên điện thoại Android không?</h3>
+        <p>Hiện tại các bản Patch ngôn ngữ của Studio được đóng gói tối ưu cấu trúc tốt nhất cho hệ điều hành Windows. Với các game phát triển bằng Ren'Py, ông có thể dùng ứng dụng giả lập <strong>JoiPlay</strong> trên Android để quét và chơi, tuy nhiên một số tính năng nâng cao hoặc khả năng hiển thị font chữ có thể bị hạn chế, không ổn định bằng chơi trực tiếp trên PC.</p>
     </div>
 
     <div class="box">
-        <h3>🔗 Khi link tải game bị báo quá giới hạn hoặc lỗi 404?</h3>
-        <p>Đối với link Google Drive, nếu bị báo lỗi quá giới hạn tải trong ngày, bạn hãy đăng nhập tài khoản Google của mình rồi bấm "Tạo bản sao" vào Drive cá nhân để tải về. Nếu link bị sập hoàn toàn (lỗi 404), hãy bấm ngay vào nút <strong>"Báo Cáo Lỗi Link"</strong> dưới chân trang hoặc nhắn tin qua Fanpage để Studio fix lại link sớm nhất.</p>
+        <h3>🔗 Link tải game bị sập, báo quá giới hạn lượt tải (Limit Drive) phải làm sao?</h3>
+        <p>Nếu link Google Drive báo quá giới hạn tải trong 24 giờ, ông chỉ cần đăng nhập tài khoản Google của mình, bấm vào icon "Thêm lối tắt vào Drive" hoặc "Tạo bản sao" về tài khoản cá nhân của ông rồi tải xuống từ đó. Trường hợp link chết hoàn toàn (lỗi 404), hãy kéo xuống đáy trang chủ bấm nút báo lỗi hoặc nhắn qua Fanpage để tôi fix link luôn nhé.</p>
     </div>
 
     <div class="footer">© 2026 HPGVH18 Studio</div>
 </div>
 
 <script>
-// LOGIC CHUỘT NEON
+// LOGIC CHUỘT NEON ĐỒNG BỘ
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
 window.addEventListener('mousemove', (e) => {
     dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
