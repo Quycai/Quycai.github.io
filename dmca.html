@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điều Khoản & DMCA | HPGVH18</title>
+<style>
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; }
+.container{ max-width:900px; margin:auto; padding:20px; }
+.back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
+.back:hover{ transform: translateX(-5px); color: white; }
+.hero{ padding:40px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.15), rgba(139,92,246,.15)); border:1px solid #333; margin-bottom: 25px; }
+.hero h1{ font-size:2.5rem; color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.hero p{ color:var(--text-dim); margin-top: 5px; }
+.box{ background:var(--card); padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #252536; margin-bottom: 20px; line-height:1.8; color:var(--text-dim); font-size: 15px; }
+.box h2 { color: white; font-size: 20px; margin-bottom: 12px; border-left: 4px solid var(--accent); padding-left: 10px; }
+.box p { margin-bottom: 15px; text-align: justify; }
+.footer{ text-align:center; color:#555; margin:40px 0; font-size: 13px; }
 
+/* --- CON TRỞ CHUỘT NEON --- */
+body { cursor: none; }
+a, button { cursor: none; }
+.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
+.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+.cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
+@media (max-width: 768px) { body, a, button { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<div class="container">
+    <a class="back" href="index.html">← Quay lại trang chủ</a>
+    
+    <div class="hero">
+        <h1>⚖️ DMCA & DISCLAIMER</h1>
+        <p>Điều khoản dịch vụ công bằng và miễn trừ bản quyền pháp lý</p>
+    </div>
+
+    <div class="box">
+        <h2>1. Miễn Trừ Trách Nhiệm (Disclaimer)</h2>
+        <p>HPGVH18 Studio là một dự án cá nhân hoạt động hoàn toàn phi lợi nhuận, được lập ra với mục đích duy nhất là chia sẻ đam mê dịch thuật và ngôn ngữ dành cho cộng đồng yêu thích thể loại Visual Novel tại Việt Nam.</p>
+        <p>Chúng tôi tuyệt đối <strong>KHÔNG lưu trữ, KHÔNG thu thập</strong> bất kỳ tệp tin (file) trò chơi bẻ khóa hay mã độc nào trên máy chủ lưu trữ (hosting) của website này. Tất cả đường liên kết (link download) được cung cấp trên hệ thống đều dẫn tới các dịch vụ lưu trữ đám mây của bên thứ ba (như Google Drive, TeraBox, Mega...) do người dùng hoặc cộng đồng chia sẻ công khai trên internet.</p>
+    </div>
+
+    <div class="box">
+        <h2>2. Chính Sách Bản Quyền (DMCA Compliance)</h2>
+        <p>Chúng tôi luôn tôn trọng quyền sở hữu trí tuệ của các nhà phát triển và nhà sản xuất trò chơi gốc. Các sản phẩm do HPGVH18 Studio đăng tải thực chất chỉ là những <strong>"bản vá dịch thuật" (Language Patch)</strong> thay đổi tệp ngôn ngữ của trò chơi gốc, phục vụ cho mục đích trải nghiệm cá nhân của những người không thành thạo tiếng nước ngoài.</p>
+        <p>Nếu bạn là chủ sở hữu hợp pháp của bất kỳ tựa game nào xuất hiện trên trang web của chúng tôi và không muốn sản phẩm của mình được chia sẻ dưới dạng dịch thuật tại đây, vui lòng gửi một thông báo khiếu nại bản quyền chính thức bao gồm đầy đủ giấy tờ chứng minh sở hữu qua hộp thư hoặc Fanpage của Studio. Chúng tôi sẽ lập tức hợp tác và tiến hành gỡ bỏ toàn bộ đường link liên quan trong vòng 24 đến 48 giờ làm việc.</p>
+    </div>
+
+    <div class="footer">© 2026 HPGVH18 Studio</div>
+</div>
+
+<script>
+// LOGIC CHUỘT NEON
+const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
+window.addEventListener('mousemove', (e) => {
+    dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+    setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40);
+});
+document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+});
+</script>
+</body>
+</html>
