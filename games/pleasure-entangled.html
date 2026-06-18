@@ -25,8 +25,20 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .stat p{ color:#aaa; font-size:14px; }
 .box h2{ margin-bottom:15px; color: var(--accent); border-bottom: 1px solid #333; padding-bottom: 10px; }
 .box p{ line-height:1.8; color:var(--text-dim); }
+
+/* --- FIX LỖI ẢNH MỜ --- */
 .gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
-.gallery img{ width:100%; height:260px; object-fit:cover; border-radius:12px; cursor:pointer; transition:.3s; border: 2px solid transparent; }
+.gallery img{ 
+    width:100%; 
+    height:260px; 
+    object-fit:cover; /* Ảnh sẽ không bị méo */
+    object-position: center; /* Giữ tâm ảnh */
+    border-radius:12px; 
+    cursor:pointer; 
+    transition:.3s; 
+    border: 2px solid transparent;
+    image-rendering: -webkit-optimize-contrast; /* Giúp ảnh nét hơn trên Chrome */
+}
 .gallery img:hover{ transform:scale(1.02); border-color: var(--accent2); }
 
 /* KHUNG MẬT KHẨU */
@@ -37,22 +49,21 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:18px; border-radius:12px; font-size:20px; font-weight:bold; box-shadow: 0 0 25px rgba(255,79,160,.4); transition:.3s; }
 .download:hover{ transform:translateY(-3px); box-shadow: 0 0 35px rgba(255,79,160,.7); }
 .footer{ text-align:center; color:#888; margin:30px 0; }
-.lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.9); justify-content:center; align-items:center; z-index:9999; }
+.lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.95); justify-content:center; align-items:center; z-index:9999; }
 .lightbox img{ max-width:90%; max-height:90%; border-radius:12px; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
 
 /* KHUNG HƯỚNG DẪN ACCORDION */
 .faq-container { margin-top: 30px; }
 .faq-item { border-bottom: 1px solid #252536; }
-.faq-item:last-child { border-bottom: none; }
 .faq-btn { width: 100%; text-align: left; background: none; border: none; color: white; padding: 18px 0; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
 .faq-btn:hover { color: var(--accent2); }
 .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
 .faq-content p { color: var(--text-dim); line-height: 1.6; padding-bottom: 18px; font-size: 15px; }
 .faq-btn.active { color: var(--accent); }
-.faq-btn.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
-.faq-icon { transition: transform 0.3s; font-size: 24px; font-weight: normal; }
+.faq-btn.active .faq-icon { transform: rotate(45deg); }
+.faq-icon { transition: transform 0.3s; font-size: 24px; }
 
-@media(max-width:768px){ .hero h1{ font-size:2rem; } .gallery{ grid-template-columns:1fr; } .stats{ grid-template-columns:repeat(2,1fr); } .gallery img{ height:auto; } }
+@media(max-width:768px){ .hero h1{ font-size:2rem; } .gallery{ grid-template-columns:1fr; } .stats{ grid-template-columns:repeat(2,1fr); } }
 </style>
 </head>
 <body>
@@ -96,20 +107,18 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 
 <div class="box">
 <h2>Tải Game</h2>
-
 <div class="password-box">
     <span>Mật khẩu giải nén:</span> 
     <strong>hpgvh18</strong>
 </div>
-
 <a class="download" href="https://drive.google.com/file/d/1FqG1R7iS-2_CWMrZbnZiLCdY0bgUR637/view?usp=sharing" target="_blank">🎮 TẢI [Việt Hóa] Pleasure Entangled (Final) (226MB)</a>
 
 <div class="faq-container">
     <div class="faq-item">
         <button class="faq-btn">🛠 Hướng dẫn cài đặt & Fix lỗi chữ ô vuông <span class="faq-icon">+</span></button>
         <div class="faq-content">
-            <p>- <strong>Cách cài đặt:</strong> Giải nén file vừa tải về (.rar hoặc .zip), mở thư mục tìm file có đuôi <code>.exe</code> và nháy đúp để khởi động game.<br>
-            - <strong>Fix lỗi đậu hũ (font ô vuông):</strong> Vào thư mục <code>game/fonts</code> bên trong thư mục game đã giải nén. Xóa font mặc định cũ đi, copy một font đã được tối ưu Tiếng Việt (như Arial hoặc font hệ thống) vào, sau đó đổi tên file lại cho trùng khớp hoàn toàn với tên font cũ. Hoặc có thể truy cập kênh YouTube <strong>PhongDHP123</strong> để xem video clip hướng dẫn trực quan từng bước cực kỳ chi tiết nhé.</p>
+            <p>- <strong>Cách cài đặt:</strong> Giải nén file, mở file <code>.exe</code> để chơi.<br>
+            - <strong>Fix lỗi font (ô vuông):</strong> Vào thư mục <code>game/fonts</code>, xóa font cũ, chép font chuẩn Tiếng Việt (như Arial) vào và đổi tên giống hệt file cũ. Xem hướng dẫn tại YouTube <strong>PhongDHP123</strong>.</p>
         </div>
     </div>
 </div>
@@ -121,22 +130,15 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 <div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
 
 <script>
-// SCRIPT XEM ẢNH PHÓNG TO (LIGHTBOX)
 const imgs=document.querySelectorAll('.gallery img'); const lightbox=document.getElementById('lightbox'); const lightboxImg=document.getElementById('lightbox-img');
 imgs.forEach(img=>{ img.addEventListener('click',()=>{ lightbox.style.display='flex'; lightboxImg.src=img.src; }); });
 lightbox.addEventListener('click',()=>{ lightbox.style.display='none'; });
-
-// SCRIPT KHUNG HƯỚNG DẪN THẢ XUỐNG (ACCORDION)
 const faqBtns = document.querySelectorAll('.faq-btn');
 faqBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         this.classList.toggle('active');
         const content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-        }
+        content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
     });
 });
 </script>
