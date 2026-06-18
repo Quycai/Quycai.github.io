@@ -11,6 +11,16 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 
+/* --- 1. THANH CUỘN MÀN HÌNH NEON --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+/* --- 3. BÔI ĐEN CHỮ PHÁ CÁCH --- */
+::selection { background: var(--accent); color: white; text-shadow: none; }
+::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
+
 /* --- HEADER CÓ ẢNH BÌA & LỚP PHỦ NEON --- */
 header {
     text-align:center;
@@ -32,9 +42,18 @@ header p {
     text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
+/* --- 4. HIỆU ỨNG NHIỄU SÓNG (GLITCH) TIÊU ĐỀ --- */
+.glitch { animation: glitch-anim 4s infinite; display: inline-block; position: relative; }
+@keyframes glitch-anim {
+    0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); }
+    96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff4fa0) drop-shadow(3px 0 0 #8b5cf6); color: #fff; }
+    97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff4fa0) drop-shadow(-3px 0 0 #8b5cf6); color: #ccc; }
+    99% { transform: translate(0, 0) skew(0deg); filter: none; }
+}
+
 .container{ max-width:1200px; margin:auto; padding:20px; }
 
-/* --- CSS CHO SLIDER TIÊU ĐIỂM (FADE EFFECT) --- */
+/* --- SLIDER TIÊU ĐIỂM (FADE EFFECT) --- */
 .featured-slider { position: relative; width: 100%; height: 420px; margin-bottom: 35px; border-radius: 16px; overflow: hidden; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: var(--card); }
 .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease-in-out; cursor: pointer; display: flex; align-items: flex-end; pointer-events: none; z-index: 1; }
 .slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
@@ -47,7 +66,6 @@ header p {
 .slide-tag { background: rgba(37,37,54,0.8); border: 1px solid var(--accent2); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; color: var(--accent2); text-transform: uppercase; box-shadow: 0 0 8px rgba(139,92,246,0.3); }
 .slide-desc { color: #ccc; font-size: 15px; max-width: 750px; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* Nút bấm điều hướng trên Slider */
 .slider-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 4; padding: 0 20px; pointer-events: none; }
 .slider-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; pointer-events: auto; font-size: 20px; transition: 0.3s; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
 .slider-btn:hover { background: var(--accent); box-shadow: 0 0 20px var(--accent); transform: scale(1.1); }
@@ -57,7 +75,7 @@ header p {
 
 @media (max-width: 768px) { .featured-slider { height: 350px; } .slide-title { font-size: 22px; } .slide-desc { font-size: 13px; } .slider-btn { width: 35px; height: 35px; font-size: 16px; } }
 
-/* --- THANH TÌM KIẾM & BỘ LỌC TAG HỆ MỚI --- */
+/* --- INPUT TÌM KIẾM & PHÂN KHU LỌC TAG --- */
 .search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; }
 .tag-filter-section { margin-bottom: 30px; background: #1e1e24; padding: 15px 20px; border-radius: 12px; border: 1px solid #333; }
 .filter-title { color: var(--accent2); font-size: 14px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
@@ -66,7 +84,7 @@ header p {
 .tag-btn:hover { border-color: var(--accent2); box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); color: var(--accent2); }
 .tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); }
 
-/* --- CARD GAME & TAG NHỎ HIỂN THỊ TRÊN THẺ --- */
+/* --- THẺ GAME CARD & NHÃN TAG NHỎ --- */
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
 .info{ padding:20px; }
 .info h2{ margin-bottom:10px; }
@@ -75,7 +93,11 @@ header p {
 .info-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #252536; border: 1px solid #333; color: #888; text-transform: uppercase; transition: 0.3s; }
 .game-card:hover .info-tag { border-color: var(--accent2); color: white; }
 
-/* --- EFFECT 3D TILT --- */
+/* --- 5. NÚT SHARE NHANH GÓC CARD --- */
+.share-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(11,11,18,0.7); border: 1px solid var(--accent); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; font-size: 14px; transition: 0.3s; backdrop-filter: blur(4px); }
+.share-btn:hover { background: var(--accent); transform: scale(1.15) rotate(15deg); box-shadow: 0 0 15px var(--accent); }
+
+/* --- 3D TILT EFFECT MƯỢT MÀ --- */
 .game-card { background: var(--card); border-radius: 16px; overflow: hidden; position: relative; border: 1px solid transparent; transition: box-shadow 0.3s ease, border-color 0.3s ease; transform-style: preserve-3d; transform: perspective(1000px); }
 .game-card:hover { border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
 .game-card img { width: 100%; height: 220px; object-fit: cover; }
@@ -84,13 +106,13 @@ header p {
 
 /* --- HIỆU ỨNG CON TRỞ CHUỘT NEON AURA --- */
 body { cursor: none; }
-a, button, img, .game-card, .slide { cursor: none; }
+a, button, img, .game-card, .slide, .share-btn { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-@media (max-width: 768px) { body, a, button, img, .game-card, .slide { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
-/* --- TIMELINE PHÁT TRIỂN STUDIO --- */
+/* --- STUDIO UPDATE TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
 .timeline-title { text-align: center; color: var(--accent2); margin-bottom: 50px; }
 .timeline-container { position: relative; max-width: 800px; margin: auto; }
@@ -105,7 +127,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 .content p { color: #aaa; font-size: 14px; line-height: 1.6; }
 @media (max-width: 768px) { .timeline-container::after { left: 31px; } .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; } .timeline-item::after { left: 15px; } .left::after { left: 23px; } .right { left: 0%; } }
 
-/* --- MÀN CHẮN TUỔI 18+ --- */
+/* --- MÀN CHẮN BẢO VỆ TUỔI 18+ --- */
 .age-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 11, 18, 0.95); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
 .age-box { background: var(--card); padding: 30px; border-radius: 16px; text-align: center; color: white; border: 2px solid var(--accent2); max-width: 420px; width: 90%; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
 .age-box h2 { color: var(--accent); margin-bottom: 10px; font-size: 26px;}
@@ -117,7 +139,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 #btn-no { background: #252536; color: #bbb; }
 #btn-no:hover { background: #3a3a52; color: white; }
 
-/* --- FOOTER CHUYÊN NGHIỆP KẾT NỐI TRANG RIÊNG --- */
+/* --- FOOTER CHUYÊN NGHIỆP --- */
 .site-footer { text-align: center; padding: 40px 20px 30px 20px; border-top: 1px solid #333; margin-top: 60px; background: #0b0b12; }
 .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; flex-wrap: wrap; }
 .footer-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
@@ -142,7 +164,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 </div>
 
 <header>
-    <h1>🎮 HPGVH18 STUDIO</h1>
+    <h1 class="glitch">🎮 HPGVH18 STUDIO</h1>
     <p>Kho Game Visual Novel Việt Hóa</p>
 </header>
 
@@ -205,7 +227,7 @@ a, button, img, .game-card, .slide { cursor: none; }
     <input class="search" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
     
     <div class="tag-filter-section">
-        <h3 class="filter-title">🔍 LỌC THEO GU (TAGS)</h3>
+        <h3 class="filter-title">🔍 Lọc Theo Gu (TAGS)</h3>
         <div class="tags-container">
             <button class="tag-btn active" data-filter="all">ALL</button>
             <button class="tag-btn" data-filter="pc">PC</button>
@@ -220,6 +242,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 
     <div class="games">
         <div class="game-card" data-tags="pc harem cot-truyen" data-tilt>
+            <div class="share-btn" onclick="shareGame('Research Diary v0.1', 'https://quycai.github.io/games/research-diary.html')">🔗</div>
             <img src="images/research-diary/research-diary-cover.jpg" alt="Research Diary">
             <div class="info">
                 <h2>Research Diary v0.1</h2>
@@ -234,6 +257,7 @@ a, button, img, .game-card, .slide { cursor: none; }
         </div>
 
         <div class="game-card" data-tags="pc hai-huoc harem" data-tilt>
+            <div class="share-btn" onclick="shareGame('Big Milf Surprise v1.3', 'https://quycai.github.io/games/big-milf-surprise.html')">🔗</div>
             <img src="images/big-milf-surprise/big-milf-surprise-cover.jpg" alt="Big Milf Surprise">
             <div class="info">
                 <h2>Big Milf Surprise v1.3</h2>
@@ -248,6 +272,7 @@ a, button, img, .game-card, .slide { cursor: none; }
         </div>
 
         <div class="game-card" data-tags="pc harem" data-tilt>
+            <div class="share-btn" onclick="shareGame('A Genin Tale v0.3', 'https://quycai.github.io/games/a-genin-tale.html')">🔗</div>
             <img src="images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
             <div class="info">
                 <h2>A Genin Tale v0.3</h2>
@@ -261,6 +286,7 @@ a, button, img, .game-card, .slide { cursor: none; }
         </div>
 
         <div class="game-card" data-tags="pc kinh-di cot-truyen" data-tilt>
+            <div class="share-btn" onclick="shareGame('Escape To The Past v0.1', 'https://quycai.github.io/games/escape-to-the-past.html')">🔗</div>
             <img src="images/escape-to-the-past/escape-to-the-past-cover.jpg" alt="Escape To The Past">
             <div class="info">
                 <h2>Escape To The Past v0.1</h2>
@@ -275,6 +301,7 @@ a, button, img, .game-card, .slide { cursor: none; }
         </div>
 
         <div class="game-card" data-tags="pc harem" data-tilt>
+            <div class="share-btn" onclick="shareGame('Scorched Innocence v0.1', 'https://quycai.github.io/games/scorched-innocence.html')">🔗</div>
             <img src="images/scorched-Innocence/scorched-innocence-cover.png" alt="Scorched Innocence">
             <div class="info">
                 <h2>Scorched Innocence v0.1</h2>
@@ -338,7 +365,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 </div>
 
 <script>
-// --- 1. SCRIPT ĐIỀU HƯỚNG SLIDER TỰ ĐỘNG (4 GIÂY CHUYỂN ẢNH) ---
+// --- LOGIC SLIDER TỰ ĐỘNG ---
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
@@ -362,14 +389,20 @@ const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-// --- 2. SCRIPT MÀN CHẮN 18+ (LƯU TRẠNG THÁI VÀO LOCALSTORAGE) ---
+// --- 8. ĐIỀU KHIỂN SLIDER BẰNG PHÍM MŨI TÊN TRÊN BÀN PHÍM ---
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'ArrowLeft') { changeSlide(-1); } 
+    else if(e.key === 'ArrowRight') { changeSlide(1); }
+});
+
+// --- LOGIC MÀN CHẮN 18+ ---
 document.addEventListener("DOMContentLoaded", function() {
     if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; }
 });
 function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
-// --- 3. SCRIPT INPUT TÌM KIẾM GAME ---
+// --- LOGIC INPUT TÌM KIẾM GAME ---
 const search = document.getElementById('search');
 search.addEventListener('keyup',()=>{
     const value = search.value.toLowerCase();
@@ -379,7 +412,7 @@ search.addEventListener('keyup',()=>{
     });
 });
 
-// --- 4. SCRIPT BỘ LỌC TAG CHUYÊN SÂU ---
+// --- LOGIC HỆ THỐNG LỌC TAG CHUYÊN SÂU ---
 const tagBtns = document.querySelectorAll('.tag-btn');
 const gameCards = document.querySelectorAll('.game-card');
 
@@ -402,7 +435,20 @@ tagBtns.forEach(btn => {
     });
 });
 
-// --- 5. SCRIPT HIỆU ỨNG CHUỘT NEON AURA (V2) ---
+// --- 5. LỆNH CHẠY TRÌNH SHARE NHANH CỦA THIẾT BỊ ---
+function shareGame(title, url) {
+    if (navigator.share) {
+        navigator.share({
+            title: title,
+            text: 'Tải ngay game Việt Hóa cực mượt tại HPGVH18: ' + title,
+            url: url
+        }).catch(console.error);
+    } else {
+        alert('Trình duyệt không hỗ trợ Share nhanh. Ông copy link này nhé: ' + url);
+    }
+}
+
+// --- LOGIC CON TRỎ CHUỘT NEON AURA ---
 const dot = document.querySelector('.cursor-dot');
 const outline = document.querySelector('.cursor-outline');
 
@@ -414,7 +460,7 @@ window.addEventListener('mousemove', function(e) {
     setTimeout(() => { outline.style.left = posX + 'px'; outline.style.top = posY + 'px'; }, 40);
 });
 
-const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide');
+const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn');
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
