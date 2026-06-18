@@ -11,45 +11,103 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 
-/* --- UPDATE: HEADER CÓ ẢNH BÌA & LỚP PHỦ NEON --- */
+/* --- HEADER CÓ ẢNH BÌA & LỚP PHỦ NEON --- */
 header {
     text-align:center;
-    /* Tăng độ cao header một chút để show ảnh đẹp hơn */
     padding:80px 20px;
-    
-    /* 1. KỸ THUẬT PHỦ MÀU: gradient mờ nằm trên ảnh bìa */
+    /* Dùng kỹ thuật phủ gradient lên ảnh để chữ vẫn nổi bật */
     background: linear-gradient(135deg, rgba(255,79,160,0.3), rgba(139,92,246,0.3)),
-                /* 2. Thay đường dẫn ảnh bìa của ông vào src này */
+                /* Gắn cái link ảnh AI nãy vừa tạo vào đây */
                 url('images/Gemini_Generated_Image_6txzhm6txzhm6txz.png'); 
-                
-    /* 3. CĂN CHỈNH ẢNH: full chiều ngang, nằm giữa */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
     border-bottom:2px solid var(--accent);
-    /* Thêm hiệu ứng phát sáng nhẹ cho viền dưới */
     box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
 }
 header h1 {
     font-size:3rem;
-    /* Thêm bóng chữ để nổi bật trên nền ảnh */
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 5px var(--accent);
 }
 header p {
-    color:#eee; /* Làm chữ phụ sáng lên một chút */
+    color:#eee;
     text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
 .container{ max-width:1200px; margin:auto; padding:20px; }
 .search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; }
-.filters{ display:flex; gap:10px; margin-bottom:25px; }
-.filters button{ border:none; padding:10px 15px; border-radius:10px; cursor:pointer; background:#252536; color:white; transition: 0.3s; }
-.filters button:hover{ background:var(--accent); }
+
+/* --- CSS CHO BỘ LỌC TAG CHUYÊN SÂU --- */
+.tag-filter-section {
+    margin-bottom: 30px;
+    background: #1e1e24; 
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+.filter-title {
+    color: var(--accent2); 
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.tag-btn {
+    border: 1px solid #444;
+    padding: 8px 16px;
+    border-radius: 999px; 
+    cursor: pointer;
+    background: #252536;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.3s ease;
+    text-transform: uppercase; 
+}
+.tag-btn:hover {
+    border-color: var(--accent2);
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    color: var(--accent2);
+}
+.tag-btn.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 79, 160, 0.6);
+}
+
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
 .info{ padding:20px; }
 .info h2{ margin-bottom:10px; }
-.info p{ color:#bbb; line-height:1.7; }
+.info p{ color:#bbb; line-height:1.7; font-size: 14px; }
+
+/* --- CSS CHO TAG NHỎ TRONG CARD GAME --- */
+.info-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.info-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #252536;
+    border: 1px solid #333;
+    color: #888;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+.game-card:hover .info-tag {
+    border-color: var(--accent2);
+    color: white;
+}
+
 .footer{ text-align:center; color:#777; margin:40px 0; }
 
 /* --- 3D TILT EFFECT --- */
@@ -90,7 +148,7 @@ header p {
     transform: translateY(-2px);
 }
 
-/* --- HIỆU ỨNG CON TRỞ NEON AURA (V2 - CLEANER) --- */
+/* --- HIỆU ỨNG CON TRỞ NEON AURA --- */
 body { cursor: none; }
 a, button, img, .game-card { cursor: none; }
 .cursor-dot {
@@ -193,53 +251,86 @@ a, button, img, .game-card { cursor: none; }
 
 <div class="container">
     <input class="search" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
-    <div class="filters">
-        <button onclick="filterGames('all')">Tất cả</button>
-        <button onclick="filterGames('pc')">PC</button>
+    
+    <div class="tag-filter-section">
+        <h3 class="filter-title">🔍 LỌC THEO GU (TAGS)</h3>
+        <div class="tags-container">
+            <button class="tag-btn active" data-filter="all">ALL</button>
+            <button class="tag-btn" data-filter="pc">PC</button>
+            <button class="tag-btn" data-filter="android">ANDROID</button>
+            <button class="tag-btn" data-filter="harem">HAREM</button>
+            <button class="tag-btn" data-filter="kinh-di">KINH DỊ</button>
+            <button class="tag-btn" data-filter="hai-huoc">HÀI HƯỚC</button>
+            <button class="tag-btn" data-filter="zombie">ZOMBIE</button>
+            <button class="tag-btn" data-filter="cot-truyen">CỐT TRUYỆN HAY</button>
+        </div>
     </div>
 
     <div class="games">
-        <div class="game-card" data-type="pc" data-tilt>
+        <div class="game-card" data-tags="pc harem cot-truyen" data-tilt>
             <img src="images/research-diary/research-diary-cover.jpg" alt="Research Diary">
             <div class="info">
                 <h2>Research Diary v0.1</h2>
-                <p>PC Windows<br>420 MB | Tác giả Nekanaro</p>
+                <p>PC Windows | Tác giả Nekanaro</p>
+                <div class="info-tags">
+                    <span class="info-tag">PC</span>
+                    <span class="info-tag">HAREM</span>
+                    <span class="info-tag">CỐT TRUYỆN</span>
+                </div>
                 <a class="btn" href="games/research-diary.html">XEM CHI TIẾT</a>
             </div>
         </div>
 
-        <div class="game-card" data-type="pc" data-tilt>
+        <div class="game-card" data-tags="pc hai-huoc harem" data-tilt>
             <img src="images/big-milf-surprise/big-milf-surprise-cover.jpg" alt="Big Milf Surprise">
             <div class="info">
                 <h2>Big Milf Surprise v1.3</h2>
-                <p>PC Windows<br>120 MB | Ash_NTR / Ash_WILD</p>
+                <p>PC Windows | Ash_NTR / Ash_WILD</p>
+                <div class="info-tags">
+                    <span class="info-tag">PC</span>
+                    <span class="info-tag">HAREM</span>
+                    <span class="info-tag">HÀI HƯỚC</span>
+                </div>
                 <a class="btn" href="games/big-milf-surprise.html">XEM CHI TIẾT</a>
             </div>
         </div>
 
-        <div class="game-card" data-type="pc" data-tilt>
+        <div class="game-card" data-tags="pc harem" data-tilt>
             <img src="images/a-genin-tale/a-genin-tale-cover.png" alt="A Genin Tale">
             <div class="info">
                 <h2>A Genin Tale v0.3</h2>
-                <p>PC Windows<br>245 MB | Luchetty</p>
+                <p>PC Windows | Luchetty</p>
+                <div class="info-tags">
+                    <span class="info-tag">PC</span>
+                    <span class="info-tag">HAREM</span>
+                </div>
                 <a class="btn" href="games/a-genin-tale.html">XEM CHI TIẾT</a>
             </div>
         </div>
 
-        <div class="game-card" data-type="pc" data-tilt>
+        <div class="game-card" data-tags="pc kinh-di cot-truyen" data-tilt>
             <img src="images/escape-to-the-past/escape-to-the-past-cover.jpg" alt="Escape To The Past">
             <div class="info">
                 <h2>Escape To The Past v0.1</h2>
-                <p>PC Windows<br>396 MB | S18 Games</p>
+                <p>PC Windows | S18 Games</p>
+                <div class="info-tags">
+                    <span class="info-tag">PC</span>
+                    <span class="info-tag">KINH DỊ</span>
+                    <span class="info-tag">CỐT TRUYỆN</span>
+                </div>
                 <a class="btn" href="games/escape-to-the-past.html">XEM CHI TIẾT</a>
             </div>
         </div>
 
-         <div class="game-card" data-type="pc" data-tilt>
+         <div class="game-card" data-tags="pc harem" data-tilt>
             <img src="images/scorched-Innocence/scorched-innocence-cover.png" alt="Scorched Innocence">
             <div class="info">
                 <h2>Scorched Innocence v0.1</h2>
-                <p>PC Windows<br>703 MB | MindMaw</p>
+                <p>PC Windows | MindMaw</p>
+                <div class="info-tags">
+                    <span class="info-tag">PC</span>
+                    <span class="info-tag">HAREM</span>
+                </div>
                 <a class="btn" href="games/scorched-innocence.html">XEM CHI TIẾT</a>
             </div>
         </div>
@@ -292,7 +383,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
-// --- LOGIC TÌM KIẾM & BỘ LỌC ---
+// --- LOGIC TÌM KIẾM ---
 const search = document.getElementById('search');
 search.addEventListener('keyup',()=>{
     const value = search.value.toLowerCase();
@@ -301,34 +392,51 @@ search.addEventListener('keyup',()=>{
         card.style.display = text.includes(value) ? 'block' : 'none';
     });
 });
-function filterGames(type){
-    document.querySelectorAll('.game-card').forEach(card=>{
-        if(type==='all'){ card.style.display='block'; return; }
-        card.style.display = card.dataset.type===type ? 'block' : 'none';
+
+// --- LOGIC HỆ THỐNG LỌC TAG CHUYÊN SÂU ---
+const tagBtns = document.querySelectorAll('.tag-btn');
+const gameCards = document.querySelectorAll('.game-card');
+
+tagBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Đổi trạng thái active của nút
+        document.querySelector('.tag-btn.active').classList.remove('active');
+        this.classList.add('active');
+
+        // Lấy giá trị tag cần lọc
+        const filterValue = this.dataset.filter;
+
+        // Quét và hiển thị game
+        gameCards.forEach(card => {
+            const cardTags = card.dataset.tags;
+            if (filterValue === 'all') {
+                card.style.display = 'block';
+            } else if (cardTags && cardTags.includes(filterValue)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     });
-}
+});
 
 // --- LOGIC SCRIPT CHO CON TRỎ NEON AURA (V2) ---
 const dot = document.querySelector('.cursor-dot');
 const outline = document.querySelector('.cursor-outline');
 
-// Bám theo tọa độ chuột
 window.addEventListener('mousemove', function(e) {
     const posX = e.clientX;
     const posY = e.clientY;
     
-    // Chấm nhỏ đi theo ngay lập tức
     dot.style.left = posX + 'px';
     dot.style.top = posY + 'px';
     
-    // Vòng tròn to đi theo hơi trễ một nhịp (tạo hiệu ứng mượt rượt)
     setTimeout(() => {
         outline.style.left = posX + 'px';
         outline.style.top = posY + 'px';
     }, 40);
 });
 
-// Hiệu ứng phình to vòng ngoài khi tương tác link, nút, ảnh game
 const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card');
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
