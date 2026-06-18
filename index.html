@@ -6,7 +6,7 @@
 <title>HPGVH18 - Kho Game Việt Hóa</title>
 
 <style>
-/* --- KHUNG XƯƠNG CƠ BẢN --- */
+/* --- KHUNG XƯƠNG CƠ BẢN & BIẾN MÀU NEON --- */
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; }
@@ -34,7 +34,7 @@ header p {
 
 .container{ max-width:1200px; margin:auto; padding:20px; }
 
-/* --- CSS CHO SLIDER TIÊU ĐIỂM --- */
+/* --- CSS CHO SLIDER TIÊU ĐIỂM (FADE EFFECT) --- */
 .featured-slider { position: relative; width: 100%; height: 420px; margin-bottom: 35px; border-radius: 16px; overflow: hidden; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: var(--card); }
 .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease-in-out; cursor: pointer; display: flex; align-items: flex-end; pointer-events: none; z-index: 1; }
 .slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
@@ -47,6 +47,7 @@ header p {
 .slide-tag { background: rgba(37,37,54,0.8); border: 1px solid var(--accent2); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; color: var(--accent2); text-transform: uppercase; box-shadow: 0 0 8px rgba(139,92,246,0.3); }
 .slide-desc { color: #ccc; font-size: 15px; max-width: 750px; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
+/* Nút bấm điều hướng trên Slider */
 .slider-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 4; padding: 0 20px; pointer-events: none; }
 .slider-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; pointer-events: auto; font-size: 20px; transition: 0.3s; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
 .slider-btn:hover { background: var(--accent); box-shadow: 0 0 20px var(--accent); transform: scale(1.1); }
@@ -56,7 +57,7 @@ header p {
 
 @media (max-width: 768px) { .featured-slider { height: 350px; } .slide-title { font-size: 22px; } .slide-desc { font-size: 13px; } .slider-btn { width: 35px; height: 35px; font-size: 16px; } }
 
-/* --- TÌM KIẾM & BỘ LỌC TAG --- */
+/* --- THANH TÌM KIẾM & BỘ LỌC TAG HỆ MỚI --- */
 .search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; }
 .tag-filter-section { margin-bottom: 30px; background: #1e1e24; padding: 15px 20px; border-radius: 12px; border: 1px solid #333; }
 .filter-title { color: var(--accent2); font-size: 14px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
@@ -65,7 +66,7 @@ header p {
 .tag-btn:hover { border-color: var(--accent2); box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); color: var(--accent2); }
 .tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); }
 
-/* --- CARD GAME & TAG NHỎ --- */
+/* --- CARD GAME & TAG NHỎ HIỂN THỊ TRÊN THẺ --- */
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
 .info{ padding:20px; }
 .info h2{ margin-bottom:10px; }
@@ -74,14 +75,14 @@ header p {
 .info-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #252536; border: 1px solid #333; color: #888; text-transform: uppercase; transition: 0.3s; }
 .game-card:hover .info-tag { border-color: var(--accent2); color: white; }
 
-/* --- 3D TILT EFFECT --- */
+/* --- EFFECT 3D TILT --- */
 .game-card { background: var(--card); border-radius: 16px; overflow: hidden; position: relative; border: 1px solid transparent; transition: box-shadow 0.3s ease, border-color 0.3s ease; transform-style: preserve-3d; transform: perspective(1000px); }
 .game-card:hover { border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); }
 .game-card img { width: 100%; height: 220px; object-fit: cover; }
 .btn { display: block; margin-top: 15px; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; }
 .btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px rgba(255, 79, 160, 0.5); transform: translateY(-2px); }
 
-/* --- HIỆU ỨNG CON TRỞ NEON AURA --- */
+/* --- HIỆU ỨNG CON TRỞ CHUỘT NEON AURA --- */
 body { cursor: none; }
 a, button, img, .game-card, .slide { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
@@ -89,7 +90,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
 @media (max-width: 768px) { body, a, button, img, .game-card, .slide { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
-/* --- STUDIO UPDATE TIMELINE --- */
+/* --- TIMELINE PHÁT TRIỂN STUDIO --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
 .timeline-title { text-align: center; color: var(--accent2); margin-bottom: 50px; }
 .timeline-container { position: relative; max-width: 800px; margin: auto; }
@@ -104,7 +105,7 @@ a, button, img, .game-card, .slide { cursor: none; }
 .content p { color: #aaa; font-size: 14px; line-height: 1.6; }
 @media (max-width: 768px) { .timeline-container::after { left: 31px; } .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; } .timeline-item::after { left: 15px; } .left::after { left: 23px; } .right { left: 0%; } }
 
-/* --- MÀN CHẮN 18+ --- */
+/* --- MÀN CHẮN TUỔI 18+ --- */
 .age-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 11, 18, 0.95); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
 .age-box { background: var(--card); padding: 30px; border-radius: 16px; text-align: center; color: white; border: 2px solid var(--accent2); max-width: 420px; width: 90%; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
 .age-box h2 { color: var(--accent); margin-bottom: 10px; font-size: 26px;}
@@ -115,7 +116,13 @@ a, button, img, .game-card, .slide { cursor: none; }
 #btn-yes:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 79, 160, 0.4); }
 #btn-no { background: #252536; color: #bbb; }
 #btn-no:hover { background: #3a3a52; color: white; }
-.footer{ text-align:center; color:#777; margin:40px 0; }
+
+/* --- FOOTER CHUYÊN NGHIỆP KẾT NỐI TRANG RIÊNG --- */
+.site-footer { text-align: center; padding: 40px 20px 30px 20px; border-top: 1px solid #333; margin-top: 60px; background: #0b0b12; }
+.footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; flex-wrap: wrap; }
+.footer-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+.footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -267,7 +274,7 @@ a, button, img, .game-card, .slide { cursor: none; }
             </div>
         </div>
 
-         <div class="game-card" data-tags="pc harem" data-tilt>
+        <div class="game-card" data-tags="pc harem" data-tilt>
             <img src="images/scorched-Innocence/scorched-innocence-cover.png" alt="Scorched Innocence">
             <div class="info">
                 <h2>Scorched Innocence v0.1</h2>
@@ -317,11 +324,21 @@ a, button, img, .game-card, .slide { cursor: none; }
         </div>
     </div>
     
-    <div class="footer">© 2026 HPGVH18 Studio</div>
+    <div class="site-footer">
+        <div class="footer-links">
+            <a href="faq.html">FAQ - Câu Hỏi Thường Gặp</a>
+            <a href="dmca.html">Điều Khoản & DMCA</a>
+            <a href="#">Báo Cáo Lỗi Link</a>
+        </div>
+        <div class="footer-copyright">
+            © 2026 HPGVH18 Studio. All rights reserved. <br>
+            <span style="font-size: 12px; color: #555;">Dự án phi lợi nhuận dành cho cộng đồng Visual Novel Việt Nam.</span>
+        </div>
+    </div>
 </div>
 
 <script>
-// --- 1. SCRIPT SLIDER TỰ ĐỘNG ---
+// --- 1. SCRIPT ĐIỀU HƯỚNG SLIDER TỰ ĐỘNG (4 GIÂY CHUYỂN ẢNH) ---
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
@@ -345,14 +362,14 @@ const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-// --- 2. LOGIC MÀN CHẮN 18+ ---
+// --- 2. SCRIPT MÀN CHẮN 18+ (LƯU TRẠNG THÁI VÀO LOCALSTORAGE) ---
 document.addEventListener("DOMContentLoaded", function() {
     if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; }
 });
 function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
-// --- 3. LOGIC TÌM KIẾM ---
+// --- 3. SCRIPT INPUT TÌM KIẾM GAME ---
 const search = document.getElementById('search');
 search.addEventListener('keyup',()=>{
     const value = search.value.toLowerCase();
@@ -362,7 +379,7 @@ search.addEventListener('keyup',()=>{
     });
 });
 
-// --- 4. LOGIC HỆ THỐNG LỌC TAG ---
+// --- 4. SCRIPT BỘ LỌC TAG CHUYÊN SÂU ---
 const tagBtns = document.querySelectorAll('.tag-btn');
 const gameCards = document.querySelectorAll('.game-card');
 
@@ -385,7 +402,7 @@ tagBtns.forEach(btn => {
     });
 });
 
-// --- 5. LOGIC CON TRỎ NEON AURA ---
+// --- 5. SCRIPT HIỆU ỨNG CHUỘT NEON AURA (V2) ---
 const dot = document.querySelector('.cursor-dot');
 const outline = document.querySelector('.cursor-outline');
 
