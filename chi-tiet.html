@@ -58,4 +58,246 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .gallery img.img-nsfw { filter: blur(25px); transform: scale(0.98); }
 .gallery img.img-nsfw.revealed { filter: blur(0); transform: scale(1); }
 .gallery img.img-nsfw.revealed:hover { transform: scale(1.03); border-color: var(--accent2); box-shadow: 0 10px 20px rgba(139,92,246,0.3); }
-.gallery img.img-nsfw
+.gallery img.img-nsfw:not(.revealed):hover { cursor: not-allowed; }
+
+/* TẢI GAME */
+.password-box { background: #252536; border: 2px dashed var(--accent); padding: 15px 20px; border-radius: 10px; text-align: center; margin: 0 auto 25px auto; max-width: 380px; color: #ccc; box-shadow: 0 0 15px rgba(255,79,160,0.1); }
+.password-box span { font-size: 15px; margin-right: 8px; }
+.password-box strong { color: var(--accent); font-size: 20px; letter-spacing: 2px; user-select: all; cursor: copy; text-shadow: 0 0 8px rgba(255,79,160,0.5); }
+
+.download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:20px; border-radius:12px; font-size:22px; font-weight:bold; box-shadow: 0 10px 25px rgba(255,79,160,.4); transition:.3s; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2); }
+.download:hover{ transform:translateY(-5px); box-shadow: 0 15px 35px rgba(255,79,160,.6); filter: brightness(1.1); }
+
+/* FAQ ACCORDION */
+.faq-container { margin-top: 35px; }
+.faq-item { border-bottom: 1px solid #333; }
+.faq-btn { width: 100%; text-align: left; background: none; border: none; color: white; padding: 20px 0; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+.faq-btn:hover { color: var(--accent2); text-shadow: 0 0 8px rgba(139,92,246,0.5); }
+.faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-content p { color: #bbb; line-height: 1.7; padding-bottom: 20px; font-size: 15px; }
+.faq-btn.active { color: var(--accent); }
+.faq-btn.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
+.faq-icon { transition: transform 0.3s; font-size: 24px; font-weight: normal; }
+
+.footer{ text-align:center; color:#555; margin:40px 0 20px 0; font-size: 14px; }
+.lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,11,18,.95); backdrop-filter: blur(5px); justify-content:center; align-items:center; z-index:9999; }
+.lightbox img{ max-width:90%; max-height:90%; border-radius:12px; box-shadow: 0 0 40px rgba(0,0,0,0.8); border: 2px solid #444; }
+
+@media(max-width:768px){ .hero h1{ font-size:2rem; } .gallery{ grid-template-columns:1fr; } .stats{ grid-template-columns:repeat(2,1fr); } .gallery img{ height:220px; } .download { font-size: 18px; } }
+</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
+
+<div class="hero">
+    <h1 id="ui-title" class="glitch">Đang kết nối Máy Chủ...</h1>
+    <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
+</div>
+
+<img class="cover" id="ui-cover" src="https://i.postimg.cc/PJQCJxz3/Gemini-Generated-Image-6txzhm6txzhm6txz.png" alt="Cover Game" loading="lazy">
+
+<div class="box">
+    <h2>Thông Tin Báo Cáo</h2>
+    <div class="tags">
+        <span id="ui-tag-version">Version ...</span> 
+        <span id="ui-tag-size">... MB</span> 
+        <span>Windows PC</span> 
+        <span id="ui-tags-list">Visual Novel</span> 
+        <span class="author-tag" id="ui-tag-author">👤 Tác giả: ...</span>
+    </div>
+    <div class="stats">
+        <div class="stat"><h3 id="ui-stat-size">...MB</h3><p>Dung lượng</p></div>
+        <div class="stat"><h3>Windows</h3><p>Hệ điều hành</p></div>
+        <div class="stat"><h3 id="ui-stat-version">...</h3><p>Phiên bản</p></div>
+        <div class="stat"><h3>2026</h3><p>Phát hành</p></div>
+    </div>
+</div>
+
+<div class="box">
+    <h2>Hồ Sơ Cốt Truyện</h2>
+    <p id="ui-desc">Đang tải giải mã hồ sơ mật từ máy chủ HPGVH18... Xin vui lòng đợi trong giây lát.</p>
+</div>
+
+<div class="box">
+    <div class="gallery-header">
+        <h2>Dữ Liệu Hình Ảnh</h2>
+        <button id="nsfw-btn" class="nsfw-toggle">
+            <span id="nsfw-icon">🙈</span> <span id="nsfw-text">Vượt tường lửa 18+</span>
+        </button>
+    </div>
+    <div class="gallery" id="ui-gallery">
+        </div>
+</div>
+
+<div class="box">
+    <h2>Cổng Truy Xuất Dữ Liệu</h2>
+    <div class="password-box">
+        <span>Mã Khóa Bảo Mật:</span> <strong>hpgvh18</strong>
+    </div>
+    <a class="download" id="ui-download" href="#" target="_blank" rel="noopener noreferrer">XÁC NHẬN TẢI VỀ</a>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-btn">🛠 Hướng dẫn cài đặt & Fix lỗi Font ô vuông (Đậu hũ) <span class="faq-icon">+</span></button>
+            <div class="faq-content">
+                <p>- <strong>Cài đặt cơ bản:</strong> Tải file về -> Nhấn chuột phải chọn "Extract Here" (Giải nén) -> Vào thư mục vừa giải nén tìm file có đuôi <code>.exe</code> nháy đúp để chơi.<br><br>
+                - <strong>Cách Fix lỗi chữ ô vuông:</strong> Bạn truy cập vào thư mục chứa game, tìm mục <code>game/fonts</code>. Hãy xóa file font mặc định bị lỗi đi, sau đó copy một font tiếng việt bất kỳ trên máy bạn (ví dụ: arial.ttf) dán vào thư mục đó, rồi đổi tên lại cho giống hệt tên file font gốc vừa xóa.<br><br>
+                📌 <em>Chi tiết xem thêm tại kênh YouTube <strong>PhongDHP123</strong>.</em></p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-btn">🔗 Link bị chết hoặc báo quá giới hạn tải? <span class="faq-icon">+</span></button>
+            <div class="faq-content">
+                <p>Nếu gặp lỗi Google Drive báo "Vượt quá số lượt tải", bạn hãy tạo một bản sao (Make a copy) file đó sang Google Drive cá nhân của bạn rồi tải từ Drive của bạn nhé. Nếu link thực sự bị xóa (404 Not Found), hãy báo ngay cho Admin trên Group để được fix sớm nhất.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">Dự án cộng đồng phi lợi nhuận © 2026 HPGVH18 Studio<br><span style="font-size: 12px; margin-top: 5px; display: block;">Code by PhongDHP</span></div>
+</div>
+
+<div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
+
+
+<script>
+// ==========================================
+// BỘ ĐỘNG CƠ HÚT DATA TỪ GOOGLE SHEETS
+// ==========================================
+
+// 🛑 ÔNG DÁN CÁI LINK WEB APP CỦA ÔNG VÀO TRONG DẤU NGOẶC KÉP BÊN DƯỚI NHÉ:
+const API_LINK = "https://script.google.com/u/0/home/projects/18SQkjvhzNVI0oLtJP6-vivHLQY4WFZU9XZd5vedMpmGgnz-z2PmB2nLR/edit";
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameId = urlParams.get('id');
+
+    if (gameId) {
+        // Hiện hiệu ứng tải
+        document.getElementById('ui-title').innerText = "Đang truy xuất CSDL...";
+        
+        fetch(API_LINK)
+            .then(response => response.json())
+            .then(dbGame => {
+                if(dbGame[gameId]) {
+                    const data = dbGame[gameId];
+
+                    // Bơm Data vào Text
+                    document.getElementById('page-title').innerText = `${data.title} ${data.version} | HPGVH18`;
+                    document.getElementById('ui-title').innerText = data.title;
+                    document.getElementById('ui-author-top').innerText = `Tác giả: ${data.author}`;
+                    document.getElementById('ui-cover').src = data.cover;
+                    
+                    document.getElementById('ui-tag-version').innerText = `Version ${data.version}`;
+                    document.getElementById('ui-tag-size').innerText = `${data.size} MB`;
+                    document.getElementById('ui-tag-author').innerText = `👤 Tác giả: ${data.author}`;
+                    
+                    document.getElementById('ui-stat-size').innerText = `${data.size} MB`;
+                    document.getElementById('ui-stat-version').innerText = data.version;
+                    
+                    document.getElementById('ui-desc').innerText = data.desc;
+                    
+                    // Nút Tải
+                    document.getElementById('ui-download').href = data.driveLink;
+                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title} ${data.version} (${data.size}MB)`;
+
+                    // Render Tags bổ sung (Cột tags)
+                    if(data.tags) {
+                        let tagsHtml = data.tags.split(" ").map(tag => `<span>${tag.toUpperCase()}</span>`).join(" ");
+                        document.getElementById('ui-tags-list').outerHTML = tagsHtml;
+                    }
+
+                    // Vòng lặp Render ẢNH GAMEPLAY
+                    const galleryContainer = document.getElementById('ui-gallery');
+                    galleryContainer.innerHTML = ""; // Xóa dữ liệu cũ
+                    
+                    if (data.gallery && data.gallery.length > 0) {
+                        data.gallery.forEach(imgUrl => {
+                            if(imgUrl.trim() !== "") {
+                                galleryContainer.innerHTML += `<img class="img-nsfw" src="${imgUrl.trim()}" alt="Gameplay" loading="lazy">`;
+                            }
+                        });
+                    } else {
+                        galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có dữ liệu hình ảnh.</p>";
+                    }
+
+                    // Kích hoạt lại bộ bấm ảnh Lightbox sau khi đã bơm xong ảnh
+                    initLightbox();
+                } else {
+                    document.getElementById('ui-title').innerText = "❌ LỖI KHÔNG TÌM THẤY GAME";
+                    document.getElementById('ui-desc').innerText = "Dữ liệu game này chưa được nạp vào Hệ thống Google Sheets. Xin vui lòng kiểm tra lại ID!";
+                }
+            })
+            .catch(error => {
+                document.getElementById('ui-title').innerText = "❌ MẤT KẾT NỐI MÁY CHỦ";
+                document.getElementById('ui-desc').innerText = "Không thể kết nối đến Database. Vui lòng kiểm tra lại link API_LINK hoặc thử lại sau!";
+                console.error("Lỗi Fetch Data:", error);
+            });
+    } else {
+        document.getElementById('ui-title').innerText = "⚠️ LỖI CÚ PHÁP";
+        document.getElementById('ui-desc').innerText = "Trang này cần có ID game để hoạt động (Ví dụ: chi-tiet.html?id=ten-game). Vui lòng quay lại trang chủ.";
+    }
+});
+
+
+// ==========================================
+// CÁC CHỨC NĂNG UI (MỞ ẢNH, LIGHTBOX, ACCORDION)
+// ==========================================
+
+// Bật/Tắt Ảnh 18+ (Cảnh báo: Luôn ẩn khi mới vào)
+const nsfwBtn = document.getElementById('nsfw-btn');
+const nsfwIcon = document.getElementById('nsfw-icon');
+const nsfwText = document.getElementById('nsfw-text');
+let isHidden = true; 
+
+nsfwBtn.addEventListener('click', () => {
+    isHidden = !isHidden;
+    const nsfwImages = document.querySelectorAll('.img-nsfw');
+    nsfwImages.forEach(img => {
+        if (isHidden) img.classList.remove('revealed');
+        else img.classList.add('revealed');
+    });
+
+    if (isHidden) {
+        nsfwIcon.innerHTML = '🙈'; nsfwText.innerHTML = 'Vượt tường lửa 18+'; nsfwBtn.style.borderColor = 'var(--accent)';
+    } else {
+        nsfwIcon.innerHTML = '👁️'; nsfwText.innerHTML = 'Đã tắt tường lửa'; nsfwBtn.style.borderColor = 'var(--accent2)';
+    }
+});
+
+// Bộ phóng to ảnh (Lightbox) - Được gọi lại sau khi tải data xong
+function initLightbox() {
+    const imgs = document.querySelectorAll('.gallery img'); 
+    const lightbox = document.getElementById('lightbox'); 
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    imgs.forEach(img => { 
+        img.addEventListener('click', () => { 
+            if (img.classList.contains('img-nsfw') && !img.classList.contains('revealed')) {
+                alert('🛑 HỆ THỐNG BẢO VỆ: Hãy bấm nút "Vượt tường lửa 18+" trước khi truy cập dữ liệu nhạy cảm!');
+                return;
+            }
+            lightbox.style.display = 'flex'; lightboxImg.src = img.src; 
+        }); 
+    });
+    lightbox.addEventListener('click', () => { lightbox.style.display = 'none'; });
+}
+
+// Khung FAQ Accordion thả xuống
+const faqBtns = document.querySelectorAll('.faq-btn');
+faqBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+});
+</script>
+
+</body>
+</html>
