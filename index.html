@@ -171,8 +171,9 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
 
+
 /* =======================================================
-   MUSIC PLAYER CYBERPUNK
+   MUSIC PLAYER CYBERPUNK - BẢN "AE CHÁY PHỐ" UPDATE
    ======================================================= */
 .cyber-player { 
     position: fixed; bottom: 20px; right: 20px; 
@@ -354,7 +355,8 @@ input[type=range]:focus { outline: none; }
             <button class="tag-btn" data-filter="cot-truyen">CỐT TRUYỆN HAY</button>
         </div>
     </div>
-      <div class="games">
+
+    <div class="games">
         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('[Việt Hóa]Special Harem Class [v0.4.6] ', 'https://quycai.github.io/games/special-harem-class.html')">🔗</div>
             <img src="https://i.postimg.cc/m2ZR663V/v-Y0JFq.png" alt="[Việt Hóa]Special Harem Class [v0.4.6]" loading="lazy">
@@ -371,7 +373,6 @@ input[type=range]:focus { outline: none; }
             </div>
         </div>
           
-    <div class="games">
         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('[Việt Hóa]Hes Just a Friend ', 'https://quycai.github.io/games/hes-just-a-friend.html')">🔗</div>
             <img src="https://i.postimg.cc/3RjPSSMt/Cover.avif" alt="He's Just a Friend [v1.0]" loading="lazy">
@@ -639,7 +640,7 @@ const playlist = [
     { 
         title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", 
         src: "https://files.catbox.moe/kt3sov.mp3",
-        img: "https://i.postimg.cc/J0pYSt12/62e996b3b9b3653a8207c06792afd452.jpg" 
+        img: "https://i.postimg.cc/Jn0z5x8L/32e5d81d5350da6382be9ac3b765793b.jpg" 
     }
 ];
 
@@ -654,7 +655,6 @@ const volumeBar = document.getElementById("volumeBar");
 const cyberPlayer = document.getElementById("cyberPlayer");
 const visualizer = document.getElementById("visualizer");
 
-// Biến điều khiển bộ tạo hiệu ứng
 let particleInterval;
 let lightningInterval;
 
@@ -706,9 +706,7 @@ function formatTime(time) {
     return `${min}:${sec}`;
 }
 
-// Bấm vào thanh trên cùng để thu nhỏ. Lệnh if bên dưới giúp không bị chặn khi ấn nhầm text
 function toggleMinimize(e) {
-    // Nếu bấm trúng cái thanh tua nhạc hoặc các nút điều khiển thì không thu nhỏ
     if (e && (e.target.tagName === 'INPUT' || (e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn'))) return;
     cyberPlayer.classList.toggle("minimized");
     document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
@@ -732,12 +730,10 @@ function createDust() {
     dust.style.width = size + 'px';
     dust.style.height = size + 'px';
     
-    // Nâng cấp: Sinh bụi lan rộng ra 300px sang cả hai bên hông của hộp nhạc
     const spawnX = rect.left - 300 + (Math.random() * (rect.width + 600));
     dust.style.left = spawnX + 'px';
     dust.style.top = rect.bottom - 10 + 'px';
     
-    // Gán biến --rnd để bụi dạt ngẫu nhiên qua trái/phải
     dust.style.setProperty('--rnd', Math.random() * 2 - 1);
     dust.style.animationDuration = (Math.random() * 2 + 2) + 's';
     
@@ -749,11 +745,9 @@ function createLightning() {
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
     if (Math.random() > 0.25) return; 
 
-    // Hiệu ứng 1: Toàn bộ khung viền máy nhạc giật lóe sáng lên (Bass Drop)
     cyberPlayer.classList.add('flash-strike');
     setTimeout(() => cyberPlayer.classList.remove('flash-strike'), 150);
 
-    // Hiệu ứng 2: Tia sáng xẹt chéo qua màn hình
     const streak = document.createElement('div');
     streak.className = 'light-streak';
     const rect = cyberPlayer.getBoundingClientRect();
@@ -767,7 +761,7 @@ function createLightning() {
 
 function startEffects() {
     particleInterval = setInterval(createDust, 200);
-    lightningInterval = setInterval(createLightning, 400); // 400ms kiểm tra đánh chớp 1 lần
+    lightningInterval = setInterval(createLightning, 400); 
 }
 
 function stopEffects() {
