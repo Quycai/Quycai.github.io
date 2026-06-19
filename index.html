@@ -21,7 +21,7 @@ body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overfl
 ::selection { background: var(--accent); color: white; text-shadow: none; }
 ::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
 
-/* --- TÍNH NĂNG MỚI: HEADER ẢNH BÌA "THỞ" (BREATHING EFFECT) --- */
+/* --- HEADER ẢNH BÌA "THỞ" (BREATHING EFFECT) --- */
 header {
     position: relative;
     text-align: center;
@@ -31,13 +31,12 @@ header {
     box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
 }
 
-/* Lớp ảnh nền tách riêng để làm animation phóng to thu nhỏ - Đã dùng link ảnh ngoài */
 header::before {
     content: '';
     position: absolute;
     top: -5%; left: -5%; right: -5%; bottom: -5%;
     background: linear-gradient(135deg, rgba(255,79,160,0.3), rgba(139,92,246,0.3)),
-                url('https://i.postimg.cc/[MÃ-ẢNH-NỀN]/Gemini_Generated_Image.png'); 
+                url('https://i.postimg.cc/mD8zHhX3/Gemini-Generated-Image.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -69,7 +68,7 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 
 .container{ max-width:1200px; margin:auto; padding:20px; }
 
-/* --- TÍNH NĂNG MỚI: LÀM MỜ KHI CUỘN (FADE ON SCROLL) --- */
+/* --- LÀM MỜ KHI CUỘN (FADE ON SCROLL) --- */
 .fade-in {
     opacity: 0;
     transform: translateY(40px);
@@ -133,11 +132,11 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 
 /* --- HIỆU ỨNG CON TRỞ CHUỘT NEON AURA --- */
 body { cursor: none; }
-a, button, img, .game-card, .slide, .share-btn { cursor: none; }
+a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
 /* --- STUDIO UPDATE TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
@@ -172,6 +171,40 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
 .footer-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
 .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
+
+/* --- MUSIC PLAYER CYBERPUNK (TRẠM RADIO) --- */
+.cyber-player { position: fixed; bottom: 20px; right: 20px; width: 320px; background: rgba(11, 11, 18, 0.85); backdrop-filter: blur(10px); border: 1px solid var(--accent2); border-radius: 16px; padding: 15px; z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px rgba(139, 92, 246, 0.2); transition: 0.4s ease; overflow: hidden; }
+.cyber-player.minimized { transform: translateY(calc(100% - 50px)); opacity: 0.8; }
+.player-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; cursor: pointer; }
+.disc { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); background: #222; display: flex; justify-content: center; align-items: center; font-size: 16px; margin-right: 12px; }
+.disc.spinning { animation: spin-disc 3s linear infinite; box-shadow: 0 0 10px var(--accent); }
+@keyframes spin-disc { 100% { transform: rotate(360deg); } }
+
+.track-info { flex-grow: 1; overflow: hidden; white-space: nowrap; }
+.track-title { color: var(--accent2); font-weight: bold; font-size: 14px; text-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
+.min-btn { background: transparent; border: none; color: #aaa; font-size: 20px; cursor: pointer; padding: 0 5px; }
+.min-btn:hover { color: white; }
+
+.visualizer { display: flex; gap: 3px; height: 15px; align-items: flex-end; margin-right: 10px; }
+.bar { width: 4px; background: var(--accent); border-radius: 2px; height: 3px; transition: 0.1s; }
+.playing .bar { animation: bounce 1s infinite alternate; }
+.playing .bar:nth-child(1) { animation-delay: 0.1s; }
+.playing .bar:nth-child(2) { animation-delay: 0.3s; }
+.playing .bar:nth-child(3) { animation-delay: 0.2s; }
+.playing .bar:nth-child(4) { animation-delay: 0.4s; }
+@keyframes bounce { 0% { height: 3px; } 100% { height: 15px; } }
+
+.player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 12px; }
+.ctrl-btn { background: #252536; border: 1px solid #444; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(255, 79, 160, 0.4); }
+#playPauseBtn { width: 45px; height: 45px; font-size: 18px; border-color: var(--accent2); background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(255,79,160,0.2)); }
+
+.player-sliders { display: flex; flex-direction: column; gap: 8px; }
+.slider-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #888; }
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: var(--accent); cursor: pointer; margin-top: -4px; box-shadow: 0 0 8px var(--accent); }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
+input[type=range]:focus { outline: none; }
 </style>
 </head>
 <body>
@@ -375,7 +408,7 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
             </div>
         </div>
 
-         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
+        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('Scorched Innocence v0.1', 'https://quycai.github.io/games/scorched-innocence.html')">🔗</div>
             <img src="https://i.postimg.cc/YSSSLTF8/1780745713690.avif" alt="Scorched Innocence" loading="lazy">
             <div class="info">
@@ -455,7 +488,109 @@ a, button, img, .game-card, .slide, .share-btn { cursor: none; }
     </div>
 </div>
 
+<div class="cyber-player" id="cyberPlayer">
+    <audio id="audioPlayer"></audio>
+    
+    <div class="player-header" onclick="toggleMinimize()">
+        <div class="disc" id="disc">🎵</div>
+        <div class="track-info">
+            <marquee class="track-title" id="trackTitle" scrollamount="4">Đang tải trạm phát sóng...</marquee>
+        </div>
+        <div class="visualizer" id="visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <button class="min-btn" id="minBtn">▼</button>
+    </div>
+
+    <div class="player-controls">
+        <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
+        <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
+        <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
+    </div>
+
+    <div class="player-sliders">
+        <div class="slider-row">
+            <span id="currentTime">0:00</span>
+            <input type="range" id="progressBar" value="0" min="0" max="100" step="1" onchange="seekAudio()">
+            <span id="durationTime">0:00</span>
+        </div>
+        <div class="slider-row" style="justify-content: flex-end; padding-top: 5px;">
+            <span>🔊</span>
+            <input type="range" id="volumeBar" value="100" min="0" max="100" step="1" style="width: 50%;" oninput="changeVolume()">
+        </div>
+    </div>
+</div>
+
 <script>
+// --- LOGIC TRẠM PHÁT NHẠC CYBERPUNK ---
+const playlist = [
+    { title: "🎵 Lofi Chill - Đêm Khuya Code Web", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+    { title: "🔥 Melodic Rap Hán Việt (Beat)", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+    { title: "🎧 R&B Vibes - HPGVH18 Studio", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+];
+
+let trackIndex = 0;
+const audio = document.getElementById("audioPlayer");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const trackTitle = document.getElementById("trackTitle");
+const progressBar = document.getElementById("progressBar");
+const currentTimeEl = document.getElementById("currentTime");
+const durationTimeEl = document.getElementById("durationTime");
+const volumeBar = document.getElementById("volumeBar");
+const disc = document.getElementById("disc");
+const visualizer = document.getElementById("visualizer");
+const cyberPlayer = document.getElementById("cyberPlayer");
+
+function loadTrack(index) {
+    audio.src = playlist[index].src;
+    trackTitle.innerText = playlist[index].title;
+    audio.load();
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playPauseBtn.innerText = "⏸";
+        disc.classList.add("spinning");
+        visualizer.classList.add("playing");
+    } else {
+        audio.pause();
+        playPauseBtn.innerText = "▶";
+        disc.classList.remove("spinning");
+        visualizer.classList.remove("playing");
+    }
+}
+
+function nextTrack() { trackIndex = (trackIndex + 1) % playlist.length; loadTrack(trackIndex); togglePlay(); }
+function prevTrack() { trackIndex = (trackIndex - 1 + playlist.length) % playlist.length; loadTrack(trackIndex); togglePlay(); }
+
+audio.addEventListener("timeupdate", () => {
+    if(audio.duration) {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progressPercent;
+        currentTimeEl.innerText = formatTime(audio.currentTime);
+        durationTimeEl.innerText = formatTime(audio.duration);
+    }
+});
+
+function seekAudio() { audio.currentTime = (progressBar.value / 100) * audio.duration; }
+function changeVolume() { audio.volume = volumeBar.value / 100; }
+audio.addEventListener("ended", nextTrack);
+
+function formatTime(time) {
+    let min = Math.floor(time / 60); let sec = Math.floor(time % 60);
+    if (sec < 10) sec = "0" + sec;
+    return `${min}:${sec}`;
+}
+
+function toggleMinimize() {
+    cyberPlayer.classList.toggle("minimized");
+    document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
+}
+
+loadTrack(trackIndex);
+audio.volume = 1; 
+
 // --- LOGIC SLIDER TỰ ĐỘNG ---
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
@@ -480,7 +615,6 @@ const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-// --- ĐIỀU KHIỂN SLIDER BẰNG PHÍM MŨI TÊN TRÊN BÀN PHÍM ---
 document.addEventListener('keydown', function(e) {
     if(e.key === 'ArrowLeft') { changeSlide(-1); } 
     else if(e.key === 'ArrowRight') { changeSlide(1); }
@@ -490,7 +624,10 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener("DOMContentLoaded", function() {
     if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; }
 });
-function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
+function acceptAge() { 
+    document.getElementById('age-warning-overlay').style.display = 'none'; 
+    localStorage.setItem('isAdult', 'true'); 
+}
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
 // --- LOGIC INPUT TÌM KIẾM GAME ---
@@ -551,13 +688,13 @@ window.addEventListener('mousemove', function(e) {
     setTimeout(() => { outline.style.left = posX + 'px'; outline.style.top = posY + 'px'; }, 40);
 });
 
-const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn');
+const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"]');
 hoverElements.forEach(el => {
     el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
 });
 
-// --- TÍNH NĂNG MỚI: LÀM MỜ KHI CUỘN (INTERSECTION OBSERVER) ---
+// --- LÀM MỜ KHI CUỘN (INTERSECTION OBSERVER) ---
 const faders = document.querySelectorAll('.fade-in');
 const appearOptions = {
     threshold: 0.15,
@@ -567,7 +704,7 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('appear');
-        observer.unobserve(entry.target); // Hiện rồi thì ngừng theo dõi
+        observer.unobserve(entry.target); 
     });
 }, appearOptions);
 
