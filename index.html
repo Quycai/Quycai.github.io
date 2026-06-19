@@ -99,12 +99,12 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 .tag-btn:hover { border-color: var(--accent2); box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); color: var(--accent2); }
 .tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); }
 
-/* --- THẺ GAME CARD (UPDATE: VIỀN NEON CHẠY MƯỢT MÀ) --- */
+/* --- THẺ GAME CARD (VIỀN NEON CHẠY MƯỢT MÀ) --- */
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
 .info{ padding:20px; }
-.info h2{ margin-bottom:10px; }
-.info p{ color:#bbb; line-height:1.7; font-size: 14px; }
-.info-tags { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.info h2{ margin-bottom:10px; font-size: 20px; }
+.info p{ color:#bbb; line-height:1.7; font-size: 13px; margin-bottom: 10px;}
+.info-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .info-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #252536; border: 1px solid #333; color: #888; text-transform: uppercase; transition: 0.3s; }
 .game-card:hover .info-tag { border-color: var(--accent2); color: white; }
 .share-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(11,11,18,0.7); border: 1px solid var(--accent); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; font-size: 14px; transition: 0.3s; backdrop-filter: blur(4px); }
@@ -171,9 +171,8 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
 
-
 /* =======================================================
-   MUSIC PLAYER CYBERPUNK - BẢN "AE CHÁY PHỐ" UPDATE
+   MUSIC PLAYER CYBERPUNK 
    ======================================================= */
 .cyber-player { 
     position: fixed; bottom: 20px; right: 20px; 
@@ -186,9 +185,7 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
     background-size: cover; background-position: center; 
 }
 .cyber-player.minimized { 
-    height: 45px !important; 
-    border-color: #444 !important; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+    height: 45px !important; border-color: #444 !important; box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
 }
 .cyber-player.minimized .player-bottom { opacity: 0; pointer-events: none; }
 .cyber-player::before {
@@ -197,24 +194,18 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
     z-index: 0; pointer-events: none;
 }
 .cyber-player.playing:not(.minimized) {
-    border-color: var(--accent);
-    animation: pulse-glow-player 1.2s infinite alternate ease-in-out;
+    border-color: var(--accent); animation: pulse-glow-player 1.2s infinite alternate ease-in-out;
 }
 @keyframes pulse-glow-player { 
-    0% { box-shadow: 0 0 5px var(--accent); } 
-    100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); } 
+    0% { box-shadow: 0 0 5px var(--accent); } 100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); } 
 }
 .cyber-player.flash-strike {
-    filter: brightness(1.6) contrast(1.2);
-    box-shadow: 0 0 60px #fff, 0 0 100px var(--accent) !important;
-    border-color: #fff !important;
-    transition: 0.05s;
+    filter: brightness(1.6) contrast(1.2); box-shadow: 0 0 60px #fff, 0 0 100px var(--accent) !important;
+    border-color: #fff !important; transition: 0.05s;
 }
 .light-streak {
-    position: fixed; width: 2px; height: 180px;
-    background: linear-gradient(to bottom, transparent, #fff, transparent);
-    box-shadow: 0 0 20px #fff, 0 0 40px var(--accent2);
-    transform: rotate(45deg); pointer-events: none; z-index: 9999;
+    position: fixed; width: 2px; height: 180px; background: linear-gradient(to bottom, transparent, #fff, transparent);
+    box-shadow: 0 0 20px #fff, 0 0 40px var(--accent2); transform: rotate(45deg); pointer-events: none; z-index: 9999;
     animation: streak-flash 0.3s ease-out forwards;
 }
 @keyframes streak-flash {
@@ -223,31 +214,23 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
     100% { opacity: 0; transform: rotate(45deg) scaleY(0.5) translateY(80px); }
 }
 .cyber-dust {
-    position: fixed; border-radius: 50%; background: #fff;
-    box-shadow: 0 0 6px #fff, 0 0 12px var(--accent);
-    pointer-events: none; z-index: 9997;
-    animation: floatUp linear forwards;
+    position: fixed; border-radius: 50%; background: #fff; box-shadow: 0 0 6px #fff, 0 0 12px var(--accent);
+    pointer-events: none; z-index: 9997; animation: floatUp linear forwards;
 }
 @keyframes floatUp {
     0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 0.8; }
+    20% { opacity: 1; } 80% { opacity: 0.8; }
     100% { transform: translate(calc(120px * var(--rnd)), -250px) scale(1.5); opacity: 0; }
 }
-.player-top {
-    position: relative; z-index: 1; display: flex; align-items: center; gap: 10px;
-    padding: 0 15px; cursor: pointer; height: 45px; flex-shrink: 0;
-}
+.player-top { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 0 15px; cursor: pointer; height: 45px; flex-shrink: 0; }
 .track-title { color: white; font-weight: bold; font-size: 14px; text-shadow: 0 0 8px rgba(255,79,160,0.8); flex-grow: 1; font-family: Consolas, monospace;}
 .min-btn { background: transparent; border: none; color: #ccc; font-size: 18px; padding: 0; cursor: pointer; transition: 0.3s;}
 .min-btn:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .visualizer { display: flex; gap: 3px; height: 14px; align-items: flex-end; }
 .bar { width: 3px; background: var(--accent2); border-radius: 2px; height: 3px; transition: 0.1s; }
 .playing .bar { background: var(--accent); animation: bounce 0.8s infinite alternate; }
-.playing .bar:nth-child(1) { animation-delay: 0.1s; }
-.playing .bar:nth-child(2) { animation-delay: 0.3s; }
-.playing .bar:nth-child(3) { animation-delay: 0.2s; }
-.playing .bar:nth-child(4) { animation-delay: 0.4s; }
+.playing .bar:nth-child(1) { animation-delay: 0.1s; } .playing .bar:nth-child(2) { animation-delay: 0.3s; }
+.playing .bar:nth-child(3) { animation-delay: 0.2s; } .playing .bar:nth-child(4) { animation-delay: 0.4s; }
 @keyframes bounce { 0% { height: 4px; } 100% { height: 18px; } }
 .player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; transition: opacity 0.3s; }
 .player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
@@ -356,192 +339,7 @@ input[type=range]:focus { outline: none; }
         </div>
     </div>
 
-    <div class="games">
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Special Harem Class [v0.4.6] ', 'https://quycai.github.io/games/special-harem-class.html')">🔗</div>
-            <img src="https://i.postimg.cc/m2ZR663V/v-Y0JFq.png" alt="[Việt Hóa]Special Harem Class [v0.4.6]" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Special Harem Class [v0.4.6]</h2>
-                <p>PC Windows | Reahe</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">BIG TITS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/special-harem-class.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-          
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Hes Just a Friend ', 'https://quycai.github.io/games/hes-just-a-friend.html')">🔗</div>
-            <img src="https://i.postimg.cc/3RjPSSMt/Cover.avif" alt="He's Just a Friend [v1.0]" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]He's Just a Friend [v1.0]</h2>
-                <p>PC Windows | Reahe</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">BIG TITS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/hes-just-a-friend.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-        
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Green Abyss - Rise of the goblins[v0.1]', 'https://quycai.github.io/games/green-abyss-rise-of-the-goblins.html')">🔗</div>
-            <img src="https://i.postimg.cc/9Mcm1q4L/logo-green-abyss.avif" alt="Green Abyss - Rise of the goblins" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Green Abyss - Rise of the goblins [v0.1]</h2>
-                <p>PC Windows | Reahe</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">BIG TITS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/green-abyss-rise-of-the-goblins.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-        
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Hard Lessons [Prologue]', 'https://quycai.github.io/games/hard-lessons.html')">🔗</div>
-            <img src="https://i.postimg.cc/bJwgSYy4/cover-f95.avif" alt="Hard Lessons" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Hard Lessons [Prologue]</h2>
-                <p>PC Windows | ADAM!</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">BIG TITS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/hard-lessons.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-        
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Saved By My Futa Boss v1.0', 'https://quycai.github.io/games/saved-by-my-futa-boss.html')">🔗</div>
-            <img src="https://i.postimg.cc/k46Xf8fq/main-menu2.avif" alt="Saved By My Futa Boss" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Saved By My Futa Boss v1.0</h2>
-                <p>PC Windows | Purple Pulse</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">FUTA/TRANS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/saved-by-my-futa-boss.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-        
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Caught By My Futa Sister v1.0', 'https://quycai.github.io/games/caught-by-my-futa-sister.html')">🔗</div>
-            <img src="https://i.postimg.cc/pThXq8qx/main-menu1.avif" alt="Caught By My Futa Sister" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Caught By My Futa Sister v1.0</h2>
-                <p>PC Windows | Purple Pulse</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">FUTA/TRANS</span>
-                    <span class="info-tag">BIG ASS</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/caught-by-my-futa-sister.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-        
-        <div class="game-card fade-in" data-tags="pc harem cot-truyen" data-tilt>
-            <div class="share-btn" onclick="shareGame('Research Diary v0.1', 'https://quycai.github.io/games/research-diary.html')">🔗</div>
-            <img src="https://i.postimg.cc/ydgYv9vK/headbanner.avif" alt="Research Diary" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Research Diary v0.1</h2>
-                <p>PC Windows | Tác giả Nekanaro</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">HAREM</span>
-                    <span class="info-tag">CỐT TRUYỆN</span>
-                </div>
-                <a class="btn" href="games/research-diary.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-
-        <div class="game-card fade-in" data-tags="pc hai-huoc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('Big Milf Surprise v1.3', 'https://quycai.github.io/games/big-milf-surprise.html')">🔗</div>
-            <img src="https://i.postimg.cc/nzkTSjz0/Screenshot-2026-06-17-025106.png" alt="Big Milf Surprise" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Big Milf Surprise v1.3</h2>
-                <p>PC Windows | Ash_NTR / Ash_WILD</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">HAREM</span>
-                    <span class="info-tag">HÀI HƯỚC</span>
-                </div>
-                <a class="btn" href="games/big-milf-surprise.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('A Genin Tale v0.3', 'https://quycai.github.io/games/a-genin-tale.html')">🔗</div>
-            <img src="https://i.postimg.cc/fbbbS1dC/1777495289444.avif" alt="A Genin Tale" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]A Genin Tale v0.3</h2>
-                <p>PC Windows | Luchetty</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">HAREM</span>
-                </div>
-                <a class="btn" href="games/a-genin-tale.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-
-        <div class="game-card fade-in" data-tags="pc kinh-di cot-truyen" data-tilt>
-            <div class="share-btn" onclick="shareGame('Escape To The Past v0.1', 'https://quycai.github.io/games/escape-to-the-past.html')">🔗</div>
-            <img src="https://i.postimg.cc/pThXq8qy/S18-zmeneno-na-1920x1080.avif" alt="Escape To The Past" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Escape To The Past v0.1</h2>
-                <p>PC Windows | S18 Games</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">KINH DỊ</span>
-                    <span class="info-tag">CỐT TRUYỆN</span>
-                </div>
-                <a class="btn" href="games/escape-to-the-past.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-
-         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('Scorched Innocence v0.1', 'https://quycai.github.io/games/scorched-innocence.html')">🔗</div>
-            <img src="https://i.postimg.cc/YSSSLTF8/1780745713690.avif" alt="Scorched Innocence" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Scorched Innocence v0.1</h2>
-                <p>PC Windows | MindMaw</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">HAREM</span>
-                </div>
-                <a class="btn" href="games/scorched-innocence.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
-            <div class="share-btn" onclick="shareGame('[Việt Hóa]Pleasure Entangled (Final)', 'https://quycai.github.io/games/pleasure-entangled.html')">🔗</div>
-            <img src="https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif" alt="Pleasure Entangled" loading="lazy">
-            <div class="info">
-                <h2>[Việt Hóa]Pleasure Entangled (Final)</h2>
-                <p>PC Windows | Dravion Entertainment</p>
-                <div class="info-tags">
-                    <span class="info-tag">PC</span>
-                    <span class="info-tag">MILF</span>
-                    <span class="info-tag">HANDJOB</span>
-                    <span class="info-tag">3DCG</span>
-                </div>
-                <a class="btn" href="games/pleasure-entangled.html">XEM CHI TIẾT</a>
-            </div>
-        </div>
-    </div> 
+    <div class="games" id="game-list"></div> 
 
     <div class="timeline-section fade-in">
         <h2 class="timeline-title">LỊCH SỬ PHÁT TRIỂN STUDIO</h2>
@@ -594,7 +392,6 @@ input[type=range]:focus { outline: none; }
 
 <div class="cyber-player" id="cyberPlayer">
     <audio id="audioPlayer"></audio>
-    
     <div class="player-top" onclick="toggleMinimize(event)">
         <div class="visualizer" id="visualizer">
             <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -602,14 +399,12 @@ input[type=range]:focus { outline: none; }
         <marquee class="track-title" id="trackTitle" scrollamount="4">Đang tải trạm phát sóng...</marquee>
         <button class="min-btn" id="minBtn">▼</button>
     </div>
-
     <div class="player-bottom">
         <div class="player-controls">
             <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
             <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
             <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
         </div>
-
         <div class="player-sliders">
             <div class="slider-row">
                 <span id="currentTime">0:00</span>
@@ -625,23 +420,140 @@ input[type=range]:focus { outline: none; }
 </div>
 
 <script>
-// --- LOGIC TRẠM PHÁT NHẠC (SỬ DỤNG LINK CATBOX) ---
-const playlist = [
-    { 
-        title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", 
-        src: "https://files.catbox.moe/gphcaw.mp3",
-        img: "https://i.postimg.cc/50y2SgJJ/6ef39f35202950c5d2432a3e182c7ce4.jpg" 
+// ==========================================
+// 1. DATA KHO GAME (SAU NÀY ÔNG CHỈ CẦN THÊM VÀO ĐÂY)
+// ==========================================
+const khoGame = [
+    {
+        title: "[Việt Hóa]Special Harem Class [v0.4.6]",
+        author: "Reahe",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/m2ZR663V/v-Y0JFq.png",
+        link: "games/special-harem-class.html",
+        labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
-    { 
-        title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", 
-        src: "https://files.catbox.moe/6i8lwb.mp3",
-        img: "https://i.postimg.cc/G2tmxKRr/95b8b05fbd482e62f5a51393ff8ae71c.jpg" 
+    {
+        title: "[Việt Hóa]He's Just a Friend [v1.0]",
+        author: "Reahe",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/3RjPSSMt/Cover.avif",
+        link: "games/hes-just-a-friend.html",
+        labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
-    { 
-        title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", 
-        src: "https://files.catbox.moe/kt3sov.mp3",
-        img: "https://i.postimg.cc/Jn0z5x8L/32e5d81d5350da6382be9ac3b765793b.jpg" 
+    {
+        title: "[Việt Hóa]Green Abyss - Rise of the goblins [v0.1]",
+        author: "Reahe",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/9Mcm1q4L/logo-green-abyss.avif",
+        link: "games/green-abyss-rise-of-the-goblins.html",
+        labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
+    },
+    {
+        title: "[Việt Hóa]Hard Lessons [Prologue]",
+        author: "ADAM!",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/bJwgSYy4/cover-f95.avif",
+        link: "games/hard-lessons.html",
+        labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
+    },
+    {
+        title: "[Việt Hóa]Saved By My Futa Boss v1.0",
+        author: "Purple Pulse",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/k46Xf8fq/main-menu2.avif",
+        link: "games/saved-by-my-futa-boss.html",
+        labels: ["PC", "FUTA/TRANS", "BIG ASS", "3DCG"]
+    },
+    {
+        title: "[Việt Hóa]Caught By My Futa Sister v1.0",
+        author: "Purple Pulse",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/pThXq8qx/main-menu1.avif",
+        link: "games/caught-by-my-futa-sister.html",
+        labels: ["PC", "FUTA/TRANS", "BIG ASS", "3DCG"]
+    },
+    {
+        title: "[Việt Hóa]Research Diary v0.1",
+        author: "Tác giả Nekanaro",
+        tags: "pc harem cot-truyen",
+        img: "https://i.postimg.cc/ydgYv9vK/headbanner.avif",
+        link: "games/research-diary.html",
+        labels: ["PC", "HAREM", "CỐT TRUYỆN"]
+    },
+    {
+        title: "[Việt Hóa]Big Milf Surprise v1.3",
+        author: "Ash_NTR / Ash_WILD",
+        tags: "pc hai-huoc harem",
+        img: "https://i.postimg.cc/nzkTSjz0/Screenshot-2026-06-17-025106.png",
+        link: "games/big-milf-surprise.html",
+        labels: ["PC", "HAREM", "HÀI HƯỚC"]
+    },
+    {
+        title: "[Việt Hóa]A Genin Tale v0.3",
+        author: "Luchetty",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/fbbbS1dC/1777495289444.avif",
+        link: "games/a-genin-tale.html",
+        labels: ["PC", "HAREM"]
+    },
+    {
+        title: "[Việt Hóa]Escape To The Past v0.1",
+        author: "S18 Games",
+        tags: "pc kinh-di cot-truyen",
+        img: "https://i.postimg.cc/pThXq8qy/S18-zmeneno-na-1920x1080.avif",
+        link: "games/escape-to-the-past.html",
+        labels: ["PC", "KINH DỊ", "CỐT TRUYỆN"]
+    },
+    {
+        title: "[Việt Hóa]Scorched Innocence v0.1",
+        author: "MindMaw",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/YSSSLTF8/1780745713690.avif",
+        link: "games/scorched-innocence.html",
+        labels: ["PC", "HAREM"]
+    },
+    {
+        title: "[Việt Hóa]Pleasure Entangled (Final)",
+        author: "Dravion Entertainment",
+        tags: "pc harem",
+        img: "https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif",
+        link: "games/pleasure-entangled.html",
+        labels: ["PC", "MILF", "HANDJOB", "3DCG"]
     }
+];
+
+// Lệnh quét Data và nhả ra giao diện tự động
+const gameListContainer = document.getElementById('game-list');
+let htmlContent = '';
+
+khoGame.forEach(game => {
+    let labelsHtml = game.labels.map(l => `<span class="info-tag">${l}</span>`).join('');
+    htmlContent += `
+        <div class="game-card fade-in" data-tags="${game.tags}">
+            <div class="share-btn" onclick="shareGame('${game.title}', 'https://quycai.github.io/${game.link}')">🔗</div>
+            <img src="${game.img}" alt="${game.title}" loading="lazy">
+            <div class="info">
+                <h2>${game.title}</h2>
+                <p>PC Windows | ${game.author}</p>
+                <div class="info-tags">
+                    ${labelsHtml}
+                </div>
+                <a class="btn" href="${game.link}">XEM CHI TIẾT</a>
+            </div>
+        </div>
+    `;
+});
+// Đẩy toàn bộ HTML vào khung
+gameListContainer.innerHTML = htmlContent;
+
+
+// ==========================================
+// 2. MÁY PHÁT NHẠC
+// ==========================================
+const playlist = [
+    { title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", src: "https://files.catbox.moe/gphcaw.mp3", img: "https://i.postimg.cc/50y2SgJJ/6ef39f35202950c5d2432a3e182c7ce4.jpg" },
+    { title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", src: "https://files.catbox.moe/6i8lwb.mp3", img: "https://i.postimg.cc/G2tmxKRr/95b8b05fbd482e62f5a51393ff8ae71c.jpg" },
+    { title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", src: "https://files.catbox.moe/kt3sov.mp3", img: "https://i.postimg.cc/Jn0z5x8L/32e5d81d5350da6382be9ac3b765793b.jpg" }
 ];
 
 let trackIndex = 0;
@@ -655,32 +567,22 @@ const volumeBar = document.getElementById("volumeBar");
 const cyberPlayer = document.getElementById("cyberPlayer");
 const visualizer = document.getElementById("visualizer");
 
-let particleInterval;
-let lightningInterval;
+let particleInterval; let lightningInterval;
 
 function loadTrack(index) {
-    audio.src = playlist[index].src;
-    trackTitle.innerText = playlist[index].title;
-    cyberPlayer.style.backgroundImage = `url('${playlist[index].img}')`;
-    audio.load();
+    audio.src = playlist[index].src; trackTitle.innerText = playlist[index].title;
+    cyberPlayer.style.backgroundImage = `url('${playlist[index].img}')`; audio.load();
 }
 
 function togglePlay() {
     if (audio.paused) {
         audio.play().then(() => {
-            playPauseBtn.innerText = "⏸";
-            cyberPlayer.classList.add("playing");
-            visualizer.classList.add("playing");
-            startEffects(); 
-        }).catch(err => {
-            alert("Lỗi tải nhạc! Trình duyệt chặn hoặc link nhạc bị hỏng.");
-        });
+            playPauseBtn.innerText = "⏸"; cyberPlayer.classList.add("playing"); visualizer.classList.add("playing");
+            particleInterval = setInterval(createDust, 200); lightningInterval = setInterval(createLightning, 400); 
+        }).catch(err => { alert("Lỗi tải nhạc! Trình duyệt chặn hoặc link nhạc bị hỏng."); });
     } else {
-        audio.pause();
-        playPauseBtn.innerText = "▶";
-        cyberPlayer.classList.remove("playing");
-        visualizer.classList.remove("playing");
-        stopEffects();
+        audio.pause(); playPauseBtn.innerText = "▶"; cyberPlayer.classList.remove("playing"); visualizer.classList.remove("playing");
+        clearInterval(particleInterval); clearInterval(lightningInterval);
     }
 }
 
@@ -689,177 +591,101 @@ function prevTrack() { trackIndex = (trackIndex - 1 + playlist.length) % playlis
 
 audio.addEventListener("timeupdate", () => {
     if(audio.duration) {
-        const progressPercent = (audio.currentTime / audio.duration) * 100;
-        progressBar.value = progressPercent;
-        currentTimeEl.innerText = formatTime(audio.currentTime);
-        durationTimeEl.innerText = formatTime(audio.duration);
+        progressBar.value = (audio.currentTime / audio.duration) * 100;
+        currentTimeEl.innerText = formatTime(audio.currentTime); durationTimeEl.innerText = formatTime(audio.duration);
     }
 });
-
 function seekAudio() { audio.currentTime = (progressBar.value / 100) * audio.duration; }
 function changeVolume() { audio.volume = volumeBar.value / 100; }
 audio.addEventListener("ended", nextTrack);
 
-function formatTime(time) {
-    let min = Math.floor(time / 60); let sec = Math.floor(time % 60);
-    if (sec < 10) sec = "0" + sec;
-    return `${min}:${sec}`;
-}
+function formatTime(time) { let min = Math.floor(time / 60); let sec = Math.floor(time % 60); if (sec < 10) sec = "0" + sec; return `${min}:${sec}`; }
 
 function toggleMinimize(e) {
     if (e && (e.target.tagName === 'INPUT' || (e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn'))) return;
-    cyberPlayer.classList.toggle("minimized");
-    document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
+    cyberPlayer.classList.toggle("minimized"); document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
 }
-
-loadTrack(trackIndex);
-audio.volume = 1; 
-
-// ==========================================
-// ĐỘ CƠ GẦM: HẠT BỤI BAY RỘNG VÀ TIA CHỚP
-// ==========================================
+loadTrack(trackIndex); audio.volume = 1; 
 
 function createDust() {
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
-
-    const dust = document.createElement('div');
-    dust.className = 'cyber-dust';
-    const rect = cyberPlayer.getBoundingClientRect();
-    
-    const size = Math.random() * 3 + 2;
-    dust.style.width = size + 'px';
-    dust.style.height = size + 'px';
-    
-    const spawnX = rect.left - 300 + (Math.random() * (rect.width + 600));
-    dust.style.left = spawnX + 'px';
-    dust.style.top = rect.bottom - 10 + 'px';
-    
-    dust.style.setProperty('--rnd', Math.random() * 2 - 1);
-    dust.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    
-    document.body.appendChild(dust);
-    setTimeout(() => dust.remove(), 4000);
+    const dust = document.createElement('div'); dust.className = 'cyber-dust'; const rect = cyberPlayer.getBoundingClientRect();
+    const size = Math.random() * 3 + 2; dust.style.width = size + 'px'; dust.style.height = size + 'px';
+    const spawnX = rect.left - 300 + (Math.random() * (rect.width + 600)); dust.style.left = spawnX + 'px'; dust.style.top = rect.bottom - 10 + 'px';
+    dust.style.setProperty('--rnd', Math.random() * 2 - 1); dust.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    document.body.appendChild(dust); setTimeout(() => dust.remove(), 4000);
 }
-
 function createLightning() {
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
     if (Math.random() > 0.25) return; 
-
-    cyberPlayer.classList.add('flash-strike');
-    setTimeout(() => cyberPlayer.classList.remove('flash-strike'), 150);
-
-    const streak = document.createElement('div');
-    streak.className = 'light-streak';
-    const rect = cyberPlayer.getBoundingClientRect();
-    
-    streak.style.left = (rect.left - 200 + Math.random() * (rect.width + 400)) + 'px';
-    streak.style.top = (rect.top - 100 + Math.random() * (rect.height + 200)) + 'px';
-    
-    document.body.appendChild(streak);
-    setTimeout(() => streak.remove(), 300);
+    cyberPlayer.classList.add('flash-strike'); setTimeout(() => cyberPlayer.classList.remove('flash-strike'), 150);
+    const streak = document.createElement('div'); streak.className = 'light-streak'; const rect = cyberPlayer.getBoundingClientRect();
+    streak.style.left = (rect.left - 200 + Math.random() * (rect.width + 400)) + 'px'; streak.style.top = (rect.top - 100 + Math.random() * (rect.height + 200)) + 'px';
+    document.body.appendChild(streak); setTimeout(() => streak.remove(), 300);
 }
 
-function startEffects() {
-    particleInterval = setInterval(createDust, 200);
-    lightningInterval = setInterval(createLightning, 400); 
-}
 
-function stopEffects() {
-    clearInterval(particleInterval);
-    clearInterval(lightningInterval);
-}
+// ==========================================
+// 3. LOGIC HỆ THỐNG UI (SLIDER, KÍNH VỠ, LỌC TAG)
+// ==========================================
 
-// --- CÁC LOGIC CHẠY WEB GIỮ NGUYÊN BÊN DƯỚI ---
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-let slideInterval;
-
-function showSlide(n) { slides.forEach(slide => slide.classList.remove('active')); dots.forEach(dot => dot.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
+// Slider
+let currentSlideIndex = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
+function showSlide(n) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
 function changeSlide(step) { showSlide(currentSlideIndex + step); resetInterval(); }
 function goToSlide(n) { showSlide(n); resetInterval(); }
-function startAutoSlide() { slideInterval = setInterval(() => { changeSlide(1); }, 4000); }
+function startAutoSlide() { slideInterval = setInterval(() => changeSlide(1), 4000); }
 function resetInterval() { clearInterval(slideInterval); startAutoSlide(); }
-
 startAutoSlide();
 const sliderContainer = document.getElementById('main-slider');
-sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-sliderContainer.addEventListener('mouseleave', startAutoSlide);
+sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval)); sliderContainer.addEventListener('mouseleave', startAutoSlide);
+document.addEventListener('keydown', e => { if(e.key === 'ArrowLeft') changeSlide(-1); else if(e.key === 'ArrowRight') changeSlide(1); });
 
-document.addEventListener('keydown', function(e) { if(e.key === 'ArrowLeft') { changeSlide(-1); } else if(e.key === 'ArrowRight') { changeSlide(1); } });
-
-// --- LOGIC MÀN CHẮN 18+ (HIỆU ỨNG KÍNH VỠ) ---
-document.addEventListener("DOMContentLoaded", function() { if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; } });
-
+// Kính Vỡ 18+
+document.addEventListener("DOMContentLoaded", () => { if(localStorage.getItem('isAdult') === 'true') document.getElementById('age-warning-overlay').style.display = 'none'; });
 function acceptAge() { 
-    const box = document.querySelector('.age-box');
-    const overlay = document.getElementById('age-warning-overlay');
-    
-    const rect = box.getBoundingClientRect();
-    
-    const shards = [
-        '0 0, 50% 0, 30% 50%, 0 30%', 
-        '50% 0, 100% 0, 100% 40%, 70% 50%', 
-        '0 30%, 30% 50%, 20% 100%, 0 100%', 
-        '70% 50%, 100% 40%, 100% 100%, 50% 100%', 
-        '30% 50%, 70% 50%, 50% 100%, 20% 100%'
-    ];
-    
-    box.style.visibility = 'hidden'; 
-    overlay.style.transition = 'opacity 0.6s ease';
-    
+    const box = document.querySelector('.age-box'); const overlay = document.getElementById('age-warning-overlay'); const rect = box.getBoundingClientRect();
+    const shards = [ '0 0, 50% 0, 30% 50%, 0 30%', '50% 0, 100% 0, 100% 40%, 70% 50%', '0 30%, 30% 50%, 20% 100%, 0 100%', '70% 50%, 100% 40%, 100% 100%, 50% 100%', '30% 50%, 70% 50%, 50% 100%, 20% 100%' ];
+    box.style.visibility = 'hidden'; overlay.style.transition = 'opacity 0.6s ease';
     shards.forEach((poly) => {
-        const clone = box.cloneNode(true); 
-        clone.style.position = 'absolute';
-        clone.style.top = rect.top + 'px';
-        clone.style.left = rect.left + 'px';
-        clone.style.width = rect.width + 'px';
-        clone.style.height = rect.height + 'px';
-        clone.style.margin = '0';
-        clone.style.visibility = 'visible';
-        clone.style.clipPath = `polygon(${poly})`; 
-        clone.style.transition = 'all 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
+        const clone = box.cloneNode(true); clone.style.position = 'absolute'; clone.style.top = rect.top + 'px'; clone.style.left = rect.left + 'px'; clone.style.width = rect.width + 'px'; clone.style.height = rect.height + 'px'; clone.style.margin = '0'; clone.style.visibility = 'visible'; clone.style.clipPath = `polygon(${poly})`; clone.style.transition = 'all 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
         overlay.appendChild(clone);
-        
-        setTimeout(() => {
-            const x = (Math.random() - 0.5) * 500; 
-            const y = (Math.random() + 0.5) * 400; 
-            const rot = (Math.random() - 0.5) * 90; 
-            clone.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(0)`;
-            clone.style.opacity = '0';
-        }, 10);
+        setTimeout(() => { const x = (Math.random() - 0.5) * 500; const y = (Math.random() + 0.5) * 400; const rot = (Math.random() - 0.5) * 90; clone.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(0)`; clone.style.opacity = '0'; }, 10);
     });
-
-    overlay.style.opacity = '0';
-    setTimeout(() => { 
-        overlay.style.display = 'none'; 
-        localStorage.setItem('isAdult', 'true'); 
-    }, 700); 
+    overlay.style.opacity = '0'; setTimeout(() => { overlay.style.display = 'none'; localStorage.setItem('isAdult', 'true'); }, 700); 
 }
-
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
+// Lọc Game & Tìm Kiếm
 const search = document.getElementById('search');
 search.addEventListener('keyup',()=>{ const value = search.value.toLowerCase(); document.querySelectorAll('.game-card').forEach(card=>{ const text = card.innerText.toLowerCase(); card.style.display = text.includes(value) ? 'block' : 'none'; }); });
 
 const tagBtns = document.querySelectorAll('.tag-btn');
-const gameCards = document.querySelectorAll('.game-card');
-
-tagBtns.forEach(btn => { btn.addEventListener('click', function() { document.querySelector('.tag-btn.active').classList.remove('active'); this.classList.add('active'); const filterValue = this.dataset.filter; gameCards.forEach(card => { const cardTags = card.dataset.tags; if (filterValue === 'all') { card.style.display = 'block'; } else if (cardTags && cardTags.includes(filterValue)) { card.style.display = 'block'; } else { card.style.display = 'none'; } }); }); });
+tagBtns.forEach(btn => { 
+    btn.addEventListener('click', function() { 
+        document.querySelector('.tag-btn.active').classList.remove('active'); this.classList.add('active'); 
+        const filterValue = this.dataset.filter; 
+        document.querySelectorAll('.game-card').forEach(card => { 
+            const cardTags = card.dataset.tags; 
+            if (filterValue === 'all' || (cardTags && cardTags.includes(filterValue))) card.style.display = 'block'; 
+            else card.style.display = 'none'; 
+        }); 
+    }); 
+});
 
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa cực mượt tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Trình duyệt không hỗ trợ Share nhanh. Ông copy link này nhé: ' + url); } }
 
+// Con Trỏ Chuột & Kích hoạt Fade-in/Tilt cho thẻ Game vừa được render
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
-window.addEventListener('mousemove', function(e) { const posX = e.clientX; const posY = e.clientY; dot.style.left = posX + 'px'; dot.style.top = posY + 'px'; setTimeout(() => { outline.style.left = posX + 'px'; outline.style.top = posY + 'px'; }, 40); });
+window.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40); });
 
-const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top');
-hoverElements.forEach(el => { el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); });
+// Gắn hiệu ứng mờ cuộn và tilt sau khi game render xong
+const appearOnScroll = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('appear'); appearOnScroll.unobserve(entry.target); } }); }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
-const faders = document.querySelectorAll('.fade-in');
-const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-const appearOnScroll = new IntersectionObserver(function(entries, observer) { entries.forEach(entry => { if (!entry.isIntersecting) return; entry.target.classList.add('appear'); observer.unobserve(entry.target); }); }, appearOptions);
+document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
 
-faders.forEach(fader => { appearOnScroll.observe(fader); });
+// Gọi mảng Hover & Tilt 
+document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top').forEach(el => { el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); });
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
