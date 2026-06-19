@@ -132,11 +132,11 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 
 /* --- HIỆU ỨNG CON TRỞ CHUỘT NEON AURA --- */
 body { cursor: none; }
-a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: none; }
+a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-header { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-header { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
 /* --- STUDIO UPDATE TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
@@ -172,38 +172,74 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: no
 .footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
 
-/* --- MUSIC PLAYER CYBERPUNK (TRẠM RADIO) --- */
-.cyber-player { position: fixed; bottom: 20px; right: 20px; width: 320px; background: rgba(11, 11, 18, 0.85); backdrop-filter: blur(10px); border: 1px solid var(--accent2); border-radius: 16px; padding: 15px; z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px rgba(139, 92, 246, 0.2); transition: 0.4s ease; overflow: hidden; }
-.cyber-player.minimized { transform: translateY(calc(100% - 50px)); opacity: 0.8; }
-.player-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; cursor: pointer; }
-.disc { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); background: #222; display: flex; justify-content: center; align-items: center; font-size: 16px; margin-right: 12px; }
-.disc.spinning { animation: spin-disc 3s linear infinite; box-shadow: 0 0 10px var(--accent); }
-@keyframes spin-disc { 100% { transform: rotate(360deg); } }
 
-.track-info { flex-grow: 1; overflow: hidden; white-space: nowrap; }
-.track-title { color: var(--accent2); font-weight: bold; font-size: 14px; text-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
-.min-btn { background: transparent; border: none; color: #aaa; font-size: 20px; cursor: pointer; padding: 0 5px; }
-.min-btn:hover { color: white; }
+/* =======================================================
+   MUSIC PLAYER CYBERPUNK - BẢN NÂNG CẤP "THÁI HOÀNG REMIX"
+   ======================================================= */
+.cyber-player { 
+    position: fixed; bottom: 20px; right: 20px; width: 340px; 
+    border: 1px solid rgba(255, 79, 160, 0.3); border-radius: 16px; padding: 15px; 
+    z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+    transition: 0.4s ease; overflow: hidden;
+    /* Phông nền động, mặc định màu tối, sẽ bị JS đè lên bằng ảnh mờ */
+    background-color: #0b0b12;
+    background-size: cover; background-position: center; background-blend-mode: overlay;
+}
+/* Lớp phủ đen nhạt để chữ dễ đọc */
+.cyber-player::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11, 11, 18, 0.85); backdrop-filter: blur(12px); z-index: -1;
+}
 
-.visualizer { display: flex; gap: 3px; height: 15px; align-items: flex-end; margin-right: 10px; }
-.bar { width: 4px; background: var(--accent); border-radius: 2px; height: 3px; transition: 0.1s; }
-.playing .bar { animation: bounce 1s infinite alternate; }
+.cyber-player.minimized { transform: translateY(calc(100% - 50px)); opacity: 0.9; }
+
+.player-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; position: relative; }
+
+/* 1. HÌNH COVER VUÔNG ĐẬP ĐẬP THEO NHẠC */
+.album-art-container {
+    position: relative; margin-right: 15px;
+}
+.album-art { 
+    width: 55px; height: 55px; border-radius: 10px; object-fit: cover; 
+    border: 2px solid #555; transition: 0.3s ease;
+}
+/* Hiệu ứng Glow khung viền y hệt video */
+.playing .album-art { 
+    border-color: var(--accent);
+    animation: pulse-glow 1.5s infinite alternate; 
+}
+@keyframes pulse-glow { 
+    0% { box-shadow: 0 0 5px var(--accent); transform: scale(1); } 
+    100% { box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); transform: scale(1.05); } 
+}
+
+/* Sóng âm chèn thẳng lên góc cái ảnh (Tùy chọn) */
+.visualizer { display: flex; gap: 3px; height: 15px; align-items: flex-end; }
+.bar { width: 3px; background: var(--accent2); border-radius: 2px; height: 3px; transition: 0.1s; }
+.playing .bar { background: var(--accent); animation: bounce 0.8s infinite alternate; }
 .playing .bar:nth-child(1) { animation-delay: 0.1s; }
 .playing .bar:nth-child(2) { animation-delay: 0.3s; }
 .playing .bar:nth-child(3) { animation-delay: 0.2s; }
 .playing .bar:nth-child(4) { animation-delay: 0.4s; }
-@keyframes bounce { 0% { height: 3px; } 100% { height: 15px; } }
+@keyframes bounce { 0% { height: 3px; } 100% { height: 18px; } }
 
-.player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 12px; }
-.ctrl-btn { background: #252536; border: 1px solid #444; color: white; width: 35px; height: 35px; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(255, 79, 160, 0.4); }
-#playPauseBtn { width: 45px; height: 45px; font-size: 18px; border-color: var(--accent2); background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(255,79,160,0.2)); }
+.track-info { flex-grow: 1; overflow: hidden; white-space: nowrap; display: flex; flex-direction: column; gap: 5px;}
+.track-title { color: white; font-weight: bold; font-size: 14px; text-shadow: 0 0 8px rgba(255, 79, 160, 0.5); font-family: Consolas, monospace; }
 
-.player-sliders { display: flex; flex-direction: column; gap: 8px; }
-.slider-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #888; }
-input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 12px; width: 12px; border-radius: 50%; background: var(--accent); cursor: pointer; margin-top: -4px; box-shadow: 0 0 8px var(--accent); }
-input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
+.min-btn { background: transparent; border: none; color: #ccc; font-size: 20px; padding: 0 5px; cursor: none; }
+.min-btn:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+
+.player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 12px; position: relative; }
+.ctrl-btn { background: rgba(37,37,54,0.6); border: 1px solid #555; color: white; width: 38px; height: 38px; border-radius: 50%; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(4px); cursor: none;}
+.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); transform: scale(1.1); }
+#playPauseBtn { width: 50px; height: 50px; font-size: 20px; border-color: var(--accent2); background: linear-gradient(135deg, rgba(139,92,246,0.4), rgba(255,79,160,0.4)); box-shadow: 0 0 10px rgba(139,92,246,0.3);}
+
+.player-sliders { display: flex; flex-direction: column; gap: 8px; position: relative; }
+.slider-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #bbb; font-weight: bold;}
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; cursor: none;}
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: var(--accent); margin-top: -5px; box-shadow: 0 0 10px var(--accent); transition: 0.2s;}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; }
 input[type=range]:focus { outline: none; }
 </style>
 </head>
@@ -408,7 +444,7 @@ input[type=range]:focus { outline: none; }
             </div>
         </div>
 
-        <div class="game-card fade-in" data-tags="pc harem" data-tilt>
+         <div class="game-card fade-in" data-tags="pc harem" data-tilt>
             <div class="share-btn" onclick="shareGame('Scorched Innocence v0.1', 'https://quycai.github.io/games/scorched-innocence.html')">🔗</div>
             <img src="https://i.postimg.cc/YSSSLTF8/1780745713690.avif" alt="Scorched Innocence" loading="lazy">
             <div class="info">
@@ -492,13 +528,17 @@ input[type=range]:focus { outline: none; }
     <audio id="audioPlayer"></audio>
     
     <div class="player-header" onclick="toggleMinimize()">
-        <div class="disc" id="disc">🎵</div>
+        <div class="album-art-container" id="albumArtContainer">
+            <img id="albumArt" class="album-art" src="https://i.postimg.cc/fbbbS1dC/1777495289444.avif" alt="Cover">
+        </div>
+        
         <div class="track-info">
             <marquee class="track-title" id="trackTitle" scrollamount="4">Đang tải trạm phát sóng...</marquee>
+            <div class="visualizer" id="visualizer">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
         </div>
-        <div class="visualizer" id="visualizer">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        </div>
+        
         <button class="min-btn" id="minBtn">▼</button>
     </div>
 
@@ -522,11 +562,25 @@ input[type=range]:focus { outline: none; }
 </div>
 
 <script>
-// --- LOGIC TRẠM PHÁT NHẠC CYBERPUNK ---
+// --- LOGIC TRẠM PHÁT NHẠC CYBERPUNK (CÓ THÊM PHẦN HÌNH ẢNH MỖI BÀI) ---
+// Chú ý: Tôi đã thêm thẻ "img: '...'" vào mỗi bài hát để nó hiển thị đúng ảnh giống video.
+// Ông có thể thay link ảnh img bằng ảnh gái xinh tùy thích!
 const playlist = [
-    { title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi x Deep Sea (NVT REMIX) - Thành Đạt | Ngày Em Đi Bầu Trời Mây Giăng Kín", src: "https://files.catbox.moe/gphcaw.mp3" },
-    { title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO ( THÁI HOÀNG REMIX ) NHẠC HOT TREND TIKTOK MẪU CAPCUT HAY NHẤT", src: "https://files.catbox.moe/6i8lwb.mp3" },
-    { title: "🎧Liều Thuốc Cho Trái Tim (Remix) - LaLa Trần | Giọt Sầu Nào Vỡ Nát Trong Tim Remix Hot TikTok", src: "https://files.catbox.moe/kt3sov.mp3" }
+    { 
+        title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", 
+        src: "https://files.catbox.moe/gphcaw.mp3",
+        img: "https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif" 
+    },
+    { 
+        title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", 
+        src: "https://files.catbox.moe/6i8lwb.mp3",
+        img: "https://i.postimg.cc/YSSSLTF8/1780745713690.avif" 
+    },
+    { 
+        title: "🎧 Liều Thuốc Cho Trái Tim (Remix) - LaLa Trần", 
+        src: "https://files.catbox.moe/kt3sov.mp3",
+        img: "https://i.postimg.cc/fbbbS1dC/1777495289444.avif" 
+    }
 ];
 
 let trackIndex = 0;
@@ -537,13 +591,22 @@ const progressBar = document.getElementById("progressBar");
 const currentTimeEl = document.getElementById("currentTime");
 const durationTimeEl = document.getElementById("durationTime");
 const volumeBar = document.getElementById("volumeBar");
-const disc = document.getElementById("disc");
-const visualizer = document.getElementById("visualizer");
 const cyberPlayer = document.getElementById("cyberPlayer");
+const albumArtContainer = document.getElementById("albumArtContainer");
+const visualizer = document.getElementById("visualizer");
+const albumArtImg = document.getElementById("albumArt");
 
+// Hàm tải bài hát + Tải luôn ảnh nền mờ mờ
 function loadTrack(index) {
     audio.src = playlist[index].src;
     trackTitle.innerText = playlist[index].title;
+    
+    // Đổi hình cái khung vuông
+    albumArtImg.src = playlist[index].img;
+    
+    // Đổi hình nền mờ của cả cái bảng nhạc
+    cyberPlayer.style.backgroundImage = `url('${playlist[index].img}')`;
+    
     audio.load();
 }
 
@@ -551,12 +614,14 @@ function togglePlay() {
     if (audio.paused) {
         audio.play();
         playPauseBtn.innerText = "⏸";
-        disc.classList.add("spinning");
+        // Bật hiệu ứng đập viền và sóng âm
+        albumArtContainer.classList.add("playing");
         visualizer.classList.add("playing");
     } else {
         audio.pause();
         playPauseBtn.innerText = "▶";
-        disc.classList.remove("spinning");
+        // Tắt hiệu ứng
+        albumArtContainer.classList.remove("playing");
         visualizer.classList.remove("playing");
     }
 }
@@ -583,144 +648,61 @@ function formatTime(time) {
     return `${min}:${sec}`;
 }
 
-function toggleMinimize() {
+// Bấm vào khu vực chữ/ảnh để thu nhỏ bảng nhạc (tránh bấm nhầm thanh trượt)
+function toggleMinimize(e) {
+    // Nếu bấm trúng cái thanh tua nhạc thì không thu nhỏ
+    if (e && (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn')) return;
+    
     cyberPlayer.classList.toggle("minimized");
     document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
 }
 
+// Chạy khởi tạo
 loadTrack(trackIndex);
 audio.volume = 1; 
 
-// --- LOGIC SLIDER TỰ ĐỘNG ---
+// --- LOGIC CŨ GIỮ NGUYÊN BÊN DƯỚI NÀY ---
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
 let slideInterval;
-
-function showSlide(n) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    currentSlideIndex = (n + slides.length) % slides.length;
-    slides[currentSlideIndex].classList.add('active');
-    dots[currentSlideIndex].classList.add('active');
-}
-
+function showSlide(n) { slides.forEach(slide => slide.classList.remove('active')); dots.forEach(dot => dot.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
 function changeSlide(step) { showSlide(currentSlideIndex + step); resetInterval(); }
 function goToSlide(n) { showSlide(n); resetInterval(); }
 function startAutoSlide() { slideInterval = setInterval(() => { changeSlide(1); }, 4000); }
 function resetInterval() { clearInterval(slideInterval); startAutoSlide(); }
-
 startAutoSlide();
 const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
 sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-document.addEventListener('keydown', function(e) {
-    if(e.key === 'ArrowLeft') { changeSlide(-1); } 
-    else if(e.key === 'ArrowRight') { changeSlide(1); }
-});
+document.addEventListener('keydown', function(e) { if(e.key === 'ArrowLeft') { changeSlide(-1); } else if(e.key === 'ArrowRight') { changeSlide(1); } });
 
-// --- LOGIC MÀN CHẮN 18+ ---
-document.addEventListener("DOMContentLoaded", function() {
-    if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; }
-});
-function acceptAge() { 
-    document.getElementById('age-warning-overlay').style.display = 'none'; 
-    localStorage.setItem('isAdult', 'true'); 
-}
+document.addEventListener("DOMContentLoaded", function() { if(localStorage.getItem('isAdult') === 'true') { document.getElementById('age-warning-overlay').style.display = 'none'; } });
+function acceptAge() { document.getElementById('age-warning-overlay').style.display = 'none'; localStorage.setItem('isAdult', 'true'); }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
-// --- LOGIC INPUT TÌM KIẾM GAME ---
 const search = document.getElementById('search');
-search.addEventListener('keyup',()=>{
-    const value = search.value.toLowerCase();
-    document.querySelectorAll('.game-card').forEach(card=>{
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(value) ? 'block' : 'none';
-    });
-});
+search.addEventListener('keyup',()=>{ const value = search.value.toLowerCase(); document.querySelectorAll('.game-card').forEach(card=>{ const text = card.innerText.toLowerCase(); card.style.display = text.includes(value) ? 'block' : 'none'; }); });
 
-// --- LOGIC HỆ THỐNG LỌC TAG CHUYÊN SÂU ---
 const tagBtns = document.querySelectorAll('.tag-btn');
 const gameCards = document.querySelectorAll('.game-card');
+tagBtns.forEach(btn => { btn.addEventListener('click', function() { document.querySelector('.tag-btn.active').classList.remove('active'); this.classList.add('active'); const filterValue = this.dataset.filter; gameCards.forEach(card => { const cardTags = card.dataset.tags; if (filterValue === 'all') { card.style.display = 'block'; } else if (cardTags && cardTags.includes(filterValue)) { card.style.display = 'block'; } else { card.style.display = 'none'; } }); }); });
 
-tagBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelector('.tag-btn.active').classList.remove('active');
-        this.classList.add('active');
-        const filterValue = this.dataset.filter;
+function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa cực mượt tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Trình duyệt không hỗ trợ Share nhanh. Ông copy link này nhé: ' + url); } }
 
-        gameCards.forEach(card => {
-            const cardTags = card.dataset.tags;
-            if (filterValue === 'all') {
-                card.style.display = 'block';
-            } else if (cardTags && cardTags.includes(filterValue)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
+const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
+window.addEventListener('mousemove', function(e) { const posX = e.clientX; const posY = e.clientY; dot.style.left = posX + 'px'; dot.style.top = posY + 'px'; setTimeout(() => { outline.style.left = posX + 'px'; outline.style.top = posY + 'px'; }, 40); });
+const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-header, .album-art-container');
+hoverElements.forEach(el => { el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); });
 
-// --- LỆNH CHẠY TRÌNH SHARE NHANH CỦA THIẾT BỊ ---
-function shareGame(title, url) {
-    if (navigator.share) {
-        navigator.share({
-            title: title,
-            text: 'Tải ngay game Việt Hóa cực mượt tại HPGVH18: ' + title,
-            url: url
-        }).catch(console.error);
-    } else {
-        alert('Trình duyệt không hỗ trợ Share nhanh. Ông copy link này nhé: ' + url);
-    }
-}
-
-// --- LOGIC CON TRỎ CHUỘT NEON AURA ---
-const dot = document.querySelector('.cursor-dot');
-const outline = document.querySelector('.cursor-outline');
-
-window.addEventListener('mousemove', function(e) {
-    const posX = e.clientX;
-    const posY = e.clientY;
-    dot.style.left = posX + 'px';
-    dot.style.top = posY + 'px';
-    setTimeout(() => { outline.style.left = posX + 'px'; outline.style.top = posY + 'px'; }, 40);
-});
-
-const hoverElements = document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"]');
-hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
-});
-
-// --- LÀM MỜ KHI CUỘN (INTERSECTION OBSERVER) ---
 const faders = document.querySelectorAll('.fade-in');
-const appearOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
-};
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('appear');
-        observer.unobserve(entry.target); 
-    });
-}, appearOptions);
-
-faders.forEach(fader => {
-    appearOnScroll.observe(fader);
-});
+const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+const appearOnScroll = new IntersectionObserver(function(entries, observer) { entries.forEach(entry => { if (!entry.isIntersecting) return; entry.target.classList.add('appear'); observer.unobserve(entry.target); }); }, appearOptions);
+faders.forEach(fader => { appearOnScroll.observe(fader); });
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-<script>
-    VanillaTilt.init(document.querySelectorAll(".game-card"), {
-        max: 12,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.25,
-    });
-</script>
+<script> VanillaTilt.init(document.querySelectorAll(".game-card"), { max: 12, speed: 400, glare: true, "max-glare": 0.25 }); </script>
 </body>
 </html>
