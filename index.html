@@ -117,11 +117,11 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 
 /* --- HIỆU ỨNG CON TRỞ CHUỘT NEON AURA --- */
 body { cursor: none; }
-a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: none; }
+a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
 /* --- STUDIO UPDATE TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
@@ -158,40 +158,73 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: no
 
 
 /* =======================================================
-   MUSIC PLAYER CYBERPUNK - BẢN ĐỘ FULL KHUNG CỰC CHÁY
+   MUSIC PLAYER CYBERPUNK - BẢN "CHÁY PHỐ" CÓ HẠT BỤI & TIA SÉT
    ======================================================= */
 .cyber-player { 
     position: fixed; bottom: 20px; right: 20px; 
-    width: 340px; height: 300px; /* Khung nhạc to hơn, dáng vuông giống clip */
+    width: 340px; height: 300px; 
     border: 2px solid #444; border-radius: 16px; 
     z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
     transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden; 
     display: flex; flex-direction: column; justify-content: space-between;
     background-color: #0b0b12;
-    background-size: cover; background-position: center; /* Hình nền phủ 100% khung */
+    background-size: cover; background-position: center; 
 }
 
-/* Lớp sương mù Gradient: Ở trên cùng đen nhạt (để thấy chữ), khúc giữa trong suốt (để ngắm gái), dưới cùng đen đậm (để chứa nút bấm) */
+/* Lớp sương mù Gradient để nổi chữ */
 .cyber-player::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background: linear-gradient(to bottom, rgba(11,11,18,0.8) 0%, rgba(11,11,18,0) 25%, rgba(11,11,18,0) 50%, rgba(11,11,18,0.95) 100%);
     z-index: 0; pointer-events: none;
 }
 
-/* HIỆU ỨNG ĐẬP/PHÁT SÁNG NGUYÊN CÁI KHUNG KHI CÓ NHẠC */
+/* VIỀN THỞ PHÁT SÁNG NGUYÊN KHUNG */
 .cyber-player.playing {
     border-color: var(--accent);
     animation: pulse-glow-player 1.2s infinite alternate ease-in-out;
 }
 @keyframes pulse-glow-player { 
     0% { box-shadow: 0 0 5px var(--accent); transform: scale(1); } 
-    100% { box-shadow: 0 0 30px var(--accent), 0 0 50px var(--accent2); transform: scale(1.02); } 
+    100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); transform: scale(1.02); } 
 }
 
-/* Thu nhỏ thì thụt xuống, chừa đúng cái viền trên (45px) */
+/* HIỆU ỨNG TIA SÉT VÀ HẠT BỤI NẰM BÊN NGOÀI (Chèn bằng JS) */
+.cyber-dust {
+    position: fixed;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 6px #fff, 0 0 12px var(--accent);
+    pointer-events: none;
+    z-index: 9997; /* Nằm ngay dưới hộp nhạc */
+    animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-120px) scale(1.5); opacity: 0; }
+}
+
+.cyber-lightning {
+    position: fixed;
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,79,160,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    mix-blend-mode: screen;
+}
+@keyframes flash-strike {
+    0% { opacity: 0; transform: scale(0.5); }
+    10% { opacity: 1; filter: brightness(2); transform: scale(1.2); }
+    20% { opacity: 0; transform: scale(1); }
+    30% { opacity: 0.6; }
+    40% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
 .cyber-player.minimized { transform: translateY(calc(100% - 45px)); opacity: 0.9; }
 
-/* Khu vực trên cùng chứa Tên bài + Nút ẩn */
 .player-top {
     position: relative; z-index: 1; display: flex; align-items: center; gap: 10px;
     padding: 10px 15px; cursor: pointer; height: 45px;
@@ -200,7 +233,6 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: no
 .min-btn { background: transparent; border: none; color: #ccc; font-size: 18px; padding: 0; cursor: pointer; transition: 0.3s;}
 .min-btn:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 
-/* Sóng âm */
 .visualizer { display: flex; gap: 3px; height: 14px; align-items: flex-end; }
 .bar { width: 3px; background: var(--accent2); border-radius: 2px; height: 3px; transition: 0.1s; }
 .playing .bar { background: var(--accent); animation: bounce 0.8s infinite alternate; }
@@ -210,7 +242,6 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"] { cursor: no
 .playing .bar:nth-child(4) { animation-delay: 0.4s; }
 @keyframes bounce { 0% { height: 4px; } 100% { height: 18px; } }
 
-/* Khu vực dưới cùng chứa Nút phát + Tua nhạc */
 .player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
 .player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
 .ctrl-btn { background: rgba(37,37,54,0.6); border: 1px solid #555; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(4px); cursor: pointer;}
@@ -544,17 +575,17 @@ input[type=range]:focus { outline: none; }
 const playlist = [
     { 
         title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", 
-        src: "https://files.catbox.moe/gphcaw.mp3",
+        src: "music/mtvlxl.mp3",
         img: "https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif" 
     },
     { 
         title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", 
-        src: "https://files.catbox.moe/6i8lwb.mp3",
+        src: "music/nldg.mp3",
         img: "https://i.postimg.cc/YSSSLTF8/1780745713690.avif" 
     },
     { 
         title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", 
-        src: "https://files.catbox.moe/kt3sov.mp3",
+        src: "music/ltctt.mp3",
         img: "https://i.postimg.cc/fbbbS1dC/1777495289444.avif" 
     }
 ];
@@ -570,6 +601,10 @@ const volumeBar = document.getElementById("volumeBar");
 const cyberPlayer = document.getElementById("cyberPlayer");
 const visualizer = document.getElementById("visualizer");
 
+// Biến điều khiển bộ tạo hiệu ứng
+let particleInterval;
+let lightningInterval;
+
 function loadTrack(index) {
     audio.src = playlist[index].src;
     trackTitle.innerText = playlist[index].title;
@@ -583,11 +618,17 @@ function togglePlay() {
         playPauseBtn.innerText = "⏸";
         cyberPlayer.classList.add("playing");
         visualizer.classList.add("playing");
+        
+        // Bật máy tạo hạt bụi và tia sét
+        startEffects();
     } else {
         audio.pause();
         playPauseBtn.innerText = "▶";
         cyberPlayer.classList.remove("playing");
         visualizer.classList.remove("playing");
+        
+        // Tắt máy tạo hiệu ứng
+        stopEffects();
     }
 }
 
@@ -613,7 +654,7 @@ function formatTime(time) {
     return `${min}:${sec}`;
 }
 
-// Bấm vào thanh trên cùng để thu nhỏ, bỏ qua thao tác nếu lỡ bấm trúng nút
+// Thu nhỏ thì tắt bớt bụi để đỡ rối mắt
 function toggleMinimize(e) {
     if (e && (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn')) return;
     cyberPlayer.classList.toggle("minimized");
@@ -622,6 +663,74 @@ function toggleMinimize(e) {
 
 loadTrack(trackIndex);
 audio.volume = 1; 
+
+// ==========================================
+// ĐỘ CƠ GẦM: HẠT BỤI VÀ TIA SÉT (JS MAGIC)
+// ==========================================
+
+function createDust() {
+    // Không sinh bụi nếu nhạc đang tắt hoặc bảng đang bị thu nhỏ
+    if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
+
+    const dust = document.createElement('div');
+    dust.className = 'cyber-dust';
+    const rect = cyberPlayer.getBoundingClientRect();
+    
+    // Tạo ngẫu nhiên kích thước hạt bụi (2px - 5px)
+    const size = Math.random() * 3 + 2;
+    dust.style.width = size + 'px';
+    dust.style.height = size + 'px';
+    
+    // Tạo vị trí ngẫu nhiên dọc theo chiều ngang của hộp nhạc
+    dust.style.left = rect.left + (Math.random() * rect.width) + 'px';
+    // Xuất phát từ cạnh dưới của hộp nhạc
+    dust.style.top = rect.bottom - 20 + 'px';
+    
+    // Thời gian bay lơ lửng ngẫu nhiên (1.5s - 3.5s)
+    dust.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+    
+    document.body.appendChild(dust);
+    
+    // Dọn dẹp rác sau khi hạt bụi bay xong
+    setTimeout(() => dust.remove(), 3500);
+}
+
+function createLightning() {
+    if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
+    
+    // Xác suất 20% lóe sáng mỗi lần check (tạo cảm giác giật ngẫu nhiên)
+    if (Math.random() > 0.2) return; 
+
+    const flash = document.createElement('div');
+    flash.className = 'cyber-lightning';
+    const rect = cyberPlayer.getBoundingClientRect();
+    
+    // Kích thước quầng sáng
+    const size = Math.random() * 100 + 100; // 100px - 200px
+    flash.style.width = size + 'px';
+    flash.style.height = size + 'px';
+    
+    // Lóe sáng ngẫu nhiên quanh các viền hộp nhạc
+    flash.style.left = rect.left - (size/2) + (Math.random() * (rect.width + size)) + 'px';
+    flash.style.top = rect.top - (size/2) + (Math.random() * (rect.height + size)) + 'px';
+    
+    flash.style.animation = 'flash-strike 0.5s ease-out';
+    document.body.appendChild(flash);
+    
+    setTimeout(() => flash.remove(), 500);
+}
+
+function startEffects() {
+    // Bắn hạt bụi mỗi 200ms
+    particleInterval = setInterval(createDust, 200);
+    // Tính toán tỷ lệ chớp giật mỗi 400ms
+    lightningInterval = setInterval(createLightning, 400);
+}
+
+function stopEffects() {
+    clearInterval(particleInterval);
+    clearInterval(lightningInterval);
+}
 
 // --- CÁC LOGIC CHẠY WEB GIỮ NGUYÊN BÊN DƯỚI ---
 let currentSlideIndex = 0;
