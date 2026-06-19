@@ -158,76 +158,85 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 
 
 /* =======================================================
-   MUSIC PLAYER CYBERPUNK - BẢN "CHÁY PHỐ" CÓ HẠT BỤI & TIA SÉT
+   MUSIC PLAYER CYBERPUNK - BẢN "AE CHÁY PHỐ" UPDATE
    ======================================================= */
 .cyber-player { 
     position: fixed; bottom: 20px; right: 20px; 
-    width: 340px; height: 300px; 
+    width: 340px; height: 300px; /* Đổi sang dùng Height để thu nhỏ không bị lỗi */
     border: 2px solid #444; border-radius: 16px; 
     z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
-    transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden; 
+    transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s, box-shadow 0.2s; 
     display: flex; flex-direction: column; justify-content: space-between;
-    background-color: #0b0b12;
+    background-color: #0b0b12; padding: 0;
     background-size: cover; background-position: center; 
 }
 
-/* Lớp sương mù Gradient để nổi chữ */
+/* Khi thu nhỏ, bóp chiều cao lại còn 45px để giấu hết bên dưới */
+.cyber-player.minimized { 
+    height: 45px !important; 
+    border-color: #444 !important; /* Tắt phát sáng viền khi thu nhỏ */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+}
+.cyber-player.minimized .player-bottom { opacity: 0; pointer-events: none; }
+
+/* Lớp sương mù Gradient */
 .cyber-player::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(11,11,18,0.8) 0%, rgba(11,11,18,0) 25%, rgba(11,11,18,0) 50%, rgba(11,11,18,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(11,11,18,0.9) 0%, rgba(11,11,18,0) 25%, rgba(11,11,18,0) 50%, rgba(11,11,18,0.95) 100%);
     z-index: 0; pointer-events: none;
 }
 
-/* VIỀN THỞ PHÁT SÁNG NGUYÊN KHUNG */
-.cyber-player.playing {
+/* VIỀN THỞ PHÁT SÁNG BÌNH THƯỜNG */
+.cyber-player.playing:not(.minimized) {
     border-color: var(--accent);
     animation: pulse-glow-player 1.2s infinite alternate ease-in-out;
 }
 @keyframes pulse-glow-player { 
-    0% { box-shadow: 0 0 5px var(--accent); transform: scale(1); } 
-    100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); transform: scale(1.02); } 
+    0% { box-shadow: 0 0 5px var(--accent); } 
+    100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); } 
 }
 
-/* HIỆU ỨNG TIA SÉT VÀ HẠT BỤI NẰM BÊN NGOÀI */
+/* HIỆU ỨNG 1: GIẬT SÁNG CẢ KHUNG (BASS DROP FLASH) ĐÈ LÊN CSS CŨ */
+.cyber-player.flash-strike {
+    filter: brightness(1.6) contrast(1.2);
+    box-shadow: 0 0 60px #fff, 0 0 100px var(--accent) !important;
+    border-color: #fff !important;
+    transition: 0.05s;
+}
+
+/* HIỆU ỨNG 2: VỆT SÁNG XẸT QUA (LIGHT STREAK) */
+.light-streak {
+    position: fixed; width: 2px; height: 180px;
+    background: linear-gradient(to bottom, transparent, #fff, transparent);
+    box-shadow: 0 0 20px #fff, 0 0 40px var(--accent2);
+    transform: rotate(45deg); pointer-events: none; z-index: 9999;
+    animation: streak-flash 0.3s ease-out forwards;
+}
+@keyframes streak-flash {
+    0% { opacity: 0; transform: rotate(45deg) scaleY(0.5) translateY(-50px); }
+    50% { opacity: 1; transform: rotate(45deg) scaleY(1.5) translateY(0); }
+    100% { opacity: 0; transform: rotate(45deg) scaleY(0.5) translateY(80px); }
+}
+
+/* HIỆU ỨNG 3: BỤI KHÔNG GIAN ĐUNG ĐƯA RỘNG RA 2 BÊN */
 .cyber-dust {
-    position: fixed;
-    border-radius: 50%;
-    background: #fff;
+    position: fixed; border-radius: 50%; background: #fff;
     box-shadow: 0 0 6px #fff, 0 0 12px var(--accent);
-    pointer-events: none;
-    z-index: 9997;
+    pointer-events: none; z-index: 9997;
     animation: floatUp linear forwards;
 }
 @keyframes floatUp {
-    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
     20% { opacity: 1; }
     80% { opacity: 0.8; }
-    100% { transform: translateY(-120px) scale(1.5); opacity: 0; }
+    /* Sử dụng biến --rnd (random từ -1 đến 1) để bụi dạt qua dạt lại 100px */
+    100% { transform: translate(calc(120px * var(--rnd)), -250px) scale(1.5); opacity: 0; }
 }
 
-.cyber-lightning {
-    position: fixed;
-    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,79,160,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    mix-blend-mode: screen;
-}
-@keyframes flash-strike {
-    0% { opacity: 0; transform: scale(0.5); }
-    10% { opacity: 1; filter: brightness(2); transform: scale(1.2); }
-    20% { opacity: 0; transform: scale(1); }
-    30% { opacity: 0.6; }
-    40% { opacity: 0; }
-    100% { opacity: 0; }
-}
-
-.cyber-player.minimized { transform: translateY(calc(100% - 45px)); opacity: 0.9; }
-
+/* --- UI COMPONENTS --- */
 .player-top {
     position: relative; z-index: 1; display: flex; align-items: center; gap: 10px;
-    padding: 10px 15px; cursor: pointer; height: 45px;
+    padding: 0 15px; cursor: pointer; height: 45px; flex-shrink: 0;
 }
 .track-title { color: white; font-weight: bold; font-size: 14px; text-shadow: 0 0 8px rgba(255,79,160,0.8); flex-grow: 1; font-family: Consolas, monospace;}
 .min-btn { background: transparent; border: none; color: #ccc; font-size: 18px; padding: 0; cursor: pointer; transition: 0.3s;}
@@ -242,7 +251,7 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 .playing .bar:nth-child(4) { animation-delay: 0.4s; }
 @keyframes bounce { 0% { height: 4px; } 100% { height: 18px; } }
 
-.player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+.player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; transition: opacity 0.3s; }
 .player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
 .ctrl-btn { background: rgba(37,37,54,0.6); border: 1px solid #555; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(4px); cursor: pointer;}
 .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); transform: scale(1.1); }
@@ -571,7 +580,7 @@ input[type=range]:focus { outline: none; }
 </div>
 
 <script>
-// --- LOGIC TRẠM PHÁT NHẠC (SỬ DỤNG LINK CATBOX ĐÃ FIX) ---
+// --- LOGIC TRẠM PHÁT NHẠC (SỬ DỤNG LINK CATBOX) ---
 const playlist = [
     { 
         title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", 
@@ -614,22 +623,20 @@ function loadTrack(index) {
 
 function togglePlay() {
     if (audio.paused) {
-        // Có thêm đoạn Bắt lỗi (Catch) để lỡ link hỏng nút sẽ không bị kẹt nữa
         audio.play().then(() => {
             playPauseBtn.innerText = "⏸";
             cyberPlayer.classList.add("playing");
             visualizer.classList.add("playing");
-            startEffects(); // Bật máy tạo hạt bụi và tia sét
+            startEffects(); 
         }).catch(err => {
             alert("Lỗi tải nhạc! Trình duyệt chặn hoặc link nhạc bị hỏng.");
-            console.error(err);
         });
     } else {
         audio.pause();
         playPauseBtn.innerText = "▶";
         cyberPlayer.classList.remove("playing");
         visualizer.classList.remove("playing");
-        stopEffects(); // Tắt máy tạo hiệu ứng
+        stopEffects();
     }
 }
 
@@ -655,9 +662,10 @@ function formatTime(time) {
     return `${min}:${sec}`;
 }
 
-// Thu nhỏ thì tắt bớt bụi để đỡ rối mắt
+// Bấm vào thanh trên cùng để thu nhỏ. Lệnh if bên dưới giúp không bị chặn khi ấn nhầm text
 function toggleMinimize(e) {
-    if (e && (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn')) return;
+    // Nếu bấm trúng cái thanh tua nhạc hoặc các nút điều khiển thì không thu nhỏ
+    if (e && (e.target.tagName === 'INPUT' || (e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn'))) return;
     cyberPlayer.classList.toggle("minimized");
     document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
 }
@@ -666,7 +674,7 @@ loadTrack(trackIndex);
 audio.volume = 1; 
 
 // ==========================================
-// ĐỘ CƠ GẦM: HẠT BỤI VÀ TIA SÉT (JS MAGIC)
+// ĐỘ CƠ GẦM: HẠT BỤI BAY RỘNG VÀ TIA CHỚP
 // ==========================================
 
 function createDust() {
@@ -680,39 +688,42 @@ function createDust() {
     dust.style.width = size + 'px';
     dust.style.height = size + 'px';
     
-    dust.style.left = rect.left + (Math.random() * rect.width) + 'px';
-    dust.style.top = rect.bottom - 20 + 'px';
+    // Nâng cấp: Sinh bụi lan rộng ra 300px sang cả hai bên hông của hộp nhạc
+    const spawnX = rect.left - 300 + (Math.random() * (rect.width + 600));
+    dust.style.left = spawnX + 'px';
+    dust.style.top = rect.bottom - 10 + 'px';
     
-    dust.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+    // Gán biến --rnd để bụi dạt ngẫu nhiên qua trái/phải
+    dust.style.setProperty('--rnd', Math.random() * 2 - 1);
+    dust.style.animationDuration = (Math.random() * 2 + 2) + 's';
     
     document.body.appendChild(dust);
-    setTimeout(() => dust.remove(), 3500);
+    setTimeout(() => dust.remove(), 4000);
 }
 
 function createLightning() {
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
-    if (Math.random() > 0.2) return; 
+    if (Math.random() > 0.25) return; 
 
-    const flash = document.createElement('div');
-    flash.className = 'cyber-lightning';
+    // Hiệu ứng 1: Toàn bộ khung viền máy nhạc giật lóe sáng lên (Bass Drop)
+    cyberPlayer.classList.add('flash-strike');
+    setTimeout(() => cyberPlayer.classList.remove('flash-strike'), 150);
+
+    // Hiệu ứng 2: Tia sáng xẹt chéo qua màn hình
+    const streak = document.createElement('div');
+    streak.className = 'light-streak';
     const rect = cyberPlayer.getBoundingClientRect();
     
-    const size = Math.random() * 100 + 100; 
-    flash.style.width = size + 'px';
-    flash.style.height = size + 'px';
+    streak.style.left = (rect.left - 200 + Math.random() * (rect.width + 400)) + 'px';
+    streak.style.top = (rect.top - 100 + Math.random() * (rect.height + 200)) + 'px';
     
-    flash.style.left = rect.left - (size/2) + (Math.random() * (rect.width + size)) + 'px';
-    flash.style.top = rect.top - (size/2) + (Math.random() * (rect.height + size)) + 'px';
-    
-    flash.style.animation = 'flash-strike 0.5s ease-out';
-    document.body.appendChild(flash);
-    
-    setTimeout(() => flash.remove(), 500);
+    document.body.appendChild(streak);
+    setTimeout(() => streak.remove(), 300);
 }
 
 function startEffects() {
     particleInterval = setInterval(createDust, 200);
-    lightningInterval = setInterval(createLightning, 400);
+    lightningInterval = setInterval(createLightning, 400); // 400ms kiểm tra đánh chớp 1 lần
 }
 
 function stopEffects() {
