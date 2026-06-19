@@ -3,18 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">Đang tải dữ liệu... | HPGVH18</title>
-
-<meta name="description" content="Kho tải game Visual Novel Việt Hóa uy tín nhất.">
-<meta property="og:title" content="Kho Game HPGVH18">
-<meta property="og:image" content="https://i.postimg.cc/PJQCJxz3/Gemini-Generated-Image-6txzhm6txzhm6txz.png">
+<title id="page-title">Đang giải mã hồ sơ... | HPGVH18</title>
 
 <style>
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 
-/* THANH CUỘN */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
@@ -25,7 +20,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; padding-top: 10px;}
 .back:hover{ transform: translateX(-5px); text-shadow: 0 0 10px var(--accent); }
 
-/* KHU VỰC TIÊU ĐỀ */
 .hero{ margin-top:20px; padding:60px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); position: relative; overflow: hidden;}
 .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: spin 10s linear infinite; z-index: 0; pointer-events: none; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -35,7 +29,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .cover{ width:100%; margin-top:20px; border-radius:16px; max-height:550px; object-fit:cover; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .box{ background:var(--card); margin-top:20px; padding:25px; border-radius:16px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
 
-/* TAGS & STATS */
 .tags{ display:flex; flex-wrap:wrap; gap:10px; }
 .tags span{ background:#252536; border:1px solid #444; padding:8px 14px; border-radius:999px; font-weight: 500; font-size: 13px; text-transform: uppercase; }
 .tags span.author-tag { border-color: var(--accent2); color: #e2e8f0; box-shadow: 0 0 10px rgba(139,92,246,0.2); }
@@ -47,7 +40,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .box h2{ margin-bottom:15px; color: var(--accent2); border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
 .box p{ line-height:1.8; color:var(--text-dim); }
 
-/* BỘ ẢNH GAMEPLAY */
 .gallery-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
 .gallery-header h2 { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 .nsfw-toggle { background: #252536; border: 1px solid var(--accent); color: var(--text); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
@@ -60,7 +52,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .gallery img.img-nsfw.revealed:hover { transform: scale(1.03); border-color: var(--accent2); box-shadow: 0 10px 20px rgba(139,92,246,0.3); }
 .gallery img.img-nsfw:not(.revealed):hover { cursor: not-allowed; }
 
-/* TẢI GAME */
 .password-box { background: #252536; border: 2px dashed var(--accent); padding: 15px 20px; border-radius: 10px; text-align: center; margin: 0 auto 25px auto; max-width: 380px; color: #ccc; box-shadow: 0 0 15px rgba(255,79,160,0.1); }
 .password-box span { font-size: 15px; margin-right: 8px; }
 .password-box strong { color: var(--accent); font-size: 20px; letter-spacing: 2px; user-select: all; cursor: copy; text-shadow: 0 0 8px rgba(255,79,160,0.5); }
@@ -68,7 +59,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:20px; border-radius:12px; font-size:22px; font-weight:bold; box-shadow: 0 10px 25px rgba(255,79,160,.4); transition:.3s; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2); }
 .download:hover{ transform:translateY(-5px); box-shadow: 0 15px 35px rgba(255,79,160,.6); filter: brightness(1.1); }
 
-/* FAQ ACCORDION */
 .faq-container { margin-top: 35px; }
 .faq-item { border-bottom: 1px solid #333; }
 .faq-btn { width: 100%; text-align: left; background: none; border: none; color: white; padding: 20px 0; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
@@ -91,23 +81,23 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
 
 <div class="hero">
-    <h1 id="ui-title" class="glitch">Đang kết nối Máy Chủ...</h1>
+    <h1 id="ui-title">Đang đồng bộ...</h1>
     <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
 </div>
 
-<img class="cover" id="ui-cover" src="https://i.postimg.cc/PJQCJxz3/Gemini-Generated-Image-6txzhm6txzhm6txz.png" alt="Cover Game" loading="lazy">
+<img class="cover" id="ui-cover" src="" alt="Cover Game" loading="lazy">
 
 <div class="box">
     <h2>Thông Tin Báo Cáo</h2>
     <div class="tags">
         <span id="ui-tag-version">Version ...</span> 
-        <span id="ui-tag-size">... MB</span> 
+        <span id="ui-tag-size">...</span> 
         <span>Windows PC</span> 
         <span id="ui-tags-list">Visual Novel</span> 
         <span class="author-tag" id="ui-tag-author">👤 Tác giả: ...</span>
     </div>
     <div class="stats">
-        <div class="stat"><h3 id="ui-stat-size">...MB</h3><p>Dung lượng</p></div>
+        <div class="stat"><h3 id="ui-stat-size">...</h3><p>Dung lượng</p></div>
         <div class="stat"><h3>Windows</h3><p>Hệ điều hành</p></div>
         <div class="stat"><h3 id="ui-stat-version">...</h3><p>Phiên bản</p></div>
         <div class="stat"><h3>2026</h3><p>Phát hành</p></div>
@@ -116,7 +106,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 
 <div class="box">
     <h2>Hồ Sơ Cốt Truyện</h2>
-    <p id="ui-desc">Đang tải giải mã hồ sơ mật từ máy chủ HPGVH18... Xin vui lòng đợi trong giây lát.</p>
+    <p id="ui-desc">Đang truy xuất dữ liệu mật...</p>
 </div>
 
 <div class="box">
@@ -126,8 +116,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
             <span id="nsfw-icon">🙈</span> <span id="nsfw-text">Vượt tường lửa 18+</span>
         </button>
     </div>
-    <div class="gallery" id="ui-gallery">
-        </div>
+    <div class="gallery" id="ui-gallery"></div>
 </div>
 
 <div class="box">
@@ -146,12 +135,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
                 📌 <em>Chi tiết xem thêm tại kênh YouTube <strong>PhongDHP123</strong>.</em></p>
             </div>
         </div>
-        <div class="faq-item">
-            <button class="faq-btn">🔗 Link bị chết hoặc báo quá giới hạn tải? <span class="faq-icon">+</span></button>
-            <div class="faq-content">
-                <p>Nếu gặp lỗi Google Drive báo "Vượt quá số lượt tải", bạn hãy tạo một bản sao (Make a copy) file đó sang Google Drive cá nhân của bạn rồi tải từ Drive của bạn nhé. Nếu link thực sự bị xóa (404 Not Found), hãy báo ngay cho Admin trên Group để được fix sớm nhất.</p>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -160,22 +143,19 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
 
-
 <script>
 // ==========================================
-// BỘ ĐỘNG CƠ HÚT DATA TỪ GOOGLE SHEETS
+// ĐỘNG CƠ HÚT DATA ĐỘNG
 // ==========================================
-
-// 🛑 ÔNG DÁN CÁI LINK WEB APP CỦA ÔNG VÀO TRONG DẤU NGOẶC KÉP BÊN DƯỚI NHÉ:
-const API_LINK = "https://script.google.com/macros/s/AKfycbxPH-4F82VUjrdhrGsaV8RVVsD5OWssYNYQOFf08l_EulxksrJPFv0vPqdE5NmYcY05Zw/exec";
+// 🛑 ĐIỀN LINK WEB APP TỪ APPS SCRIPT CỦA ÔNG VÀO ĐÂY:
+const API_LINK = "DÁN_LINK_WEB_APP_APPS_SCRIPT_CỦA_ÔNG_VÀO_ĐÂY";
 
 document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const gameId = urlParams.get('id');
 
     if (gameId) {
-        // Hiện hiệu ứng tải
-        document.getElementById('ui-title').innerText = "Đang truy xuất CSDL...";
+        document.getElementById('ui-title').innerText = "Đang đồng bộ đám mây...";
         
         fetch(API_LINK)
             .then(response => response.json())
@@ -183,34 +163,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(dbGame[gameId]) {
                     const data = dbGame[gameId];
 
-                    // Bơm Data vào Text
                     document.getElementById('page-title').innerText = `${data.title} ${data.version} | HPGVH18`;
                     document.getElementById('ui-title').innerText = data.title;
                     document.getElementById('ui-author-top').innerText = `Tác giả: ${data.author}`;
                     document.getElementById('ui-cover').src = data.cover;
                     
                     document.getElementById('ui-tag-version').innerText = `Version ${data.version}`;
-                    document.getElementById('ui-tag-size').innerText = `${data.size} MB`;
+                    // FIXED: Đã gỡ bỏ chữ "MB" ép buộc, lấy trực tiếp text từ Google Sheets (ví dụ: "1.5 GB")
+                    document.getElementById('ui-tag-size').innerText = data.size;
                     document.getElementById('ui-tag-author').innerText = `👤 Tác giả: ${data.author}`;
+                    document.getElementById('ui-stat-size').innerText = data.size;
                     
-                    document.getElementById('ui-stat-size').innerText = `${data.size} MB`;
                     document.getElementById('ui-stat-version').innerText = data.version;
-                    
                     document.getElementById('ui-desc').innerText = data.desc;
                     
-                    // Nút Tải
                     document.getElementById('ui-download').href = data.driveLink;
-                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title} ${data.version} (${data.size}MB)`;
+                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title} ${data.version} (${data.size})`;
 
-                    // Render Tags bổ sung (Cột tags)
                     if(data.tags) {
                         let tagsHtml = data.tags.split(" ").map(tag => `<span>${tag.toUpperCase()}</span>`).join(" ");
                         document.getElementById('ui-tags-list').outerHTML = tagsHtml;
                     }
 
-                    // Vòng lặp Render ẢNH GAMEPLAY
                     const galleryContainer = document.getElementById('ui-gallery');
-                    galleryContainer.innerHTML = ""; // Xóa dữ liệu cũ
+                    galleryContainer.innerHTML = ""; 
                     
                     if (data.gallery && data.gallery.length > 0) {
                         data.gallery.forEach(imgUrl => {
@@ -219,33 +195,23 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
                         });
                     } else {
-                        galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có dữ liệu hình ảnh.</p>";
+                        galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh.</p>";
                     }
 
-                    // Kích hoạt lại bộ bấm ảnh Lightbox sau khi đã bơm xong ảnh
                     initLightbox();
                 } else {
-                    document.getElementById('ui-title').innerText = "❌ LỖI KHÔNG TÌM THẤY GAME";
-                    document.getElementById('ui-desc').innerText = "Dữ liệu game này chưa được nạp vào Hệ thống Google Sheets. Xin vui lòng kiểm tra lại ID!";
+                    document.getElementById('ui-title').innerText = "❌ KHÔNG TÌM THẤY GAME";
                 }
             })
             .catch(error => {
                 document.getElementById('ui-title').innerText = "❌ MẤT KẾT NỐI MÁY CHỦ";
-                document.getElementById('ui-desc').innerText = "Không thể kết nối đến Database. Vui lòng kiểm tra lại link API_LINK hoặc thử lại sau!";
-                console.error("Lỗi Fetch Data:", error);
             });
-    } else {
-        document.getElementById('ui-title').innerText = "⚠️ LỖI CÚ PHÁP";
-        document.getElementById('ui-desc').innerText = "Trang này cần có ID game để hoạt động (Ví dụ: chi-tiet.html?id=ten-game). Vui lòng quay lại trang chủ.";
     }
 });
 
-
 // ==========================================
-// CÁC CHỨC NĂNG UI (MỞ ẢNH, LIGHTBOX, ACCORDION)
+// HIỆU ỨNG UI
 // ==========================================
-
-// Bật/Tắt Ảnh 18+ (Cảnh báo: Luôn ẩn khi mới vào)
 const nsfwBtn = document.getElementById('nsfw-btn');
 const nsfwIcon = document.getElementById('nsfw-icon');
 const nsfwText = document.getElementById('nsfw-text');
@@ -258,7 +224,6 @@ nsfwBtn.addEventListener('click', () => {
         if (isHidden) img.classList.remove('revealed');
         else img.classList.add('revealed');
     });
-
     if (isHidden) {
         nsfwIcon.innerHTML = '🙈'; nsfwText.innerHTML = 'Vượt tường lửa 18+'; nsfwBtn.style.borderColor = 'var(--accent)';
     } else {
@@ -266,17 +231,12 @@ nsfwBtn.addEventListener('click', () => {
     }
 });
 
-// Bộ phóng to ảnh (Lightbox) - Được gọi lại sau khi tải data xong
 function initLightbox() {
-    const imgs = document.querySelectorAll('.gallery img'); 
-    const lightbox = document.getElementById('lightbox'); 
-    const lightboxImg = document.getElementById('lightbox-img');
-
+    const imgs = document.querySelectorAll('.gallery img'); const lightbox = document.getElementById('lightbox'); const lightboxImg = document.getElementById('lightbox-img');
     imgs.forEach(img => { 
         img.addEventListener('click', () => { 
             if (img.classList.contains('img-nsfw') && !img.classList.contains('revealed')) {
-                alert('🛑 HỆ THỐNG BẢO VỆ: Hãy bấm nút "Vượt tường lửa 18+" trước khi truy cập dữ liệu nhạy cảm!');
-                return;
+                alert('🛑 Hãy bấm nút "Vượt tường lửa 18+" trước!'); return;
             }
             lightbox.style.display = 'flex'; lightboxImg.src = img.src; 
         }); 
@@ -284,20 +244,14 @@ function initLightbox() {
     lightbox.addEventListener('click', () => { lightbox.style.display = 'none'; });
 }
 
-// Khung FAQ Accordion thả xuống
 const faqBtns = document.querySelectorAll('.faq-btn');
 faqBtns.forEach(btn => {
     btn.addEventListener('click', function() {
-        this.classList.toggle('active');
-        const content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-        }
+        this.classList.toggle('active'); const content = this.nextElementSibling;
+        if (content.style.maxHeight) content.style.maxHeight = null;
+        else content.style.maxHeight = content.scrollHeight + "px";
     });
 });
 </script>
-
 </body>
 </html>
