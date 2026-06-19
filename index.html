@@ -188,14 +188,14 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
     100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); transform: scale(1.02); } 
 }
 
-/* HIỆU ỨNG TIA SÉT VÀ HẠT BỤI NẰM BÊN NGOÀI (Chèn bằng JS) */
+/* HIỆU ỨNG TIA SÉT VÀ HẠT BỤI NẰM BÊN NGOÀI */
 .cyber-dust {
     position: fixed;
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 6px #fff, 0 0 12px var(--accent);
     pointer-events: none;
-    z-index: 9997; /* Nằm ngay dưới hộp nhạc */
+    z-index: 9997;
     animation: floatUp linear forwards;
 }
 @keyframes floatUp {
@@ -571,21 +571,21 @@ input[type=range]:focus { outline: none; }
 </div>
 
 <script>
-// --- LOGIC TRẠM PHÁT NHẠC ---
+// --- LOGIC TRẠM PHÁT NHẠC (SỬ DỤNG LINK CATBOX ĐÃ FIX) ---
 const playlist = [
     { 
         title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", 
-        src: "music/mtvlxl.mp3",
+        src: "https://files.catbox.moe/gphcaw.mp3",
         img: "https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif" 
     },
     { 
         title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", 
-        src: "music/nldg.mp3",
+        src: "https://files.catbox.moe/6i8lwb.mp3",
         img: "https://i.postimg.cc/YSSSLTF8/1780745713690.avif" 
     },
     { 
         title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", 
-        src: "music/ltctt.mp3",
+        src: "https://files.catbox.moe/kt3sov.mp3",
         img: "https://i.postimg.cc/fbbbS1dC/1777495289444.avif" 
     }
 ];
@@ -614,21 +614,22 @@ function loadTrack(index) {
 
 function togglePlay() {
     if (audio.paused) {
-        audio.play();
-        playPauseBtn.innerText = "⏸";
-        cyberPlayer.classList.add("playing");
-        visualizer.classList.add("playing");
-        
-        // Bật máy tạo hạt bụi và tia sét
-        startEffects();
+        // Có thêm đoạn Bắt lỗi (Catch) để lỡ link hỏng nút sẽ không bị kẹt nữa
+        audio.play().then(() => {
+            playPauseBtn.innerText = "⏸";
+            cyberPlayer.classList.add("playing");
+            visualizer.classList.add("playing");
+            startEffects(); // Bật máy tạo hạt bụi và tia sét
+        }).catch(err => {
+            alert("Lỗi tải nhạc! Trình duyệt chặn hoặc link nhạc bị hỏng.");
+            console.error(err);
+        });
     } else {
         audio.pause();
         playPauseBtn.innerText = "▶";
         cyberPlayer.classList.remove("playing");
         visualizer.classList.remove("playing");
-        
-        // Tắt máy tạo hiệu ứng
-        stopEffects();
+        stopEffects(); // Tắt máy tạo hiệu ứng
     }
 }
 
@@ -669,48 +670,37 @@ audio.volume = 1;
 // ==========================================
 
 function createDust() {
-    // Không sinh bụi nếu nhạc đang tắt hoặc bảng đang bị thu nhỏ
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
 
     const dust = document.createElement('div');
     dust.className = 'cyber-dust';
     const rect = cyberPlayer.getBoundingClientRect();
     
-    // Tạo ngẫu nhiên kích thước hạt bụi (2px - 5px)
     const size = Math.random() * 3 + 2;
     dust.style.width = size + 'px';
     dust.style.height = size + 'px';
     
-    // Tạo vị trí ngẫu nhiên dọc theo chiều ngang của hộp nhạc
     dust.style.left = rect.left + (Math.random() * rect.width) + 'px';
-    // Xuất phát từ cạnh dưới của hộp nhạc
     dust.style.top = rect.bottom - 20 + 'px';
     
-    // Thời gian bay lơ lửng ngẫu nhiên (1.5s - 3.5s)
     dust.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
     
     document.body.appendChild(dust);
-    
-    // Dọn dẹp rác sau khi hạt bụi bay xong
     setTimeout(() => dust.remove(), 3500);
 }
 
 function createLightning() {
     if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
-    
-    // Xác suất 20% lóe sáng mỗi lần check (tạo cảm giác giật ngẫu nhiên)
     if (Math.random() > 0.2) return; 
 
     const flash = document.createElement('div');
     flash.className = 'cyber-lightning';
     const rect = cyberPlayer.getBoundingClientRect();
     
-    // Kích thước quầng sáng
-    const size = Math.random() * 100 + 100; // 100px - 200px
+    const size = Math.random() * 100 + 100; 
     flash.style.width = size + 'px';
     flash.style.height = size + 'px';
     
-    // Lóe sáng ngẫu nhiên quanh các viền hộp nhạc
     flash.style.left = rect.left - (size/2) + (Math.random() * (rect.width + size)) + 'px';
     flash.style.top = rect.top - (size/2) + (Math.random() * (rect.height + size)) + 'px';
     
@@ -721,9 +711,7 @@ function createLightning() {
 }
 
 function startEffects() {
-    // Bắn hạt bụi mỗi 200ms
     particleInterval = setInterval(createDust, 200);
-    // Tính toán tỷ lệ chớp giật mỗi 400ms
     lightningInterval = setInterval(createLightning, 400);
 }
 
