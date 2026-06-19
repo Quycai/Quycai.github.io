@@ -270,7 +270,7 @@ input[type=range]:focus { outline: none; }
 <div class="container">
     
     <div class="featured-slider fade-in" id="main-slider">
-        <div class="slide active" onclick="window.location.href='games/a-genin-tale.html'">
+        <div class="slide active" onclick="window.location.href='chi-tiet.html?id=a-genin-tale'">
             <img src="https://i.postimg.cc/fbbbS1dC/1777495289444.avif" alt="A Genin Tale" loading="lazy">
             <div class="slide-overlay"></div>
             <div class="slide-content">
@@ -284,7 +284,7 @@ input[type=range]:focus { outline: none; }
             </div>
         </div>
 
-        <div class="slide" onclick="window.location.href='games/research-diary.html'">
+        <div class="slide" onclick="window.location.href='chi-tiet.html?id=research-diary'">
             <img src="https://i.postimg.cc/ydgYv9vK/headbanner.avif" alt="Research Diary" loading="lazy">
             <div class="slide-overlay"></div>
             <div class="slide-content">
@@ -298,7 +298,7 @@ input[type=range]:focus { outline: none; }
             </div>
         </div>
 
-        <div class="slide" onclick="window.location.href='games/escape-to-the-past.html'">
+        <div class="slide" onclick="window.location.href='chi-tiet.html?id=escape-to-the-past'">
             <img src="https://i.postimg.cc/pThXq8qy/S18-zmeneno-na-1920x1080.avif" alt="Escape To The Past" loading="lazy">
             <div class="slide-overlay"></div>
             <div class="slide-content">
@@ -421,108 +421,108 @@ input[type=range]:focus { outline: none; }
 
 <script>
 // ==========================================
-// 1. DATA KHO GAME (SAU NÀY ÔNG CHỈ CẦN THÊM VÀO ĐÂY)
+// 1. DATA KHO GAME ĐÃ CÓ ID
 // ==========================================
 const khoGame = [
     {
+        id: "special-harem-class",
         title: "[Việt Hóa]Special Harem Class [v0.4.6]",
         author: "Reahe",
         tags: "pc harem",
         img: "https://i.postimg.cc/m2ZR663V/v-Y0JFq.png",
-        link: "games/special-harem-class.html",
         labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
     {
+        id: "hes-just-a-friend",
         title: "[Việt Hóa]He's Just a Friend [v1.0]",
         author: "Reahe",
         tags: "pc harem",
         img: "https://i.postimg.cc/3RjPSSMt/Cover.avif",
-        link: "games/hes-just-a-friend.html",
         labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
     {
+        id: "green-abyss",
         title: "[Việt Hóa]Green Abyss - Rise of the goblins [v0.1]",
         author: "Reahe",
         tags: "pc harem",
         img: "https://i.postimg.cc/9Mcm1q4L/logo-green-abyss.avif",
-        link: "games/green-abyss-rise-of-the-goblins.html",
         labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
     {
+        id: "hard-lessons",
         title: "[Việt Hóa]Hard Lessons [Prologue]",
         author: "ADAM!",
         tags: "pc harem",
         img: "https://i.postimg.cc/bJwgSYy4/cover-f95.avif",
-        link: "games/hard-lessons.html",
         labels: ["PC", "BIG TITS", "BIG ASS", "3DCG"]
     },
     {
+        id: "saved-by-my-futa-boss",
         title: "[Việt Hóa]Saved By My Futa Boss v1.0",
         author: "Purple Pulse",
         tags: "pc harem",
         img: "https://i.postimg.cc/k46Xf8fq/main-menu2.avif",
-        link: "games/saved-by-my-futa-boss.html",
         labels: ["PC", "FUTA/TRANS", "BIG ASS", "3DCG"]
     },
     {
+        id: "caught-by-my-futa-sister",
         title: "[Việt Hóa]Caught By My Futa Sister v1.0",
         author: "Purple Pulse",
         tags: "pc harem",
         img: "https://i.postimg.cc/pThXq8qx/main-menu1.avif",
-        link: "games/caught-by-my-futa-sister.html",
         labels: ["PC", "FUTA/TRANS", "BIG ASS", "3DCG"]
     },
     {
+        id: "research-diary",
         title: "[Việt Hóa]Research Diary v0.1",
         author: "Tác giả Nekanaro",
         tags: "pc harem cot-truyen",
         img: "https://i.postimg.cc/ydgYv9vK/headbanner.avif",
-        link: "games/research-diary.html",
         labels: ["PC", "HAREM", "CỐT TRUYỆN"]
     },
     {
+        id: "big-milf-surprise",
         title: "[Việt Hóa]Big Milf Surprise v1.3",
         author: "Ash_NTR / Ash_WILD",
         tags: "pc hai-huoc harem",
         img: "https://i.postimg.cc/nzkTSjz0/Screenshot-2026-06-17-025106.png",
-        link: "games/big-milf-surprise.html",
         labels: ["PC", "HAREM", "HÀI HƯỚC"]
     },
     {
+        id: "a-genin-tale",
         title: "[Việt Hóa]A Genin Tale v0.3",
         author: "Luchetty",
         tags: "pc harem",
         img: "https://i.postimg.cc/fbbbS1dC/1777495289444.avif",
-        link: "games/a-genin-tale.html",
         labels: ["PC", "HAREM"]
     },
     {
+        id: "escape-to-the-past",
         title: "[Việt Hóa]Escape To The Past v0.1",
         author: "S18 Games",
         tags: "pc kinh-di cot-truyen",
         img: "https://i.postimg.cc/pThXq8qy/S18-zmeneno-na-1920x1080.avif",
-        link: "games/escape-to-the-past.html",
         labels: ["PC", "KINH DỊ", "CỐT TRUYỆN"]
     },
     {
+        id: "scorched-innocence",
         title: "[Việt Hóa]Scorched Innocence v0.1",
         author: "MindMaw",
         tags: "pc harem",
         img: "https://i.postimg.cc/YSSSLTF8/1780745713690.avif",
-        link: "games/scorched-innocence.html",
         labels: ["PC", "HAREM"]
     },
     {
+        id: "pleasure-entangled",
         title: "[Việt Hóa]Pleasure Entangled (Final)",
         author: "Dravion Entertainment",
         tags: "pc harem",
         img: "https://i.postimg.cc/qRhMjnjT/Pleasure-Entangled-01.avif",
-        link: "games/pleasure-entangled.html",
         labels: ["PC", "MILF", "HANDJOB", "3DCG"]
     }
 ];
 
-// Lệnh quét Data và nhả ra giao diện tự động
+// Lệnh quét Data và nhả ra giao diện tự động (Trỏ thẳng vào chi-tiet.html)
 const gameListContainer = document.getElementById('game-list');
 let htmlContent = '';
 
@@ -530,7 +530,7 @@ khoGame.forEach(game => {
     let labelsHtml = game.labels.map(l => `<span class="info-tag">${l}</span>`).join('');
     htmlContent += `
         <div class="game-card fade-in" data-tags="${game.tags}">
-            <div class="share-btn" onclick="shareGame('${game.title}', 'https://quycai.github.io/${game.link}')">🔗</div>
+            <div class="share-btn" onclick="shareGame('${game.title}', 'https://quycai.github.io/chi-tiet.html?id=${game.id}')">🔗</div>
             <img src="${game.img}" alt="${game.title}" loading="lazy">
             <div class="info">
                 <h2>${game.title}</h2>
@@ -538,12 +538,11 @@ khoGame.forEach(game => {
                 <div class="info-tags">
                     ${labelsHtml}
                 </div>
-                <a class="btn" href="${game.link}">XEM CHI TIẾT</a>
+                <a class="btn" href="chi-tiet.html?id=${game.id}">XEM CHI TIẾT</a>
             </div>
         </div>
     `;
 });
-// Đẩy toàn bộ HTML vào khung
 gameListContainer.innerHTML = htmlContent;
 
 
