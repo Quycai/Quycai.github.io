@@ -312,15 +312,15 @@ input[type=range]:focus { outline: none; }
             <button class="tag-btn" data-filter="pc">PC</button>
             <button class="tag-btn" data-filter="android">ANDROID</button>
             <button class="tag-btn" data-filter="harem">HAREM</button>
-            <button class="tag-btn" data-filter="kinh-di">KINH DỊ</button>
-            <button class="tag-btn" data-filter="hai-huoc">HÀI HƯỚC</button>
+            <button class="tag-btn" data-filter="kinh dị">KINH DỊ</button>
+            <button class="tag-btn" data-filter="hài hước">HÀI HƯỚC</button>
             <button class="tag-btn" data-filter="zombie">ZOMBIE</button>
-            <button class="tag-btn" data-filter="android">MILF</button>
-            <button class="tag-btn" data-filter="harem">BDSM</button>
-            <button class="tag-btn" data-filter="kinh-di">ANIME</button>
-            <button class="tag-btn" data-filter="hai-huoc">2D</button>
-            <button class="tag-btn" data-filter="zombie">FUTA/TRANS</button>
-            <button class="tag-btn" data-filter="cot-truyen">SANDBOX</button>
+            <button class="tag-btn" data-filter="milf">MILF</button>
+            <button class="tag-btn" data-filter="bdsm">BDSM</button>
+            <button class="tag-btn" data-filter="anime">ANIME</button>
+            <button class="tag-btn" data-filter="2d">2D</button>
+            <button class="tag-btn" data-filter="futa">FUTA/TRANS</button>
+            <button class="tag-btn" data-filter="sandbox">SANDBOX</button>
         </div>
     </div>
 
@@ -543,7 +543,7 @@ function createLightning() {
 }
 
 // ==========================================
-// 3. UI LOGIC (SLIDER, KÍNH VỠ, TÌM KIẾM)
+// 3. UI LOGIC (SLIDER, KÍNH VỠ, TÌM KIẾM, TAG FILTER)
 // ==========================================
 let currentSlideIndex = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
 function showSlide(n) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
@@ -578,22 +578,30 @@ search.addEventListener('keyup',()=>{
     }); 
 });
 
+// LOGIC LỌC DỮ LIỆU KHÔNG PHÂN BIỆT HOA THƯỜNG / KHỚP TỪ KHÓA CHUẨN
 const tagBtns = document.querySelectorAll('.tag-btn');
 tagBtns.forEach(btn => { 
     btn.addEventListener('click', function() { 
-        document.querySelector('.tag-btn.active').classList.remove('active'); this.classList.add('active'); 
-        const filterValue = this.dataset.filter; 
+        document.querySelector('.tag-btn.active').classList.remove('active'); 
+        this.classList.add('active'); 
+        
+        const filterValue = this.dataset.filter.toLowerCase(); 
+        
         document.querySelectorAll('.game-card').forEach(card => { 
-            const cardTags = card.dataset.tags; 
-            if (filterValue === 'all' || (cardTags && cardTags.includes(filterValue))) card.style.display = 'block'; 
-            else card.style.display = 'none'; 
+            const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase() : ""; 
+            
+            if (filterValue === 'all' || cardTags.includes(filterValue)) {
+                card.style.display = 'block'; 
+            } else {
+                card.style.display = 'none'; 
+            }
         }); 
     }); 
 });
 
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
 
-// Khởi tạo hoạt động Con Trỏ Chuột
+// Con Trỏ Chuột
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
 window.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40); });
 </script>
