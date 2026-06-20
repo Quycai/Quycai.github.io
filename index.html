@@ -9,17 +9,22 @@
 /* --- KHUNG XƯƠNG CƠ BẢN & BIẾN MÀU NEON --- */
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-body{ background:var(--bg); color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; position: relative; }
 
-/* 🌟 Ý TƯỞNG 4: LƯỚI CYBERPUNK TRÔI NHẸ Ở BACKGROUND */
+/* Ép màu nền tối cho lớp HTML ngoài cùng */
+html { background-color: var(--bg); }
+
+/* Đưa body về suốt để không che lớp lưới phía sau */
+body { color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; position: relative; cursor: none; }
+
+/* 🌟 LƯỚI CYBERPUNK TRÔI LỜ LỮNG (ĐÃ FIX HIỂN THỊ RÕ NÉT) */
 body::before {
     content: '';
     position: fixed;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
     background-image: 
-        linear-gradient(rgba(255, 79, 160, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(255, 79, 160, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.15) 1px, transparent 1px);
     background-size: 50px 50px;
     z-index: -999;
     pointer-events: none;
@@ -52,10 +57,9 @@ header::before {
 @keyframes breathe-anim { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
 header h1, header p { position: relative; z-index: 1; }
 
-/* 🌟 Ý TƯỞNG 7: LOGO CHUYỂN MÀU RGB MƯỢT MÀ KẾT HỢP GLITCH */
+/* 🌟 LOGO CHUYỂN MÀU RGB MƯỢT MÀ KẾT HỢP GLITCH */
 header h1.glitch { 
     font-size:3rem; 
-    /* Gộp 2 hiệu ứng: Glitch cũ + RGB mới */
     animation: glitch-anim 4s infinite, rgb-text-glow 6s linear infinite; 
     display: inline-block; position: relative; 
 }
@@ -140,7 +144,6 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 .btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px rgba(255, 79, 160, 0.5); transform: translateY(-2px); }
 
 /* --- CON TRỞ CHUỘT --- */
-body { cursor: none; }
 a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
@@ -215,7 +218,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
 input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; }
 input[type=range]:focus { outline: none; }
 
-/* FIX RESPONSIVE MOBILE CHO MUSIC PLAYER */
+/* FIX MOBILE CHO PLAYER */
 @media (max-width: 768px) {
     .cyber-player { width: 100%; right: 0; bottom: 0; border-radius: 16px 16px 0 0; height: 55px !important; }
     .cyber-player:not(.minimized) { height: 120px !important; } 
@@ -412,12 +415,10 @@ fetch(API_LINK)
     .then(response => response.json())
     .then(data => {
         let htmlContent = '';
-        
         const gameIds = Object.keys(data).reverse();
         
         gameIds.forEach(id => {
             const game = data[id];
-            
             let labelsHtml = "";
             if(game.tags) {
                 labelsHtml = game.tags.split(" ").slice(0,4).map(l => `<span class="info-tag">${l}</span>`).join('');
@@ -587,7 +588,7 @@ tagBtns.forEach(btn => {
 
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
 
-// Con Trỏ Chuột
+// Khởi tạo hoạt động Con Trỏ Chuột
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
 window.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40); });
 </script>
