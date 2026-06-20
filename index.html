@@ -374,8 +374,8 @@ fetch(API_LINK)
     .then(data => {
         let htmlContent = '';
         
-        // MA THUẬT: Đọc ID từ API (Google Sheets sẽ lấy từ trên xuống dưới, không reverse nữa)
-        const gameIds = Object.keys(data);
+        // MA THUẬT: Lộn ngược danh sách ID để game mới ở đáy Sheets lên đầu Web
+        const gameIds = Object.keys(data).reverse();
         
         gameIds.forEach(id => {
             const game = data[id];
