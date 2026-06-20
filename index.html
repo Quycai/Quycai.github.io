@@ -329,11 +329,40 @@ input[type=range]:focus { outline: none; }
     </div>
 </div>
 
+<div class="cyber-player" id="cyberPlayer">
+    <audio id="audioPlayer"></audio>
+    <div class="player-top" onclick="toggleMinimize(event)">
+        <div class="visualizer" id="visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <marquee class="track-title" id="trackTitle" scrollamount="4">Đang tải trạm phát sóng...</marquee>
+        <button class="min-btn" id="minBtn">▼</button>
+    </div>
+    <div class="player-bottom">
+        <div class="player-controls">
+            <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
+            <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
+            <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
+        </div>
+        <div class="player-sliders">
+            <div class="slider-row">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progressBar" value="0" min="0" max="100" step="1" onchange="seekAudio()">
+                <span id="durationTime">0:00</span>
+            </div>
+            <div class="slider-row" style="justify-content: flex-end; padding-top: 5px;">
+                <span>🔊</span>
+                <input type="range" id="volumeBar" value="100" min="0" max="100" step="1" style="width: 50%;" oninput="changeVolume()">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
 <script>
 // ==========================================
-// 1. KẾT NỐI API GOOGLE SHEETS (LỘN NGƯỢC SHEET ĐỂ GAME MỚI LÊN ĐẦU)
+// 1. KẾT NỐI API GOOGLE SHEETS
 // ==========================================
 // 🛑 ĐIỀN LINK WEB APP TỪ APPS SCRIPT CỦA ÔNG VÀO ĐÂY:
 const API_LINK = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
@@ -345,8 +374,8 @@ fetch(API_LINK)
     .then(data => {
         let htmlContent = '';
         
-        // MA THUẬT: Đọc ngược danh sách ID từ dưới lên để game mới nhất đứng top
-        const gameIds = Object.keys(data).reverse();
+        // MA THUẬT: Đọc ID từ API (Google Sheets sẽ lấy từ trên xuống dưới, không reverse nữa)
+        const gameIds = Object.keys(data);
         
         gameIds.forEach(id => {
             const game = data[id];
@@ -382,6 +411,8 @@ fetch(API_LINK)
             }); 
         }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
+        
+        // Gán lại tính năng con trỏ chuột
         const outline = document.querySelector('.cursor-outline');
         document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top').forEach(el => { 
             el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
@@ -520,6 +551,7 @@ tagBtns.forEach(btn => {
 
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
 
+// Con Trỏ Chuột
 const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
 window.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40); });
 </script>
