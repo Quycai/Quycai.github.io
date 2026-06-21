@@ -6,7 +6,7 @@
 <title id="page-title">Đang giải mã hồ sơ... | HPGVH18</title>
 
 <style>
-:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; }
+:root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; --safe:#00e5ff;}
 *{ margin:0; padding:0; box-sizing:border-box; }
 body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; overflow-x: hidden; }
 
@@ -16,7 +16,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 ::selection { background: var(--accent); color: white; }
 
-.container{ max-width:1100px; margin:auto; padding:20px; }
+.container{ max-width:1200px; margin:auto; padding:20px; }
 .back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; padding-top: 10px;}
 .back:hover{ transform: translateX(-5px); text-shadow: 0 0 10px var(--accent); }
 
@@ -26,10 +26,15 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .hero h1{ font-size:3rem; margin-bottom:10px; position: relative; z-index: 1; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
 .hero p{ color:var(--text-dim); font-size: 1.1rem; position: relative; z-index: 1; }
 
+/* BỐ CỤC 2 CỘT */
+.detail-wrapper { display: flex; gap: 25px; margin-top: 25px; align-items: flex-start; }
+.main-content { flex: 7; min-width: 0; }
+.sidebar { flex: 3; min-width: 320px; position: sticky; top: 20px; }
+
 /* HIỆU ỨNG LOADING ẢNH BÌA */
 .cover { 
-    width: 100%; margin-top: 20px; border-radius: 16px; 
-    max-height: 550px; min-height: 350px; 
+    width: 100%; border-radius: 16px; 
+    max-height: 450px; min-height: 250px; 
     object-fit: cover; border: 1px solid #333; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
     background: linear-gradient(90deg, #171722 25%, #252536 50%, #171722 75%);
@@ -37,10 +42,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     animation: loading-pulse 1.5s infinite;
     color: transparent; 
 }
-@keyframes loading-pulse {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
+@keyframes loading-pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* HIỆU ỨNG GLASSMORPHISM KHI HOVER BOX */
 .box { 
@@ -54,15 +56,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(139, 92, 246, 0.1);
 }
 
-.tags{ display:flex; flex-wrap:wrap; gap:10px; }
-.tags span{ background:#252536; border:1px solid #444; padding:8px 14px; border-radius:999px; font-weight: 500; font-size: 13px; text-transform: uppercase; }
-.tags span.author-tag { border-color: var(--accent2); color: #e2e8f0; box-shadow: 0 0 10px rgba(139,92,246,0.2); }
-.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-top:20px; }
-.stat{ background:#252536; border-radius:12px; padding:15px; text-align:center; border: 1px solid #333; }
-.stat h3{ color:var(--accent); margin-bottom:5px; text-shadow: 0 0 8px rgba(255,79,160,0.4); }
-.stat p{ color:#aaa; font-size:14px; text-transform: uppercase; letter-spacing: 1px;}
-
-.box h2{ margin-bottom:15px; color: var(--accent2); border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.box h2{ margin-bottom:15px; color: var(--accent2); border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 20px;}
 .box p{ line-height:1.8; color:var(--text-dim); }
 
 .gallery-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
@@ -71,7 +65,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .nsfw-toggle:hover { background: rgba(255, 79, 160, 0.2); box-shadow: 0 0 15px rgba(255, 79, 160, 0.4); transform: translateY(-2px); }
 
 .gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
-.gallery img{ width:100%; height:280px; object-fit:cover; border-radius:12px; cursor:pointer; transition:.4s; border: 2px solid transparent; }
+.gallery img{ width:100%; height:200px; object-fit:cover; border-radius:12px; cursor:pointer; transition:.4s; border: 2px solid transparent; }
 .gallery img.img-nsfw { filter: blur(25px); transform: scale(0.98); }
 .gallery img.img-nsfw.revealed { filter: blur(0); transform: scale(1); }
 .gallery img.img-nsfw.revealed:hover { transform: scale(1.03); border-color: var(--accent2); box-shadow: 0 10px 20px rgba(139,92,246,0.3); }
@@ -86,18 +80,12 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 }
 .password-box span { font-size: 15px; margin-right: 8px; }
 .password-box strong { color: var(--accent); font-size: 20px; letter-spacing: 2px; text-shadow: 0 0 8px rgba(255,79,160,0.5); }
-.password-box:hover {
-    background: rgba(255, 79, 160, 0.15); transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(255, 79, 160, 0.3); border-style: solid;
-}
-.password-box::after {
-    content: '[ Click để Copy ]'; display: block; font-size: 11px; color: var(--accent2); 
-    margin-top: 8px; letter-spacing: 1px; opacity: 0.6; animation: blink-text 1.5s infinite alternate;
-}
+.password-box:hover { background: rgba(255, 79, 160, 0.15); transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 20px rgba(255, 79, 160, 0.3); border-style: solid; }
+.password-box::after { content: '[ Click để Copy ]'; display: block; font-size: 11px; color: var(--accent2); margin-top: 8px; letter-spacing: 1px; opacity: 0.6; animation: blink-text 1.5s infinite alternate; }
 @keyframes blink-text { 0% { opacity: 0.3; } 100% { opacity: 1; text-shadow: 0 0 5px var(--accent2); } }
 .password-box:active { transform: scale(0.95); background: rgba(139, 92, 246, 0.3); border-color: var(--accent2); }
 
-.download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:20px; border-radius:12px; font-size:22px; font-weight:bold; box-shadow: 0 10px 25px rgba(255,79,160,.4); transition:.3s; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2); }
+.download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:18px; border-radius:12px; font-size:20px; font-weight:bold; box-shadow: 0 10px 25px rgba(255,79,160,.4); transition:.3s; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2); }
 .download:hover{ transform:translateY(-5px); box-shadow: 0 15px 35px rgba(255,79,160,.6); filter: brightness(1.1); }
 
 .faq-container { margin-top: 35px; }
@@ -105,81 +93,155 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .faq-btn { width: 100%; text-align: left; background: none; border: none; color: white; padding: 20px 0; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
 .faq-btn:hover { color: var(--accent2); text-shadow: 0 0 8px rgba(139,92,246,0.5); }
 .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-.faq-content p { color: #bbb; line-height: 1.7; padding-bottom: 20px; font-size: 15px; }
+.faq-content p { color: #bbb; line-height: 1.7; padding-bottom: 20px; font-size: 14px; }
 .faq-btn.active { color: var(--accent); }
 .faq-btn.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
 .faq-icon { transition: transform 0.3s; font-size: 24px; font-weight: normal; }
 
-.footer{ text-align:center; color:#555; margin:40px 0 20px 0; font-size: 14px; }
+/* --- CỘT SIDEBAR (PHẢI) - BẢNG THÔNG TIN GAME --- */
+.meta-box { background: rgba(23, 23, 34, 0.8); border: 1px solid #444; border-radius: 12px; padding: 25px 20px; backdrop-filter: blur(8px); width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 3px solid var(--accent2); }
+.meta-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 13.5px; line-height: 1.5; }
+.meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+.meta-label { color: #888; font-weight: 600; flex-basis: 40%; display: flex; align-items: center; gap: 6px; }
+.meta-value { color: #eee; text-align: right; flex-basis: 60%; word-break: break-word; }
+.meta-value.highlight { color: var(--accent); font-weight: bold; }
+.meta-value a { color: var(--accent2); text-decoration: none; transition: 0.3s; font-weight: bold;}
+.meta-value a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.meta-tags-row { flex-direction: column; gap: 10px; }
+.meta-tags-row .meta-value { text-align: left; }
+.meta-tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.meta-tag-item { background: rgba(37,37,54,0.6); border: 1px solid #555; color: #ccc; padding: 4px 8px; border-radius: 6px; font-size: 11px; text-transform: uppercase; transition: 0.3s; }
+.meta-tag-item:hover { border-color: var(--accent2); color: white; box-shadow: 0 0 8px rgba(139, 92, 246, 0.4); }
+.rating-stars { color: #ffb400; font-size: 15px; margin-right: 5px;}
+.rating-text { font-size: 12px; color: #aaa; display: block; margin-top: 4px;}
+
+.footer{ text-align:center; color:#555; margin:40px 0 20px 0; font-size: 14px; padding-top: 20px; border-top: 1px solid #333;}
 .lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,11,18,.95); backdrop-filter: blur(5px); justify-content:center; align-items:center; z-index:9999; }
 .lightbox img{ max-width:90%; max-height:90%; border-radius:12px; box-shadow: 0 0 40px rgba(0,0,0,0.8); border: 2px solid #444; }
 
-@media(max-width:768px){ .hero h1{ font-size:2rem; } .gallery{ grid-template-columns:1fr; } .stats{ grid-template-columns:repeat(2,1fr); } .gallery img{ height:220px; } .download { font-size: 18px; } }
+@media(max-width:900px){ 
+    .detail-wrapper { flex-direction: column; } 
+    .main-content, .sidebar { min-width: 100%; } 
+    .sidebar { position: relative; top: 0; }
+    .hero h1{ font-size:2rem; } 
+    .gallery{ grid-template-columns:1fr; } 
+    .gallery img{ height:220px; } 
+}
 </style>
 </head>
 <body>
 <div class="container">
-<a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
+    <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
 
-<div class="hero">
-    <h1 id="ui-title">Đang đồng bộ...</h1>
-    <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
-</div>
-
-<img class="cover" id="ui-cover" src="" alt="Cover Game" loading="lazy">
-
-<div class="box">
-    <h2>Thông Tin Báo Cáo</h2>
-    <div class="tags">
-        <span id="ui-tag-version">Version ...</span> 
-        <span id="ui-tag-size">...</span> 
-        <span>Windows PC</span> 
-        <span id="ui-tags-list">Visual Novel</span> 
-        <span class="author-tag" id="ui-tag-author">👤 Tác giả: ...</span>
+    <div class="hero">
+        <h1 id="ui-title">Đang đồng bộ...</h1>
+        <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
     </div>
-    <div class="stats">
-        <div class="stat"><h3 id="ui-stat-size">...</h3><p>Dung lượng</p></div>
-        <div class="stat"><h3>Windows</h3><p>Hệ điều hành</p></div>
-        <div class="stat"><h3 id="ui-stat-version">...</h3><p>Phiên bản</p></div>
-        <div class="stat"><h3>2026</h3><p>Phát hành</p></div>
-    </div>
-</div>
 
-<div class="box">
-    <h2>Hồ Sơ Cốt Truyện</h2>
-    <p id="ui-desc">Đang truy xuất dữ liệu mật...</p>
-</div>
+    <div class="detail-wrapper">
+        <div class="main-content">
+            <img class="cover" id="ui-cover" src="" alt="Cover Game" loading="lazy">
 
-<div class="box">
-    <div class="gallery-header">
-        <h2>Dữ Liệu Hình Ảnh</h2>
-        <button id="nsfw-btn" class="nsfw-toggle">
-            <span id="nsfw-icon">🙈</span> <span id="nsfw-text">Vượt tường lửa 18+</span>
-        </button>
-    </div>
-    <div class="gallery" id="ui-gallery"></div>
-</div>
+            <div class="box">
+                <h2>Hồ Sơ Cốt Truyện</h2>
+                <p id="ui-desc">Đang truy xuất dữ liệu mật...</p>
+            </div>
 
-<div class="box">
-    <h2>Cổng Truy Xuất Dữ Liệu</h2>
-    <div class="password-box" id="copy-pass-btn">
-        <span>Mã Khóa Bảo Mật:</span> <strong>hpgvh18</strong>
-    </div>
-    <a class="download" id="ui-download" href="#" target="_blank" rel="noopener noreferrer">XÁC NHẬN TẢI VỀ</a>
+            <div class="box">
+                <div class="gallery-header">
+                    <h2>Dữ Liệu Hình Ảnh</h2>
+                    <button id="nsfw-btn" class="nsfw-toggle">
+                        <span id="nsfw-icon">🙈</span> <span id="nsfw-text">Vượt tường lửa 18+</span>
+                    </button>
+                </div>
+                <div class="gallery" id="ui-gallery"></div>
+            </div>
 
-    <div class="faq-container">
-        <div class="faq-item">
-            <button class="faq-btn">🛠 Hướng dẫn cài đặt & Fix lỗi Font ô vuông (Đậu hũ) <span class="faq-icon">+</span></button>
-            <div class="faq-content">
-                <p>- <strong>Cài đặt cơ bản:</strong> Tải file về -> Nhấn chuột phải chọn "Extract Here" (Giải nén) -> Vào thư mục vừa giải nén tìm file có đuôi <code>.exe</code> nháy đúp để chơi.<br><br>
-                - <strong>Cách Fix lỗi chữ ô vuông:</strong> Bạn truy cập vào thư mục chứa game, tìm mục <code>game/fonts</code>. Hãy xóa file font mặc định bị lỗi đi, sau đó copy một font tiếng việt bất kỳ trên máy bạn (ví dụ: arial.ttf) dán vào thư mục đó, rồi đổi tên lại cho giống hệt tên file font gốc vừa xóa.<br><br>
-                📌 <em>Chi tiết xem thêm tại kênh YouTube <strong>PhongDHP123</strong>.</em></p>
+            <div class="box">
+                <h2>Cổng Truy Xuất Dữ Liệu</h2>
+                <div class="password-box" id="copy-pass-btn">
+                    <span>Mã Khóa Bảo Mật:</span> <strong>hpgvh18</strong>
+                </div>
+                <a class="download" id="ui-download" href="#" target="_blank" rel="noopener noreferrer">XÁC NHẬN TẢI VỀ</a>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-btn">🛠 Hướng dẫn cài đặt & Fix lỗi Font ô vuông <span class="faq-icon">+</span></button>
+                        <div class="faq-content">
+                            <p>- <strong>Cài đặt cơ bản:</strong> Tải file về -> Nhấn chuột phải chọn "Extract Here" (Giải nén) -> Vào thư mục vừa giải nén tìm file có đuôi <code>.exe</code> nháy đúp để chơi.<br><br>
+                            - <strong>Cách Fix lỗi chữ ô vuông:</strong> Bạn truy cập vào thư mục chứa game, tìm mục <code>game/fonts</code>. Hãy xóa file font mặc định bị lỗi đi, sau đó copy một font tiếng việt bất kỳ trên máy bạn (ví dụ: arial.ttf) dán vào thư mục đó, rồi đổi tên lại cho giống hệt tên file font gốc vừa xóa.<br><br>
+                            📌 <em>Chi tiết xem thêm tại kênh YouTube <strong>PhongDHP123</strong>.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="meta-box fade-in" style="opacity: 1; transform: translateY(0);">
+                <div class="meta-row">
+                    <span class="meta-label">🕒 Cập nhật</span>
+                    <span class="meta-value">Gần đây</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">📊 Trạng thái</span>
+                    <span class="meta-value highlight">Đã Việt Hóa (100%)</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">💻 Nền tảng</span>
+                    <span class="meta-value">Windows PC</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">📦 Dung lượng</span>
+                    <span class="meta-value" id="meta-size">...</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">⭐ Xếp hạng</span>
+                    <span class="meta-value">
+                        <span class="rating-stars">★★★★☆</span> 4.8/5<br>
+                        <span class="rating-text">(Cộng đồng bình chọn)</span>
+                    </span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">✍️ Tác giả</span>
+                    <span class="meta-value"><a href="#" id="meta-author">...</a></span>
+                </div>
+
+                <div class="meta-row">
+                    <span class="meta-label">📌 Phiên bản</span>
+                    <span class="meta-value" id="meta-version">...</span>
+                </div>
+                
+                <div class="meta-row meta-tags-row">
+                    <span class="meta-label">🏷️ Thẻ (Tags)</span>
+                    <div class="meta-tag-list" id="meta-tags-list">
+                        </div>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">🌐 Ngôn ngữ</span>
+                    <span class="meta-value">Tiếng Việt (Việt hóa)</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">🕹️ Đầu vào</span>
+                    <span class="meta-value">Bàn phím, Chuột</span>
+                </div>
+                
+                <div class="meta-row">
+                    <span class="meta-label">🤖 AI Content</span>
+                    <span class="meta-value" style="color: #4ade80;">Dịch thuật có AI hỗ trợ</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="footer">Dự án cộng đồng phi lợi nhuận © 2026 HPGVH18 Studio<br><span style="font-size: 12px; margin-top: 5px; display: block;">Code by PhongDHP</span></div>
+    <div class="footer">Dự án cộng đồng phi lợi nhuận © 2026 HPGVH18 Studio<br><span style="font-size: 12px; margin-top: 5px; display: block;">Code by PhongDHP</span></div>
 </div>
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
@@ -207,23 +269,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById('ui-title').innerText = data.title;
                     document.getElementById('ui-author-top').innerText = `Tác giả: ${data.author}`;
                     document.getElementById('ui-cover').src = data.cover;
-                    
-                    document.getElementById('ui-tag-version').innerText = `Version ${data.version}`;
-                    document.getElementById('ui-tag-size').innerText = data.size;
-                    document.getElementById('ui-tag-author').innerText = `👤 Tác giả: ${data.author}`;
-                    document.getElementById('ui-stat-size').innerText = data.size;
-                    
-                    document.getElementById('ui-stat-version').innerText = data.version;
                     document.getElementById('ui-desc').innerText = data.desc;
-                    
                     document.getElementById('ui-download').href = data.driveLink;
-                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title} ${data.version} (${data.size})`;
+                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title.toUpperCase()} (${data.size})`;
+
+                    // ĐỔ DATA VÀO META BOX MỚI
+                    document.getElementById('meta-size').innerText = data.size;
+                    document.getElementById('meta-author').innerText = data.author;
+                    document.getElementById('meta-version').innerText = data.version;
 
                     if(data.tags) {
-                        let tagsHtml = data.tags.split(" ").map(tag => `<span>${tag.toUpperCase()}</span>`).join(" ");
-                        document.getElementById('ui-tags-list').outerHTML = tagsHtml;
+                        let tagsHtml = data.tags.split(" ").map(tag => `<span class="meta-tag-item">${tag}</span>`).join("");
+                        document.getElementById('meta-tags-list').innerHTML = tagsHtml;
                     }
 
+                    // XỬ LÝ ẢNH GALLERY (NSFW)
                     const galleryContainer = document.getElementById('ui-gallery');
                     galleryContainer.innerHTML = ""; 
                     
