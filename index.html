@@ -123,6 +123,8 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 .share-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(11,11,18,0.7); border: 1px solid var(--accent); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; font-size: 14px; transition: 0.3s; backdrop-filter: blur(4px); }
 .share-btn:hover { background: var(--accent); transform: scale(1.15) rotate(15deg); box-shadow: 0 0 15px var(--accent); }
 
+@media (max-width: 768px) { .games { grid-template-columns: 1fr; } }
+
 @property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
 .game-card { 
     background: var(--card); border-radius: 16px; overflow: hidden; position: relative; 
@@ -218,11 +220,66 @@ input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
 input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; }
 input[type=range]:focus { outline: none; }
 
-/* FIX MOBILE CHO PLAYER */
+/* --- NÚT LÊN ĐẦU TRANG (SCROLL TO TOP) --- */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* Đặt bên trái để né cái Music Player */
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: none; /* Khớp với hiệu ứng con trỏ chuột custom của web */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    z-index: 9990;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+#scrollTopBtn:hover {
+    box-shadow: 0 0 25px var(--accent), 0 0 15px var(--accent2);
+    transform: translateY(-5px) scale(1.1);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+
+/* Icon mũi tên bên trong nút lên đầu trang */
+#scrollTopBtn svg {
+    width: 26px;
+    height: 26px;
+    animation: floatArrow 2s infinite ease-in-out;
+}
+
+@keyframes floatArrow {
+    0%, 100% { transform: translateY(2px); }
+    50% { transform: translateY(-3px); }
+}
+
+/* FIX MOBILE CHO PLAYER & SCROLL TOP BUTTON */
 @media (max-width: 768px) {
     .cyber-player { width: 100%; right: 0; bottom: 0; border-radius: 16px 16px 0 0; height: 55px !important; }
     .cyber-player:not(.minimized) { height: 120px !important; } 
     .player-sliders { display: none; } 
+    
+    #scrollTopBtn {
+        bottom: 70px; /* Đẩy lên trên mobile để không cấn đáy màn hình */
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        cursor: auto;
+    }
 }
 </style>
 </head>
@@ -406,6 +463,13 @@ input[type=range]:focus { outline: none; }
     </div>
 </div>
 
+<!-- NÚT LÊN ĐẦU TRANG -->
+<button id="scrollTopBtn" onclick="scrollToTop()" title="Lên đầu trang">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</button>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
 <script>
@@ -415,6 +479,7 @@ input[type=range]:focus { outline: none; }
 const API_LINK = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
 
 const gameListContainer = document.getElementById('game-list');
+const outline = document.querySelector('.cursor-outline');
 
 fetch(API_LINK)
     .then(response => response.json())
@@ -455,15 +520,19 @@ fetch(API_LINK)
         }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
         
-        const outline = document.querySelector('.cursor-outline');
-        document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top').forEach(el => { 
-            el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
-            el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
-        });
+        // Cập nhật sự kiện hover cho các phần tử động mới tải
+        refreshCursorHoverEffects();
     })
     .catch(error => {
         gameListContainer.innerHTML = "<p style='text-align:center; width:100%; color:red;'>Lỗi tải dữ liệu. Hãy kiểm tra lại API_LINK!</p>";
     });
+
+function refreshCursorHoverEffects() {
+    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn').forEach(el => { 
+        el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
+        el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
+    });
+}
 
 // ==========================================
 // 2. MÁY PHÁT NHẠC
@@ -556,7 +625,11 @@ const sliderContainer = document.getElementById('main-slider');
 sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval)); sliderContainer.addEventListener('mouseleave', startAutoSlide);
 document.addEventListener('keydown', e => { if(e.key === 'ArrowLeft') changeSlide(-1); else if(e.key === 'ArrowRight') changeSlide(1); });
 
-document.addEventListener("DOMContentLoaded", () => { if(localStorage.getItem('isAdult') === 'true') document.getElementById('age-warning-overlay').style.display = 'none'; });
+document.addEventListener("DOMContentLoaded", () => { 
+    if(localStorage.getItem('isAdult') === 'true') document.getElementById('age-warning-overlay').style.display = 'none'; 
+    refreshCursorHoverEffects();
+});
+
 function acceptAge() { 
     const box = document.querySelector('.age-box'); const overlay = document.getElementById('age-warning-overlay'); const rect = box.getBoundingClientRect();
     const shards = [ '0 0, 50% 0, 30% 50%, 0 30%', '50% 0, 100% 0, 100% 40%, 70% 50%', '0 30%, 30% 50%, 20% 100%, 0 100%', '70% 50%, 100% 40%, 100% 100%, 50% 100%', '30% 50%, 70% 50%, 50% 100%, 20% 100%' ];
@@ -602,8 +675,38 @@ tagBtns.forEach(btn => {
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
 
 // Con Trỏ Chuột
-const dot = document.querySelector('.cursor-dot'); const outline = document.querySelector('.cursor-outline');
-window.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; setTimeout(() => { outline.style.left = e.clientX + 'px'; outline.style.top = e.clientY + 'px'; }, 40); });
+const dot = document.querySelector('.cursor-dot');
+window.addEventListener('mousemove', e => { 
+    dot.style.left = e.clientX + 'px'; 
+    dot.style.top = e.clientY + 'px'; 
+    setTimeout(() => { 
+        outline.style.left = e.clientX + 'px'; 
+        outline.style.top = e.clientY + 'px'; 
+    }, 40); 
+});
+
+// ==========================================
+// 4. NÚT LÊN ĐẦU TRANG (SCROLL TO TOP)
+// ==========================================
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+// Theo dõi sự kiện cuộn trang để ẩn/hiện nút
+window.addEventListener("scroll", () => {
+    // Nếu cuộn xuống quá 400px thì hiện nút
+    if (window.scrollY > 400) {
+        scrollTopBtn.classList.add("show");
+    } else {
+        scrollTopBtn.classList.remove("show");
+    }
+});
+
+// Hàm cuộn mượt lên đỉnh
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 </script>
 </body>
 </html>
