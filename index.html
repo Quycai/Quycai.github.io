@@ -28,11 +28,11 @@ body::before {
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 ::selection { background: var(--accent); color: white; text-shadow: none; }
 
-/* --- HEADER MỚI --- */
+/* --- HEADER MỚI CÓ LOGO --- */
 header {
     position: relative; text-align: center; padding: 120px 20px; overflow: hidden;
     border-bottom: 2px solid var(--accent); box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
-    display: flex; justify-content: center; align-items: center;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
 }
 header::before {
     content: ''; position: absolute; top: -5%; left: -5%; right: -5%; bottom: -5%;
@@ -46,7 +46,20 @@ header::before {
     background: rgba(15, 15, 25, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     padding: 35px 60px; border-radius: 20px; border: 1px solid rgba(255, 79, 160, 0.3);
     box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
-    z-index: 2; display: inline-block; transition: all 0.4s ease;
+    z-index: 2; display: flex; flex-direction: column; align-items: center; transition: all 0.4s ease;
+}
+
+/* HIỆU ỨNG CHO LOGO CHÍNH THỨC */
+.site-logo {
+    width: 140px; height: 140px; border-radius: 50%; margin-bottom: 15px;
+    box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    animation: floatLogo 3s ease-in-out infinite;
+}
+@keyframes floatLogo {
+    0% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
+    50% { transform: translateY(-10px); box-shadow: 0 0 35px var(--accent), 0 0 60px var(--accent2); }
+    100% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
 }
 
 header h1.glitch { font-size:3.2rem; animation: glitch-anim 4s infinite, rgb-text-glow 6s linear infinite; display: inline-block; position: relative; margin-bottom: 5px; }
@@ -82,6 +95,14 @@ body.blood-theme .header-glass { border-color: rgba(255, 51, 51, 0.4); box-shado
 body.blood-theme .left-sidebar { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
 body.blood-theme .sidebar-title { text-shadow: 0 0 10px #ff3333; }
 body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; color: #ff3333; text-shadow: 0 0 15px rgba(255, 51, 51, 0.8), 0 0 5px #ff3333; }
+/* Đổi hào quang logo sang đỏ máu khi sang khu kinh dị */
+body.blood-theme .site-logo { box-shadow: 0 0 25px #ff3333, 0 0 45px #990000; animation: floatLogoBlood 3s ease-in-out infinite; }
+@keyframes floatLogoBlood {
+    0% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
+    50% { transform: translateY(-10px); box-shadow: 0 0 35px #ff3333, 0 0 60px #990000; }
+    100% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
+}
+
 @keyframes glitch-anim-blood { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
 
 .container{ max-width:1200px; margin:auto; padding:20px; position: relative; z-index: 1;}
@@ -313,7 +334,9 @@ input[type=range]:focus { outline: none; }
 
 <header>
     <div class="header-glass">
-        <h1 class="glitch">🎮 HPGVH18 STUDIO</h1>
+        <img src="ĐIỀN_LINK_ẢNH_CỦA_ÔNG_VÀO_ĐÂY" alt="HPGVH18 Logo" class="site-logo">
+        
+        <h1 class="glitch">HPGVH18 STUDIO</h1>
         <p>Kho Game Visual Novel & Kinh Dị Việt Hóa</p>
     </div>
 </header>
@@ -570,7 +593,6 @@ function selectZone(mode) {
 
     applyFilters();
 
-    // Cuộn mượt xuống thẳng danh sách game
     const anchor = document.getElementById('game-section-anchor');
     if(anchor) {
         anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
