@@ -155,10 +155,10 @@ body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; co
 .btn { display: block; margin-top: 15px; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; }
 .btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px var(--accent); transform: translateY(-2px); }
 
-/* --- CON TRỞ CHUỘT --- */
+/* --- CON TRỞ CHUỘT (ĐÃ FIX LÊN ĐỈNH CHÓP) --- */
 a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: none; }
-.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
-.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99999; box-shadow: 0 0 10px var(--accent); }
+.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
 
 /* --- TIMELINE --- */
@@ -572,7 +572,6 @@ search.addEventListener('keyup',()=>{
 // 🎲 LOGIC QUAY GACHA NHÂN PHẨM 🎲
 // ==========================================
 function rollGacha() {
-    // 1. Chỉ lấy những con game ĐANG HIỂN THỊ (phù hợp với bộ lọc hiện tại)
     const visibleGames = Array.from(document.querySelectorAll('.game-card')).filter(card => card.style.display === 'block');
     
     if(visibleGames.length === 0) {
@@ -585,34 +584,27 @@ function rollGacha() {
     const loadingUI = document.getElementById('gacha-loading');
     const resultUI = document.getElementById('gacha-result');
 
-    // 2. Mở cửa sổ Modal quay gacha
     modal.style.display = 'flex';
     setTimeout(() => box.classList.add('active'), 10);
     
-    // Bật hiệu ứng loading, tắt kết quả
     loadingUI.style.display = 'block';
     resultUI.style.display = 'none';
 
-    // 3. Chờ 2 giây hồi hộp rồi nhả kết quả
     setTimeout(() => {
-        // Random 1 số ngẫu nhiên từ danh sách game đang hiện
         const randomIndex = Math.floor(Math.random() * visibleGames.length);
         const winnerCard = visibleGames[randomIndex];
 
-        // Rút data từ thẻ game đó ra
         const gameImg = winnerCard.querySelector('img').src;
         const gameTitle = winnerCard.querySelector('h2').innerText;
         const gameLink = winnerCard.querySelector('.btn').href;
 
-        // Bơm data vào màn hình kết quả
         document.getElementById('gacha-img').src = gameImg;
         document.getElementById('gacha-title').innerText = gameTitle;
         document.getElementById('gacha-link').href = gameLink;
 
-        // Chuyển UI
         loadingUI.style.display = 'none';
         resultUI.style.display = 'block';
-    }, 2000); // 2000ms = 2 giây quay
+    }, 2000); 
 }
 
 function closeGacha() {
