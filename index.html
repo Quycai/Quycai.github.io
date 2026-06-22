@@ -16,7 +16,7 @@ html { background-color: var(--bg); }
 /* Đưa body về suốt để không che lớp lưới phía sau */
 body { color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; position: relative; cursor: none; }
 
-/* 🌟 LƯỚI CYBERPUNK TRÔI LỜ LỮNG (ĐÃ FIX HIỂN THỊ RÕ NÉT) */
+/* 🌟 LƯỚI CYBERPUNK TRÔI LỜ LỮNG */
 body::before {
     content: '';
     position: fixed;
@@ -44,7 +44,7 @@ body::before {
 ::-moz-selection { background: var(--accent); color: white; text-shadow: none; }
 
 header {
-    position: relative; text-align: center; padding: 80px 20px; overflow: hidden;
+    position: relative; text-align: center; padding: 60px 20px; overflow: hidden;
     border-bottom: 2px solid var(--accent); box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
 }
 header::before {
@@ -75,8 +75,41 @@ header h1.glitch {
     97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff4fa0) drop-shadow(-3px 0 0 #8b5cf6); }
     99% { transform: translate(0, 0) skew(0deg); filter: none; }
 }
+header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); margin-bottom: 20px;}
 
-header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
+/* --- NÚT GẠT CHUYỂN ĐỔI THEME --- */
+.theme-switch-wrapper { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 15px; position: relative; z-index: 2; }
+#switch-label { font-weight: bold; font-size: 15px; color: var(--accent); text-shadow: 0 0 10px var(--accent); transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+.theme-switch { display: inline-block; height: 28px; position: relative; width: 54px; }
+.theme-switch input { display:none; }
+.slider { background-color: #252536; bottom: 0; cursor: none; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border: 1px solid #444; }
+.slider:before { background-color: white; bottom: 3px; content: ""; height: 20px; left: 4px; position: absolute; transition: .4s; width: 20px; }
+input:checked + .slider { background-color: #b91c1c; border-color: #7f1d1d; box-shadow: 0 0 15px #ff3333; }
+input:checked + .slider:before { transform: translateX(24px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* 🔴 THEME ĐỎ MÁU / KINH DỊ KHI BẬT CÔNG TẮC */
+body.blood-theme {
+    --accent: #ff3333; 
+    --accent2: #990000; 
+}
+body.blood-theme::before {
+    background-image: 
+        linear-gradient(rgba(255, 51, 51, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(153, 0, 0, 0.15) 1px, transparent 1px);
+}
+body.blood-theme header h1.glitch {
+    animation: glitch-anim-blood 4s infinite;
+    color: #ff3333;
+    text-shadow: 0 0 15px rgba(255, 51, 51, 0.8), 0 0 5px #ff3333;
+}
+@keyframes glitch-anim-blood {
+    0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); }
+    96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); }
+    97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); }
+    99% { transform: translate(0, 0) skew(0deg); filter: none; }
+}
 
 .container{ max-width:1200px; margin:auto; padding:20px; }
 .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
@@ -90,7 +123,7 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 .slide.active img { transform: scale(1.05); } 
 .slide-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; background: linear-gradient(to top, rgba(11,11,18,1) 0%, rgba(11,11,18,0.8) 30%, transparent 100%); z-index: -1; }
 .slide-content { padding: 30px; width: 100%; z-index: 3; }
-.slide-title { font-size: 28px; color: white; margin-bottom: 12px; text-shadow: 0 0 10px rgba(255,79,160,0.8), 2px 2px 4px rgba(0,0,0,0.8); letter-spacing: 1px; }
+.slide-title { font-size: 28px; color: white; margin-bottom: 12px; text-shadow: 0 0 10px var(--accent), 2px 2px 4px rgba(0,0,0,0.8); letter-spacing: 1px; }
 .slide-tags { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
 .slide-tag { background: rgba(37,37,54,0.8); border: 1px solid var(--accent2); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; color: var(--accent2); text-transform: uppercase; box-shadow: 0 0 8px rgba(139,92,246,0.3); }
 .slide-desc { color: #ccc; font-size: 15px; max-width: 750px; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -110,7 +143,7 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 .tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
 .tag-btn { border: 1px solid #444; padding: 8px 16px; border-radius: 999px; cursor: pointer; background: #252536; color: white; font-size: 13px; font-weight: 500; transition: 0.3s ease; text-transform: uppercase; }
 .tag-btn:hover { border-color: var(--accent2); box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); color: var(--accent2); }
-.tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); }
+.tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px var(--accent); }
 
 /* --- THẺ GAME CARD --- */
 .games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
@@ -143,14 +176,14 @@ header p { color:#eee; text-shadow: 0 0 5px rgba(0,0,0,0.8); }
 @keyframes bg-spin { to { --border-angle: 1turn; } }
 .game-card img { width: 100%; height: 220px; object-fit: cover; }
 .btn { display: block; margin-top: 15px; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; }
-.btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px rgba(255, 79, 160, 0.5); transform: translateY(-2px); }
+.btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px var(--accent); transform: translateY(-2px); }
 
 /* --- CON TRỞ CHUỘT --- */
-a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top { cursor: none; }
+a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 10000; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+@media (max-width: 768px) { body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
 
 /* --- TIMELINE --- */
 .timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
@@ -175,7 +208,7 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 .age-buttons { margin-top: 25px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;}
 .age-buttons button { padding: 12px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
 #btn-yes { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; }
-#btn-yes:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 79, 160, 0.4); }
+#btn-yes:hover { transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent); }
 #btn-no { background: #252536; color: #bbb; }
 #btn-no:hover { background: #3a3a52; color: white; }
 
@@ -210,7 +243,7 @@ a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top
 .player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; transition: opacity 0.3s; }
 .player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
 .ctrl-btn { background: rgba(37,37,54,0.6); border: 1px solid #555; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(4px); cursor: pointer;}
-.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); transform: scale(1.1); }
+.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px var(--accent); transform: scale(1.1); }
 #playPauseBtn { width: 50px; height: 50px; font-size: 20px; border-color: var(--accent2); background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(255,79,160,0.5)); box-shadow: 0 0 15px rgba(139,92,246,0.4);}
 .player-sliders { display: flex; flex-direction: column; gap: 8px; }
 .slider-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #bbb; font-weight: bold;}
@@ -224,14 +257,14 @@ input[type=range]:focus { outline: none; }
 #scrollTopBtn {
     position: fixed;
     bottom: 30px;
-    left: 30px; /* Đặt bên trái để né cái Music Player */
+    left: 30px; 
     width: 50px;
     height: 50px;
     background: linear-gradient(135deg, var(--accent2), var(--accent));
     color: white;
     border: none;
     border-radius: 50%;
-    cursor: none; /* Khớp với hiệu ứng con trỏ chuột custom của web */
+    cursor: none; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -255,7 +288,6 @@ input[type=range]:focus { outline: none; }
     background: linear-gradient(135deg, var(--accent), var(--accent2));
 }
 
-/* Icon mũi tên bên trong nút lên đầu trang */
 #scrollTopBtn svg {
     width: 26px;
     height: 26px;
@@ -267,14 +299,12 @@ input[type=range]:focus { outline: none; }
     50% { transform: translateY(-3px); }
 }
 
-/* FIX MOBILE CHO PLAYER & SCROLL TOP BUTTON */
 @media (max-width: 768px) {
     .cyber-player { width: 100%; right: 0; bottom: 0; border-radius: 16px 16px 0 0; height: 55px !important; }
     .cyber-player:not(.minimized) { height: 120px !important; } 
     .player-sliders { display: none; } 
-    
     #scrollTopBtn {
-        bottom: 70px; /* Đẩy lên trên mobile để không cấn đáy màn hình */
+        bottom: 70px;
         left: 20px;
         width: 45px;
         height: 45px;
@@ -291,7 +321,7 @@ input[type=range]:focus { outline: none; }
 <div id="age-warning-overlay" class="age-overlay">
     <div class="age-box">
         <h2>⚠️ CẢNH BÁO ĐỘ TUỔI</h2>
-        <p>Kho game này chứa nội dung nhạy cảm (18+).<br>Bạn phải đủ 18 tuổi trở lên mới được phép truy cập.</p>
+        <p>Kho game này chứa nội dung Nhạy cảm (18+) và Kinh dị.<br>Bạn phải đủ 18 tuổi trở lên mới được phép truy cập.</p>
         <div class="age-buttons">
             <button id="btn-yes" onclick="acceptAge()">Tôi đã trên 18 tuổi</button>
             <button id="btn-no" onclick="rejectAge()">Tôi chưa đủ tuổi</button>
@@ -301,7 +331,15 @@ input[type=range]:focus { outline: none; }
 
 <header>
     <h1 class="glitch">🎮 HPGVH18 STUDIO</h1>
-    <p>Kho Game Visual Novel Việt Hóa</p>
+    <p>Kho Game Visual Novel & Kinh Dị Việt Hóa</p>
+    
+    <div class="theme-switch-wrapper">
+        <span id="switch-label">Chế độ: 18+ Neon</span>
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" onchange="switchTheme(this)">
+            <div class="slider round"></div>
+        </label>
+    </div>
 </header>
 
 <div class="container">
@@ -317,7 +355,7 @@ input[type=range]:focus { outline: none; }
                     <span class="slide-tag">PC</span>
                     <span class="slide-tag">Tác giả: Luchetty</span>
                 </div>
-                <p class="slide-desc">Cốt truyện: Vào vai một Genin trẻ tuổi tại Làng Lá, bắt đầu hành trình nhẫn giả của riêng bạn với những nhiệm vụ bất ngờ và các cuộc gặp gỡ thú vị...</p>
+                <p class="slide-desc">Cốt truyện: Vào vai một Genin trẻ tuổi tại Làng Lá, bắt đầu hành trình nhẫn giả của riêng bạn với những nhiệm vụ bất ngờ...</p>
             </div>
         </div>
 
@@ -335,20 +373,6 @@ input[type=range]:focus { outline: none; }
             </div>
         </div>
 
-        <div class="slide" onclick="window.location.href='chi-tiet.html?id=escape-to-the-past'">
-            <img src="https://i.postimg.cc/pThXq8qy/S18-zmeneno-na-1920x1080.avif" alt="Escape To The Past" loading="lazy">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="slide-title">Escape To The Past v0.1</h2>
-                <div class="slide-tags">
-                    <span class="slide-tag">396 MB</span>
-                    <span class="slide-tag">PC</span>
-                    <span class="slide-tag">Tác giả: S18 Games</span>
-                </div>
-                <p class="slide-desc">Cốt truyện: Trở về quá khứ để thay đổi tương lai đen tối. Những sự kiện kinh dị xen lẫn yếu tố bí ẩn đang chờ bạn giải mã.</p>
-            </div>
-        </div>
-
         <div class="slider-nav">
             <button class="slider-btn" onclick="changeSlide(-1)">&#10094;</button>
             <button class="slider-btn" onclick="changeSlide(1)">&#10095;</button>
@@ -356,7 +380,6 @@ input[type=range]:focus { outline: none; }
         <div class="slider-dots">
             <span class="dot active" onclick="goToSlide(0)"></span>
             <span class="dot" onclick="goToSlide(1)"></span>
-            <span class="dot" onclick="goToSlide(2)"></span>
         </div>
     </div>
 
@@ -369,14 +392,12 @@ input[type=range]:focus { outline: none; }
             <button class="tag-btn" data-filter="pc">PC</button>
             <button class="tag-btn" data-filter="android">ANDROID</button>
             <button class="tag-btn" data-filter="harem">HAREM</button>
-            <button class="tag-btn" data-filter="kinh dị">KINH DỊ</button>
-            <button class="tag-btn" data-filter="hài hước">HÀI HƯỚC</button>
+            <button class="tag-btn" data-filter="kinh-di">KINH DỊ</button>
             <button class="tag-btn" data-filter="zombie">ZOMBIE</button>
             <button class="tag-btn" data-filter="milf">MILF</button>
             <button class="tag-btn" data-filter="bdsm">BDSM</button>
             <button class="tag-btn" data-filter="anime">ANIME</button>
             <button class="tag-btn" data-filter="2d">2D</button>
-            <button class="tag-btn" data-filter="futa">FUTA/TRANS</button>
             <button class="tag-btn" data-filter="sandbox">SANDBOX</button>
         </div>
     </div>
@@ -391,7 +412,7 @@ input[type=range]:focus { outline: none; }
             <div class="timeline-item left fade-in">
                 <div class="content">
                     <h3>Khởi Nguồn</h3>
-                    <p>Tháng 4, 2026: HPGVH18 STUDIO chính thức ra mắt. Solo Developer: PhongDHP một tay "cân" mọi dự án.</p>
+                    <p>Tháng 4, 2026: HPGVH18 STUDIO chính thức ra mắt. Solo Developer một tay "cân" mọi dự án.</p>
                 </div>
             </div>
             <div class="timeline-item right fade-in">
@@ -402,20 +423,8 @@ input[type=range]:focus { outline: none; }
             </div>
             <div class="timeline-item left fade-in">
                 <div class="content">
-                    <h3>Quy Hoạch Web</h3>
-                    <p>Tháng 6, 2026: Cấu trúc lại toàn bộ hệ thống Repo, quản lý thư mục images/games chuẩn Developer chuyên nghiệp.</p>
-                </div>
-            </div>
-            <div class="timeline-item right fade-in">
-                <div class="content">
-                    <h3>Fix Lỗi Cực Căng</h3>
-                    <p>Tháng 6, 2026: Xử lý mượt mà lỗi font "đậu hũ", xuất xưởng thành công siêu phẩm 'A Genin Tale v0.3'.</p>
-                </div>
-            </div>
-            <div class="timeline-item left fade-in">
-                <div class="content">
-                    <h3>Lột Xác Giao Diện</h3>
-                    <p>Tháng 6, 2026: Tự tay nâng cấp hệ thống với giao diện 3D Tilt, Timeline phát sáng và hiệu ứng con trỏ Neon Aura độc quyền.</p>
+                    <h3>Kỷ Nguyên Mới</h3>
+                    <p>Tháng 6, 2026: Mở rộng sang mảng game Kinh dị và rục rịch chuẩn bị hé lộ dự án Zombie Bạc Liêu.</p>
                 </div>
             </div>
         </div>
@@ -429,7 +438,7 @@ input[type=range]:focus { outline: none; }
         </div>
         <div class="footer-copyright">
             © 2026 HPGVH18 Studio. All rights reserved. <br>
-            <span style="font-size: 12px; color: #555;">Dự án phi lợi nhuận dành cho cộng đồng Visual Novel Việt Nam.</span>
+            <span style="font-size: 12px; color: #555;">Dự án phi lợi nhuận dành cho cộng đồng Visual Novel & RPG Việt Nam.</span>
         </div>
     </div>
 </div>
@@ -463,7 +472,6 @@ input[type=range]:focus { outline: none; }
     </div>
 </div>
 
-<!-- NÚT LÊN ĐẦU TRANG -->
 <button id="scrollTopBtn" onclick="scrollToTop()" title="Lên đầu trang">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="18 15 12 9 6 15"></polyline>
@@ -473,6 +481,10 @@ input[type=range]:focus { outline: none; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
 <script>
+// Biến lưu trữ trạng thái hiện tại của bộ lọc
+let currentThemeMode = 'nsfw'; 
+let currentActiveTag = 'all';
+
 // ==========================================
 // 1. KẾT NỐI API GOOGLE SHEETS
 // ==========================================
@@ -520,19 +532,96 @@ fetch(API_LINK)
         }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
         
-        // Cập nhật sự kiện hover cho các phần tử động mới tải
         refreshCursorHoverEffects();
+        
+        // Chạy bộ lọc lần đầu để ẩn game kinh dị ở chế độ mặc định
+        applyFilters();
     })
     .catch(error => {
         gameListContainer.innerHTML = "<p style='text-align:center; width:100%; color:red;'>Lỗi tải dữ liệu. Hãy kiểm tra lại API_LINK!</p>";
     });
 
 function refreshCursorHoverEffects() {
-    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn').forEach(el => { 
+    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider').forEach(el => { 
         el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
         el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
     });
 }
+
+// ==========================================
+// TỔNG HỢP LOGIC LỌC (THEME + TAG)
+// ==========================================
+function applyFilters() {
+    document.querySelectorAll('.game-card').forEach(card => {
+        const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase() : "";
+        
+        // 1. Kiểm tra Công tắc Theme
+        let themeMatch = false;
+        if (currentThemeMode === 'horror') {
+            themeMatch = cardTags.includes('kinh-di'); // Chế độ máu: chỉ hiện game có chữ kinh-di
+        } else {
+            themeMatch = !cardTags.includes('kinh-di'); // Chế độ neon: ẩn game có chữ kinh-di
+        }
+
+        // 2. Kiểm tra Nút Lọc Tag (kết hợp với thanh tìm kiếm nếu có)
+        let tagMatch = false;
+        if (currentActiveTag === 'all' || cardTags.includes(currentActiveTag)) {
+            tagMatch = true;
+        }
+
+        // 3. Kết quả hiển thị
+        if (themeMatch && tagMatch) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function switchTheme(checkbox) {
+    const label = document.getElementById('switch-label');
+    if (checkbox.checked) {
+        document.body.classList.add('blood-theme');
+        label.innerText = "Chế độ: Horror / Blood";
+        label.style.color = "#ff3333";
+        label.style.textShadow = "0 0 10px #ff3333";
+        currentThemeMode = 'horror';
+    } else {
+        document.body.classList.remove('blood-theme');
+        label.innerText = "Chế độ: 18+ Neon";
+        label.style.color = "var(--accent)";
+        label.style.textShadow = "0 0 10px var(--accent)";
+        currentThemeMode = 'nsfw';
+    }
+    applyFilters();
+}
+
+const tagBtns = document.querySelectorAll('.tag-btn');
+tagBtns.forEach(btn => { 
+    btn.addEventListener('click', function() { 
+        document.querySelector('.tag-btn.active').classList.remove('active'); 
+        this.classList.add('active'); 
+        currentActiveTag = this.dataset.filter.toLowerCase();
+        applyFilters();
+    }); 
+});
+
+const search = document.getElementById('search');
+search.addEventListener('keyup',()=>{ 
+    const value = search.value.toLowerCase(); 
+    document.querySelectorAll('.game-card').forEach(card=>{ 
+        // Lọc kết hợp với trạng thái hiển thị hiện tại
+        const text = card.innerText.toLowerCase(); 
+        const isCurrentlyVisible = card.style.display === 'block';
+        
+        // Tạm thời áp dụng filter chuẩn trước, sau đó mới tính đến tìm kiếm
+        applyFilters(); 
+        
+        if(card.style.display === 'block' && !text.includes(value)){
+            card.style.display = 'none';
+        }
+    }); 
+});
 
 // ==========================================
 // 2. MÁY PHÁT NHẠC
@@ -612,7 +701,7 @@ function createLightning() {
 }
 
 // ==========================================
-// 3. UI LOGIC (SLIDER, KÍNH VỠ, TÌM KIẾM, TAG FILTER)
+// 3. UI LOGIC (SLIDER, KÍNH VỠ)
 // ==========================================
 let currentSlideIndex = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
 function showSlide(n) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
@@ -643,35 +732,6 @@ function acceptAge() {
 }
 function rejectAge() { window.location.href = "https://www.google.com"; }
 
-const search = document.getElementById('search');
-search.addEventListener('keyup',()=>{ 
-    const value = search.value.toLowerCase(); 
-    document.querySelectorAll('.game-card').forEach(card=>{ 
-        const text = card.innerText.toLowerCase(); card.style.display = text.includes(value) ? 'block' : 'none'; 
-    }); 
-});
-
-// LOGIC LỌC DỮ LIỆU KHÔNG PHÂN BIỆT HOA THƯỜNG / KHỚP TỪ KHÓA CHUẨN
-const tagBtns = document.querySelectorAll('.tag-btn');
-tagBtns.forEach(btn => { 
-    btn.addEventListener('click', function() { 
-        document.querySelector('.tag-btn.active').classList.remove('active'); 
-        this.classList.add('active'); 
-        
-        const filterValue = this.dataset.filter.toLowerCase(); 
-        
-        document.querySelectorAll('.game-card').forEach(card => { 
-            const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase() : ""; 
-            
-            if (filterValue === 'all' || cardTags.includes(filterValue)) {
-                card.style.display = 'block'; 
-            } else {
-                card.style.display = 'none'; 
-            }
-        }); 
-    }); 
-});
-
 function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
 
 // Con Trỏ Chuột
@@ -689,24 +749,10 @@ window.addEventListener('mousemove', e => {
 // 4. NÚT LÊN ĐẦU TRANG (SCROLL TO TOP)
 // ==========================================
 const scrollTopBtn = document.getElementById("scrollTopBtn");
-
-// Theo dõi sự kiện cuộn trang để ẩn/hiện nút
 window.addEventListener("scroll", () => {
-    // Nếu cuộn xuống quá 400px thì hiện nút
-    if (window.scrollY > 400) {
-        scrollTopBtn.classList.add("show");
-    } else {
-        scrollTopBtn.classList.remove("show");
-    }
+    if (window.scrollY > 400) { scrollTopBtn.classList.add("show"); } else { scrollTopBtn.classList.remove("show"); }
 });
-
-// Hàm cuộn mượt lên đỉnh
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
 </script>
 </body>
 </html>
