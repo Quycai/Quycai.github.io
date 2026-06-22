@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">Đang giải mã hồ sơ... | HPGVH18</title>
 
+<link rel="icon" type="image/png" href="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png">
+
 <style>
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; --text:#ffffff; --text-dim:#b0b0b0; --safe:#00e5ff;}
 *{ margin:0; padding:0; box-sizing:border-box; }
@@ -20,10 +22,36 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; padding-top: 10px;}
 .back:hover{ transform: translateX(-5px); text-shadow: 0 0 10px var(--accent); }
 
-.hero{ margin-top:20px; padding:60px 20px; text-align:center; border-radius:20px; background:linear-gradient(135deg, rgba(255,79,160,.25), rgba(139,92,246,.25)); border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); position: relative; overflow: hidden;}
-.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: spin 10s linear infinite; z-index: 0; pointer-events: none; }
+/* --- HEADER MỚI CÓ LOGO CỦA TÔI --- */
+.hero{ margin-top:20px; padding:80px 20px; text-align:center; border-radius:20px; border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-direction: column;}
+.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height:Radial(200%); background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: spin 10s linear infinite; z-index: 0; pointer-events: none; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-.hero h1{ font-size:3rem; margin-bottom:10px; position: relative; z-index: 1; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+
+/* KHUNG GLASSMORPHISM CHỨA LOGO VÀ TIÊU ĐỀ */
+.header-content {
+    background: rgba(15, 15, 25, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    padding: 30px 50px; border-radius: 20px; border: 1px solid rgba(255, 79, 160, 0.3);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; transition: all 0.4s ease;
+}
+
+/* HIỆU ỨNG CHO LOGO CHÍNH THỨC */
+.header-logo {
+    width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;
+    box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: floatLogo 3s ease-in-out infinite;
+}
+@keyframes floatLogo {
+    0% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
+    50% { transform: translateY(-10px); box-shadow: 0 0 35px var(--accent), 0 0 60px var(--accent2); }
+    100% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
+}
+
+/* Cập nhật style cho tiêu đề Game động */
+#ui-title {
+    font-size: 2.2rem; color: white; text-shadow: 0 0 15px var(--accent), 0 0 5px var(--accent); margin-bottom: 5px;
+}
 .hero p{ color:var(--text-dim); font-size: 1.1rem; position: relative; z-index: 1; }
 
 /* BỐ CỤC 2 CỘT */
@@ -134,8 +162,11 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
 
     <div class="hero">
-        <h1 id="ui-title">Đang đồng bộ...</h1>
-        <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
+        <div class="header-content"> <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" alt="HPGVH18 Logo" class="header-logo">
+            
+            <h1 id="ui-title">Đang đồng bộ...</h1>
+            <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
+        </div>
     </div>
 
     <div class="detail-wrapper">
