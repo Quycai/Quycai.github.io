@@ -10,7 +10,7 @@
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
 
-html { background-color: var(--bg); }
+html { background-color: var(--bg); scroll-behavior: smooth; }
 body { color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; position: relative; cursor: none; }
 
 /* 🌟 LƯỚI CYBERPUNK TRÔI LỜ LỮNG */
@@ -28,7 +28,7 @@ body::before {
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 ::selection { background: var(--accent); color: white; text-shadow: none; }
 
-/* --- HEADER MỚI (GLASSMORPHISM & NÚT GẠT GÓC PHẢI) --- */
+/* --- HEADER MỚI --- */
 header {
     position: relative; text-align: center; padding: 120px 20px; overflow: hidden;
     border-bottom: 2px solid var(--accent); box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
@@ -54,26 +54,37 @@ header h1.glitch { font-size:3.2rem; animation: glitch-anim 4s infinite, rgb-tex
 @keyframes glitch-anim { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff4fa0) drop-shadow(3px 0 0 #8b5cf6); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff4fa0) drop-shadow(-3px 0 0 #8b5cf6); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
 header p { color:#e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-size: 17px; font-weight: 500;}
 
-/* --- NÚT GẠT CHUYỂN ĐỔI THEME ĐƯA LÊN GÓC PHẢI --- */
-.theme-switch-wrapper { position: absolute; top: 25px; right: 30px; display: flex; align-items: center; gap: 12px; z-index: 10; background: rgba(11,11,18,0.6); padding: 8px 18px; border-radius: 30px; border: 1px solid #333; backdrop-filter: blur(8px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-#switch-label { font-weight: bold; font-size: 13px; color: var(--accent); text-shadow: 0 0 10px var(--accent); transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
-.theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
-.theme-switch input { display:none; }
-.slider { background-color: #252536; bottom: 0; cursor: none; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border: 1px solid #444; }
-.slider:before { background-color: white; bottom: 2px; content: ""; height: 20px; left: 4px; position: absolute; transition: .4s; width: 20px; }
-input:checked + .slider { background-color: #b91c1c; border-color: #7f1d1d; box-shadow: 0 0 15px #ff3333; }
-input:checked + .slider:before { transform: translateX(20px); }
-.slider.round { border-radius: 34px; }
-.slider.round:before { border-radius: 50%; }
+/* --- BẢNG ĐIỀU KHIỂN BÊN TRÁI (LEFT SIDEBAR) --- */
+.left-sidebar {
+    position: fixed; left: 25px; top: 50%; transform: translateY(-50%);
+    width: 260px; background: rgba(15, 15, 25, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 79, 160, 0.3); border-radius: 20px; padding: 20px;
+    z-index: 100; box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
+    transition: all 0.4s ease;
+}
+.sidebar-title { text-align: center; color: white; margin-bottom: 20px; font-size: 16px; letter-spacing: 2px; text-shadow: 0 0 10px var(--accent); }
+.zone-btn {
+    padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #444;
+    background: rgba(30, 30, 36, 0.8); cursor: none; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; position: relative; overflow: hidden;
+}
+.zone-btn:last-child { margin-bottom: 0; }
+.zone-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,79,160,0.4); border-color: var(--accent); }
+.zone-nsfw.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; box-shadow: 0 0 25px rgba(255, 79, 160, 0.6); }
+.zone-horror.active { background: linear-gradient(135deg, #ff3333, #990000); border-color: transparent; box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); }
+.zone-icon { font-size: 32px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+.zone-title { font-size: 16px; font-weight: bold; color: white; letter-spacing: 1px; margin-bottom: 5px; }
+.zone-desc { font-size: 12px; color: #ccc; line-height: 1.4; }
 
-/* 🔴 THEME ĐỎ MÁU / KINH DỊ KHI BẬT CÔNG TẮC */
+/* 🔴 THEME ĐỎ MÁU / KINH DỊ KHI CHỌN KHU VỰC HORROR */
 body.blood-theme { --accent: #ff3333; --accent2: #990000; }
 body.blood-theme::before { background-image: linear-gradient(rgba(255, 51, 51, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(153, 0, 0, 0.15) 1px, transparent 1px); }
 body.blood-theme .header-glass { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
+body.blood-theme .left-sidebar { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
+body.blood-theme .sidebar-title { text-shadow: 0 0 10px #ff3333; }
 body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; color: #ff3333; text-shadow: 0 0 15px rgba(255, 51, 51, 0.8), 0 0 5px #ff3333; }
 @keyframes glitch-anim-blood { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
 
-.container{ max-width:1200px; margin:auto; padding:20px; }
+.container{ max-width:1200px; margin:auto; padding:20px; position: relative; z-index: 1;}
 .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .fade-in.appear { opacity: 1; transform: translateY(0); }
 
@@ -155,7 +166,7 @@ body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; co
 .btn { display: block; margin-top: 15px; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; }
 .btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px var(--accent); transform: translateY(-2px); }
 
-/* --- CON TRỞ CHUỘT (ĐÃ FIX LÊN ĐỈNH CHÓP) --- */
+/* --- CON TRỞ CHUỘT --- */
 a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: none; }
 .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99999; box-shadow: 0 0 10px var(--accent); }
 .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
@@ -235,11 +246,18 @@ input[type=range]:focus { outline: none; }
 #scrollTopBtn svg { width: 26px; height: 26px; animation: floatArrow 2s infinite ease-in-out; }
 
 /* --- ĐIỀU CHỈNH RESPONSIVE MOBILE --- */
+@media (max-width: 1400px) {
+    .left-sidebar { position: relative; left: 0; top: 0; transform: none; width: 100%; margin-top: 20px; display: flex; gap: 15px; padding: 15px; }
+    .sidebar-title { display: none; }
+    .zone-btn { flex: 1; margin-bottom: 0; padding: 10px; }
+    .zone-icon { font-size: 20px; margin-bottom: 4px; display: inline-block; margin-right: 8px;}
+    .zone-desc { display: none; }
+}
+
 @media (max-width: 768px) {
-    .theme-switch-wrapper { top: 15px; right: 15px; transform: scale(0.85); transform-origin: top right;}
     .header-glass { padding: 25px 20px; width: 92%; } header h1.glitch { font-size: 2.2rem; }
     .featured-slider { height: 350px; } .slide-title { font-size: 22px; } .slide-desc { font-size: 13px; } .slider-btn { width: 35px; height: 35px; font-size: 16px; } 
-    .games { grid-template-columns: 1fr; } body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } 
+    .games { grid-template-columns: 1fr; } body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider, .zone-btn { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } 
     .timeline-container::after { left: 31px; } .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; } .timeline-item::after { left: 15px; } .left::after { left: 23px; } .right { left: 0%; } 
     .cyber-player { width: 100%; right: 0; bottom: 0; border-radius: 16px 16px 0 0; height: 55px !important; } .cyber-player:not(.minimized) { height: 120px !important; } .player-sliders { display: none; } 
     #scrollTopBtn { bottom: 70px; left: 20px; width: 45px; height: 45px; cursor: auto; }
@@ -250,6 +268,20 @@ input[type=range]:focus { outline: none; }
 
 <div class="cursor-dot"></div>
 <div class="cursor-outline"></div>
+
+<aside class="left-sidebar fade-in">
+    <h3 class="sidebar-title">⚡ ĐỔI KHU VỰC</h3>
+    <div class="zone-btn zone-nsfw active" onclick="selectZone('nsfw')">
+        <span class="zone-icon">🔞</span>
+        <div class="zone-title">KHU 18+ NEON</div>
+        <div class="zone-desc">Visual Novel, Harem, Lãng mạn...</div>
+    </div>
+    <div class="zone-btn zone-horror" onclick="selectZone('horror')">
+        <span class="zone-icon">🩸</span>
+        <div class="zone-title">KHU KINH DỊ</div>
+        <div class="zone-desc">Guro, Zombie, Bạo lực tâm lý...</div>
+    </div>
+</aside>
 
 <div id="age-warning-overlay" class="age-overlay">
     <div class="age-box">
@@ -280,14 +312,6 @@ input[type=range]:focus { outline: none; }
 </div>
 
 <header>
-    <div class="theme-switch-wrapper">
-        <span id="switch-label">18+ NEON</span>
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" onchange="switchTheme(this)">
-            <div class="slider round"></div>
-        </label>
-    </div>
-
     <div class="header-glass">
         <h1 class="glitch">🎮 HPGVH18 STUDIO</h1>
         <p>Kho Game Visual Novel & Kinh Dị Việt Hóa</p>
@@ -334,6 +358,8 @@ input[type=range]:focus { outline: none; }
             <span class="dot" onclick="goToSlide(1)"></span>
         </div>
     </div>
+
+    <div id="game-section-anchor"></div>
 
     <input class="search fade-in" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
     
@@ -495,7 +521,7 @@ fetch(API_LINK)
     });
 
 function refreshCursorHoverEffects() {
-    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider, .gacha-btn, .close-gacha').forEach(el => { 
+    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider, .gacha-btn, .close-gacha, .zone-btn').forEach(el => { 
         el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
         el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
     });
@@ -528,22 +554,27 @@ function applyFilters() {
     });
 }
 
-function switchTheme(checkbox) {
-    const label = document.getElementById('switch-label');
-    if (checkbox.checked) {
+// LOGIC MENU BÊN TRÁI TỰ ĐỘNG SCROLL
+function selectZone(mode) {
+    document.querySelectorAll('.zone-btn').forEach(btn => btn.classList.remove('active'));
+
+    if (mode === 'horror') {
         document.body.classList.add('blood-theme');
-        label.innerText = "HORROR";
-        label.style.color = "#ff3333";
-        label.style.textShadow = "0 0 10px #ff3333";
+        document.querySelector('.zone-horror').classList.add('active');
         currentThemeMode = 'horror';
     } else {
         document.body.classList.remove('blood-theme');
-        label.innerText = "18+ NEON";
-        label.style.color = "var(--accent)";
-        label.style.textShadow = "0 0 10px var(--accent)";
+        document.querySelector('.zone-nsfw').classList.add('active');
         currentThemeMode = 'nsfw';
     }
+
     applyFilters();
+
+    // Cuộn mượt xuống thẳng danh sách game
+    const anchor = document.getElementById('game-section-anchor');
+    if(anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 const tagBtns = document.querySelectorAll('.tag-btn');
@@ -691,7 +722,7 @@ function createLightning() {
 }
 
 // ==========================================
-// 3. UI LOGIC (SLIDER, KÍNH VỠ)
+// 3. UI LOGIC (SLIDER)
 // ==========================================
 let currentSlideIndex = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
 function showSlide(n) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
@@ -736,7 +767,7 @@ window.addEventListener('mousemove', e => {
 });
 
 // ==========================================
-// 4. NÚT LÊN ĐẦU TRANG (SCROLL TO TOP)
+// 4. NÚT LÊN ĐẦU TRANG
 // ==========================================
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", () => {
