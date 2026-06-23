@@ -22,10 +22,22 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; padding-top: 10px;}
 .back:hover{ transform: translateX(-5px); text-shadow: 0 0 10px var(--accent); }
 
-/* --- HEADER MỚI CÓ LOGO CỦA TÔI --- */
-.hero{ margin-top:20px; padding:80px 20px; text-align:center; border-radius:20px; border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-direction: column;}
-.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height:Radial(200%); background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: spin 10s linear infinite; z-index: 0; pointer-events: none; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
+/* --- BANNER KHỔNG LỒ (HERO) --- */
+.hero{ 
+    margin-top:20px; padding:100px 20px; text-align:center; border-radius:20px; 
+    border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); 
+    position: relative; overflow: hidden; display: flex; justify-content: center; 
+    align-items: center; flex-direction: column;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    background-color: var(--card);
+}
+/* Phủ một lớp sương đen gradient để chữ không bị chìm vào ảnh nền */
+.hero::after { 
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: linear-gradient(to bottom, rgba(11,11,18,0.4) 0%, rgba(11,11,18,0.95) 100%); 
+    z-index: 1; pointer-events: none; 
+}
+.header-content, .hero p { z-index: 2; position: relative; }
 
 /* KHUNG GLASSMORPHISM CHỨA LOGO VÀ TIÊU ĐỀ */
 .header-content {
@@ -304,17 +316,41 @@ document.addEventListener("DOMContentLoaded", function() {
                         document.getElementById('meta-tags-list').innerHTML = tagsHtml;
                     }
 
-                    // XỬ LÝ ẢNH GALLERY (NSFW)
+                    // XỬ LÝ ẢNH GALLERY (NSFW) VÀ ĐẨY BANNER
                     const galleryContainer = document.getElementById('ui-gallery');
                     galleryContainer.innerHTML = ""; 
                     
-                    if (data.gallery && data.gallery.length > 0) {
-                        data.gallery.forEach(imgUrl => {
-                            if(imgUrl.trim() !== "") {
-                                galleryContainer.innerHTML += `<img class="img-nsfw" src="${imgUrl.trim()}" alt="Gameplay" loading="lazy">`;
+                    // Xử lý tách chuỗi nếu là string (đề phòng định dạng string từ Google Sheet)
+                    let galleryArray = [];
+                    if (data.gallery && typeof data.gallery === 'string') {
+                        galleryArray = data.gallery.split(',');
+                    } else if (Array.isArray(data.gallery)) {
+                        galleryArray = data.gallery;
+                    }
+
+                    if (galleryArray.length > 0 && galleryArray[0].trim() !== "") {
+                        // 1. Lấy ảnh đầu tiên trong Gallery làm Banner bự
+                        const bannerUrl = galleryArray[0].trim();
+                        if(bannerUrl !== "") {
+                            document.querySelector('.hero').style.backgroundImage = `url('${bannerUrl}')`;
+                        } else {
+                            document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
+                        }
+
+                        // 2. Các ảnh còn lại (từ ảnh thứ 2 trở đi) nhét vào mục Hình ảnh
+                        if (galleryArray.length > 1) {
+                            for(let i = 1; i < galleryArray.length; i++) {
+                                let imgUrl = galleryArray[i].trim();
+                                if(imgUrl !== "") {
+                                    galleryContainer.innerHTML += `<img class="img-nsfw" src="${imgUrl}" alt="Gameplay" loading="lazy">`;
+                                }
                             }
-                        });
+                        } else {
+                            galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh bổ sung.</p>";
+                        }
                     } else {
+                        // Nếu lười không nhập Gallery luôn thì lấy tạm Cover làm Banner
+                        document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
                         galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh.</p>";
                     }
 
