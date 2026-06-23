@@ -346,42 +346,13 @@ input[type=range]:focus { outline: none; }
 <div class="container">
     
     <div class="featured-slider fade-in" id="main-slider">
-        <div class="slide active" onclick="window.location.href='chi-tiet.html?id=a-genin-tale'">
-            <img src="https://i.postimg.cc/fbbbS1dC/1777495289444.avif" alt="A Genin Tale" loading="lazy">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="slide-title">A Genin Tale v0.3</h2>
-                <div class="slide-tags">
-                    <span class="slide-tag">245 MB</span>
-                    <span class="slide-tag">PC</span>
-                    <span class="slide-tag">Tác giả: Luchetty</span>
-                </div>
-                <p class="slide-desc">Cốt truyện: Vào vai một Genin trẻ tuổi tại Làng Lá, bắt đầu hành trình nhẫn giả của riêng bạn với những nhiệm vụ bất ngờ...</p>
-            </div>
-        </div>
-
-        <div class="slide" onclick="window.location.href='chi-tiet.html?id=research-diary'">
-            <img src="https://i.postimg.cc/ydgYv9vK/headbanner.avif" alt="Research Diary" loading="lazy">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-                <h2 class="slide-title">Research Diary v0.1</h2>
-                <div class="slide-tags">
-                    <span class="slide-tag">420 MB</span>
-                    <span class="slide-tag">PC</span>
-                    <span class="slide-tag">Tác giả: Nekanaro</span>
-                </div>
-                <p class="slide-desc">Cốt truyện: Khám phá cuốn nhật ký nghiên cứu chứa nhiều bí mật chưa được hé lộ thông qua các lựa chọn và sự kiện khác nhau.</p>
-            </div>
-        </div>
+        <div id="dynamic-slides-container"></div>
 
         <div class="slider-nav">
             <button class="slider-btn" onclick="changeSlide(-1)">&#10094;</button>
             <button class="slider-btn" onclick="changeSlide(1)">&#10095;</button>
         </div>
-        <div class="slider-dots">
-            <span class="dot active" onclick="goToSlide(0)"></span>
-            <span class="dot" onclick="goToSlide(1)"></span>
-        </div>
+        <div class="slider-dots" id="dynamic-dots-container"></div>
     </div>
 
     <div id="game-section-anchor"></div>
@@ -492,26 +463,31 @@ let currentThemeMode = 'nsfw';
 let currentActiveTag = 'all';
 
 // ==========================================
-// 1. KẾT NỐI API GOOGLE SHEETS
+// 1. KẾT NỐI API GOOGLE SHEETS & TẠO UI
 // ==========================================
 const API_LINK = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
 
 const gameListContainer = document.getElementById('game-list');
+const slidesContainer = document.getElementById('dynamic-slides-container');
+const dotsContainer = document.getElementById('dynamic-dots-container');
 const outline = document.querySelector('.cursor-outline');
 
 fetch(API_LINK)
     .then(response => response.json())
     .then(data => {
         let htmlContent = '';
+        let slidesHtml = '';
+        let dotsHtml = '';
         const gameIds = Object.keys(data).reverse();
         
-        gameIds.forEach(id => {
+        gameIds.forEach((id, index) => {
             const game = data[id];
             let labelsHtml = "";
             if(game.tags) {
                 labelsHtml = game.tags.split(" ").slice(0,4).map(l => `<span class="info-tag">${l}</span>`).join('');
             }
 
+            // --- TẠO HTML CHO GAME CARD BÊN DƯỚI ---
             htmlContent += `
                 <div class="game-card fade-in" data-tags="${game.tags || ''}">
                     <div class="share-btn" onclick="shareGame('${game.title}', 'https://quycai.github.io/chi-tiet.html?id=${id}')">🔗</div>
@@ -526,9 +502,33 @@ fetch(API_LINK)
                     </div>
                 </div>
             `;
+
+            // --- TẠO HTML CHO SLIDER (LẤY 3 GAME MỚI NHẤT) ---
+            if (index < 3) {
+                const isActive = index === 0 ? 'active' : '';
+                slidesHtml += `
+                    <div class="slide ${isActive}" onclick="window.location.href='chi-tiet.html?id=${id}'">
+                        <img src="${game.cover}" alt="${game.title}" loading="lazy">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2 class="slide-title">${game.title} ${game.version ? 'v' + game.version : ''}</h2>
+                            <div class="slide-tags">
+                                <span class="slide-tag">${game.size || 'N/A'}</span>
+                                <span class="slide-tag">PC</span>
+                                <span class="slide-tag">Tác giả: ${game.author || 'Đang cập nhật'}</span>
+                            </div>
+                            <p class="slide-desc">${game.desc || 'Chưa có mô tả cốt truyện...'}</p>
+                        </div>
+                    </div>
+                `;
+                dotsHtml += `<span class="dot ${isActive}" onclick="goToSlide(${index})"></span>`;
+            }
         });
         
+        // Bơm dữ liệu vào Web
         gameListContainer.innerHTML = htmlContent;
+        slidesContainer.innerHTML = slidesHtml;
+        dotsContainer.innerHTML = dotsHtml;
 
         VanillaTilt.init(document.querySelectorAll(".game-card"), { max: 12, speed: 400, glare: true, "max-glare": 0.25 });
         const appearOnScroll = new IntersectionObserver(entries => { 
@@ -540,9 +540,13 @@ fetch(API_LINK)
         
         refreshCursorHoverEffects();
         applyFilters();
+
+        // Kích hoạt Slider
+        initDynamicSlider(); 
     })
     .catch(error => {
         gameListContainer.innerHTML = "<p style='text-align:center; width:100%; color:red;'>Lỗi tải dữ liệu. Hãy kiểm tra lại API_LINK!</p>";
+        console.error(error);
     });
 
 function refreshCursorHoverEffects() {
@@ -579,7 +583,6 @@ function applyFilters() {
     });
 }
 
-// LOGIC MENU BÊN TRÁI TỰ ĐỘNG SCROLL
 function selectZone(mode) {
     document.querySelectorAll('.zone-btn').forEach(btn => btn.classList.remove('active'));
 
@@ -746,18 +749,40 @@ function createLightning() {
 }
 
 // ==========================================
-// 3. UI LOGIC (SLIDER)
+// 3. UI LOGIC (SLIDER) CẬP NHẬT ĐỘNG
 // ==========================================
-let currentSlideIndex = 0; const slides = document.querySelectorAll('.slide'); const dots = document.querySelectorAll('.dot'); let slideInterval;
-function showSlide(n) { slides.forEach(s => s.classList.remove('active')); dots.forEach(d => d.classList.remove('active')); currentSlideIndex = (n + slides.length) % slides.length; slides[currentSlideIndex].classList.add('active'); dots[currentSlideIndex].classList.add('active'); }
+let currentSlideIndex = 0; 
+let slides, dots, slideInterval;
+
+function initDynamicSlider() {
+    slides = document.querySelectorAll('.slide'); 
+    dots = document.querySelectorAll('.dot'); 
+    if(slides.length === 0) return; // Nếu không có game nào thì bỏ qua
+    resetInterval();
+
+    const sliderContainer = document.getElementById('main-slider');
+    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval)); 
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+}
+
+function showSlide(n) { 
+    if(!slides || slides.length === 0) return;
+    slides.forEach(s => s.classList.remove('active')); 
+    dots.forEach(d => d.classList.remove('active')); 
+    currentSlideIndex = (n + slides.length) % slides.length; 
+    slides[currentSlideIndex].classList.add('active'); 
+    dots[currentSlideIndex].classList.add('active'); 
+}
+
 function changeSlide(step) { showSlide(currentSlideIndex + step); resetInterval(); }
 function goToSlide(n) { showSlide(n); resetInterval(); }
 function startAutoSlide() { slideInterval = setInterval(() => changeSlide(1), 4000); }
 function resetInterval() { clearInterval(slideInterval); startAutoSlide(); }
-startAutoSlide();
-const sliderContainer = document.getElementById('main-slider');
-sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval)); sliderContainer.addEventListener('mouseleave', startAutoSlide);
-document.addEventListener('keydown', e => { if(e.key === 'ArrowLeft') changeSlide(-1); else if(e.key === 'ArrowRight') changeSlide(1); });
+
+document.addEventListener('keydown', e => { 
+    if(e.key === 'ArrowLeft') changeSlide(-1); 
+    else if(e.key === 'ArrowRight') changeSlide(1); 
+});
 
 document.addEventListener("DOMContentLoaded", () => { 
     if(localStorage.getItem('isAdult') === 'true') document.getElementById('age-warning-overlay').style.display = 'none'; 
