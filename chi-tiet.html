@@ -22,36 +22,15 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .back{ color:var(--accent); text-decoration:none; font-weight:bold; transition: 0.3s; display: inline-block; padding-top: 10px;}
 .back:hover{ transform: translateX(-5px); text-shadow: 0 0 10px var(--accent); }
 
-/* --- BANNER KHỔNG LỒ (HERO) --- */
-.hero{ 
-    margin-top:20px; padding:100px 20px; text-align:center; border-radius:20px; 
-    border:1px solid rgba(255,255,255,.08); box-shadow: 0 0 30px rgba(255,79,160,.2); 
-    position: relative; overflow: hidden; display: flex; justify-content: center; 
-    align-items: center; flex-direction: column;
-    background-size: cover; background-position: center; background-repeat: no-repeat;
-    background-color: var(--card);
+/* --- HEADER TRÊN ĐỈNH --- */
+.site-top-header {
+    display: flex; align-items: center; gap: 25px;
+    padding: 20px 0; margin-top: 15px; margin-bottom: 25px;
+    border-bottom: 1px dashed rgba(139, 92, 246, 0.3);
 }
-/* Phủ một lớp sương đen gradient để chữ không bị chìm vào ảnh nền */
-.hero::after { 
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(to bottom, rgba(11,11,18,0.4) 0%, rgba(11,11,18,0.95) 100%); 
-    z-index: 1; pointer-events: none; 
-}
-.header-content, .hero p { z-index: 2; position: relative; }
-
-/* KHUNG GLASSMORPHISM CHỨA LOGO VÀ TIÊU ĐỀ */
-.header-content {
-    background: rgba(15, 15, 25, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    padding: 30px 50px; border-radius: 20px; border: 1px solid rgba(255, 79, 160, 0.3);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
-    z-index: 2; display: flex; flex-direction: column; align-items: center; transition: all 0.4s ease;
-}
-
-/* HIỆU ỨNG CHO LOGO CHÍNH THỨC */
-.header-logo {
-    width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;
-    box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+.top-logo { 
+    width: 90px; height: 90px; border-radius: 50%; 
+    box-shadow: 0 0 20px var(--accent); border: 2px solid var(--accent); 
     animation: floatLogo 3s ease-in-out infinite;
 }
 @keyframes floatLogo {
@@ -59,19 +38,28 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     50% { transform: translateY(-10px); box-shadow: 0 0 35px var(--accent), 0 0 60px var(--accent2); }
     100% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
 }
-
-/* Cập nhật style cho tiêu đề Game động */
-#ui-title {
-    font-size: 2.2rem; color: white; text-shadow: 0 0 15px var(--accent), 0 0 5px var(--accent); margin-bottom: 5px;
+.top-titles h1 { 
+    font-size: 2.4rem; color: white; text-shadow: 0 0 15px var(--accent); 
+    margin-bottom: 5px; letter-spacing: 1px;
 }
-.hero p{ color:var(--text-dim); font-size: 1.1rem; position: relative; z-index: 1; }
+.top-titles p { color: var(--text-dim); font-size: 1.1rem; }
+
+/* --- BANNER KHỔNG LỒ (CHỈ LÀ ẢNH TRƠN) --- */
+.hero { 
+    width: 100%; height: 400px; 
+    border-radius: 20px; 
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    border: 1px solid rgba(255,255,255,0.1); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background-color: var(--card); /* Màu lót khi ảnh chưa load */
+}
 
 /* BỐ CỤC 2 CỘT */
 .detail-wrapper { display: flex; gap: 25px; margin-top: 25px; align-items: flex-start; }
 .main-content { flex: 7; min-width: 0; }
 .sidebar { flex: 3; min-width: 320px; position: sticky; top: 20px; }
 
-/* HIỆU ỨNG LOADING ẢNH BÌA */
+/* HIỆU ỨNG LOADING ẢNH BÌA DỌC */
 .cover { 
     width: 100%; border-radius: 16px; 
     max-height: 450px; min-height: 250px; 
@@ -163,7 +151,8 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     .detail-wrapper { flex-direction: column; } 
     .main-content, .sidebar { min-width: 100%; } 
     .sidebar { position: relative; top: 0; }
-    .hero h1{ font-size:2rem; } 
+    .site-top-header { flex-direction: column; text-align: center; gap: 15px; }
+    .hero { height: 250px; }
     .gallery{ grid-template-columns:1fr; } 
     .gallery img{ height:220px; } 
 }
@@ -173,13 +162,15 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 <div class="container">
     <a class="back" href="index.html">← QUAY LẠI TRANG CHỦ</a>
 
-    <div class="hero">
-        <div class="header-content"> <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" alt="HPGVH18 Logo" class="header-logo">
-            
+    <div class="site-top-header">
+        <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" alt="HPGVH18 Logo" class="top-logo">
+        <div class="top-titles">
             <h1 id="ui-title">Đang đồng bộ...</h1>
             <p>Visual Novel Việt Hóa | <strong id="ui-author-top">Tác giả: ...</strong></p>
         </div>
     </div>
+
+    <div class="hero"></div>
 
     <div class="detail-wrapper">
         <div class="main-content">
@@ -329,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
 
                     if (galleryArray.length > 0 && galleryArray[0].trim() !== "") {
-                        // 1. Lấy ảnh đầu tiên trong Gallery làm Banner bự
+                        // Lấy ảnh đầu tiên trong Gallery làm Banner bự
                         const bannerUrl = galleryArray[0].trim();
                         if(bannerUrl !== "") {
                             document.querySelector('.hero').style.backgroundImage = `url('${bannerUrl}')`;
@@ -337,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
                         }
 
-                        // 2. Các ảnh còn lại (từ ảnh thứ 2 trở đi) nhét vào mục Hình ảnh
+                        // Các ảnh còn lại nhét vào mục Hình ảnh
                         if (galleryArray.length > 1) {
                             for(let i = 1; i < galleryArray.length; i++) {
                                 let imgUrl = galleryArray[i].trim();
