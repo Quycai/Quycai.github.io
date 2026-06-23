@@ -503,8 +503,8 @@ fetch(API_LINK)
                 </div>
             `;
 
-            // --- TẠO HTML CHO SLIDER (LẤY 3 GAME MỚI NHẤT) ---
-            if (index < 3) {
+            // --- TẠO HTML CHO SLIDER (LẤY 10 GAME MỚI NHẤT) ---
+            if (index < 10) {
                 const isActive = index === 0 ? 'active' : '';
                 slidesHtml += `
                     <div class="slide ${isActive}" onclick="window.location.href='chi-tiet.html?id=${id}'">
@@ -776,7 +776,7 @@ function showSlide(n) {
 
 function changeSlide(step) { showSlide(currentSlideIndex + step); resetInterval(); }
 function goToSlide(n) { showSlide(n); resetInterval(); }
-function startAutoSlide() { slideInterval = setInterval(() => changeSlide(1), 4000); }
+function startAutoSlide() { slideInterval = setInterval(() => changeSlide(1), 3000); }
 function resetInterval() { clearInterval(slideInterval); startAutoSlide(); }
 
 document.addEventListener('keydown', e => { 
