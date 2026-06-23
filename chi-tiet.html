@@ -47,10 +47,10 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 /* --- BANNER KHỔNG LỒ (CHỈ LÀ ẢNH TRƠN) --- */
 .hero { 
     width: 100%; 
-    aspect-ratio: 21 / 9; /* Tỷ lệ vàng tự co giãn */
+    aspect-ratio: 21 / 9; 
     max-height: 450px; 
     border-radius: 20px; 
-    background-size: contain; /* Ép hiển thị trọn vẹn 100% ảnh */
+    background-size: contain; 
     background-position: center; 
     background-repeat: no-repeat;
     border: 1px solid rgba(255,255,255,0.1); 
@@ -147,6 +147,36 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .rating-stars { color: #ffb400; font-size: 15px; margin-right: 5px;}
 .rating-text { font-size: 12px; color: #aaa; display: block; margin-top: 4px;}
 
+/* --- KHU VỰC CÓ THỂ BẠN GHIỀN --- */
+.related-section { margin-top: 60px; padding-top: 40px; border-top: 1px dashed rgba(139, 92, 246, 0.3); }
+.related-title { text-align: center; color: var(--accent2); margin-bottom: 30px; font-size: 22px; text-shadow: 0 0 10px rgba(139,92,246,0.5); letter-spacing: 1px; text-transform: uppercase;}
+.games { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+@property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
+.game-card { 
+    background: var(--card); border-radius: 16px; overflow: hidden; position: relative; 
+    border: 2px solid transparent; 
+    transition: box-shadow 0.3s ease, transform 0.3s ease; transform-style: preserve-3d; transform: perspective(1000px); 
+    background-clip: padding-box, border-box; background-origin: padding-box, border-box;
+    background-image: linear-gradient(var(--card), var(--card)), linear-gradient(#333, #333);
+    text-decoration: none; display: block;
+}
+.game-card:hover { 
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4); 
+    background-image: linear-gradient(var(--card), var(--card)), conic-gradient(from var(--border-angle), var(--card) 40%, var(--accent) 70%, var(--accent2) 100%);
+    animation: bg-spin 2s linear infinite; transform: translateY(-5px);
+}
+@keyframes bg-spin { to { --border-angle: 1turn; } }
+.game-card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid #333;}
+.game-card .info { padding: 15px; }
+.game-card h3 { font-size: 17px; margin-bottom: 8px; color: white; transition: 0.3s;}
+.game-card:hover h3 { color: var(--accent2); }
+.game-card p { font-size: 13px; color: #aaa; margin-bottom: 12px; }
+.btn-view { display: block; text-align: center; background: rgba(139, 92, 246, 0.15); border: 1px solid var(--accent2); color: var(--accent2); padding: 8px; border-radius: 8px; transition: 0.3s; font-weight: bold; font-size: 13px;}
+.game-card:hover .btn-view { background: var(--accent2); color: white; box-shadow: 0 0 15px var(--accent2); }
+
+.fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-in.appear { opacity: 1; transform: translateY(0); }
+
 .footer{ text-align:center; color:#555; margin:40px 0 20px 0; font-size: 14px; padding-top: 20px; border-top: 1px solid #333;}
 .lightbox{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(11,11,18,.95); backdrop-filter: blur(5px); justify-content:center; align-items:center; z-index:9999; }
 .lightbox img{ max-width:90%; max-height:90%; border-radius:12px; box-shadow: 0 0 40px rgba(0,0,0,0.8); border: 2px solid #444; }
@@ -156,10 +186,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     .main-content, .sidebar { min-width: 100%; } 
     .sidebar { position: relative; top: 0; }
     .site-top-header { flex-direction: column; text-align: center; gap: 15px; }
-    
-    /* Giao diện Mobile: Tự động co giãn theo tỷ lệ ảnh */
     .hero { aspect-ratio: 16 / 9; max-height: none; height: auto; }
-    
     .gallery{ grid-template-columns:1fr; } 
     .gallery img{ height:220px; } 
 }
@@ -181,14 +208,14 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 
     <div class="detail-wrapper">
         <div class="main-content">
-            <img class="cover" id="ui-cover" src="" alt="Cover Game" loading="lazy">
+            <img class="cover fade-in" id="ui-cover" src="" alt="Cover Game" loading="lazy">
 
-            <div class="box">
+            <div class="box fade-in">
                 <h2>Hồ Sơ Cốt Truyện</h2>
                 <p id="ui-desc">Đang truy xuất dữ liệu mật...</p>
             </div>
 
-            <div class="box">
+            <div class="box fade-in">
                 <div class="gallery-header">
                     <h2>Dữ Liệu Hình Ảnh</h2>
                     <button id="nsfw-btn" class="nsfw-toggle">
@@ -198,7 +225,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
                 <div class="gallery" id="ui-gallery"></div>
             </div>
 
-            <div class="box">
+            <div class="box fade-in">
                 <h2>Cổng Truy Xuất Dữ Liệu</h2>
                 <div class="password-box" id="copy-pass-btn">
                     <span>Mã Khóa Bảo Mật:</span> <strong>hpgvh18</strong>
@@ -272,16 +299,32 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
         </div>
     </div>
 
+    <div class="related-section fade-in">
+        <h2 class="related-title">⚡ CÓ THỂ BẠN SẼ GHIỀN ⚡</h2>
+        <div class="games" id="related-games-list">
+            <p style='text-align:center; width:100%; color:#888;'>Đang tải dữ liệu radar...</p>
+        </div>
+    </div>
+
     <div class="footer">Dự án cộng đồng phi lợi nhuận © 2026 HPGVH18 Studio<br><span style="font-size: 12px; margin-top: 5px; display: block;">Code by PhongDHP</span></div>
 </div>
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
 <script>
 // ==========================================
 // ĐỘNG CƠ HÚT DATA ĐỘNG
 // ==========================================
 const API_LINK = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
+
+// Cài đặt Intersection Observer để làm mượt Scroll
+const appearOnScroll = new IntersectionObserver(entries => { 
+    entries.forEach(entry => { 
+        if (entry.isIntersecting) { entry.target.classList.add('appear'); appearOnScroll.unobserve(entry.target); } 
+    }); 
+}, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
 document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -318,7 +361,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     const galleryContainer = document.getElementById('ui-gallery');
                     galleryContainer.innerHTML = ""; 
                     
-                    // Xử lý tách chuỗi nếu là string (đề phòng định dạng string từ Google Sheet)
                     let galleryArray = [];
                     if (data.gallery && typeof data.gallery === 'string') {
                         galleryArray = data.gallery.split(',');
@@ -327,7 +369,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
 
                     if (galleryArray.length > 0 && galleryArray[0].trim() !== "") {
-                        // Lấy ảnh đầu tiên trong Gallery làm Banner bự
                         const bannerUrl = galleryArray[0].trim();
                         if(bannerUrl !== "") {
                             document.querySelector('.hero').style.backgroundImage = `url('${bannerUrl}')`;
@@ -335,24 +376,55 @@ document.addEventListener("DOMContentLoaded", function() {
                             document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
                         }
 
-                        // Các ảnh còn lại nhét vào mục Hình ảnh
                         if (galleryArray.length > 1) {
                             for(let i = 1; i < galleryArray.length; i++) {
                                 let imgUrl = galleryArray[i].trim();
                                 if(imgUrl !== "") {
-                                    galleryContainer.innerHTML += `<img class="img-nsfw" src="${imgUrl}" alt="Gameplay" loading="lazy">`;
+                                    galleryContainer.innerHTML += `<img class="img-nsfw fade-in" src="${imgUrl}" alt="Gameplay" loading="lazy">`;
                                 }
                             }
                         } else {
                             galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh bổ sung.</p>";
                         }
                     } else {
-                        // Nếu lười không nhập Gallery luôn thì lấy tạm Cover làm Banner
                         document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
                         galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh.</p>";
                     }
 
                     initLightbox();
+
+                    // --- BĂNG CHUYỀN GAME GỢI Ý (RELATED GAMES) ---
+                    // Lọc lấy danh sách ID và xáo trộn ngẫu nhiên, bỏ game hiện tại ra
+                    let allIds = Object.keys(dbGame).filter(id => id !== gameId);
+                    allIds.sort(() => 0.5 - Math.random());
+                    
+                    // Lấy ra 3 game đầu tiên sau khi xáo trộn
+                    let randomIds = allIds.slice(0, 3);
+                    let relatedHtml = "";
+                    
+                    randomIds.forEach(rId => {
+                        const rGame = dbGame[rId];
+                        relatedHtml += `
+                            <a href="chi-tiet.html?id=${rId}" class="game-card fade-in">
+                                <img src="${rGame.cover}" alt="${rGame.title}" loading="lazy">
+                                <div class="info">
+                                    <h3>${rGame.title}</h3>
+                                    <p>Tác giả: ${rGame.author}</p>
+                                    <div class="btn-view">XEM HỒ SƠ</div>
+                                </div>
+                            </a>
+                        `;
+                    });
+                    
+                    if(relatedHtml === "") relatedHtml = "<p style='color:#888;'>Kho dữ liệu chưa đủ game để gợi ý.</p>";
+                    document.getElementById('related-games-list').innerHTML = relatedHtml;
+
+                    // Kích hoạt hiệu ứng thẻ bài 3D cho Related Games
+                    VanillaTilt.init(document.querySelectorAll(".game-card"), { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
+                    
+                    // Kích hoạt lại hiệu ứng cuộn trang (Fade In)
+                    document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
+
                 } else {
                     document.getElementById('ui-title').innerText = "❌ KHÔNG TÌM THẤY GAME";
                 }
@@ -361,7 +433,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById('ui-title').innerText = "❌ MẤT KẾT NỐI MÁY CHỦ";
             });
     } else {
-        // ĐÁ VĂNG KHÁCH LẠC ĐƯỜNG VỀ TRANG CHỦ
         document.getElementById('ui-title').innerText = "❌ LỖI TRUY XUẤT. ĐANG QUAY LẠI...";
         setTimeout(() => { window.location.href = 'index.html'; }, 1500);
     }
