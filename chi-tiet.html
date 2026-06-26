@@ -63,16 +63,20 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .main-content { flex: 7; min-width: 0; }
 .sidebar { flex: 3; min-width: 320px; position: sticky; top: 20px; }
 
-/* HIỆU ỨNG LOADING ẢNH BÌA DỌC */
+/* HIỆU ỨNG LOADING ẢNH BÌA DỌC ĐÃ ĐƯỢC FIX SẮC NÉT */
 .cover { 
-    width: 100%; border-radius: 16px; 
-    max-height: 450px; min-height: 250px; 
+    width: 100%; 
+    max-width: 350px; /* Khóa kích thước tối đa để ảnh không bị giãn làm mờ */
+    height: auto; /* Tự co giãn chiều cao cho đúng tỷ lệ gốc, không bị cắt xén */
+    border-radius: 16px; 
     object-fit: cover; border: 1px solid #333; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
     background: linear-gradient(90deg, #171722 25%, #252536 50%, #171722 75%);
     background-size: 200% 100%;
     animation: loading-pulse 1.5s infinite;
     color: transparent; 
+    display: block; 
+    margin: 0 auto 25px auto; /* Căn giữa tấm ảnh cho đẹp đội hình */
 }
 @keyframes loading-pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
@@ -299,6 +303,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
         </div>
     </div>
 
+    <!-- KHU VỰC CÓ THỂ BẠN GHIỀN -->
     <div class="related-section fade-in">
         <h2 class="related-title">⚡ CÓ THỂ BẠN SẼ GHIỀN ⚡</h2>
         <div class="games" id="related-games-list">
