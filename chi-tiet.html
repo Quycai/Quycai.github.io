@@ -44,18 +44,18 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 }
 .top-titles p { color: var(--text-dim); font-size: 1.1rem; }
 
-/* --- BANNER KHỔNG LỒ (CHỈ LÀ ẢNH TRƠN) --- */
-.hero { 
+/* --- BANNER KHỔNG LỒ (ĐÃ FIX LỖI TỶ LỆ & CHUYỂN SANG DÙNG IMG) --- */
+.hero-banner { 
     width: 100%; 
-    aspect-ratio: 21 / 9; 
-    max-height: 450px; 
+    height: auto; /* Ảnh tỷ lệ bao nhiêu bung ra bấy nhiêu, không bị viền đen */
+    max-height: 500px; /* Khóa chiều cao tối đa để màn hình to không bị lố */
+    object-fit: cover; 
+    object-position: top center; 
     border-radius: 20px; 
-    background-size: contain; 
-    background-position: center; 
-    background-repeat: no-repeat;
     border: 1px solid rgba(255,255,255,0.1); 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    background-color: transparent; 
+    margin-bottom: 25px;
+    display: none; /* Mặc định ẩn, JS sẽ bật lên nếu có ảnh */
 }
 
 /* BỐ CỤC 2 CỘT */
@@ -63,11 +63,11 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 .main-content { flex: 7; min-width: 0; }
 .sidebar { flex: 3; min-width: 320px; position: sticky; top: 20px; }
 
-/* HIỆU ỨNG LOADING ẢNH BÌA DỌC ĐÃ ĐƯỢC FIX SẮC NÉT */
+/* HIỆU ỨNG LOADING ẢNH BÌA DỌC */
 .cover { 
     width: 100%; 
-    max-width: 350px; /* Khóa kích thước tối đa để ảnh không bị giãn làm mờ */
-    height: auto; /* Tự co giãn chiều cao cho đúng tỷ lệ gốc, không bị cắt xén */
+    max-width: 350px; 
+    height: auto; 
     border-radius: 16px; 
     object-fit: cover; border: 1px solid #333; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
@@ -76,7 +76,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     animation: loading-pulse 1.5s infinite;
     color: transparent; 
     display: block; 
-    margin: 0 auto 25px auto; /* Căn giữa tấm ảnh cho đẹp đội hình */
+    margin: 0 auto 25px auto; 
 }
 @keyframes loading-pulse { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
@@ -190,7 +190,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     .main-content, .sidebar { min-width: 100%; } 
     .sidebar { position: relative; top: 0; }
     .site-top-header { flex-direction: column; text-align: center; gap: 15px; }
-    .hero { aspect-ratio: 16 / 9; max-height: none; height: auto; }
+    .hero-banner { max-height: 300px; }
     .gallery{ grid-template-columns:1fr; } 
     .gallery img{ height:220px; } 
 }
@@ -208,7 +208,7 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
         </div>
     </div>
 
-    <div class="hero"></div>
+    <img class="hero-banner fade-in" id="ui-hero-banner" src="" alt="Banner Game">
 
     <div class="detail-wrapper">
         <div class="main-content">
@@ -303,7 +303,6 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
         </div>
     </div>
 
-    <!-- KHU VỰC CÓ THỂ BẠN GHIỀN -->
     <div class="related-section fade-in">
         <h2 class="related-title">⚡ CÓ THỂ BẠN SẼ GHIỀN ⚡</h2>
         <div class="games" id="related-games-list">
@@ -364,6 +363,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     // XỬ LÝ ẢNH GALLERY (NSFW) VÀ ĐẨY BANNER
                     const galleryContainer = document.getElementById('ui-gallery');
+                    const heroBanner = document.getElementById('ui-hero-banner');
                     galleryContainer.innerHTML = ""; 
                     
                     let galleryArray = [];
@@ -373,12 +373,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         galleryArray = data.gallery;
                     }
 
+                    // THUẬT TOÁN BANNER MỚI: CÓ THÌ BẬT, KHÔNG THÌ TẮT SẠCH MÁT MẼ!
                     if (galleryArray.length > 0 && galleryArray[0].trim() !== "") {
                         const bannerUrl = galleryArray[0].trim();
                         if(bannerUrl !== "") {
-                            document.querySelector('.hero').style.backgroundImage = `url('${bannerUrl}')`;
-                        } else {
-                            document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
+                            heroBanner.src = bannerUrl;
+                            heroBanner.style.display = 'block'; // Hiện Banner lên
                         }
 
                         if (galleryArray.length > 1) {
@@ -392,18 +392,17 @@ document.addEventListener("DOMContentLoaded", function() {
                             galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh bổ sung.</p>";
                         }
                     } else {
-                        document.querySelector('.hero').style.backgroundImage = `url('${data.cover}')`;
+                        // NẾU KHÔNG CÓ GALLERY THÌ ẨN LUÔN CÁI BOX BANNER
+                        heroBanner.style.display = 'none';
                         galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh.</p>";
                     }
 
                     initLightbox();
 
                     // --- BĂNG CHUYỀN GAME GỢI Ý (RELATED GAMES) ---
-                    // Lọc lấy danh sách ID và xáo trộn ngẫu nhiên, bỏ game hiện tại ra
                     let allIds = Object.keys(dbGame).filter(id => id !== gameId);
                     allIds.sort(() => 0.5 - Math.random());
                     
-                    // Lấy ra 3 game đầu tiên sau khi xáo trộn
                     let randomIds = allIds.slice(0, 3);
                     let relatedHtml = "";
                     
@@ -424,10 +423,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if(relatedHtml === "") relatedHtml = "<p style='color:#888;'>Kho dữ liệu chưa đủ game để gợi ý.</p>";
                     document.getElementById('related-games-list').innerHTML = relatedHtml;
 
-                    // Kích hoạt hiệu ứng thẻ bài 3D cho Related Games
                     VanillaTilt.init(document.querySelectorAll(".game-card"), { max: 10, speed: 400, glare: true, "max-glare": 0.2 });
                     
-                    // Kích hoạt lại hiệu ứng cuộn trang (Fade In)
                     document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
 
                 } else {
