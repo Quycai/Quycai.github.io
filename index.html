@@ -86,7 +86,7 @@ header p { color:#e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-size: 17p
 .zone-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,79,160,0.4); border-color: var(--accent); }
 .zone-nsfw.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; box-shadow: 0 0 25px rgba(255, 79, 160, 0.6); }
 .zone-horror.active { background: linear-gradient(135deg, #ff3333, #990000); border-color: transparent; box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); }
-/* Active State cho Zone VN */
+/* Active State cho Theme VN */
 .zone-vietnam.active { background: linear-gradient(135deg, #da251d, #ffcc00); border-color: transparent; box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); }
 .zone-vietnam.active .zone-title, .zone-vietnam.active .zone-desc { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
 
@@ -109,7 +109,7 @@ body.blood-theme .site-logo { box-shadow: 0 0 25px #ff3333, 0 0 45px #990000; an
 }
 @keyframes glitch-anim-blood { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
 
-/* 🇻🇳 THEME VIỆT NAM KHI CHỌN KHU GAME VIỆT */
+/* 🇻🇳 THEME VIỆT NAM (Chỉ đổi màu UI, không lọc game) */
 body.vietnam-theme { --accent: #ffcc00; --accent2: #da251d; } /* Vàng sao, đỏ cờ */
 body.vietnam-theme::before { background-image: linear-gradient(rgba(218, 37, 29, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 204, 0, 0.15) 1px, transparent 1px); }
 body.vietnam-theme .header-glass { border-color: rgba(255, 204, 0, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(218, 37, 29, 0.2); }
@@ -321,10 +321,11 @@ input[type=range]:focus { outline: none; }
         <div class="zone-title">KHU KINH DỊ</div>
         <div class="zone-desc">Guro, Zombie, Bạo lực tâm lý...</div>
     </div>
+    <!-- KHU VỰC ĐỔI THEME VN ĐÃ ĐƯỢC CHỈNH LẠI -->
     <div class="zone-btn zone-vietnam" onclick="selectZone('vietnam')">
         <span class="zone-icon">🇻🇳</span>
-        <div class="zone-title">KHU GAME VIỆT</div>
-        <div class="zone-desc">Dự án gốc, Bối cảnh VN...</div>
+        <div class="zone-title">THEME VIỆT NAM</div>
+        <div class="zone-desc">Đổi màu cờ Tổ Quốc...</div>
     </div>
 </aside>
 
@@ -589,8 +590,8 @@ function applyFilters() {
         if (currentThemeMode === 'horror') {
             themeMatch = cardTags.includes('kinh-di'); 
         } else if (currentThemeMode === 'vietnam') {
-            // Lọc ra các dự án của nhà trồng được hoặc game Việt
-            themeMatch = cardTags.includes('vietnam') || cardTags.includes('vn') || cardTags.includes('thuần việt');
+            // NÚT NÀY CHỈ ĐỔI MÀU, NÊN HIỂN THỊ TẤT CẢ GAME TRONG KHO
+            themeMatch = true; 
         } else {
             themeMatch = !cardTags.includes('kinh-di'); 
         }
