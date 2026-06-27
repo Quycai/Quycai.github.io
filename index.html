@@ -86,6 +86,10 @@ header p { color:#e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-size: 17p
 .zone-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,79,160,0.4); border-color: var(--accent); }
 .zone-nsfw.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; box-shadow: 0 0 25px rgba(255, 79, 160, 0.6); }
 .zone-horror.active { background: linear-gradient(135deg, #ff3333, #990000); border-color: transparent; box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); }
+/* Active State cho Zone VN */
+.zone-vietnam.active { background: linear-gradient(135deg, #da251d, #ffcc00); border-color: transparent; box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); }
+.zone-vietnam.active .zone-title, .zone-vietnam.active .zone-desc { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+
 .zone-icon { font-size: 32px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
 .zone-title { font-size: 16px; font-weight: bold; color: white; letter-spacing: 1px; margin-bottom: 5px; }
 .zone-desc { font-size: 12px; color: #ccc; line-height: 1.4; }
@@ -97,15 +101,28 @@ body.blood-theme .header-glass { border-color: rgba(255, 51, 51, 0.4); box-shado
 body.blood-theme .left-sidebar { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
 body.blood-theme .sidebar-title { text-shadow: 0 0 10px #ff3333; }
 body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; color: #ff3333; text-shadow: 0 0 15px rgba(255, 51, 51, 0.8), 0 0 5px #ff3333; }
-/* Đổi hào quang logo sang đỏ máu khi sang khu kinh dị */
 body.blood-theme .site-logo { box-shadow: 0 0 25px #ff3333, 0 0 45px #990000; animation: floatLogoBlood 3s ease-in-out infinite; }
 @keyframes floatLogoBlood {
     0% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
     50% { transform: translateY(-10px); box-shadow: 0 0 35px #ff3333, 0 0 60px #990000; }
     100% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
 }
-
 @keyframes glitch-anim-blood { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
+
+/* 🇻🇳 THEME VIỆT NAM KHI CHỌN KHU GAME VIỆT */
+body.vietnam-theme { --accent: #ffcc00; --accent2: #da251d; } /* Vàng sao, đỏ cờ */
+body.vietnam-theme::before { background-image: linear-gradient(rgba(218, 37, 29, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 204, 0, 0.15) 1px, transparent 1px); }
+body.vietnam-theme .header-glass { border-color: rgba(255, 204, 0, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(218, 37, 29, 0.2); }
+body.vietnam-theme .left-sidebar { border-color: rgba(255, 204, 0, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(218, 37, 29, 0.2); }
+body.vietnam-theme .sidebar-title { text-shadow: 0 0 10px #ffcc00; }
+body.vietnam-theme header h1.glitch { animation: glitch-anim-vn 4s infinite; color: #ffcc00; text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 0 0 5px #da251d; }
+body.vietnam-theme .site-logo { box-shadow: 0 0 25px #ffcc00, 0 0 45px #da251d; animation: floatLogoVN 3s ease-in-out infinite; }
+@keyframes floatLogoVN {
+    0% { transform: translateY(0px); box-shadow: 0 0 20px #ffcc00, 0 0 40px #da251d; }
+    50% { transform: translateY(-10px); box-shadow: 0 0 35px #ffcc00, 0 0 60px #da251d; }
+    100% { transform: translateY(0px); box-shadow: 0 0 20px #ffcc00, 0 0 40px #da251d; }
+}
+@keyframes glitch-anim-vn { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ffcc00) drop-shadow(3px 0 0 #da251d); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ffcc00) drop-shadow(-3px 0 0 #da251d); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
 
 .container{ max-width:1200px; margin:auto; padding:20px; position: relative; z-index: 1;}
 .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
@@ -303,6 +320,11 @@ input[type=range]:focus { outline: none; }
         <span class="zone-icon">🩸</span>
         <div class="zone-title">KHU KINH DỊ</div>
         <div class="zone-desc">Guro, Zombie, Bạo lực tâm lý...</div>
+    </div>
+    <div class="zone-btn zone-vietnam" onclick="selectZone('vietnam')">
+        <span class="zone-icon">🇻🇳</span>
+        <div class="zone-title">KHU GAME VIỆT</div>
+        <div class="zone-desc">Dự án gốc, Bối cảnh VN...</div>
     </div>
 </aside>
 
@@ -566,6 +588,9 @@ function applyFilters() {
         let themeMatch = false;
         if (currentThemeMode === 'horror') {
             themeMatch = cardTags.includes('kinh-di'); 
+        } else if (currentThemeMode === 'vietnam') {
+            // Lọc ra các dự án của nhà trồng được hoặc game Việt
+            themeMatch = cardTags.includes('vietnam') || cardTags.includes('vn') || cardTags.includes('thuần việt');
         } else {
             themeMatch = !cardTags.includes('kinh-di'); 
         }
@@ -585,13 +610,17 @@ function applyFilters() {
 
 function selectZone(mode) {
     document.querySelectorAll('.zone-btn').forEach(btn => btn.classList.remove('active'));
+    document.body.classList.remove('blood-theme', 'vietnam-theme');
 
     if (mode === 'horror') {
         document.body.classList.add('blood-theme');
         document.querySelector('.zone-horror').classList.add('active');
         currentThemeMode = 'horror';
+    } else if (mode === 'vietnam') {
+        document.body.classList.add('vietnam-theme');
+        document.querySelector('.zone-vietnam').classList.add('active');
+        currentThemeMode = 'vietnam';
     } else {
-        document.body.classList.remove('blood-theme');
         document.querySelector('.zone-nsfw').classList.add('active');
         currentThemeMode = 'nsfw';
     }
