@@ -264,9 +264,9 @@ body.vietnam-theme .site-logo { box-shadow: 0 0 25px #ffcc00, 0 0 45px #da251d; 
 .btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px var(--accent); transform: translateY(-2px); }
 
 /* --- CON TRỞ CHUỘT --- */
-a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider, .suggest-settings-btn { cursor: none; }
-.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99999; box-shadow: 0 0 10px var(--accent); }
-.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider, .suggest-settings-btn, .btn-ghost, .btn-primary, .toggle-slider { cursor: none; }
+.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 999999; box-shadow: 0 0 10px var(--accent); }
+.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 999998; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
 .cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
 
 /* --- TIMELINE --- */
@@ -448,7 +448,6 @@ input[type=range]:focus { outline: none; }
 <header>
     <div class="header-glass">
         <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" alt="HPGVH18 Logo" class="site-logo">
-        
         <h1 class="glitch">HPGVH18 STUDIO</h1>
         <p>Kho Game Visual Novel & Kinh Dị Việt Hóa</p>
     </div>
@@ -483,7 +482,6 @@ input[type=range]:focus { outline: none; }
             </label>
         </div>
         <div class="games" id="suggestList"></div>
-        <div class="suggest-empty" id="emptySuggest">🕵️ Xem thêm 2‑3 game nữa để hệ thống "bắt bài" gu của bạn nhé!</div>
     </section>
 
     <section class="suggest-block fade-in" id="suggestRelated" style="display:none">
@@ -726,18 +724,17 @@ function renderCardHTML(g, score = 0, isSuggestBlock = false) {
 function renderSuggestions() {
     const wrap = document.getElementById("suggestForYou");
     const list = document.getElementById("suggestList");
-    const empty = document.getElementById("emptySuggest");
     
+    // Bị tắt trong cài đặt
     if (!suggestConfig.enabled) { wrap.style.display = "none"; return; }
     
     const items = getSuggestForYou();
-    wrap.style.display = "block";
     
     if (items.length === 0) { 
-        list.innerHTML = ""; 
-        empty.style.display = "block"; 
+        // Ẩn hoàn toàn thẻ Gợi Ý nếu chưa có dữ liệu để chống lỗi khoảng trống
+        wrap.style.display = "none"; 
     } else { 
-        empty.style.display = "none"; 
+        wrap.style.display = "block"; 
         list.innerHTML = items.map(({ game, score }) => renderCardHTML(game, score, true)).join("");
         VanillaTilt.init(list.querySelectorAll(".game-card"), TILT_CONFIG); 
     }
@@ -817,7 +814,7 @@ fetch(API_LINK)
         initDynamicSlider(); 
         renderSuggestions();
 
-        // Check ID trên URL để log lịch sử xem nếu user vào link chi tiết
+        // Check ID trên URL để log lịch sử
         const urlId = new URLSearchParams(location.search).get("id");
         if(urlId) { logViewGame(urlId); renderRelated(urlId); }
     })
@@ -828,7 +825,7 @@ fetch(API_LINK)
 
 /* ---------- 4. SỰ KIỆN TƯƠNG TÁC GIAO DIỆN ---------- */
 function refreshCursorHoverEffects() {
-    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider, .gacha-btn, .close-gacha, .zone-btn, .suggest-settings-btn').forEach(el => { 
+    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider, .gacha-btn, .close-gacha, .zone-btn, .suggest-settings-btn, .btn-ghost, .btn-primary, .toggle-slider').forEach(el => { 
         el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
         el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
     });
@@ -883,7 +880,7 @@ document.querySelectorAll('.tag-btn').forEach(btn => {
 document.getElementById('search').addEventListener('keyup', (e) => { 
     const value = e.target.value.toLowerCase(); 
     document.querySelectorAll('#game-list .game-card').forEach(card => { 
-        applyFilters(); // Reset filter first
+        applyFilters(); 
         if (card.style.display === 'block') {
             const text = card.innerText.toLowerCase(); 
             if(!text.includes(value)) card.style.display = 'none';
@@ -918,7 +915,6 @@ function clearAllSuggestData() {
     openSuggestSettings();
 }
 
-// Event Listeners cho Modal Gợi Ý
 document.getElementById("enableSuggest").addEventListener("change", e => { suggestConfig.enabled = e.target.checked; saveSuggestConfig(); renderSuggestions(); });
 document.getElementById("suggestCount").addEventListener("input", e => { suggestConfig.count = +e.target.value; document.getElementById("countLabel").textContent = e.target.value; saveSuggestConfig(); renderSuggestions(); });
 document.getElementById("hideSeen").addEventListener("change", e => { suggestConfig.hideSeen = e.target.checked; saveSuggestConfig(); renderSuggestions(); });
