@@ -322,9 +322,6 @@ input[type=range]::-webkit-slider-runnable-track{height:4px; background:#fff2; b
         <div class="slider-dots" id="dynamic-dots-container"></div>
     </div>
 
-    <!-- ==========================================
-         🧠 KHỐI GỢI Ý THÔNG MINH - HOÀN CHỈNH
-         ========================================== -->
     <div class="fade-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <h2 style="color:var(--accent2)">🎮 KHO GAME</h2>
         <div class="suggest-settings-btn" onclick="openSuggestSettings()">🧠 Tùy chỉnh gợi ý</div>
@@ -400,7 +397,7 @@ input[type=range]::-webkit-slider-runnable-track{height:4px; background:#fff2; b
 </div>
 
 <div class="cyber-player" id="cyberPlayer">
-    <audio id="audioPlayer">
+    <audio id="audioPlayer"></audio> 
     <div class="player-top" onclick="toggleMinimize(event)">
         <div class="visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
         <marquee class="track-title" id="trackTitle">Đang tải trạm phát sóng...</marquee>
@@ -575,7 +572,7 @@ document.getElementById("avoidSimilarMode").addEventListener("change",e=>{
 });
 
 /* =========================================================
-   PHẦN CŨ ĐÃ CÓ - GIỮ NGUYÊN + TÍCH HỢP GỢI Ý
+   LẤY DATA TỪ SHEET & KHỞI TẠO WEB
    ========================================================= */
 const API = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
 const gameListContainer = document.getElementById('game-list');
@@ -586,7 +583,7 @@ const outline = document.querySelector('.cursor-outline');
 fetch(API).then(r=>r.json()).then(data=>{
     let html='', sHtml='', dHtml='';
     const ids = Object.keys(data).reverse();
-    ids.forEach(id => allGamesMap[id] = {id, ...data[id]}); // ✅ bản đồ cho gợi ý
+    ids.forEach(id => allGamesMap[id] = {id, ...data[id]});
 
     ids.forEach((id,i)=>{
         const g=data[id];
@@ -615,7 +612,7 @@ fetch(API).then(r=>r.json()).then(data=>{
 
     bindHover();
     applyFilters();
-    renderSuggestions(); // ✅ tự động hiện gợi ý
+    renderSuggestions(); 
     const urlId = new URLSearchParams(location.search).get("id");
     if(urlId){ logViewGame(urlId); renderRelated(urlId); }
     initSlider();
