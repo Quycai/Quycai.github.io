@@ -4,18 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HPGVH18 - Kho Game Visual Novel & Kinh Dị</title>
-
+<meta name="rating" content="adult">
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png">
 
 <style>
 /* --- KHUNG XƯƠNG CƠ BẢN & BIẾN MÀU NEON --- */
 :root{ --bg:#0b0b12; --card:#171722; --accent:#ff4fa0; --accent2:#8b5cf6; }
 *{ margin:0; padding:0; box-sizing:border-box; }
-
 html { background-color: var(--bg); scroll-behavior: smooth; }
 body { color:white; font-family:Segoe UI,sans-serif; overflow-x: hidden; position: relative; cursor: none; }
 
-/* 🌟 LƯỚI CYBERPUNK TRÔI LỜ LỮNG */
 body::before {
     content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
     background-image: linear-gradient(rgba(255, 79, 160, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.15) 1px, transparent 1px);
@@ -28,9 +27,9 @@ body::before {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 10px; border: 1px solid #222; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
-::selection { background: var(--accent); color: white; text-shadow: none; }
+::selection { background: var(--accent); color: white; }
 
-/* --- HEADER MỚI CÓ LOGO --- */
+/* --- HEADER --- */
 header {
     position: relative; text-align: center; padding: 120px 20px; overflow: hidden;
     border-bottom: 2px solid var(--accent); box-shadow: 0 5px 20px rgba(255, 79, 160, 0.3);
@@ -39,19 +38,15 @@ header {
 header::before {
     content: ''; position: absolute; top: -5%; left: -5%; right: -5%; bottom: -5%;
     background: linear-gradient(135deg, rgba(11,11,18,0.7), rgba(11,11,18,0.5)), url('https://i.postimg.cc/PJQCJxz3/Gemini-Generated-Image-6txzhm6txzhm6txz.png'); 
-    background-size: cover; background-position: center; background-repeat: no-repeat;
-    z-index: -1; animation: breathe-anim 12s infinite alternate ease-in-out;
+    background-size: cover; background-position: center; z-index: -1; animation: breathe-anim 12s infinite alternate ease-in-out;
 }
 @keyframes breathe-anim { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
-
 .header-glass {
-    background: rgba(15, 15, 25, 0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(15, 15, 25, 0.55); backdrop-filter: blur(12px);
     padding: 35px 60px; border-radius: 20px; border: 1px solid rgba(255, 79, 160, 0.3);
     box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
-    z-index: 2; display: flex; flex-direction: column; align-items: center; transition: all 0.4s ease;
+    z-index: 2; display: flex; flex-direction: column; align-items: center;
 }
-
-/* HIỆU ỨNG CHO LOGO CHÍNH THỨC */
 .site-logo {
     width: 140px; height: 140px; border-radius: 50%; margin-bottom: 15px;
     box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2);
@@ -59,280 +54,239 @@ header::before {
     animation: floatLogo 3s ease-in-out infinite;
 }
 @keyframes floatLogo {
-    0% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
-    50% { transform: translateY(-10px); box-shadow: 0 0 35px var(--accent), 0 0 60px var(--accent2); }
-    100% { transform: translateY(0px); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
+    0%,100% { transform: translateY(0); box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent2); }
+    50%     { transform: translateY(-10px); box-shadow: 0 0 35px var(--accent), 0 0 60px var(--accent2); }
 }
+header h1.glitch { font-size:3.2rem; animation: glitch-anim 4s infinite, rgb-text-glow 6s linear infinite; display: inline-block; position: relative; }
+@keyframes rgb-text-glow { 0%{color:#ff4fa0;text-shadow:0 0 15px #ff4fa0}33%{color:#0ff;text-shadow:0 0 15px #0ff}66%{color:#8b5cf6;text-shadow:0 0 15px #8b5cf6}100%{color:#ff4fa0;text-shadow:0 0 15px #ff4fa0}}
+@keyframes glitch-anim { 0%,95%,98%,100%{transform:none}96%{transform:translate(-3px,2px) skew(-10deg);filter:drop-shadow(-3px 0 0 #ff4fa0) drop-shadow(3px 0 0 #8b5cf6)}97%{transform:translate(3px,-2px) skew(10deg);filter:drop-shadow(3px 0 0 #ff4fa0) drop-shadow(-3px 0 0 #8b5cf6)}}
+header p { color:#e2e8f0; font-size:17px; }
 
-header h1.glitch { font-size:3.2rem; animation: glitch-anim 4s infinite, rgb-text-glow 6s linear infinite; display: inline-block; position: relative; margin-bottom: 5px; }
-@keyframes rgb-text-glow { 0% { color: #ff4fa0; text-shadow: 0 0 15px rgba(255, 79, 160, 0.8), 0 0 5px #ff4fa0; } 33% { color: #00ffff; text-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 5px #00ffff; } 66% { color: #8b5cf6; text-shadow: 0 0 15px rgba(139, 92, 246, 0.8), 0 0 5px #8b5cf6; } 100% { color: #ff4fa0; text-shadow: 0 0 15px rgba(255, 79, 160, 0.8), 0 0 5px #ff4fa0; } }
-@keyframes glitch-anim { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff4fa0) drop-shadow(3px 0 0 #8b5cf6); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff4fa0) drop-shadow(-3px 0 0 #8b5cf6); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
-header p { color:#e2e8f0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); font-size: 17px; font-weight: 500;}
-
-/* --- BẢNG ĐIỀU KHIỂN BÊN TRÁI (LEFT SIDEBAR) --- */
+/* --- SIDEBAR --- */
 .left-sidebar {
-    position: fixed; left: 25px; top: 50%; transform: translateY(-50%);
-    width: 260px; background: rgba(15, 15, 25, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 79, 160, 0.3); border-radius: 20px; padding: 20px;
-    z-index: 100; box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255, 79, 160, 0.1);
-    transition: all 0.4s ease;
+    position: fixed; left:25px; top:50%; transform:translateY(-50%);
+    width:260px; background:rgba(15,15,25,.65); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,79,160,.3); border-radius:20px; padding:20px; z-index:100;
 }
-.sidebar-title { text-align: center; color: white; margin-bottom: 20px; font-size: 16px; letter-spacing: 2px; text-shadow: 0 0 10px var(--accent); }
+.sidebar-title { text-align:center; color:#fff; margin-bottom:18px; font-size:15px; letter-spacing:2px; text-shadow:0 0 10px var(--accent); }
 .zone-btn {
-    padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid #444;
-    background: rgba(30, 30, 36, 0.8); cursor: none; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; position: relative; overflow: hidden;
+    padding:14px; margin-bottom:14px; border-radius:12px; border:1px solid #444;
+    background:rgba(30,30,36,.8); cursor:none; transition:.3s; text-align:center;
 }
-.zone-btn:last-child { margin-bottom: 0; }
-.zone-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,79,160,0.4); border-color: var(--accent); }
-.zone-nsfw.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; box-shadow: 0 0 25px rgba(255, 79, 160, 0.6); }
-.zone-horror.active { background: linear-gradient(135deg, #ff3333, #990000); border-color: transparent; box-shadow: 0 0 25px rgba(255, 51, 51, 0.6); }
-/* Active State cho Theme VN */
-.zone-vietnam.active { background: linear-gradient(135deg, #da251d, #ffcc00); border-color: transparent; box-shadow: 0 0 25px rgba(255, 204, 0, 0.6); }
-.zone-vietnam.active .zone-title, .zone-vietnam.active .zone-desc { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+.zone-btn:hover { transform:scale(1.04); border-color:var(--accent); box-shadow:0 0 18px rgba(255,79,160,.35); }
+.zone-nsfw.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+.zone-horror.active{background:linear-gradient(135deg,#f33,#900);border-color:transparent}
+.zone-vietnam.active{background:linear-gradient(135deg,#da251d,#ffcc00);border-color:transparent}
+.zone-icon{font-size:28px;display:block}
+.zone-title{font-weight:bold}
+.zone-desc{font-size:12px;color:#bbb}
 
-.zone-icon { font-size: 32px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
-.zone-title { font-size: 16px; font-weight: bold; color: white; letter-spacing: 1px; margin-bottom: 5px; }
-.zone-desc { font-size: 12px; color: #ccc; line-height: 1.4; }
+body.blood-theme{--accent:#f33;--accent2:#900}
+body.blood-theme::before{background-image:linear-gradient(rgba(255,51,51,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(153,0,0,.15) 1px,transparent 1px)}
+body.vietnam-theme{--accent:#ffcc00;--accent2:#da251d}
+body.vietnam-theme::before{background-image:linear-gradient(rgba(218,37,29,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,204,0,.15) 1px,transparent 1px)}
 
-/* 🔴 THEME ĐỎ MÁU / KINH DỊ KHI CHỌN KHU VỰC HORROR */
-body.blood-theme { --accent: #ff3333; --accent2: #990000; }
-body.blood-theme::before { background-image: linear-gradient(rgba(255, 51, 51, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(153, 0, 0, 0.15) 1px, transparent 1px); }
-body.blood-theme .header-glass { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
-body.blood-theme .left-sidebar { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 51, 51, 0.15); }
-body.blood-theme .sidebar-title { text-shadow: 0 0 10px #ff3333; }
-body.blood-theme header h1.glitch { animation: glitch-anim-blood 4s infinite; color: #ff3333; text-shadow: 0 0 15px rgba(255, 51, 51, 0.8), 0 0 5px #ff3333; }
-body.blood-theme .site-logo { box-shadow: 0 0 25px #ff3333, 0 0 45px #990000; animation: floatLogoBlood 3s ease-in-out infinite; }
-@keyframes floatLogoBlood {
-    0% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
-    50% { transform: translateY(-10px); box-shadow: 0 0 35px #ff3333, 0 0 60px #990000; }
-    100% { transform: translateY(0px); box-shadow: 0 0 20px #ff3333, 0 0 40px #990000; }
+.container{ max-width:1200px; margin:auto; padding:20px; position:relative; z-index:1;}
+.fade-in { opacity:0; transform:translateY(40px); transition:.8s; }
+.fade-in.appear { opacity:1; transform:none; }
+
+/* --- SLIDER --- */
+.featured-slider { position:relative; width:100%; height:420px; margin:30px 0; border-radius:16px; overflow:hidden; border:1px solid #333; background:var(--card); }
+.slide { position:absolute; inset:0; opacity:0; transition:.6s; display:flex; align-items:flex-end; z-index:1; }
+.slide.active{opacity:1; z-index:2}
+.slide img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; z-index:-2}
+.slide-overlay{position:absolute; inset:0; background:linear-gradient(to top, #0b0b12 0%, #0b0b12cc 30%, transparent 100%); z-index:-1}
+.slide-content{padding:30px; width:100%}
+.slide-title{font-size:28px; text-shadow:0 0 10px var(--accent), 2px 2px 4px #000}
+.slide-tags{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0}
+.slide-tag{background:#252536cc; border:1px solid var(--accent2); color:var(--accent2); padding:4px 10px; border-radius:6px; font-size:11px}
+.slide-desc{color:#ccc; max-width:750px}
+.slider-nav{position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; transform:translateY(-50%); padding:0 15px; z-index:4}
+.slider-btn{width:44px;height:44px;border-radius:50%;background:#000a;border:1px solid var(--accent);color:#fff;cursor:none}
+.slider-btn:hover{background:var(--accent)}
+.slider-dots{position:absolute; bottom:20px; right:25px; display:flex; gap:8px; z-index:4}
+.dot{width:12px;height:12px;border-radius:50%;background:#fff3;cursor:none}
+.dot.active{background:var(--accent); box-shadow:0 0 12px var(--accent)}
+
+/* ========== 🧠 GỢI Ý THÔNG MINH - CSS MỚI ========== */
+.suggest-block{margin:40px 0;}
+.suggest-header{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid #2a2a3a;
 }
-@keyframes glitch-anim-blood { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 51, 51, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ff3333) drop-shadow(3px 0 0 #990000); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ff3333) drop-shadow(-3px 0 0 #990000); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
-
-/* 🇻🇳 THEME VIỆT NAM (Chỉ đổi màu UI, không lọc game) */
-body.vietnam-theme { --accent: #ffcc00; --accent2: #da251d; } /* Vàng sao, đỏ cờ */
-body.vietnam-theme::before { background-image: linear-gradient(rgba(218, 37, 29, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 204, 0, 0.15) 1px, transparent 1px); }
-body.vietnam-theme .header-glass { border-color: rgba(255, 204, 0, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(218, 37, 29, 0.2); }
-body.vietnam-theme .left-sidebar { border-color: rgba(255, 204, 0, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(218, 37, 29, 0.2); }
-body.vietnam-theme .sidebar-title { text-shadow: 0 0 10px #ffcc00; }
-body.vietnam-theme header h1.glitch { animation: glitch-anim-vn 4s infinite; color: #ffcc00; text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 0 0 5px #da251d; }
-body.vietnam-theme .site-logo { box-shadow: 0 0 25px #ffcc00, 0 0 45px #da251d; animation: floatLogoVN 3s ease-in-out infinite; }
-@keyframes floatLogoVN {
-    0% { transform: translateY(0px); box-shadow: 0 0 20px #ffcc00, 0 0 40px #da251d; }
-    50% { transform: translateY(-10px); box-shadow: 0 0 35px #ffcc00, 0 0 60px #da251d; }
-    100% { transform: translateY(0px); box-shadow: 0 0 20px #ffcc00, 0 0 40px #da251d; }
+.suggest-header h2{color:var(--accent); text-shadow:0 0 10px #ff4fa066}
+.suggest-sub{color:#888; font-size:12px}
+.suggest-empty{
+    text-align:center; color:#777; padding:28px;
+    background:#14141e; border-radius:12px; border:1px dashed #333;
 }
-@keyframes glitch-anim-vn { 0%, 95%, 98%, 100% { transform: translate(0, 0) skew(0deg); filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.2)); } 96% { transform: translate(-3px, 2px) skew(-10deg); filter: drop-shadow(-3px 0 0 #ffcc00) drop-shadow(3px 0 0 #da251d); } 97% { transform: translate(3px, -2px) skew(10deg); filter: drop-shadow(3px 0 0 #ffcc00) drop-shadow(-3px 0 0 #da251d); } 99% { transform: translate(0, 0) skew(0deg); filter: none; } }
-
-.container{ max-width:1200px; margin:auto; padding:20px; position: relative; z-index: 1;}
-.fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.fade-in.appear { opacity: 1; transform: translateY(0); }
-
-/* --- SLIDER TIÊU ĐIỂM --- */
-.featured-slider { position: relative; width: 100%; height: 420px; margin-bottom: 35px; border-radius: 16px; overflow: hidden; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: var(--card); }
-.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease-in-out; cursor: pointer; display: flex; align-items: flex-end; pointer-events: none; z-index: 1; }
-.slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
-.slide img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; z-index: -2; transition: transform 6s ease; border-radius: inherit; }
-.slide.active img { transform: scale(1.05); } 
-.slide-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; background: linear-gradient(to top, rgba(11,11,18,1) 0%, rgba(11,11,18,0.8) 30%, transparent 100%); z-index: -1; }
-.slide-content { padding: 30px; width: 100%; z-index: 3; }
-.slide-title { font-size: 28px; color: white; margin-bottom: 12px; text-shadow: 0 0 10px var(--accent), 2px 2px 4px rgba(0,0,0,0.8); letter-spacing: 1px; }
-.slide-tags { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-.slide-tag { background: rgba(37,37,54,0.8); border: 1px solid var(--accent2); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; color: var(--accent2); text-transform: uppercase; box-shadow: 0 0 8px rgba(139,92,246,0.3); }
-.slide-desc { color: #ccc; font-size: 15px; max-width: 750px; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.slider-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 4; padding: 0 20px; pointer-events: none; }
-.slider-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; pointer-events: auto; font-size: 20px; transition: 0.3s; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-.slider-btn:hover { background: var(--accent); box-shadow: 0 0 20px var(--accent); transform: scale(1.1); }
-.slider-dots { position: absolute; bottom: 25px; right: 30px; display: flex; gap: 8px; z-index: 4; }
-.dot { width: 12px; height: 12px; background: rgba(255,255,255,0.3); border-radius: 50%; cursor: pointer; transition: 0.3s; }
-.dot.active { background: var(--accent); box-shadow: 0 0 15px var(--accent); transform: scale(1.2); }
-
-/* --- INPUT TÌM KIẾM & PHÂN KHU LỌC TAG --- */
-.search{ width:100%; padding:15px; border:none; border-radius:12px; background:#1e1e24; color:white; margin-bottom:20px; font-size:16px; border: 1px solid #333; transition: 0.3s;}
-.search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px rgba(255,79,160,0.3); }
-.tag-filter-section { margin-bottom: 20px; background: rgba(30,30,36,0.8); padding: 15px 20px; border-radius: 12px; border: 1px solid #333; backdrop-filter: blur(5px); }
-.filter-title { color: var(--accent2); font-size: 14px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-.tags-container { display: flex; flex-wrap: wrap; gap: 10px; }
-.tag-btn { border: 1px solid #444; padding: 8px 16px; border-radius: 999px; cursor: pointer; background: #252536; color: white; font-size: 13px; font-weight: 500; transition: 0.3s ease; text-transform: uppercase; }
-.tag-btn:hover { border-color: var(--accent2); box-shadow: 0 0 10px rgba(139, 92, 246, 0.5); color: var(--accent2); }
-.tag-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; color: white; box-shadow: 0 0 15px var(--accent); }
-
-/* --- NÚT GACHA NHÂN PHẨM --- */
-.gacha-btn-container { text-align: center; margin-bottom: 30px; }
-.gacha-btn { width: 100%; padding: 16px; border-radius: 12px; background: linear-gradient(45deg, var(--accent), var(--accent2), var(--accent)); background-size: 200% auto; color: white; font-size: 18px; font-weight: bold; border: 2px solid rgba(255,255,255,0.2); cursor: none; text-shadow: 0 0 10px rgba(255,255,255,0.8); box-shadow: 0 5px 20px rgba(0,0,0,0.5); animation: gradientFlow 3s infinite linear; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-.gacha-btn:hover { transform: scale(1.02) translateY(-2px); box-shadow: 0 10px 30px var(--accent); border-color: white; }
-@keyframes gradientFlow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-
-/* --- MÀN HÌNH GACHA (MODAL) --- */
-.gacha-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
-.gacha-box { background: var(--card); padding: 40px 30px; border-radius: 20px; text-align: center; border: 2px solid var(--accent); box-shadow: 0 0 50px var(--accent); max-width: 450px; width: 90%; transform: scale(0.8); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
-.gacha-box.active { transform: scale(1); opacity: 1; }
-.gacha-spinner { width: 70px; height: 70px; border: 6px solid rgba(255, 255, 255, 0.1); border-top-color: var(--accent); border-bottom-color: var(--accent2); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 25px auto; }
-@keyframes spin { to { transform: rotate(360deg); } }
-#gacha-result { display: none; animation: popIn 0.5s ease-out forwards; }
-@keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-#gacha-result h2 { color: var(--accent); font-size: 28px; margin-bottom: 15px; text-shadow: 0 0 15px var(--accent); }
-#gacha-img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; border: 2px solid #444; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-#gacha-title { color: white; margin-bottom: 25px; font-size: 22px; text-shadow: 0 0 10px var(--accent2); }
-.close-gacha { margin-top: 20px; background: transparent; border: none; color: #888; font-size: 14px; text-decoration: underline; cursor: none; transition: 0.3s; }
-.close-gacha:hover { color: white; text-shadow: 0 0 5px white; }
-
-/* --- THẺ GAME CARD --- */
-.games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
-.info{ padding:20px; }
-.info h2{ margin-bottom:10px; font-size: 20px; }
-.info p{ color:#bbb; line-height:1.7; font-size: 13px; margin-bottom: 10px;}
-.info-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.info-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: #252536; border: 1px solid #333; color: #888; text-transform: uppercase; transition: 0.3s; }
-.game-card:hover .info-tag { border-color: var(--accent2); color: white; }
-.share-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(11,11,18,0.7); border: 1px solid var(--accent); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; font-size: 14px; transition: 0.3s; backdrop-filter: blur(4px); }
-.share-btn:hover { background: var(--accent); transform: scale(1.15) rotate(15deg); box-shadow: 0 0 15px var(--accent); }
-
-@property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
-.game-card { 
-    background: var(--card); border-radius: 16px; overflow: hidden; position: relative; 
-    border: 2px solid transparent; 
-    transition: box-shadow 0.3s ease, transform 0.3s ease; transform-style: preserve-3d; transform: perspective(1000px); 
-    background-clip: padding-box, border-box; background-origin: padding-box, border-box;
-    background-image: linear-gradient(var(--card), var(--card)), linear-gradient(#333, #333);
+.suggest-settings-btn{
+    display:inline-block; padding:10px 16px; border-radius:10px; cursor:none;
+    background:linear-gradient(135deg,#1a1a28,#222); border:1px solid var(--accent2);
+    color:#fff; font-size:13px; transition:.25s; margin-bottom:15px;
 }
-.game-card:hover { 
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4); 
-    background-image: linear-gradient(var(--card), var(--card)), conic-gradient(from var(--border-angle), var(--card) 40%, var(--accent) 70%, var(--accent2) 100%);
-    animation: bg-spin 2s linear infinite;
+.suggest-settings-btn:hover{border-color:var(--accent); box-shadow:0 0 15px #8b5cf655}
+.suggest-toggle{display:flex; align-items:center; gap:8px; color:#bbb; font-size:13px}
+.toggle-slider{
+    position:relative; width:36px; height:20px; background:#333; border-radius:999px; cursor:none;
+    display:inline-block; transition:.25s;
 }
-@keyframes bg-spin { to { --border-angle: 1turn; } }
-.game-card img { width: 100%; height: 220px; object-fit: cover; }
-.btn { display: block; margin-top: 15px; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: 0.3s; }
-.btn:hover { filter: brightness(1.2); box-shadow: 0 5px 15px var(--accent); transform: translateY(-2px); }
-
-/* --- CON TRỞ CHUỘT --- */
-a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider { cursor: none; }
-.cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99999; box-shadow: 0 0 10px var(--accent); }
-.cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent2); border-radius: 50%; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); pointer-events: none; z-index: 99998; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
-.cursor-hover { width: 60px; height: 60px; background-color: rgba(255, 79, 160, 0.1); border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.5); }
-
-/* --- TIMELINE --- */
-.timeline-section { margin-top: 80px; padding-bottom: 50px; border-top: 1px solid #333; padding-top: 40px; }
-.timeline-title { text-align: center; color: var(--accent2); margin-bottom: 50px; }
-.timeline-container { position: relative; max-width: 800px; margin: auto; }
-.timeline-container::after { content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, var(--accent2), var(--accent)); top: 0; bottom: 0; left: 50%; margin-left: -2px; box-shadow: 0 0 15px rgba(139, 92, 246, 0.5); }
-.timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
-.timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background-color: var(--card); border: 3px solid var(--accent2); top: 15px; border-radius: 50%; z-index: 1; box-shadow: 0 0 10px var(--accent2); }
-.left { left: 0; text-align: right; }
-.right { left: 50%; }
-.right::after { left: -8px; }
-.content { padding: 20px; background: var(--card); position: relative; border-radius: 10px; border: 1px solid #333; backdrop-filter: blur(5px);}
-.content h3 { color: var(--accent); margin-bottom: 5px; }
-.content p { color: #aaa; font-size: 14px; line-height: 1.6; }
-
-/* --- MÀN CHẮN 18+ --- */
-.age-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 11, 18, 0.95); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; }
-.age-box { background: var(--card); padding: 30px; border-radius: 16px; text-align: center; color: white; border: 2px solid var(--accent2); max-width: 420px; width: 90%; box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
-.age-box h2 { color: var(--accent); margin-bottom: 10px; font-size: 26px;}
-.age-box p { color: #bbb; line-height: 1.6; font-size: 15px;}
-.age-buttons { margin-top: 25px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;}
-.age-buttons button { padding: 12px 20px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-#btn-yes { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; }
-#btn-yes:hover { transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent); }
-#btn-no { background: #252536; color: #bbb; }
-#btn-no:hover { background: #3a3a52; color: white; }
-
-.site-footer { text-align: center; padding: 40px 20px 30px 20px; border-top: 1px solid #333; margin-top: 60px; background: rgba(11,11,18,0.9); }
-.footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; flex-wrap: wrap; }
-.footer-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-.footer-links a:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-.footer-copyright { color: #555; font-size: 13px; line-height: 1.6; }
-
-/* --- MUSIC PLAYER --- */
-.cyber-player { position: fixed; bottom: 20px; right: 20px; width: 340px; height: 300px; border: 2px solid #444; border-radius: 16px; z-index: 9998; box-shadow: 0 10px 30px rgba(0,0,0,0.8); transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between; background-color: #0b0b12; padding: 0; background-size: cover; background-position: center; }
-.cyber-player.minimized { height: 45px !important; border-color: #444 !important; box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important; }
-.cyber-player.minimized .player-bottom { opacity: 0; pointer-events: none; }
-.cyber-player::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(11,11,18,0.9) 0%, rgba(11,11,18,0) 25%, rgba(11,11,18,0) 50%, rgba(11,11,18,0.95) 100%); z-index: 0; pointer-events: none; }
-.cyber-player.playing:not(.minimized) { border-color: var(--accent); animation: pulse-glow-player 1.2s infinite alternate ease-in-out; }
-@keyframes pulse-glow-player { 0% { box-shadow: 0 0 5px var(--accent); } 100% { box-shadow: 0 0 25px var(--accent), 0 0 45px var(--accent2); } }
-.cyber-player.flash-strike { filter: brightness(1.6) contrast(1.2); box-shadow: 0 0 60px #fff, 0 0 100px var(--accent) !important; border-color: #fff !important; transition: 0.05s; }
-.light-streak { position: fixed; width: 2px; height: 180px; background: linear-gradient(to bottom, transparent, #fff, transparent); box-shadow: 0 0 20px #fff, 0 0 40px var(--accent2); transform: rotate(45deg); pointer-events: none; z-index: 9999; animation: streak-flash 0.3s ease-out forwards; }
-@keyframes streak-flash { 0% { opacity: 0; transform: rotate(45deg) scaleY(0.5) translateY(-50px); } 50% { opacity: 1; transform: rotate(45deg) scaleY(1.5) translateY(0); } 100% { opacity: 0; transform: rotate(45deg) scaleY(0.5) translateY(80px); } }
-.cyber-dust { position: fixed; border-radius: 50%; background: #fff; box-shadow: 0 0 6px #fff, 0 0 12px var(--accent); pointer-events: none; z-index: 9997; animation: floatUp linear forwards; }
-@keyframes floatUp { 0% { transform: translate(0, 0) scale(0.5); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 0.8; } 100% { transform: translate(calc(120px * var(--rnd)), -250px) scale(1.5); opacity: 0; } }
-.player-top { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 0 15px; cursor: pointer; height: 45px; flex-shrink: 0; }
-.track-title { color: white; font-weight: bold; font-size: 14px; text-shadow: 0 0 8px rgba(255,79,160,0.8); flex-grow: 1; font-family: Consolas, monospace;}
-.min-btn { background: transparent; border: none; color: #ccc; font-size: 18px; padding: 0; cursor: pointer; transition: 0.3s;}
-.min-btn:hover { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-.visualizer { display: flex; gap: 3px; height: 14px; align-items: flex-end; }
-.bar { width: 3px; background: var(--accent2); border-radius: 2px; height: 3px; transition: 0.1s; }
-.playing .bar { background: var(--accent); animation: bounce 0.8s infinite alternate; }
-.playing .bar:nth-child(1) { animation-delay: 0.1s; } .playing .bar:nth-child(2) { animation-delay: 0.3s; }
-.playing .bar:nth-child(3) { animation-delay: 0.2s; } .playing .bar:nth-child(4) { animation-delay: 0.4s; }
-@keyframes bounce { 0% { height: 4px; } 100% { height: 18px; } }
-.player-bottom { position: relative; z-index: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; transition: opacity 0.3s; }
-.player-controls { display: flex; justify-content: center; align-items: center; gap: 20px; }
-.ctrl-btn { background: rgba(37,37,54,0.6); border: 1px solid #555; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(4px); cursor: pointer;}
-.ctrl-btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 15px rgba(255, 79, 160, 0.6); transform: scale(1.1); }
-#playPauseBtn { width: 50px; height: 50px; font-size: 20px; border-color: var(--accent2); background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(255,79,160,0.5)); box-shadow: 0 0 15px rgba(139,92,246,0.4);}
-.player-sliders { display: flex; flex-direction: column; gap: 8px; }
-.slider-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #bbb; font-weight: bold;}
-input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; cursor: pointer;}
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: var(--accent); margin-top: -5px; box-shadow: 0 0 10px var(--accent); transition: 0.2s;}
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
-input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; }
-input[type=range]:focus { outline: none; }
-
-/* --- NÚT LÊN ĐẦU TRANG --- */
-#scrollTopBtn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent2), var(--accent)); color: white; border: none; border-radius: 50%; cursor: none; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(139, 92, 246, 0.5); z-index: 9990; opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.9); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-#scrollTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
-#scrollTopBtn:hover { box-shadow: 0 0 25px var(--accent), 0 0 15px var(--accent2); transform: translateY(-5px) scale(1.1); background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-#scrollTopBtn svg { width: 26px; height: 26px; animation: floatArrow 2s infinite ease-in-out; }
-
-/* --- ĐIỀU CHỈNH RESPONSIVE MOBILE --- */
-@media (max-width: 1400px) {
-    .left-sidebar { position: relative; left: 0; top: 0; transform: none; width: 100%; margin-top: 20px; display: flex; gap: 15px; padding: 15px; }
-    .sidebar-title { display: none; }
-    .zone-btn { flex: 1; margin-bottom: 0; padding: 10px; }
-    .zone-icon { font-size: 20px; margin-bottom: 4px; display: inline-block; margin-right: 8px;}
-    .zone-desc { display: none; }
+.toggle-slider::before{content:""; position:absolute; width:16px; height:16px; background:#fff; border-radius:50%; top:2px; left:2px; transition:.25s}
+.suggest-toggle input:checked + .toggle-slider{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.suggest-toggle input:checked + .toggle-slider::before{left:18px}
+.suggest-toggle input{display:none}
+.suggest-modal{
+    position:fixed; inset:0; background:#000d; z-index:99999;
+    display:none; align-items:center; justify-content:center; backdrop-filter:blur(6px);
+}
+.suggest-modal.show{display:flex}
+.suggest-modal-box{
+    width:min(520px,92%); background:#151520; border:1px solid var(--accent2);
+    border-radius:16px; padding:24px; color:#fff; max-height:88vh; overflow-y:auto;
+    box-shadow:0 0 40px #8b5cf655;
+}
+.setting-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 0; border-bottom:1px solid #222;
+}
+.data-stats{
+    background:#0e0e16; border-radius:10px; padding:12px; font-size:13px; color:#aaa;
+    display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.btn-ghost,.btn-primary{padding:10px 16px; border-radius:8px; border:none; cursor:none; font-weight:600}
+.btn-ghost{background:transparent; color:#ff6b6b; border:1px solid #333}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff}
+.modal-actions{display:flex; gap:10px; justify-content:flex-end; margin-top:18px}
+.muted{color:#888; font-size:13px}
+.similarity-badge{
+    position:absolute; top:12px; left:12px; z-index:5;
+    background:#000a; color:var(--accent); padding:3px 8px; border-radius:999px;
+    font-size:11px; border:1px solid var(--accent); backdrop-filter:blur(4px);
 }
 
-@media (max-width: 768px) {
-    .header-glass { padding: 25px 20px; width: 92%; } header h1.glitch { font-size: 2.2rem; }
-    .featured-slider { height: 350px; } .slide-title { font-size: 22px; } .slide-desc { font-size: 13px; } .slider-btn { width: 35px; height: 35px; font-size: 16px; } 
-    .games { grid-template-columns: 1fr; } body, a, button, img, .game-card, .slide, .share-btn, input[type="range"], .player-top, .slider, .zone-btn { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } 
-    .timeline-container::after { left: 31px; } .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; } .timeline-item::after { left: 15px; } .left::after { left: 23px; } .right { left: 0%; } 
-    .cyber-player { width: 100%; right: 0; bottom: 0; border-radius: 16px 16px 0 0; height: 55px !important; } .cyber-player:not(.minimized) { height: 120px !important; } .player-sliders { display: none; } 
-    #scrollTopBtn { bottom: 70px; left: 20px; width: 45px; height: 45px; cursor: auto; }
+/* --- TÌM KIẾM & LỌC --- */
+.search{ width:100%; padding:14px; border-radius:12px; background:#1e1e24; color:#fff; border:1px solid #333; font-size:15px}
+.search:focus{outline:none; border-color:var(--accent); box-shadow:0 0 14px #ff4fa055}
+.tag-filter-section{margin:18px 0; background:#1e1e24cc; padding:14px 18px; border-radius:12px; border:1px solid #333}
+.filter-title{color:var(--accent2); font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px}
+.tags-container{display:flex; flex-wrap:wrap; gap:8px}
+.tag-btn{border:1px solid #444; padding:7px 14px; border-radius:999px; background:#252536; color:#fff; font-size:12px; cursor:none}
+.tag-btn:hover{border-color:var(--accent2); color:var(--accent2)}
+.tag-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2)); border-color:transparent}
+
+.gacha-btn-container{margin:22px 0}
+.gacha-btn{
+    width:100%; padding:15px; border-radius:12px; cursor:none;
+    background:linear-gradient(45deg,var(--accent),var(--accent2),var(--accent));
+    background-size:200% auto; color:#fff; font-weight:bold; font-size:17px; letter-spacing:2px;
+    border:2px solid #fff3; animation:gradientFlow 3s linear infinite;
+}
+.gacha-btn:hover{transform:translateY(-2px); box-shadow:0 10px 25px var(--accent)}
+@keyframes gradientFlow{to{background-position:200% 50%}}
+
+/* --- GACHA MODAL --- */
+.gacha-overlay{position:fixed; inset:0; background:#000d8; z-index:10000; display:none; justify-content:center; align-items:center; backdrop-filter:blur(8px)}
+.gacha-box{background:var(--card); padding:30px; border-radius:18px; border:2px solid var(--accent); max-width:440px; width:90%; transform:scale(.8); opacity:0; transition:.4s}
+.gacha-box.active{transform:scale(1); opacity:1}
+.gacha-spinner{width:64px;height:64px;border:6px solid #fff1;border-top-color:var(--accent);border-bottom-color:var(--accent2);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* --- THẺ GAME --- */
+.games{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px; }
+.game-card{
+    background:var(--card); border-radius:14px; overflow:hidden; position:relative;
+    border:2px solid transparent; transition:.3s;
+    background-image:linear-gradient(var(--card),var(--card)),linear-gradient(#333,#333);
+    background-origin:padding-box,border-box; background-clip:padding-box,border-box;
+}
+.game-card:hover{
+    box-shadow:0 10px 25px #8b5cf666;
+    background-image:linear-gradient(var(--card),var(--card)),conic-gradient(from var(--border-angle),var(--card)40%,var(--accent)70%,var(--accent2)100%);
+    animation:bg-spin 2s linear infinite;
+}
+@property --border-angle{syntax:"<angle>";inherits:true;initial-value:0turn}
+@keyframes bg-spin{to{--border-angle:1turn}}
+.game-card img{width:100%; height:210px; object-fit:cover}
+.info{padding:16px}
+.info h2{font-size:18px; margin-bottom:6px}
+.info p{color:#bbb; font-size:13px}
+.info-tags{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0}
+.info-tag{font-size:10px; padding:3px 7px; border-radius:4px; background:#252536; border:1px solid #333; color:#999; text-transform:uppercase}
+.share-btn{position:absolute; top:12px; right:12px; width:30px; height:30px; border-radius:50%; background:#000a; border:1px solid var(--accent); color:#fff; display:grid; place-items:center; cursor:none; z-index:5}
+.btn{display:block; text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:#fff; font-weight:bold; background:linear-gradient(135deg,var(--accent),var(--accent2)); margin-top:10px}
+.btn:hover{filter:brightness(1.15); transform:translateY(-2px)}
+
+/* --- AGE GATE --- */
+.age-overlay{position:fixed; inset:0; background:#0b0b12f2; z-index:9999; display:flex; align-items:center; justify-content:center}
+.age-box{background:var(--card); padding:28px; border-radius:14px; max-width:420px; width:90%; text-align:center; border:2px solid var(--accent2)}
+.age-box h2{color:var(--accent)}
+.age-buttons{display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+.age-buttons button{padding:10px 18px; border-radius:8px; border:none; cursor:none; font-weight:bold}
+#btn-yes{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff}
+#btn-no{background:#252536; color:#bbb}
+
+/* --- CON TRỎ --- */
+.cursor-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;transform:translate(-50%,-50%);pointer-events:none;z-index:99999;box-shadow:0 0 10px var(--accent)}
+.cursor-outline{width:40px;height:40px;border:2px solid var(--accent2);border-radius:50%;position:fixed;transform:translate(-50%,-50%);pointer-events:none;z-index:99998;transition:.15s width,.15s height,.15s background}
+.cursor-hover{width:58px;height:58px;background:#ff4fa01a;border-color:var(--accent)}
+
+/* --- PLAYER --- */
+.cyber-player{position:fixed; right:20px; bottom:20px; width:340px; height:300px; border:2px solid #444; border-radius:14px; z-index:9998; background:#0b0b12; display:flex; flex-direction:column; justify-content:space-between}
+.cyber-player.minimized{height:45px !important}
+.cyber-player.playing:not(.minimized){border-color:var(--accent); animation:pulse-glow 1.2s infinite alternate}
+@keyframes pulse-glow{from{box-shadow:none}to{box-shadow:0 0 25px var(--accent),0 0 40px var(--accent2)}}
+.player-top{display:flex; align-items:center; gap:10px; padding:0 12px; height:45px; cursor:none}
+.track-title{flex:1; color:#fff; font-weight:bold}
+.visualizer{display:flex; gap:3px; align-items:flex-end; height:14px}
+.bar{width:3px; height:3px; background:var(--accent2); border-radius:2px}
+.playing .bar{background:var(--accent); animation:bounce .8s infinite alternate}
+.playing .bar:nth-child(2){animation-delay:.15s}.playing .bar:nth-child(3){animation-delay:.3s}.playing .bar:nth-child(4){animation-delay:.45s}
+@keyframes bounce{to{height:16px}}
+.player-bottom{padding:12px}
+.player-controls{display:flex; justify-content:center; gap:14px; align-items:center}
+.ctrl-btn{width:38px;height:38px;border-radius:50%;background:#252536aa;border:1px solid #555;color:#fff}
+#playPauseBtn{width:46px;height:46px;background:linear-gradient(135deg,#8b5cf680,#ff4fa080);border-color:var(--accent2)}
+input[type=range]{-webkit-appearance:none; background:transparent; width:100%}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; height:12px; width:12px; border-radius:50%; background:var(--accent); margin-top:-4px}
+input[type=range]::-webkit-slider-runnable-track{height:4px; background:#fff2; border-radius:2px}
+
+#scrollTopBtn{position:fixed; left:25px; bottom:25px; width:46px; height:46px; border-radius:50%; background:linear-gradient(135deg,var(--accent2),var(--accent)); color:#fff; border:none; cursor:none; opacity:0; visibility:hidden; transform:translateY(20px); transition:.4s; z-index:9990}
+#scrollTopBtn.show{opacity:1; visibility:visible; transform:none}
+
+.site-footer{text-align:center; padding:30px 15px; border-top:1px solid #333; margin-top:50px; color:#777}
+.footer-links{display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-bottom:10px}
+.footer-links a{color:#888; text-decoration:none; font-size:13px}
+.footer-links a:hover{color:var(--accent)}
+
+@media(max-width:1400px){
+    .left-sidebar{position:relative; left:0; top:0; transform:none; width:100%; display:flex; gap:12px; margin-top:15px}
+    .sidebar-title{display:none}
+    .zone-btn{flex:1; margin:0}
+    .zone-desc{display:none}
+}
+@media(max-width:768px){
+    body, a, button, .game-card{cursor:auto}
+    .cursor-dot,.cursor-outline{display:none}
+    header h1.glitch{font-size:2.2rem}
+    .cyber-player{width:100%; right:0; bottom:0; border-radius:14px 14px 0 0; height:55px !important}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+<div class="cursor-dot"></div><div class="cursor-outline"></div>
 
 <aside class="left-sidebar fade-in">
     <h3 class="sidebar-title">⚡ ĐỔI KHU VỰC</h3>
-    <div class="zone-btn zone-nsfw active" onclick="selectZone('nsfw')">
-        <span class="zone-icon">🔞</span>
-        <div class="zone-title">KHU 18+ NEON</div>
-        <div class="zone-desc">Visual Novel, Harem, Lãng mạn...</div>
-    </div>
-    <div class="zone-btn zone-horror" onclick="selectZone('horror')">
-        <span class="zone-icon">🩸</span>
-        <div class="zone-title">KHU KINH DỊ</div>
-        <div class="zone-desc">Guro, Zombie, Bạo lực tâm lý...</div>
-    </div>
-    <!-- KHU VỰC ĐỔI THEME VN ĐÃ ĐƯỢC CHỈNH LẠI -->
-    <div class="zone-btn zone-vietnam" onclick="selectZone('vietnam')">
-        <span class="zone-icon">🇻🇳</span>
-        <div class="zone-title">THEME VIỆT NAM</div>
-        <div class="zone-desc">Đổi màu cờ Tổ Quốc...</div>
-    </div>
+    <div class="zone-btn zone-nsfw active" onclick="selectZone('nsfw')"><span class="zone-icon">🔞</span><div class="zone-title">KHU 18+ NEON</div><div class="zone-desc">VN, Harem, Lãng mạn</div></div>
+    <div class="zone-btn zone-horror" onclick="selectZone('horror')"><span class="zone-icon">🩸</span><div class="zone-title">KHU KINH DỊ</div><div class="zone-desc">Bạo lực, tâm lý</div></div>
+    <div class="zone-btn zone-vietnam" onclick="selectZone('vietnam')"><span class="zone-icon">🇻🇳</span><div class="zone-title">THEME VIỆT NAM</div><div class="zone-desc">Đổi màu giao diện</div></div>
 </aside>
 
 <div id="age-warning-overlay" class="age-overlay">
     <div class="age-box">
-        <h2>⚠️ CẢNH BÁO ĐỘ TUỔI</h2>
-        <p>Kho game này chứa nội dung Nhạy cảm (18+) và Kinh dị.<br>Bạn phải đủ 18 tuổi trở lên mới được phép truy cập.</p>
+        <h2>⚠️ CẢNH BÁO 18+</h2>
+        <p>Kho game chứa nội dung nhạy cảm & kinh dị.<br>Bạn phải đủ 18 tuổi mới được truy cập.</p>
         <div class="age-buttons">
             <button id="btn-yes" onclick="acceptAge()">Tôi đã trên 18 tuổi</button>
             <button id="btn-no" onclick="rejectAge()">Tôi chưa đủ tuổi</button>
@@ -342,115 +296,114 @@ input[type=range]:focus { outline: none; }
 
 <div id="gacha-modal" class="gacha-overlay">
     <div class="gacha-box">
-        <div id="gacha-loading">
-            <div class="gacha-spinner"></div>
-            <h3 style="color: var(--accent); text-transform: uppercase; font-weight: bold; text-shadow: 0 0 10px var(--accent);">Đang rải nhân phẩm...</h3>
-            <p style="color: #bbb; margin-top: 10px; font-size: 14px;">Vũ trụ đang lựa chọn game cho bạn</p>
-        </div>
-        <div id="gacha-result">
-            <h2>🎉 TRÚNG MÁNH 🎉</h2>
-            <img id="gacha-img" src="" alt="Game Art">
-            <h3 id="gacha-title">Tên Game</h3>
-            <a id="gacha-link" href="#" class="btn" style="margin-bottom: 10px;">VÀO CHIẾN LUÔN</a>
-            <button class="close-gacha" onclick="closeGacha()">Đóng cửa sổ này</button>
+        <div id="gacha-loading"><div class="gacha-spinner"></div><h3 style="color:var(--accent)">Đang rải nhân phẩm...</h3></div>
+        <div id="gacha-result" style="display:none">
+            <h2>🎉 TRÚNG MÁNH</h2>
+            <img id="gacha-img" src="" style="width:100%;height:200px;object-fit:cover;border-radius:10px;margin:10px 0">
+            <h3 id="gacha-title"></h3>
+            <a id="gacha-link" class="btn">VÀO CHIẾN</a>
         </div>
     </div>
 </div>
 
 <header>
     <div class="header-glass">
-        <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" alt="HPGVH18 Logo" class="site-logo">
-        
+        <img src="https://i.postimg.cc/zfHJGv6J/Chat-GPT-Image-20-55-14-22-thg-6-2026-Photoroom.png" class="site-logo">
         <h1 class="glitch">HPGVH18 STUDIO</h1>
         <p>Kho Game Visual Novel & Kinh Dị Việt Hóa</p>
     </div>
 </header>
 
 <div class="container">
-    
+
     <div class="featured-slider fade-in" id="main-slider">
         <div id="dynamic-slides-container"></div>
-
-        <div class="slider-nav">
-            <button class="slider-btn" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="slider-btn" onclick="changeSlide(1)">&#10095;</button>
-        </div>
+        <div class="slider-nav"><button class="slider-btn" onclick="changeSlide(-1)">&#10094;</button><button class="slider-btn" onclick="changeSlide(1)">&#10095;</button></div>
         <div class="slider-dots" id="dynamic-dots-container"></div>
     </div>
 
-    <div id="game-section-anchor"></div>
+    <!-- ==========================================
+         🧠 KHỐI GỢI Ý THÔNG MINH - HOÀN CHỈNH
+         ========================================== -->
+    <div class="fade-in" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <h2 style="color:var(--accent2)">🎮 KHO GAME</h2>
+        <div class="suggest-settings-btn" onclick="openSuggestSettings()">🧠 Tùy chỉnh gợi ý</div>
+    </div>
 
-    <input class="search fade-in" id="search" type="text" placeholder="🔍 Tìm kiếm game...">
-    
+    <section class="suggest-block fade-in" id="suggestForYou">
+        <div class="suggest-header">
+            <h2>✨ DÀNH RIÊNG CHO BẠN</h2>
+            <span class="suggest-sub">Chỉ tính toán tại máy bạn · Không gửi dữ liệu đi đâu</span>
+            <label class="suggest-toggle">
+                <input type="checkbox" id="avoidSimilarMode">
+                <span class="toggle-slider"></span>
+                <small>🔀 Không gợi ý nội dung tương tự</small>
+            </label>
+        </div>
+        <div class="games" id="suggestList"></div>
+        <div class="suggest-empty" id="emptySuggest">🕵️ Xem thêm 2‑3 game nữa để hệ thống hiểu rõ gu chơi của bạn</div>
+    </section>
+
+    <section class="suggest-block fade-in" id="suggestRelated" style="display:none">
+        <div class="suggest-header">
+            <h2>👀 NGƯỜI XEM NÀY CŨNG XEM</h2>
+            <span class="suggest-sub">Độ tương đồng cao nhất</span>
+        </div>
+        <div class="games" id="relatedList"></div>
+    </section>
+
+    <div class="suggest-modal" id="suggestModal">
+        <div class="suggest-modal-box">
+            <h3>🧠 Cài đặt gợi ý thông minh</h3>
+            <p class="muted">Toàn bộ dữ liệu chỉ lưu trên trình duyệt, không ai xem được kể cả chúng tôi.</p>
+            <div class="setting-row"><span>Bật hệ thống gợi ý</span><input type="checkbox" id="enableSuggest" checked></div>
+            <div class="setting-row"><span>Số game hiển thị</span><div style="display:flex;align-items:center;gap:8px"><input type="range" id="suggestCount" min="3" max="12" value="6"><b id="countLabel">6</b></div></div>
+            <div class="setting-row"><span>Không lặp lại game đã xem / thích</span><input type="checkbox" id="hideSeen" checked></div>
+            <div class="setting-row"><span>🔀 Ưu tiên thể loại khác hẳn</span><input type="checkbox" id="avoidSimilar"></div>
+            <h4 style="margin-top:14px">📊 Dữ liệu đã thu thập</h4>
+            <div class="data-stats" id="dataStats"></div>
+            <div class="modal-actions">
+                <button class="btn-ghost" onclick="clearAllSuggestData()">🗑️ Xóa dữ liệu</button>
+                <button class="btn-primary" onclick="closeSuggestSettings()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <input class="search fade-in" id="search" placeholder="🔍 Tìm tên game, tác giả, thẻ...">
+
     <div class="tag-filter-section fade-in">
-        <h3 class="filter-title">🔍 Lọc Theo Gu (TAGS)</h3>
+        <h3 class="filter-title">🏷️ LỌC THEO THỂ LOẠI</h3>
         <div class="tags-container">
             <button class="tag-btn active" data-filter="all">ALL</button>
-            <button class="tag-btn" data-filter="pc">PC</button>
-            <button class="tag-btn" data-filter="android">ANDROID</button>
             <button class="tag-btn" data-filter="harem">HAREM</button>
-            <button class="tag-btn" data-filter="kinh-di">KINH DỊ</button>
-            <button class="tag-btn" data-filter="zombie">ZOMBIE</button>
             <button class="tag-btn" data-filter="milf">MILF</button>
             <button class="tag-btn" data-filter="bdsm">BDSM</button>
             <button class="tag-btn" data-filter="anime">ANIME</button>
-            <button class="tag-btn" data-filter="2d">2D</button>
+            <button class="tag-btn" data-filter="3dcg">3DCG</button>
             <button class="tag-btn" data-filter="sandbox">SANDBOX</button>
+            <button class="tag-btn" data-filter="ntr">NTR</button>
+            <button class="tag-btn" data-filter="kinh-di">KINH DỊ</button>
+            <button class="tag-btn" data-filter="2d">2D</button>
         </div>
     </div>
 
     <div class="gacha-btn-container fade-in">
-        <button class="gacha-btn" onclick="rollGacha()">🎲 Không biết chơi gì? TEST NHÂN PHẨM! 🎲</button>
+        <button class="gacha-btn" onclick="rollGacha()">🎲 KHÔNG BIẾT CHƠI GÌ? QUAY GACHA! 🎲</button>
     </div>
 
-    <div class="games" id="game-list">
-        <p style='text-align:center; width:100%; color:var(--accent); font-size:18px;'>Đang giải mã kết nối máy chủ HPGVH18...</p>
-    </div> 
+    <div class="games" id="game-list"><p style="text-align:center;width:100%;color:var(--accent)">Đang kết nối máy chủ HPGVH18...</p></div>
 
-    <div class="timeline-section fade-in">
-        <h2 class="timeline-title">LỊCH SỬ PHÁT TRIỂN STUDIO</h2>
-        <div class="timeline-container">
-            <div class="timeline-item left fade-in">
-                <div class="content">
-                    <h3>Khởi Nguồn</h3>
-                    <p>Tháng 4, 2026: HPGVH18 STUDIO chính thức ra mắt. Solo Developer một tay "cân" mọi dự án.</p>
-                </div>
-            </div>
-            <div class="timeline-item right fade-in">
-                <div class="content">
-                    <h3>Dự Án Đầu Tiên</h3>
-                    <p>Tháng 5, 2026: Trình làng bản Việt hóa đầu tay 'Research Diary v0.1'. Mở bát thành công!</p>
-                </div>
-            </div>
-            <div class="timeline-item left fade-in">
-                <div class="content">
-                    <h3>Kỷ Nguyên Mới</h3>
-                    <p>Tháng 6, 2026: Mở rộng sang mảng game Kinh dị.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="site-footer fade-in">
-        <div class="footer-links">
-            <a href="faq.html">FAQ - Câu Hỏi Thường Gặp</a>
-            <a href="dmca.html">Điều Khoản & DMCA</a>
-            <a href="#">Báo Cáo Lỗi Link</a>
-        </div>
-        <div class="footer-copyright">
-            © 2026 HPGVH18 Studio. All rights reserved. <br>
-            <span style="font-size: 12px; color: #555;">Dự án phi lợi nhuận dành cho cộng đồng Visual Novel & RPG Việt Nam.</span>
-        </div>
+    <div class="site-footer">
+        <div class="footer-links"><a href="#">FAQ</a><a href="#">DMCA</a><a href="#">Báo lỗi</a></div>
+        <div style="font-size:12px">© 2026 HPGVH18 Studio · Dự án phi lợi nhuận · Toàn bộ gợi ý được tính hoàn toàn tại máy bạn</div>
     </div>
 </div>
 
 <div class="cyber-player" id="cyberPlayer">
-    <audio id="audioPlayer"></audio>
+    <audio id="audioPlayer">
     <div class="player-top" onclick="toggleMinimize(event)">
-        <div class="visualizer" id="visualizer">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        </div>
-        <marquee class="track-title" id="trackTitle" scrollamount="4">Đang tải trạm phát sóng...</marquee>
+        <div class="visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+        <marquee class="track-title" id="trackTitle">Đang tải trạm phát sóng...</marquee>
         <button class="min-btn" id="minBtn">▼</button>
     </div>
     <div class="player-bottom">
@@ -459,400 +412,326 @@ input[type=range]:focus { outline: none; }
             <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
             <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
         </div>
-        <div class="player-sliders">
-            <div class="slider-row">
+        <div style="margin-top:10px">
+            <div style="display:flex;gap:8px;align-items:center;font-size:12px;color:#bbb">
                 <span id="currentTime">0:00</span>
-                <input type="range" id="progressBar" value="0" min="0" max="100" step="1" onchange="seekAudio()">
+                <input type="range" id="progressBar" min="0" max="100" value="0" oninput="seekAudio()">
                 <span id="durationTime">0:00</span>
-            </div>
-            <div class="slider-row" style="justify-content: flex-end; padding-top: 5px;">
-                <span>🔊</span>
-                <input type="range" id="volumeBar" value="100" min="0" max="100" step="1" style="width: 50%;" oninput="changeVolume()">
             </div>
         </div>
     </div>
 </div>
 
-<button id="scrollTopBtn" onclick="scrollToTop()" title="Lên đầu trang">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="18 15 12 9 6 15"></polyline>
-    </svg>
-</button>
+<button id="scrollTopBtn" onclick="scrollToTop()">▲</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-
 <script>
-let currentThemeMode = 'nsfw'; 
-let currentActiveTag = 'all';
+/* =========================================================
+   🧠 HỆ THỐNG GỢI Ý THÔNG MINH - HOÀN CHỈNH
+   Hoàn toàn cục bộ | Không cần máy chủ | Không gửi dữ liệu
+   ========================================================= */
+const SUGGEST_STORAGE = "hpgvh18_suggest_v1";
+const BEHAVIOR_STORAGE = "hpgvh18_behavior_v1";
+const WEIGHT = { tags:0.60, author:0.12, sizeClose:0.08, coView:0.10, freshness:0.10 };
+const TILT = { max:12, speed:400, glare:true, "max-glare":0.22 };
 
-// ==========================================
-// 1. KẾT NỐI API GOOGLE SHEETS & TẠO UI
-// ==========================================
-const API_LINK = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
+let suggestConfig = loadSuggestConfig();
+let behavior     = loadBehavior();
+let allGamesMap  = {};
+let currentThemeMode = 'nsfw';
+let currentActiveTag  = 'all';
+let currentSlideIndex = 0, slideInterval;
 
+/* ---------- LƯU / ĐỌC DỮ LIỆU ---------- */
+function loadSuggestConfig(){
+    return Object.assign({enabled:true,count:6,hideSeen:true,avoidSimilar:false,expireDays:60},
+        JSON.parse(localStorage.getItem(SUGGEST_STORAGE)||"{}"));
+}
+function saveSuggestConfig(){ localStorage.setItem(SUGGEST_STORAGE, JSON.stringify(suggestConfig)); }
+function loadBehavior(){
+    const raw = JSON.parse(localStorage.getItem(BEHAVIOR_STORAGE)||"{}");
+    const now = Date.now(), maxAge = suggestConfig.expireDays*86400000;
+    raw.history = Object.fromEntries(Object.entries(raw.history||{}).filter(([,v])=> now - v.lastSeen < maxAge));
+    raw.favorites = raw.favorites||[]; raw.tagFreq = raw.tagFreq||{}; raw.coViewMatrix = raw.coViewMatrix||{};
+    localStorage.setItem(BEHAVIOR_STORAGE, JSON.stringify(raw));
+    return raw;
+}
+function saveBehavior(){ localStorage.setItem(BEHAVIOR_STORAGE, JSON.stringify(behavior)); }
+
+/* ---------- GHI NHẬN HÀNH VI ---------- */
+function logViewGame(gameId){
+    if(!suggestConfig.enabled) return;
+    const now = Date.now(), p = behavior.history[gameId];
+    behavior.history[gameId] = { count:(p?.count||0)+1, lastSeen:now, firstSeen:p?.firstSeen||now };
+    const tags = (allGamesMap[gameId]?.tags||"").toLowerCase().split(/\s+/).filter(Boolean);
+    tags.forEach(t => behavior.tagFreq[t] = (behavior.tagFreq[t]||0)+1);
+    const recent = Object.entries(behavior.history).sort((a,b)=>b[1].lastSeen-a[1].lastSeen).slice(0,5).map(([id])=>id);
+    recent.forEach(a => {
+        if(a===gameId) return;
+        behavior.coViewMatrix[a] = behavior.coViewMatrix[a]||{};
+        behavior.coViewMatrix[gameId] = behavior.coViewMatrix[gameId]||{};
+        behavior.coViewMatrix[a][gameId] = (behavior.coViewMatrix[a][gameId]||0)+1;
+        behavior.coViewMatrix[gameId][a] = (behavior.coViewMatrix[gameId][a]||0)+1;
+    });
+    saveBehavior();
+}
+
+/* ---------- 🧮 THUẬT TOÁN TƯƠNG ĐỒNG JACCARD + TRỌNG SỐ ---------- */
+function jaccard(a,b){ if(!a.length||!b.length) return 0; const i=a.filter(x=>b.includes(x)).length; return i/(a.length+b.length-i); }
+function calcScore(A,B,mode="normal"){
+    if(A.id===B.id) return -999;
+    const tA=(A.tags||"").toLowerCase().split(/\s+/).filter(Boolean);
+    const tB=(B.tags||"").toLowerCase().split(/\s+/).filter(Boolean);
+    let s=0;
+    s += WEIGHT.tags      * jaccard(tA,tB);
+    s += WEIGHT.author    * ((A.author||"").toLowerCase()===(B.author||"").toLowerCase()?1:0);
+    const sA=parseFloat(A.size||"0"), sB=parseFloat(B.size||"0");
+    if(sA&&sB) s += WEIGHT.sizeClose * (Math.min(sA,sB)/Math.max(sA,sB));
+    s += WEIGHT.coView    * Math.min(1,(behavior.coViewMatrix[A.id]?.[B.id]||0)/5);
+    s += WEIGHT.freshness * Math.min(1, Object.keys(behavior.history).length/10);
+    if(mode==="diverse"){ const tj=jaccard(tA,tB); s = s*(1-tj)+(1-tj)*0.7; }
+    if(suggestConfig.hideSeen){
+        if(behavior.history[B.id]) s-=0.85;
+        if(behavior.favorites.includes(B.id)) s-=0.4;
+    }
+    return +s.toFixed(4);
+}
+
+/* ---------- LẤY & RENDER GỢI Ý ---------- */
+function getSuggestForYou(){
+    const games = Object.values(allGamesMap);
+    if(Object.keys(behavior.history).length<2) return [];
+    const topTags = Object.entries(behavior.tagFreq).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([t])=>t).join(" ");
+    const mode = suggestConfig.avoidSimilar?"diverse":"normal";
+    return games.map(g=>({game:g,score:calcScore({id:"__me__",tags:topTags},g,mode)}))
+                .sort((a,b)=>b.score-a.score).slice(0,suggestConfig.count).filter(x=>x.score>0.05);
+}
+function getRelated(gameId){
+    const base = allGamesMap[gameId]; if(!base) return [];
+    const mode = suggestConfig.avoidSimilar?"diverse":"normal";
+    return Object.values(allGamesMap).map(g=>({game:g,score:calcScore(base,g,mode)}))
+                .sort((a,b)=>b.score-a.score).slice(0,suggestConfig.count).filter(x=>x.score>0.08);
+}
+function renderCard(g,score=0){
+    const tags=(g.tags||"").split(" ").slice(0,4).map(t=>`<span class="info-tag">${t}</span>`).join("");
+    return `<div class="game-card fade-in" data-tags="${g.tags||""}" data-id="${g.id}" onclick="logViewGame('${g.id}')">
+        <div class="similarity-badge">${Math.max(5,Math.round(score*100))}% phù hợp</div>
+        <div class="share-btn" onclick="event.stopPropagation();shareGame('${g.title}','chi-tiet.html?id=${g.id}')">🔗</div>
+        <img src="${g.cover}" alt="${g.title}" loading="lazy">
+        <div class="info"><h2>${g.title}</h2><p>${g.author||""} · ${g.size||""}</p>
+        <div class="info-tags">${tags}</div>
+        <a class="btn" href="chi-tiet.html?id=${g.id}">XEM CHI TIẾT</a></div></div>`;
+}
+function renderSuggestions(){
+    const wrap=document.getElementById("suggestForYou"), list=document.getElementById("suggestList"), empty=document.getElementById("emptySuggest");
+    if(!suggestConfig.enabled){ wrap.style.display="none"; return; }
+    const items = getSuggestForYou();
+    wrap.style.display="block";
+    if(items.length===0){ list.innerHTML=""; empty.style.display="block"; }
+    else { empty.style.display="none"; list.innerHTML=items.map(({game,score})=>renderCard(game,score)).join("");
+           VanillaTilt.init(list.querySelectorAll(".game-card"), TILT); }
+    bindHover();
+}
+function renderRelated(gameId){
+    const wrap=document.getElementById("suggestRelated"), list=document.getElementById("relatedList");
+    const items=getRelated(gameId);
+    if(items.length){ wrap.style.display="block"; list.innerHTML=items.map(({game,score})=>renderCard(game,score)).join("");
+        VanillaTilt.init(list.querySelectorAll(".game-card"), TILT); bindHover(); }
+}
+
+/* ---------- ⚙️ CÀI ĐẶT ---------- */
+function openSuggestSettings(){
+    document.getElementById("enableSuggest").checked = suggestConfig.enabled;
+    document.getElementById("suggestCount").value = suggestConfig.count;
+    document.getElementById("countLabel").textContent = suggestConfig.count;
+    document.getElementById("hideSeen").checked = suggestConfig.hideSeen;
+    document.getElementById("avoidSimilar").checked = suggestConfig.avoidSimilar;
+    document.getElementById("avoidSimilarMode").checked = suggestConfig.avoidSimilar;
+    document.getElementById("dataStats").innerHTML = `
+        <div>🎬 Đã xem: <b>${Object.keys(behavior.history).length}</b></div>
+        <div>❤️ Yêu thích: <b>${behavior.favorites.length}</b></div>
+        <div>🏷️ Thể loại: <b>${Object.keys(behavior.tagFreq).length}</b></div>
+        <div>🔗 Tương quan: <b>${Object.keys(behavior.coViewMatrix).length}</b></div>`;
+    document.getElementById("suggestModal").classList.add("show");
+}
+function closeSuggestSettings(){ document.getElementById("suggestModal").classList.remove("show"); }
+function clearAllSuggestData(){
+    if(!confirm("Xóa hoàn toàn lịch sử & hồ sơ gợi ý?")) return;
+    localStorage.removeItem(BEHAVIOR_STORAGE); behavior=loadBehavior();
+    renderSuggestions(); openSuggestSettings();
+}
+document.getElementById("enableSuggest").addEventListener("change",e=>{suggestConfig.enabled=e.target.checked;saveSuggestConfig();renderSuggestions()});
+document.getElementById("suggestCount").addEventListener("input",e=>{suggestConfig.count=+e.target.value;document.getElementById("countLabel").textContent=e.target.value;saveSuggestConfig();renderSuggestions()});
+document.getElementById("hideSeen").addEventListener("change",e=>{suggestConfig.hideSeen=e.target.checked;saveSuggestConfig();renderSuggestions()});
+document.getElementById("avoidSimilar").addEventListener("change",e=>{
+    suggestConfig.avoidSimilar=e.target.checked;
+    document.getElementById("avoidSimilarMode").checked=e.target.checked;
+    saveSuggestConfig();renderSuggestions();
+});
+document.getElementById("avoidSimilarMode").addEventListener("change",e=>{
+    suggestConfig.avoidSimilar=e.target.checked;
+    document.getElementById("avoidSimilar").checked=e.target.checked;
+    saveSuggestConfig();renderSuggestions();
+});
+
+/* =========================================================
+   PHẦN CŨ ĐÃ CÓ - GIỮ NGUYÊN + TÍCH HỢP GỢI Ý
+   ========================================================= */
+const API = "https://script.google.com/macros/s/AKfycbzaM_c0kvAMewTwV76lxkxyrG0CSIsshLyztEzmQJm3dWD3WcYL96zlcdvzHmhPAtKQPA/exec";
 const gameListContainer = document.getElementById('game-list');
 const slidesContainer = document.getElementById('dynamic-slides-container');
 const dotsContainer = document.getElementById('dynamic-dots-container');
 const outline = document.querySelector('.cursor-outline');
 
-fetch(API_LINK)
-    .then(response => response.json())
-    .then(data => {
-        let htmlContent = '';
-        let slidesHtml = '';
-        let dotsHtml = '';
-        const gameIds = Object.keys(data).reverse();
-        
-        gameIds.forEach((id, index) => {
-            const game = data[id];
-            let labelsHtml = "";
-            if(game.tags) {
-                labelsHtml = game.tags.split(" ").slice(0,4).map(l => `<span class="info-tag">${l}</span>`).join('');
-            }
+fetch(API).then(r=>r.json()).then(data=>{
+    let html='', sHtml='', dHtml='';
+    const ids = Object.keys(data).reverse();
+    ids.forEach(id => allGamesMap[id] = {id, ...data[id]}); // ✅ bản đồ cho gợi ý
 
-            // --- TẠO HTML CHO GAME CARD BÊN DƯỚI ---
-            htmlContent += `
-                <div class="game-card fade-in" data-tags="${game.tags || ''}">
-                    <div class="share-btn" onclick="shareGame('${game.title}', 'https://quycai.github.io/chi-tiet.html?id=${id}')">🔗</div>
-                    <img src="${game.cover}" alt="${game.title}" loading="lazy">
-                    <div class="info">
-                        <h2>${game.title}</h2>
-                        <p>PC Windows | ${game.author}</p>
-                        <div class="info-tags">
-                            ${labelsHtml}
-                        </div>
-                        <a class="btn" href="chi-tiet.html?id=${id}">XEM CHI TIẾT</a>
-                    </div>
-                </div>
-            `;
-
-            // --- TẠO HTML CHO SLIDER (LẤY 10 GAME MỚI NHẤT) ---
-            if (index < 10) {
-                const isActive = index === 0 ? 'active' : '';
-                slidesHtml += `
-                    <div class="slide ${isActive}" onclick="window.location.href='chi-tiet.html?id=${id}'">
-                        <img src="${game.cover}" alt="${game.title}" loading="lazy">
-                        <div class="slide-overlay"></div>
-                        <div class="slide-content">
-                            <h2 class="slide-title">${game.title} ${game.version ? 'v' + game.version : ''}</h2>
-                            <div class="slide-tags">
-                                <span class="slide-tag">${game.size || 'N/A'}</span>
-                                <span class="slide-tag">PC</span>
-                                <span class="slide-tag">Tác giả: ${game.author || 'Đang cập nhật'}</span>
-                            </div>
-                            <p class="slide-desc">${game.desc || 'Chưa có mô tả cốt truyện...'}</p>
-                        </div>
-                    </div>
-                `;
-                dotsHtml += `<span class="dot ${isActive}" onclick="goToSlide(${index})"></span>`;
-            }
-        });
-        
-        // Bơm dữ liệu vào Web
-        gameListContainer.innerHTML = htmlContent;
-        slidesContainer.innerHTML = slidesHtml;
-        dotsContainer.innerHTML = dotsHtml;
-
-        VanillaTilt.init(document.querySelectorAll(".game-card"), { max: 12, speed: 400, glare: true, "max-glare": 0.25 });
-        const appearOnScroll = new IntersectionObserver(entries => { 
-            entries.forEach(entry => { 
-                if (entry.isIntersecting) { entry.target.classList.add('appear'); appearOnScroll.unobserve(entry.target); } 
-            }); 
-        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-        document.querySelectorAll('.fade-in').forEach(fader => appearOnScroll.observe(fader));
-        
-        refreshCursorHoverEffects();
-        applyFilters();
-
-        // Kích hoạt Slider
-        initDynamicSlider(); 
-    })
-    .catch(error => {
-        gameListContainer.innerHTML = "<p style='text-align:center; width:100%; color:red;'>Lỗi tải dữ liệu. Hãy kiểm tra lại API_LINK!</p>";
-        console.error(error);
-    });
-
-function refreshCursorHoverEffects() {
-    document.querySelectorAll('a, button, .game-card img, .game-card, .slide, .share-btn, input[type="range"], .player-top, #scrollTopBtn, .slider, .gacha-btn, .close-gacha, .zone-btn').forEach(el => { 
-        el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover')); 
-        el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover')); 
-    });
-}
-
-// ==========================================
-// TỔNG HỢP LOGIC LỌC (THEME + TAG)
-// ==========================================
-function applyFilters() {
-    document.querySelectorAll('.game-card').forEach(card => {
-        const cardTags = card.dataset.tags ? card.dataset.tags.toLowerCase() : "";
-        
-        let themeMatch = false;
-        if (currentThemeMode === 'horror') {
-            themeMatch = cardTags.includes('kinh-di'); 
-        } else if (currentThemeMode === 'vietnam') {
-            // NÚT NÀY CHỈ ĐỔI MÀU, NÊN HIỂN THỊ TẤT CẢ GAME TRONG KHO
-            themeMatch = true; 
-        } else {
-            themeMatch = !cardTags.includes('kinh-di'); 
-        }
-
-        let tagMatch = false;
-        if (currentActiveTag === 'all' || cardTags.includes(currentActiveTag)) {
-            tagMatch = true;
-        }
-
-        if (themeMatch && tagMatch) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
+    ids.forEach((id,i)=>{
+        const g=data[id];
+        const tags=(g.tags||"").split(" ").slice(0,4).map(t=>`<span class="info-tag">${t}</span>`).join("");
+        html += `<div class="game-card fade-in" data-tags="${g.tags||""}" data-id="${id}" onclick="logViewGame('${id}')">
+            <div class="share-btn" onclick="event.stopPropagation();shareGame('${g.title}','chi-tiet.html?id=${id}')">🔗</div>
+            <img src="${g.cover}" loading="lazy">
+            <div class="info"><h2>${g.title}</h2><p>${g.author||""} · ${g.size||""}</p>
+            <div class="info-tags">${tags}</div>
+            <a class="btn" href="chi-tiet.html?id=${id}">XEM CHI TIẾT</a></div></div>`;
+        if(i<10){
+            const act=i===0?"active":"";
+            sHtml += `<div class="slide ${act}" onclick="window.location='chi-tiet.html?id=${id}'"><img src="${g.cover}"><div class="slide-overlay"></div>
+                <div class="slide-content"><h2 class="slide-title">${g.title} ${g.version?"v"+g.version:""}</h2>
+                <div class="slide-tags"><span class="slide-tag">${g.size||""}</span><span class="slide-tag">PC</span><span class="slide-tag">${g.author||""}</span></div>
+                <p class="slide-desc">${g.desc||""}</p></div></div>`;
+            dHtml += `<span class="dot ${act}" onclick="goToSlide(${i})"></span>`;
         }
     });
-}
+    gameListContainer.innerHTML=html;
+    slidesContainer.innerHTML=sHtml; dotsContainer.innerHTML=dHtml;
+    VanillaTilt.init(document.querySelectorAll(".game-card"), TILT);
 
-function selectZone(mode) {
-    document.querySelectorAll('.zone-btn').forEach(btn => btn.classList.remove('active'));
-    document.body.classList.remove('blood-theme', 'vietnam-theme');
+    const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("appear");io.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll(".fade-in").forEach(f=>io.observe(f));
 
-    if (mode === 'horror') {
-        document.body.classList.add('blood-theme');
-        document.querySelector('.zone-horror').classList.add('active');
-        currentThemeMode = 'horror';
-    } else if (mode === 'vietnam') {
-        document.body.classList.add('vietnam-theme');
-        document.querySelector('.zone-vietnam').classList.add('active');
-        currentThemeMode = 'vietnam';
-    } else {
-        document.querySelector('.zone-nsfw').classList.add('active');
-        currentThemeMode = 'nsfw';
-    }
-
+    bindHover();
     applyFilters();
+    renderSuggestions(); // ✅ tự động hiện gợi ý
+    const urlId = new URLSearchParams(location.search).get("id");
+    if(urlId){ logViewGame(urlId); renderRelated(urlId); }
+    initSlider();
+}).catch(e=>{ gameListContainer.innerHTML="<p style='color:red;text-align:center;width:100%'>Lỗi tải dữ liệu</p>"; console.error(e); });
 
-    const anchor = document.getElementById('game-section-anchor');
-    if(anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
-const tagBtns = document.querySelectorAll('.tag-btn');
-tagBtns.forEach(btn => { 
-    btn.addEventListener('click', function() { 
-        document.querySelector('.tag-btn.active').classList.remove('active'); 
-        this.classList.add('active'); 
-        currentActiveTag = this.dataset.filter.toLowerCase();
-        applyFilters();
-    }); 
-});
-
-const search = document.getElementById('search');
-search.addEventListener('keyup',()=>{ 
-    const value = search.value.toLowerCase(); 
-    document.querySelectorAll('.game-card').forEach(card=>{ 
-        const text = card.innerText.toLowerCase(); 
-        applyFilters(); 
-        if(card.style.display === 'block' && !text.includes(value)){
-            card.style.display = 'none';
-        }
-    }); 
-});
-
-// ==========================================
-// 🎲 LOGIC QUAY GACHA NHÂN PHẨM 🎲
-// ==========================================
-function rollGacha() {
-    const visibleGames = Array.from(document.querySelectorAll('.game-card')).filter(card => card.style.display === 'block');
-    
-    if(visibleGames.length === 0) {
-        alert("⚠️ Hiện tại không có game nào trong mục này để quay!");
-        return;
-    }
-
-    const modal = document.getElementById('gacha-modal');
-    const box = document.querySelector('.gacha-box');
-    const loadingUI = document.getElementById('gacha-loading');
-    const resultUI = document.getElementById('gacha-result');
-
-    modal.style.display = 'flex';
-    setTimeout(() => box.classList.add('active'), 10);
-    
-    loadingUI.style.display = 'block';
-    resultUI.style.display = 'none';
-
-    setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * visibleGames.length);
-        const winnerCard = visibleGames[randomIndex];
-
-        const gameImg = winnerCard.querySelector('img').src;
-        const gameTitle = winnerCard.querySelector('h2').innerText;
-        const gameLink = winnerCard.querySelector('.btn').href;
-
-        document.getElementById('gacha-img').src = gameImg;
-        document.getElementById('gacha-title').innerText = gameTitle;
-        document.getElementById('gacha-link').href = gameLink;
-
-        loadingUI.style.display = 'none';
-        resultUI.style.display = 'block';
-    }, 2000); 
-}
-
-function closeGacha() {
-    const box = document.querySelector('.gacha-box');
-    box.classList.remove('active');
-    setTimeout(() => document.getElementById('gacha-modal').style.display = 'none', 400);
-}
-
-// ==========================================
-// 2. MÁY PHÁT NHẠC
-// ==========================================
-const playlist = [
-    { title: "🎵 Mashup Mùa Thu Và Lời Xin Lỗi (NVT REMIX)", src: "https://files.catbox.moe/gphcaw.mp3", img: "https://i.postimg.cc/50y2SgJJ/6ef39f35202950c5d2432a3e182c7ce4.jpg" },
-    { title: "🔥 NHỮNG LỜI DỐI GIAN - VIỆT PUZO (THÁI HOÀNG REMIX)", src: "https://files.catbox.moe/6i8lwb.mp3", img: "https://i.postimg.cc/G2tmxKRr/95b8b05fbd482e62f5a51393ff8ae71c.jpg" },
-    { title: "🎧 Liều Thuốc Cho Trái Tim (Remix)", src: "https://files.catbox.moe/kt3sov.mp3", img: "https://i.postimg.cc/Jn0z5x8L/32e5d81d5350da6382be9ac3b765793b.jpg" }
-];
-
-let trackIndex = 0;
-const audio = document.getElementById("audioPlayer");
-const playPauseBtn = document.getElementById("playPauseBtn");
-const trackTitle = document.getElementById("trackTitle");
-const progressBar = document.getElementById("progressBar");
-const currentTimeEl = document.getElementById("currentTime");
-const durationTimeEl = document.getElementById("durationTime");
-const volumeBar = document.getElementById("volumeBar");
-const cyberPlayer = document.getElementById("cyberPlayer");
-const visualizer = document.getElementById("visualizer");
-
-let particleInterval; let lightningInterval;
-
-function loadTrack(index) {
-    audio.src = playlist[index].src; trackTitle.innerText = playlist[index].title;
-    cyberPlayer.style.backgroundImage = `url('${playlist[index].img}')`; audio.load();
-}
-
-function togglePlay() {
-    if (audio.paused) {
-        audio.play().then(() => {
-            playPauseBtn.innerText = "⏸"; cyberPlayer.classList.add("playing"); visualizer.classList.add("playing");
-            particleInterval = setInterval(createDust, 200); lightningInterval = setInterval(createLightning, 400); 
-        }).catch(err => { alert("Lỗi tải nhạc! Trình duyệt chặn hoặc link nhạc bị hỏng."); });
-    } else {
-        audio.pause(); playPauseBtn.innerText = "▶"; cyberPlayer.classList.remove("playing"); visualizer.classList.remove("playing");
-        clearInterval(particleInterval); clearInterval(lightningInterval);
-    }
-}
-
-function nextTrack() { trackIndex = (trackIndex + 1) % playlist.length; loadTrack(trackIndex); togglePlay(); }
-function prevTrack() { trackIndex = (trackIndex - 1 + playlist.length) % playlist.length; loadTrack(trackIndex); togglePlay(); }
-
-audio.addEventListener("timeupdate", () => {
-    if(audio.duration) {
-        progressBar.value = (audio.currentTime / audio.duration) * 100;
-        currentTimeEl.innerText = formatTime(audio.currentTime); durationTimeEl.innerText = formatTime(audio.duration);
-    }
-});
-function seekAudio() { audio.currentTime = (progressBar.value / 100) * audio.duration; }
-function changeVolume() { audio.volume = volumeBar.value / 100; }
-audio.addEventListener("ended", nextTrack);
-
-function formatTime(time) { let min = Math.floor(time / 60); let sec = Math.floor(time % 60); if (sec < 10) sec = "0" + sec; return `${min}:${sec}`; }
-
-function toggleMinimize(e) {
-    if (e && (e.target.tagName === 'INPUT' || (e.target.tagName === 'BUTTON' && e.target.id !== 'minBtn'))) return;
-    cyberPlayer.classList.toggle("minimized"); document.getElementById("minBtn").innerText = cyberPlayer.classList.contains("minimized") ? "▲" : "▼";
-}
-loadTrack(trackIndex); audio.volume = 1; 
-
-function createDust() {
-    if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
-    const dust = document.createElement('div'); dust.className = 'cyber-dust'; const rect = cyberPlayer.getBoundingClientRect();
-    const size = Math.random() * 3 + 2; dust.style.width = size + 'px'; dust.style.height = size + 'px';
-    const spawnX = rect.left - 300 + (Math.random() * (rect.width + 600)); dust.style.left = spawnX + 'px'; dust.style.top = rect.bottom - 10 + 'px';
-    dust.style.setProperty('--rnd', Math.random() * 2 - 1); dust.style.animationDuration = (Math.random() * 2 + 2) + 's';
-    document.body.appendChild(dust); setTimeout(() => dust.remove(), 4000);
-}
-function createLightning() {
-    if (audio.paused || cyberPlayer.classList.contains('minimized')) return;
-    if (Math.random() > 0.25) return; 
-    cyberPlayer.classList.add('flash-strike'); setTimeout(() => cyberPlayer.classList.remove('flash-strike'), 150);
-    const streak = document.createElement('div'); streak.className = 'light-streak'; const rect = cyberPlayer.getBoundingClientRect();
-    streak.style.left = (rect.left - 200 + Math.random() * (rect.width + 400)) + 'px'; streak.style.top = (rect.top - 100 + Math.random() * (rect.height + 200)) + 'px';
-    document.body.appendChild(streak); setTimeout(() => streak.remove(), 300);
-}
-
-// ==========================================
-// 3. UI LOGIC (SLIDER) CẬP NHẬT ĐỘNG
-// ==========================================
-let currentSlideIndex = 0; 
-let slides, dots, slideInterval;
-
-function initDynamicSlider() {
-    slides = document.querySelectorAll('.slide'); 
-    dots = document.querySelectorAll('.dot'); 
-    if(slides.length === 0) return; // Nếu không có game nào thì bỏ qua
-    resetInterval();
-
-    const sliderContainer = document.getElementById('main-slider');
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval)); 
-    sliderContainer.addEventListener('mouseleave', startAutoSlide);
-}
-
-function showSlide(n) { 
-    if(!slides || slides.length === 0) return;
-    slides.forEach(s => s.classList.remove('active')); 
-    dots.forEach(d => d.classList.remove('active')); 
-    currentSlideIndex = (n + slides.length) % slides.length; 
-    slides[currentSlideIndex].classList.add('active'); 
-    dots[currentSlideIndex].classList.add('active'); 
-}
-
-function changeSlide(step) { showSlide(currentSlideIndex + step); resetInterval(); }
-function goToSlide(n) { showSlide(n); resetInterval(); }
-function startAutoSlide() { slideInterval = setInterval(() => changeSlide(1), 3000); }
-function resetInterval() { clearInterval(slideInterval); startAutoSlide(); }
-
-document.addEventListener('keydown', e => { 
-    if(e.key === 'ArrowLeft') changeSlide(-1); 
-    else if(e.key === 'ArrowRight') changeSlide(1); 
-});
-
-document.addEventListener("DOMContentLoaded", () => { 
-    if(localStorage.getItem('isAdult') === 'true') document.getElementById('age-warning-overlay').style.display = 'none'; 
-    refreshCursorHoverEffects();
-});
-
-function acceptAge() { 
-    const box = document.querySelector('.age-box'); const overlay = document.getElementById('age-warning-overlay'); const rect = box.getBoundingClientRect();
-    const shards = [ '0 0, 50% 0, 30% 50%, 0 30%', '50% 0, 100% 0, 100% 40%, 70% 50%', '0 30%, 30% 50%, 20% 100%, 0 100%', '70% 50%, 100% 40%, 100% 100%, 50% 100%', '30% 50%, 70% 50%, 50% 100%, 20% 100%' ];
-    box.style.visibility = 'hidden'; overlay.style.transition = 'opacity 0.6s ease';
-    shards.forEach((poly) => {
-        const clone = box.cloneNode(true); clone.style.position = 'absolute'; clone.style.top = rect.top + 'px'; clone.style.left = rect.left + 'px'; clone.style.width = rect.width + 'px'; clone.style.height = rect.height + 'px'; clone.style.margin = '0'; clone.style.visibility = 'visible'; clone.style.clipPath = `polygon(${poly})`; clone.style.transition = 'all 0.7s cubic-bezier(0.25, 1, 0.5, 1)';
-        overlay.appendChild(clone);
-        setTimeout(() => { const x = (Math.random() - 0.5) * 500; const y = (Math.random() + 0.5) * 400; const rot = (Math.random() - 0.5) * 90; clone.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg) scale(0)`; clone.style.opacity = '0'; }, 10);
+function bindHover(){
+    document.querySelectorAll('a,button,.game-card,.slide,.share-btn,#scrollTopBtn,.zone-btn,.gacha-btn')
+      .forEach(el=>{
+        el.addEventListener('mouseenter',()=>outline.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave',()=>outline.classList.remove('cursor-hover'));
     });
-    overlay.style.opacity = '0'; setTimeout(() => { overlay.style.display = 'none'; localStorage.setItem('isAdult', 'true'); }, 700); 
 }
-function rejectAge() { window.location.href = "https://www.google.com"; }
-
-function shareGame(title, url) { if (navigator.share) { navigator.share({ title: title, text: 'Tải ngay game Việt Hóa tại HPGVH18: ' + title, url: url }).catch(console.error); } else { alert('Copy link này nhé ông: ' + url); } }
-
-// Con Trỏ Chuột
-const dot = document.querySelector('.cursor-dot');
-window.addEventListener('mousemove', e => { 
-    dot.style.left = e.clientX + 'px'; 
-    dot.style.top = e.clientY + 'px'; 
-    setTimeout(() => { 
-        outline.style.left = e.clientX + 'px'; 
-        outline.style.top = e.clientY + 'px'; 
-    }, 40); 
+function applyFilters(){
+    document.querySelectorAll('.game-card').forEach(c=>{
+        const t=(c.dataset.tags||"").toLowerCase();
+        const okTheme = currentThemeMode==='horror' ? t.includes('kinh-di') : !t.includes('kinh-di');
+        const okTag   = currentActiveTag==='all' || t.includes(currentActiveTag);
+        c.style.display = okTheme&&okTag ? 'block':'none';
+    });
+}
+function selectZone(m){
+    document.querySelectorAll('.zone-btn').forEach(b=>b.classList.remove('active'));
+    document.body.classList.remove('blood-theme','vietnam-theme');
+    if(m==='horror'){document.body.classList.add('blood-theme');document.querySelector('.zone-horror').classList.add('active')}
+    else if(m==='vietnam'){document.body.classList.add('vietnam-theme');document.querySelector('.zone-vietnam').classList.add('active')}
+    else document.querySelector('.zone-nsfw').classList.add('active');
+    currentThemeMode=m; applyFilters();
+}
+document.querySelectorAll('.tag-btn').forEach(b=>b.onclick=function(){
+    document.querySelector('.tag-btn.active').classList.remove('active');
+    this.classList.add('active'); currentActiveTag=this.dataset.filter.toLowerCase(); applyFilters();
+});
+document.getElementById('search').addEventListener('input',function(){
+    const v=this.value.toLowerCase();
+    document.querySelectorAll('.game-card').forEach(c=>{
+        if(c.style.display==='none') return;
+        if(!c.innerText.toLowerCase().includes(v)) c.style.display='none';
+    });
 });
 
-// ==========================================
-// 4. NÚT LÊN ĐẦU TRANG
-// ==========================================
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) { scrollTopBtn.classList.add("show"); } else { scrollTopBtn.classList.remove("show"); }
+/* --- GACHA --- */
+function rollGacha(){
+    const vis=Array.from(document.querySelectorAll('.game-card')).filter(c=>c.style.display!=='none');
+    if(!vis.length) return alert("Không có game nào để quay");
+    const m=document.getElementById('gacha-modal'), b=m.querySelector('.gacha-box');
+    m.style.display='flex'; setTimeout(()=>b.classList.add('active'),10);
+    document.getElementById('gacha-loading').style.display='block';
+    document.getElementById('gacha-result').style.display='none';
+    setTimeout(()=>{
+        const r=vis[Math.floor(Math.random()*vis.length)];
+        document.getElementById('gacha-img').src=r.querySelector('img').src;
+        document.getElementById('gacha-title').innerText=r.querySelector('h2').innerText;
+        document.getElementById('gacha-link').href=r.querySelector('.btn').href;
+        document.getElementById('gacha-loading').style.display='none';
+        document.getElementById('gacha-result').style.display='block';
+    },1800);
+}
+
+/* --- SLIDER --- */
+function initSlider(){
+    startAuto();
+    document.getElementById('main-slider').addEventListener('mouseenter',()=>clearInterval(slideInterval));
+    document.getElementById('main-slider').addEventListener('mouseleave',startAuto);
+}
+function showSlide(n){
+    const s=document.querySelectorAll('.slide'), d=document.querySelectorAll('.dot');
+    currentSlideIndex=(n+s.length)%s.length;
+    s.forEach(x=>x.classList.remove('active')); d.forEach(x=>x.classList.remove('active'));
+    s[currentSlideIndex].classList.add('active'); d[currentSlideIndex].classList.add('active');
+}
+function changeSlide(k){showSlide(currentSlideIndex+k); startAuto()}
+function goToSlide(n){showSlide(n); startAuto()}
+function startAuto(){ clearInterval(slideInterval); slideInterval=setInterval(()=>changeSlide(1),4000); }
+
+/* --- NHẠC --- */
+const pl=[
+    {title:"🎵 Mùa Thu & Lời Xin Lỗi",src:"https://files.catbox.moe/gphcaw.mp3"},
+    {title:"🔥 Những Lời Dối Gian",src:"https://files.catbox.moe/6i8lwb.mp3"},
+    {title:"🎧 Liều Thuốc Cho Trái Tim",src:"https://files.catbox.moe/kt3sov.mp3"}
+];
+let ti=0, audio=document.getElementById("audioPlayer");
+function loadTrack(i){audio.src=pl[i].src;document.getElementById("trackTitle").innerText=pl[i].title;audio.load()}
+function togglePlay(){audio.paused?audio.play().then(()=>{document.getElementById("playPauseBtn").innerText="⏸";document.getElementById("cyberPlayer").classList.add("playing")})
+    :(audio.pause(),document.getElementById("playPauseBtn").innerText="▶",document.getElementById("cyberPlayer").classList.remove("playing"));}
+function nextTrack(){ti=(ti+1)%pl.length;loadTrack(ti);togglePlay()}
+function prevTrack(){ti=(ti-1+pl.length)%pl.length;loadTrack(ti);togglePlay()}
+audio.addEventListener("timeupdate",()=>{
+    if(audio.duration){
+        document.getElementById("progressBar").value=(audio.currentTime/audio.duration)*100;
+        document.getElementById("currentTime").innerText=fmt(audio.currentTime);
+        document.getElementById("durationTime").innerText=fmt(audio.duration);
+    }
 });
-function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
+function seekAudio(){audio.currentTime=(document.getElementById("progressBar").value/100)*audio.duration}
+function fmt(t){const m=Math.floor(t/60),s=Math.floor(t%60);return `${m}:${s<10?"0":""}${s}`}
+audio.addEventListener("ended",nextTrack);
+function toggleMinimize(e){if(e.target.tagName==='BUTTON'||e.target.tagName==='INPUT')return;document.getElementById("cyberPlayer").classList.toggle("minimized")}
+loadTrack(ti);
+
+/* --- TUỔI --- */
+if(localStorage.getItem('isAdult')==='true') document.getElementById('age-warning-overlay').style.display='none';
+function acceptAge(){localStorage.setItem('isAdult','true');document.getElementById('age-warning-overlay').style.display='none'}
+function rejectAge(){location.href="https://www.google.com"}
+function shareGame(t,u){navigator.share?navigator.share({title:t,url:u}):prompt("Copy link:",u)}
+
+/* --- CON TRỎ --- */
+const dot=document.querySelector('.cursor-dot');
+window.addEventListener('mousemove',e=>{
+    dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';
+    setTimeout(()=>{outline.style.left=e.clientX+'px';outline.style.top=e.clientY+'px'},50);
+});
+
+/* --- CUỘN --- */
+const topBtn=document.getElementById("scrollTopBtn");
+window.addEventListener("scroll",()=>window.scrollY>400?topBtn.classList.add("show"):topBtn.classList.remove("show"));
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})}
 </script>
 </body>
 </html>
