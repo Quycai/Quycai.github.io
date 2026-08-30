@@ -44,18 +44,18 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 }
 .top-titles p { color: var(--text-dim); font-size: 1.1rem; }
 
-/* --- BANNER KHỔNG LỒ (ĐÃ FIX LỖI TỶ LỆ & CHUYỂN SANG DÙNG IMG) --- */
+/* --- BANNER KHỔNG LỒ --- */
 .hero-banner { 
     width: 100%; 
-    height: auto; /* Ảnh tỷ lệ bao nhiêu bung ra bấy nhiêu, không bị viền đen */
-    max-height: 500px; /* Khóa chiều cao tối đa để màn hình to không bị lố */
+    height: auto; 
+    max-height: 500px; 
     object-fit: cover; 
     object-position: top center; 
     border-radius: 20px; 
     border: 1px solid rgba(255,255,255,0.1); 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin-bottom: 25px;
-    display: none; /* Mặc định ẩn, JS sẽ bật lên nếu có ảnh */
+    display: none;
 }
 
 /* BỐ CỤC 2 CỘT */
@@ -121,8 +121,25 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
 @keyframes blink-text { 0% { opacity: 0.3; } 100% { opacity: 1; text-shadow: 0 0 5px var(--accent2); } }
 .password-box:active { transform: scale(0.95); background: rgba(139, 92, 246, 0.3); border-color: var(--accent2); }
 
-.download{ display:block; text-align:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:white; text-decoration:none; padding:18px; border-radius:12px; font-size:20px; font-weight:bold; box-shadow: 0 10px 25px rgba(255,79,160,.4); transition:.3s; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.2); }
-.download:hover{ transform:translateY(-5px); box-shadow: 0 15px 35px rgba(255,79,160,.6); filter: brightness(1.1); }
+/* --- HỆ THỐNG DOWNLOAD KÉP --- */
+.download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.btn-dl { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 15px; border-radius: 12px; font-weight: bold; text-decoration: none; transition: 0.3s; color: white; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
+.btn-dl span { font-size: 13px; font-weight: normal; opacity: 0.8; margin-top: 5px; display: block; }
+
+.dl-game { background: linear-gradient(135deg, #252536, #3b3b54); border-color: var(--accent2); }
+.dl-game:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4); border-color: #fff; }
+
+.dl-patch { background: linear-gradient(135deg, var(--accent), #ff1f71); box-shadow: 0 5px 15px rgba(255,79,160,.3); }
+.dl-patch:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(255,79,160,.6); filter: brightness(1.1); }
+
+/* --- LỊCH SỬ PATCH --- */
+.patch-history { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 15px; margin-top: 15px; border: 1px dashed rgba(255, 79, 160, 0.3); }
+.patch-history h3 { font-size: 14px; color: var(--accent); margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;}
+.patch-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #333; font-size: 13px; }
+.patch-item:last-child { border-bottom: none; padding-bottom: 0; }
+.patch-info strong { color: var(--accent2); }
+.patch-dl-btn { background: #252536; color: white; text-decoration: none; padding: 5px 12px; border-radius: 6px; border: 1px solid #555; transition: 0.3s; font-weight: bold; white-space: nowrap;}
+.patch-dl-btn:hover { background: var(--accent2); border-color: var(--accent2); }
 
 .faq-container { margin-top: 35px; }
 .faq-item { border-bottom: 1px solid #333; }
@@ -194,6 +211,9 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
     .gallery{ grid-template-columns:1fr; } 
     .gallery img{ height:220px; } 
 }
+@media(max-width:600px){ 
+    .download-grid { grid-template-columns: 1fr; } 
+}
 </style>
 </head>
 <body>
@@ -234,15 +254,38 @@ body{ background:var(--bg); color:var(--text); font-family:Segoe UI,sans-serif; 
                 <div class="password-box" id="copy-pass-btn">
                     <span>Mã Khóa Bảo Mật:</span> <strong>hpgvh18</strong>
                 </div>
-                <a class="download" id="ui-download" href="#" target="_blank" rel="noopener noreferrer">XÁC NHẬN TẢI VỀ</a>
+                
+                <!-- HỆ THỐNG NÚT TẢI KÉP -->
+                <div class="download-grid">
+                    <a href="#" id="dl-game-btn" class="btn-dl dl-game" target="_blank">
+                        🎮 TẢI GAME GỐC
+                        <span id="dl-game-info">Đang truy xuất thông tin...</span>
+                    </a>
+                    <a href="#" id="dl-patch-btn" class="btn-dl dl-patch" target="_blank">
+                        🇻🇳 TẢI PATCH VIỆT HÓA MỚI NHẤT
+                        <span id="dl-patch-info">Đang kiểm tra kho lưu trữ...</span>
+                    </a>
+                </div>
 
+                <!-- LỊCH SỬ PATCH BẢN CŨ -->
+                <div class="patch-history" id="patch-history-container" style="display: none;">
+                    <h3>Lịch sử phiên bản Patch (Changelog)</h3>
+                    <div id="patch-list">
+                        <!-- Render qua JS -->
+                    </div>
+                </div>
+
+                <!-- HƯỚNG DẪN CÀI ĐẶT -->
                 <div class="faq-container">
                     <div class="faq-item">
-                        <button class="faq-btn">🛠 Hướng dẫn cài đặt & Fix lỗi Font ô vuông <span class="faq-icon">+</span></button>
-                        <div class="faq-content">
-                            <p>- <strong>Cài đặt cơ bản:</strong> Tải file về -> Nhấn chuột phải chọn "Extract Here" (Giải nén) -> Vào thư mục vừa giải nén tìm file có đuôi <code>.exe</code> nháy đúp để chơi.<br><br>
-                            - <strong>Cách Fix lỗi chữ ô vuông:</strong> Bạn truy cập vào thư mục chứa game, tìm mục <code>game/fonts</code>. Hãy xóa file font mặc định bị lỗi đi, sau đó copy một font tiếng việt bất kỳ trên máy bạn (ví dụ: arial.ttf) dán vào thư mục đó, rồi đổi tên lại cho giống hệt tên file font gốc vừa xóa.<br><br>
-                            📌 <em>Chi tiết xem thêm tại kênh YouTube <strong>PhongDHP123</strong>.</em></p>
+                        <button class="faq-btn active">🛠 Hướng dẫn cài đặt Game & Patch <span class="faq-icon">×</span></button>
+                        <div class="faq-content" style="max-height: 1000px;">
+                            <p style="padding-top:15px; color: #ddd;">
+                                <strong style="color: var(--accent2);">Bước 1:</strong> Tải <b>GAME GỐC</b> về và giải nén ra một thư mục.<br><br>
+                                <strong style="color: var(--accent2);">Bước 2:</strong> Tải <b>PATCH VIỆT HÓA</b> về máy.<br><br>
+                                <strong style="color: var(--accent2);">Bước 3:</strong> Giải nén file Patch, copy toàn bộ các file bên trong (thường là thư mục <code>game</code>) và dán đè (Replace) vào thư mục Game Gốc ở Bước 1.<br><br>
+                                <strong style="color: var(--accent);">⚠️ Lưu ý:</strong> Đảm bảo phiên bản Game Gốc của bạn khớp với yêu cầu của bản Patch để tránh lỗi crash game. Nếu bị lỗi font ô vuông, hãy vào thư mục <code>game/fonts</code> đổi font theo hướng dẫn video trên kênh <strong>PhongDHP123</strong>.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -343,22 +386,79 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(dbGame[gameId]) {
                     const data = dbGame[gameId];
 
-                    document.getElementById('page-title').innerText = `${data.title} ${data.version} | HPGVH18`;
+                    document.getElementById('page-title').innerText = `${data.title} | HPGVH18`;
                     document.getElementById('ui-title').innerText = data.title;
-                    document.getElementById('ui-author-top').innerText = `Tác giả: ${data.author}`;
+                    document.getElementById('ui-author-top').innerText = `Tác giả: ${data.author || 'Đang cập nhật'}`;
                     document.getElementById('ui-cover').src = data.cover;
                     document.getElementById('ui-desc').innerText = data.desc;
-                    document.getElementById('ui-download').href = data.driveLink;
-                    document.getElementById('ui-download').innerText = `🎮 TẢI ${data.title.toUpperCase()} (${data.size})`;
 
-                    // ĐỔ DATA VÀO META BOX MỚI
-                    document.getElementById('meta-size').innerText = data.size;
-                    document.getElementById('meta-author').innerText = data.author;
-                    document.getElementById('meta-version').innerText = data.version;
+                    // --- CẬP NHẬT GIAO DIỆN META TEXT (Có Fallback đề phòng thiếu cột) ---
+                    document.getElementById('meta-size').innerText = data.game_size || data.size || "Đang cập nhật";
+                    document.getElementById('meta-author').innerText = data.author || "Đang cập nhật";
+                    document.getElementById('meta-version').innerText = data.game_version || data.version || "Đang cập nhật";
 
                     if(data.tags) {
                         let tagsHtml = data.tags.split(" ").map(tag => `<span class="meta-tag-item">${tag}</span>`).join("");
                         document.getElementById('meta-tags-list').innerHTML = tagsHtml;
+                    }
+
+                    // --- XỬ LÝ LINK TẢI GAME GỐC ---
+                    const gameBtn = document.getElementById('dl-game-btn');
+                    const gameLink = data.game_link || data.driveLink; // Fallback to old driveLink if game_link is empty
+                    if(gameLink) {
+                        gameBtn.href = gameLink;
+                        document.getElementById('dl-game-info').innerText = `Phiên bản: v${data.game_version || data.version || '?'} | Nặng: ${data.game_size || data.size || '?'}`;
+                    } else {
+                        gameBtn.style.pointerEvents = "none";
+                        gameBtn.innerHTML = `🎮 CHƯA CÓ LINK GAME GỐC<span>Vui lòng quay lại sau</span>`;
+                        gameBtn.style.filter = "grayscale(1)";
+                    }
+
+                    // --- XỬ LÝ DỮ LIỆU PATCH (JSON) ---
+                    const patchContainer = document.getElementById('patch-history-container');
+                    const patchList = document.getElementById('patch-list');
+                    const patchBtn = document.getElementById('dl-patch-btn');
+                    
+                    try {
+                        let patches = [];
+                        if (data.patch_data) {
+                            patches = typeof data.patch_data === 'string' ? JSON.parse(data.patch_data) : data.patch_data;
+                        }
+
+                        if (patches && patches.length > 0) {
+                            // Bản vá đầu tiên (mới nhất) gán cho Nút tải chính
+                            const latestPatch = patches[0];
+                            patchBtn.href = latestPatch.link;
+                            document.getElementById('dl-patch-info').innerText = `Bản Patch: ${latestPatch.version} | Cập nhật: ${latestPatch.date}`;
+
+                            // Nếu có từ 2 bản patch trở lên, hiện khung Lịch sử phiên bản
+                            if (patches.length > 1) {
+                                patchContainer.style.display = 'block';
+                                let historyHtml = "";
+                                for (let i = 1; i < patches.length; i++) {
+                                    historyHtml += `
+                                        <div class="patch-item">
+                                            <div class="patch-info">
+                                                <strong>${patches[i].version}</strong> <span style="color:#888;">(${patches[i].date})</span><br>
+                                                <span style="color:#aaa;">${patches[i].changelog}</span>
+                                            </div>
+                                            <a href="${patches[i].link}" class="patch-dl-btn" target="_blank">Tải bản cũ</a>
+                                        </div>
+                                    `;
+                                }
+                                patchList.innerHTML = historyHtml;
+                            }
+                        } else {
+                            // Chưa có bản patch nào
+                            patchBtn.style.pointerEvents = "none";
+                            patchBtn.innerHTML = `🇻🇳 CHƯA CÓ PATCH VIỆT HÓA<span>Đang trong quá trình dịch thuật</span>`;
+                            patchBtn.style.filter = "grayscale(1)";
+                        }
+                    } catch (e) {
+                        console.error("Lỗi parse dữ liệu Patch JSON:", e);
+                        patchBtn.style.pointerEvents = "none";
+                        patchBtn.style.filter = "grayscale(1)";
+                        document.getElementById('dl-patch-info').innerText = "Lỗi đọc dữ liệu patch từ Database";
                     }
 
                     // XỬ LÝ ẢNH GALLERY (NSFW) VÀ ĐẨY BANNER
@@ -373,12 +473,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         galleryArray = data.gallery;
                     }
 
-                    // THUẬT TOÁN BANNER MỚI: CÓ THÌ BẬT, KHÔNG THÌ TẮT SẠCH MÁT MẼ!
+                    // THUẬT TOÁN BANNER
                     if (galleryArray.length > 0 && galleryArray[0].trim() !== "") {
                         const bannerUrl = galleryArray[0].trim();
                         if(bannerUrl !== "") {
                             heroBanner.src = bannerUrl;
-                            heroBanner.style.display = 'block'; // Hiện Banner lên
+                            heroBanner.style.display = 'block';
                         }
 
                         if (galleryArray.length > 1) {
@@ -392,7 +492,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh bổ sung.</p>";
                         }
                     } else {
-                        // NẾU KHÔNG CÓ GALLERY THÌ ẨN LUÔN CÁI BOX BANNER
                         heroBanner.style.display = 'none';
                         galleryContainer.innerHTML = "<p style='color:#888;'>Chưa có hình ảnh.</p>";
                     }
@@ -413,7 +512,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <img src="${rGame.cover}" alt="${rGame.title}" loading="lazy">
                                 <div class="info">
                                     <h3>${rGame.title}</h3>
-                                    <p>Tác giả: ${rGame.author}</p>
+                                    <p>Tác giả: ${rGame.author || 'Đang cập nhật'}</p>
                                     <div class="btn-view">XEM HỒ SƠ</div>
                                 </div>
                             </a>
@@ -433,6 +532,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => {
                 document.getElementById('ui-title').innerText = "❌ MẤT KẾT NỐI MÁY CHỦ";
+                console.error(error);
             });
     } else {
         document.getElementById('ui-title').innerText = "❌ LỖI TRUY XUẤT. ĐANG QUAY LẠI...";
